@@ -41,7 +41,7 @@ DEVICE_<FRIENDLY_NAME>_<PARAMETER>=value
 | `CHANNELS` | Audio channel count | 1 (mono), 2 (stereo) | 1 |
 | `CODEC` | Audio encoding format | opus, aac, mp3, pcm | opus |
 | `BITRATE` | Encoding bitrate | 64k, 128k, 256k | 128k |
-| `THREAD_QUEUE` | FFmpeg buffer size | 512, 1024, 2048 | 1024 |
+| `THREAD_QUEUE` | FFmpeg buffer size | 1024, 8192, 16384 | 8192 |
 
 #### Example Configuration
 
@@ -51,7 +51,7 @@ DEVICE_BLUE_YETI_SAMPLE_RATE=44100
 DEVICE_BLUE_YETI_CHANNELS=2
 DEVICE_BLUE_YETI_CODEC=aac
 DEVICE_BLUE_YETI_BITRATE=192k
-DEVICE_BLUE_YETI_THREAD_QUEUE=1024
+DEVICE_BLUE_YETI_THREAD_QUEUE=8192
 
 # USB microphone with full device ID for uniqueness
 DEVICE_usb_046d_0825_12345678_SAMPLE_RATE=48000
@@ -378,12 +378,13 @@ The `THREAD_QUEUE` parameter configures FFmpeg's internal buffer for audio proce
 ### Default Settings
 
 ```bash
-DEVICE_MICROPHONE_THREAD_QUEUE=1024
+# Default is 8192 if not specified
+DEVICE_MICROPHONE_THREAD_QUEUE=8192
 ```
 
 ### When to Adjust
 
-**Increase (2048, 4096):**
+**Increase (16384, 32768):**
 
 - Experiencing audio dropouts
 - High CPU load environments

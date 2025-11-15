@@ -76,8 +76,8 @@ For a standard single-microphone setup:
 
 2. **Map USB Device** (Option 2)
    - Detects connected USB microphones
-   - Creates `/dev/lyrebird-mic-1` persistent name
-   - Configures udev rules
+   - Creates persistent device name via udev
+   - Generates symlinks for consistent device access
 
 3. **Add Stream** (Option 4)
    - Select mapped device
@@ -103,7 +103,7 @@ Expected output:
 ```
 Stream Status:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-lyrebird-mic-1    RUNNING    PID: 1234    Uptime: 5m
+Device_1    RUNNING    PID: 1234    Uptime: 5m
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -112,19 +112,22 @@ lyrebird-mic-1    RUNNING    PID: 1234    Uptime: 5m
 === "VLC Player"
 
     ```bash
-    vlc rtsp://localhost:8554/lyrebird-mic-1
+    # Stream name depends on your device naming
+    vlc rtsp://localhost:8554/Device_1
     ```
 
 === "FFmpeg"
 
     ```bash
-    ffmpeg -i rtsp://localhost:8554/lyrebird-mic-1 -t 10 -acodec copy test.aac
+    # Stream name depends on your device naming
+    ffmpeg -i rtsp://localhost:8554/Device_1 -t 10 -acodec copy test.aac
     ```
 
 === "cURL (Metadata)"
 
     ```bash
-    curl -v rtsp://localhost:8554/lyrebird-mic-1
+    # Stream name depends on your device naming
+    curl -v rtsp://localhost:8554/Device_1
     ```
 
 ---
@@ -135,10 +138,10 @@ After setup, you'll have:
 
 | File | Location | Purpose |
 |------|----------|---------|
-| MediaMTX Config | `/opt/mediamtx/mediamtx.yml` | Server configuration |
-| Stream Configs | `/opt/mediamtx/streams/*.env` | Individual stream settings |
-| udev Rules | `/etc/udev/rules.d/99-lyrebird-*.rules` | Device persistence |
-| Service File | `/etc/systemd/system/mediamtx-stream-manager.service` | Auto-start configuration |
+| MediaMTX Config | `/etc/mediamtx/mediamtx.yml` | Server configuration |
+| Audio Device Config | `/etc/mediamtx/audio-devices.conf` | Stream settings and device parameters |
+| udev Rules | `/etc/udev/rules.d/99-usb-soundcards.rules` | Device persistence |
+| Service File | `/etc/systemd/system/mediamtx-audio.service` | Auto-start configuration |
 
 ---
 
