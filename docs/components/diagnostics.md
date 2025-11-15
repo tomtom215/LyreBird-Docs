@@ -111,12 +111,16 @@ sudo ./lyrebird-diagnostics.sh quick
 ```
 
 **Checks Performed:**
-- Required utilities (ffmpeg, arecord, jq)
+- Prerequisites: bash version, standard utilities (grep, sed, awk, ps, sort, uniq, cut, date, mkdir, rm, chmod)
+- Optional tools: timeout, lsof, alsamixer, ffmpeg (NOT arecord or jq)
+- Project info: script versions, configured devices
+- Project files: file permissions, git status
+- Log locations: verify log files exist and are accessible (NOT content analysis)
 - USB audio device detection
 - MediaMTX service status
-- Active stream count
-- RTSP port availability
-- Critical log errors
+- RTSP connectivity testing
+
+**Note:** Quick mode does NOT analyze log content or check active stream count - use Full mode for those.
 
 **Use Cases:**
 - Daily health verification
@@ -169,12 +173,22 @@ sudo ./lyrebird-diagnostics.sh debug
 ```
 
 **Checks Performed:**
-- All Full mode checks with verbose output
-- Detailed command execution traces
-- Complete error stack traces
-- Configuration file dumps
-- Process tree analysis
-- Extended log analysis
+Debug mode is NOT "Full mode with verbose output". It runs a different set of checks:
+
+**Includes (same as Full):**
+- Prerequisites and project info
+- System information
+- USB devices
+- MediaMTX service and configuration
+- Stream health and resource constraints
+- Process stability and audio conflicts
+- Network resources and time/clock health
+- Service dependencies
+
+**Different from Full:**
+- INCLUDES: Log content analysis (analyzes errors/warnings in logs)
+- EXCLUDES: Project file validation (permissions, git status)
+- EXCLUDES: Log location checks (file accessibility)
 
 **Use Cases:**
 - Troubleshooting persistent failures
@@ -246,20 +260,18 @@ sudo ./lyrebird-diagnostics.sh debug
 
 **What Gets Checked:**
 - MediaMTX binary installation (`/usr/local/bin/mediamtx`)
-- MediaMTX version
 - Configuration file validity (`/etc/mediamtx/mediamtx.yml`)
 - Service status (systemd or standalone)
-- API accessibility (port 9997)
 - RTSP port availability (port 8554)
+
+**Note:** MediaMTX version is checked in the `check_project_info` section, not here. API port 9997 is NOT checked.
 
 **Example Output:**
 ```
-✓ MediaMTX binary: /usr/local/bin/mediamtx
-✓ Version: v1.15.0
-✓ Config file: /etc/mediamtx/mediamtx.yml (valid)
-✓ Service: active (running)
-✓ API: http://localhost:9997/v3/config (accessible)
-✓ RTSP port: 8554 (listening)
+  [PASS] MediaMTX binary: /usr/local/bin/mediamtx
+  [PASS] Config file: /etc/mediamtx/mediamtx.yml (valid)
+  [PASS] Service: active (running)
+  [PASS] RTSP port: 8554 (listening)
 ```
 
 **Detected Issues:**
@@ -334,10 +346,11 @@ sudo ./lyrebird-diagnostics.sh debug
 
 **Log Locations Checked:**
 - `/var/log/mediamtx.out` - MediaMTX service
-- `/var/log/mediamtx-stream-manager.log` - Stream Manager
-- `/var/log/lyrebird-orchestrator.log` - Orchestrator
+- `/var/log/lyrebird/stream-manager.log` - Stream Manager
 - `/var/log/lyrebird-diagnostics.log` - Diagnostics
 - `/var/log/lyrebird/*.log` - Per-device FFmpeg logs
+
+**Note:** Orchestrator log is NOT checked by diagnostics script.
 
 **Example Output:**
 ```
@@ -456,13 +469,15 @@ esac
 
 ## Options Reference
 
-| Option | Description | Example |
-|--------|-------------|---------|
-| `--config <path>` | Specify alternate MediaMTX config file | `--config /etc/mediamtx/custom.yml` |
-| `--timeout <seconds>` | Set command timeout (default: 30) | `--timeout 60` |
-| `--debug` | Enable verbose debug output | `--debug` |
-| `--quiet` | Suppress non-error output | `--quiet` |
-| `--no-color` | Disable color output (for logs) | `--no-color` |
+| Option | Short | Description | Example |
+|--------|-------|-------------|---------|
+| `--help` | `-h` | Display help message | `--help` |
+| `--version` | `-v` | Display version information | `--version` |
+| `--debug` | `-d` | Enable verbose debug output | `-d` |
+| `--quiet` | `-q` | Suppress non-error output | `-q` |
+| `--config <path>` | `-c` | Specify alternate MediaMTX config file | `-c /etc/mediamtx/custom.yml` |
+| `--timeout <seconds>` | | Set command timeout (default: 30s, max: 3600s) | `--timeout 60` |
+| `--no-color` | | Disable color output (for logs) | `--no-color` |
 
 ---
 
