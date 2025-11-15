@@ -458,43 +458,43 @@ After installation, manage the service using systemd commands:
 **Enable automatic startup:**
 
 ```bash
-sudo systemctl enable mediamtx-stream-manager
+sudo systemctl enable mediamtx-audio
 ```
 
 **Start the service:**
 
 ```bash
-sudo systemctl start mediamtx-stream-manager
+sudo systemctl start mediamtx-audio
 ```
 
 **Stop the service:**
 
 ```bash
-sudo systemctl stop mediamtx-stream-manager
+sudo systemctl stop mediamtx-audio
 ```
 
 **Restart the service:**
 
 ```bash
-sudo systemctl restart mediamtx-stream-manager
+sudo systemctl restart mediamtx-audio
 ```
 
 **Check service status:**
 
 ```bash
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 ```
 
 **Example status output:**
 
 ```
-● mediamtx-stream-manager.service - LyreBirdAudio Stream Manager
-   Loaded: loaded (/etc/systemd/system/mediamtx-stream-manager.service)
+● mediamtx-audio.service - LyreBirdAudio Stream Manager
+   Loaded: loaded (/etc/systemd/system/mediamtx-audio.service)
    Active: active (running) since Mon 2025-11-15 10:00:00 UTC; 2h 15m ago
  Main PID: 12340 (mediamtx-stream)
     Tasks: 12 (limit: 4096)
    Memory: 450.0M
-   CGroup: /system.slice/mediamtx-stream-manager.service
+   CGroup: /system.slice/mediamtx-audio.service
            ├─12340 /bin/bash ./mediamtx-stream-manager.sh monitor
            ├─12345 ffmpeg -f alsa -i hw:CARD=Blue_Yeti ...
            └─12346 ffmpeg -f alsa -i hw:CARD=USB_Microphone ...
@@ -506,26 +506,26 @@ Monitor stream activity via journalctl:
 
 ```bash
 # View recent logs
-sudo journalctl -u mediamtx-stream-manager -n 50
+sudo journalctl -u mediamtx-audio -n 50
 
 # Follow logs in real-time
-sudo journalctl -u mediamtx-stream-manager -f
+sudo journalctl -u mediamtx-audio -f
 
 # View logs since boot
-sudo journalctl -u mediamtx-stream-manager -b
+sudo journalctl -u mediamtx-audio -b
 
 # Filter for errors only
-sudo journalctl -u mediamtx-stream-manager -p err
+sudo journalctl -u mediamtx-audio -p err
 ```
 
 **Example log output:**
 
 ```
-Nov 15 10:00:00 server mediamtx-stream-manager[12340]: Starting streams...
-Nov 15 10:00:01 server mediamtx-stream-manager[12340]: Started Blue_Yeti (PID: 12345)
-Nov 15 10:00:02 server mediamtx-stream-manager[12340]: Started USB_Microphone (PID: 12346)
-Nov 15 10:00:12 server mediamtx-stream-manager[12340]: All streams validated
-Nov 15 12:15:30 server mediamtx-stream-manager[12340]: Stream Blue_Yeti health check: OK
+Nov 15 10:00:00 server mediamtx-audio[12340]: Starting streams...
+Nov 15 10:00:01 server mediamtx-audio[12340]: Started Blue_Yeti (PID: 12345)
+Nov 15 10:00:02 server mediamtx-audio[12340]: Started USB_Microphone (PID: 12346)
+Nov 15 10:00:12 server mediamtx-audio[12340]: All streams validated
+Nov 15 12:15:30 server mediamtx-audio[12340]: Stream Blue_Yeti health check: OK
 ```
 
 ---
@@ -618,7 +618,7 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
 
 5. **Review logs:**
    ```bash
-   sudo journalctl -u mediamtx-stream-manager -n 50
+   sudo journalctl -u mediamtx-audio -n 50
    ```
 
 ### Streams Start Then Fail
@@ -742,7 +742,7 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
 
 1. **Check monitoring mode is active:**
    ```bash
-   sudo systemctl status mediamtx-stream-manager
+   sudo systemctl status mediamtx-audio
    ```
 
 2. **Verify auto-recovery isn't disabled:**
@@ -757,7 +757,7 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
 
 4. **Review failure logs:**
    ```bash
-   sudo journalctl -u mediamtx-stream-manager -p err
+   sudo journalctl -u mediamtx-audio -p err
    ```
 
 ---

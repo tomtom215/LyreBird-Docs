@@ -110,7 +110,7 @@ ls -lh $BACKUP_DIR/99-usb-soundcards.rules
 ```bash
 # Copy all MediaMTX-related service files
 sudo cp /etc/systemd/system/mediamtx.service $BACKUP_DIR/ 2>/dev/null || true
-sudo cp /etc/systemd/system/mediamtx-stream-manager.service $BACKUP_DIR/ 2>/dev/null || true
+sudo cp /etc/systemd/system/mediamtx-audio.service $BACKUP_DIR/ 2>/dev/null || true
 
 # Verify
 ls -lh $BACKUP_DIR/*.service
@@ -157,6 +157,9 @@ cat $BACKUP_DIR/MANIFEST.txt
 
 ## Automated Backup
 
+!!! info "Backup Script - TBD"
+    A dedicated `backup-config.sh` script is planned for future implementation. For now, you can create your own backup script using the example below.
+
 ### Backup Script
 
 Create a reusable backup script:
@@ -194,7 +197,7 @@ cp /etc/udev/rules.d/99-usb-soundcards.rules "$BACKUP_DIR/" 2>/dev/null || echo 
 # Backup systemd services
 echo "Backing up systemd services..."
 cp /etc/systemd/system/mediamtx.service "$BACKUP_DIR/" 2>/dev/null || true
-cp /etc/systemd/system/mediamtx-stream-manager.service "$BACKUP_DIR/" 2>/dev/null || true
+cp /etc/systemd/system/mediamtx-audio.service "$BACKUP_DIR/" 2>/dev/null || true
 
 # Backup stream configurations
 if [ -d /opt/LyreBirdAudio/streams ]; then
@@ -354,7 +357,7 @@ sudo git push
 
 ```bash
 # Stop all LyreBirdAudio services
-sudo systemctl stop mediamtx-stream-manager
+sudo systemctl stop mediamtx-audio
 sudo systemctl stop mediamtx 2>/dev/null || true
 ```
 
@@ -403,7 +406,7 @@ ls -lh /etc/udev/rules.d/99-usb-soundcards.rules
 ```bash
 # Restore service files
 sudo cp $RESTORE_DIR/mediamtx.service /etc/systemd/system/ 2>/dev/null || true
-sudo cp $RESTORE_DIR/mediamtx-stream-manager.service /etc/systemd/system/ 2>/dev/null || true
+sudo cp $RESTORE_DIR/mediamtx-audio.service /etc/systemd/system/ 2>/dev/null || true
 
 # Verify
 ls -lh /etc/systemd/system/mediamtx*.service
@@ -429,8 +432,8 @@ sudo udevadm trigger
 # Reload systemd
 sudo systemctl daemon-reload
 
-# Verify configurations
-sudo /opt/LyreBirdAudio/lyrebird-capability-checker.sh --validate-config
+# Verify configuration syntax
+sudo /opt/LyreBirdAudio/lyrebird-mic-check.sh -V
 ```
 
 **8. Restart Services**
@@ -440,17 +443,17 @@ sudo /opt/LyreBirdAudio/lyrebird-capability-checker.sh --validate-config
 sudo systemctl start mediamtx 2>/dev/null || true
 
 # Start stream manager
-sudo systemctl start mediamtx-stream-manager
+sudo systemctl start mediamtx-audio
 
 # Verify status
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 ```
 
 **9. Verify Restoration**
 
 ```bash
 # Check service status
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 
 # Check streams
 sudo /opt/LyreBirdAudio/mediamtx-stream-manager.sh status
@@ -472,7 +475,7 @@ ffmpeg -i rtsp://localhost:8554/your-stream -t 5 -acodec copy test.aac
 RESTORE_DIR="/var/backups/lyrebird/latest"
 
 sudo cp $RESTORE_DIR/mediamtx.yml /etc/mediamtx/
-sudo systemctl restart mediamtx-stream-manager
+sudo systemctl restart mediamtx-audio
 ```
 
 **Restore Only Audio Device Settings:**
@@ -481,7 +484,7 @@ sudo systemctl restart mediamtx-stream-manager
 RESTORE_DIR="/var/backups/lyrebird/latest"
 
 sudo cp $RESTORE_DIR/audio-devices.conf /etc/mediamtx/
-sudo systemctl restart mediamtx-stream-manager
+sudo systemctl restart mediamtx-audio
 ```
 
 **Restore Only USB Rules:**
@@ -503,8 +506,13 @@ sudo udevadm trigger
 **On Source System:**
 
 ```bash
-# Create migration package
-sudo /opt/LyreBirdAudio/scripts/backup-config.sh
+# Create timestamped backup
+BACKUP_DIR="/var/backups/lyrebird/$(date +%Y%m%d-%H%M%S)"
+sudo mkdir -p $BACKUP_DIR
+sudo cp /etc/mediamtx/mediamtx.yml \
+       /etc/mediamtx/audio-devices.conf \
+       /etc/udev/rules.d/99-usb-soundcards.rules \
+       $BACKUP_DIR/
 
 # Compress backup
 cd /var/backups/lyrebird
@@ -535,7 +543,7 @@ sudo cp /tmp/latest/99-usb-soundcards.rules /etc/udev/rules.d/
 # Apply and verify
 sudo udevadm control --reload-rules
 sudo systemctl daemon-reload
-sudo systemctl restart mediamtx-stream-manager
+sudo systemctl restart mediamtx-audio
 ```
 
 !!! note "USB Device IDs"
@@ -581,11 +589,16 @@ md5sum -c $RESTORE_DIR/checksums.md5
 
 ```bash
 # Always backup before changes
-sudo /opt/LyreBirdAudio/scripts/backup-config.sh
+BACKUP_DIR="/var/backups/lyrebird/$(date +%Y%m%d-%H%M%S)"
+sudo mkdir -p $BACKUP_DIR
+sudo cp /etc/mediamtx/mediamtx.yml \
+       /etc/mediamtx/audio-devices.conf \
+       /etc/udev/rules.d/99-usb-soundcards.rules \
+       $BACKUP_DIR/
 
 # Document the change
 echo "Reason: Upgrading MediaMTX to v1.9.0" | \
-  sudo tee /var/backups/lyrebird/latest/CHANGE_REASON.txt
+  sudo tee $BACKUP_DIR/CHANGE_REASON.txt
 ```
 
 **5. Retention Policy**
@@ -632,8 +645,9 @@ sudo git push origin v1.0
 **Issue: Permission Denied**
 
 ```bash
-# Ensure running as root
-sudo /opt/LyreBirdAudio/scripts/backup-config.sh
+# Ensure running backup commands with sudo
+sudo mkdir -p /var/backups/lyrebird
+sudo cp /etc/mediamtx/*.conf /var/backups/lyrebird/
 ```
 
 **Issue: Disk Space Full**
@@ -656,13 +670,13 @@ sudo tar czf archive-$(date +%Y%m).tar.gz 2025* && sudo rm -rf 2025*
 
 ```bash
 # Check service status
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 
 # Check logs
-sudo journalctl -u mediamtx-stream-manager -n 50
+sudo journalctl -u mediamtx-audio -n 50
 
-# Verify configuration syntax
-sudo /opt/mediamtx/mediamtx --validate /etc/mediamtx/mediamtx.yml
+# Verify configuration syntax with lyrebird-mic-check
+sudo /opt/LyreBirdAudio/lyrebird-mic-check.sh -V
 ```
 
 **Issue: Streams Not Working After Restore**
@@ -675,7 +689,7 @@ arecord -l
 ls -l /dev/lyrebird-*
 
 # Re-run device mapper
-sudo /opt/LyreBirdAudio/lyrebird-usb-mapper.sh
+sudo /opt/LyreBirdAudio/usb-audio-mapper.sh
 ```
 
 ---

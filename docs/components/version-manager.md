@@ -20,32 +20,32 @@ The Version Manager provides safe, transactional version management for LyreBird
 <div class="grid" markdown>
 
 <div markdown>
-### :material-git: Git-Based Version Control
+### Git-Based Version Control
 Complete version history with branch and tag switching, enabling instant rollback to any previous version.
 </div>
 
 <div markdown>
-### :material-shield-check: Transaction-Based Updates
+### Transaction-Based Updates
 Atomic updates with automatic rollback on failures ensure system integrity during version changes.
 </div>
 
 <div markdown>
-### :material-cog-sync: Systemd Service Coordination
+### Systemd Service Coordination
 Automatically stops services before updates, reinstalls service files after version changes, and restarts services.
 </div>
 
 <div markdown>
-### :material-refresh-auto: Self-Update Capability
+### Self-Update Capability
 Updates itself when the updater script changes, with syntax validation to prevent broken updaters.
 </div>
 
 <div markdown>
-### :material-content-save-edit: Stash Management
+### Stash Management
 Automatically stashes local changes before updates and restores them after, with conflict detection.
 </div>
 
 <div markdown>
-### :material-lock: Concurrent Execution Protection
+### Concurrent Execution Protection
 Lock file prevents multiple updater instances from running simultaneously and corrupting git state.
 </div>
 
@@ -256,9 +256,10 @@ v1.3.0  - Latest stable
 
 **Before Update:**
 ```bash
-# Automatically stashes uncommitted changes
-git stash push -m "Auto-stash before version switch"
+# Automatically stashes uncommitted and untracked changes
+git stash push -u -m "Auto-stash before version switch"
 ```
+**Note:** The `-u` flag includes untracked files in the stash.
 
 **After Update:**
 ```bash
@@ -291,13 +292,19 @@ git stash drop stash@{0}
 
 ### Permission Preservation
 
-After version switch, executable permissions are automatically restored:
+After version switch, executable permissions are automatically restored for core scripts:
 
 ```bash
-chmod +x *.sh
+chmod +x install_mediamtx.sh
+chmod +x lyrebird-orchestrator.sh
+chmod +x lyrebird-updater.sh
+chmod +x mediamtx-stream-manager.sh
+chmod +x usb-audio-mapper.sh
+chmod +x lyrebird-mic-check.sh
+chmod +x lyrebird-diagnostics.sh
 ```
 
-This ensures all scripts remain executable after git operations.
+This ensures all critical scripts remain executable after git operations that may reset permissions.
 
 ---
 
@@ -686,8 +693,8 @@ git remote -v
 # Check if process actually running
 ps aux | grep lyrebird-updater
 
-# If no process found, remove stale lock
-sudo rm -f /var/lock/lyrebird-updater.lock
+# If no process found, remove stale lock (lock is in script directory)
+rm -f .lyrebird-updater.lock
 
 # Try again
 ./lyrebird-updater.sh

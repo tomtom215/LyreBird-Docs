@@ -20,32 +20,32 @@ The Diagnostics component provides comprehensive system health validation for Ly
 <div class="grid" markdown>
 
 <div markdown>
-### :material-check-all: 20+ Health Checks
+### 20+ Health Checks
 Automated validation of system resources, USB devices, MediaMTX service, streams, RTSP connectivity, logs, and time synchronization.
 </div>
 
 <div markdown>
-### :material-speedometer: Three Diagnostic Modes
+### Three Diagnostic Modes
 Quick (essential checks), Full (comprehensive analysis), and Debug (maximum verbosity) modes for different use cases.
 </div>
 
 <div markdown>
-### :material-alert-decagram: Actionable Error Reporting
+### Actionable Error Reporting
 Clear identification of failures with specific remediation steps and guidance for GitHub issue submission.
 </div>
 
 <div markdown>
-### :material-gauge-empty: Resource Constraint Detection
+### Resource Constraint Detection
 Monitors CPU, memory, file descriptors, and disk space to identify performance bottlenecks before they cause failures.
 </div>
 
 <div markdown>
-### :material-progress-wrench: Process Stability Analysis
+### Process Stability Analysis
 Validates FFmpeg process counts, detects process accumulation, and identifies stream health issues.
 </div>
 
 <div markdown>
-### :material-comment-alert: Audio Subsystem Conflict Detection
+### Audio Subsystem Conflict Detection
 Detects device conflicts, ALSA state issues, and USB device problems that prevent stream startup.
 </div>
 
@@ -218,12 +218,12 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 **Example Output:**
 ```
-✓ OS: Ubuntu 22.04.3 LTS
-✓ Kernel: 5.15.0-91-generic
-✓ Uptime: 15 days, 7 hours
-✓ Load: 1.23 1.45 1.67 (healthy)
-✓ Memory: 3.2G / 8.0G used (40%)
-✓ All required utilities installed
+[PASS] OS: Ubuntu 22.04.3 LTS
+[PASS] Kernel: 5.15.0-91-generic
+[PASS] Uptime: 15 days, 7 hours
+[PASS] Load: 1.23 1.45 1.67 (healthy)
+[PASS] Memory: 3.2G / 8.0G used (40%)
+[PASS] All required utilities installed
 ```
 
 ---
@@ -240,11 +240,11 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 **Example Output:**
 ```
-✓ Found 3 USB audio devices
-✓ ALSA cards: Card 0, Card 1, Card 2
-✓ udev rules: /etc/udev/rules.d/99-usb-soundcards.rules
-✓ Device mappings: Device_1, Device_2, Device_3
-✓ All devices available (not busy)
+[PASS] Found 3 USB audio devices
+[PASS] ALSA cards: Card 0, Card 1, Card 2
+[PASS] udev rules: /etc/udev/rules.d/99-usb-soundcards.rules
+[PASS] Device mappings: Device_1, Device_2, Device_3
+[PASS] All devices available (not busy)
 ```
 
 **Detected Issues:**
@@ -296,11 +296,11 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 **Example Output:**
 ```
-✓ Active streams: 3
-✓ FFmpeg processes: 3 (healthy)
-✓ All streams publishing
-✓ Stream uptime: 2h 15m average
-✓ No process accumulation detected
+[PASS] Active streams: 3
+[PASS] FFmpeg processes: 3 (healthy)
+[PASS] All streams publishing
+[PASS] Stream uptime: 2h 15m average
+[PASS] No process accumulation detected
 ```
 
 **Detected Issues:**
@@ -322,9 +322,9 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 **Example Output:**
 ```
-✓ Port 8554: LISTENING
-✓ RTSP protocol: responding
-✓ Stream test: rtsp://localhost:8554/Device_1 (OK)
+[PASS] Port 8554: LISTENING
+[PASS] RTSP protocol: responding
+[PASS] Stream test: rtsp://localhost:8554/Device_1 (OK)
 ```
 
 **Detected Issues:**
@@ -354,9 +354,9 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 **Example Output:**
 ```
-✓ All log files accessible
-✓ No critical errors in last 100 lines
-⚠ 2 warnings detected (device temporarily unavailable)
+[PASS] All log files accessible
+[PASS] No critical errors in last 100 lines
+WARNING: 2 warnings detected (device temporarily unavailable)
 ```
 
 **Detected Issues:**
@@ -379,11 +379,11 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 **Example Output:**
 ```
-✓ File descriptors: 347 / 4096 (8%)
-✓ CPU usage: ffmpeg processes < 50%
-✓ Memory available: 4.8G (60%)
-✓ Disk space: / (45% used), /var/log (12% used)
-✓ Process count: 127 (healthy)
+[PASS] File descriptors: 347 / 4096 (8%)
+[PASS] CPU usage: ffmpeg processes < 50%
+[PASS] Memory available: 4.8G (60%)
+[PASS] Disk space: / (45% used), /var/log (12% used)
+[PASS] Process count: 127 (healthy)
 ```
 
 **Detected Issues:**
@@ -405,9 +405,9 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 **Example Output:**
 ```
-✓ Chrony service: active (synchronized)
-✓ Time drift: < 50ms
-✓ System clock: synchronized
+[PASS] Chrony service: active (synchronized)
+[PASS] Time drift: < 50ms
+[PASS] System clock: synchronized
 ```
 
 **Detected Issues:**
@@ -622,12 +622,12 @@ The Diagnostics component integrates seamlessly with the Orchestrator:
 ```
 Orchestrator Main Menu
 ├── 5. Diagnostics & Information
-│   ├── 1. Quick Health Check ──────────> diagnostics.sh quick
-│   ├── 2. Full Diagnostic ─────────────> diagnostics.sh full
-│   ├── 3. Debug Diagnostic ────────────> diagnostics.sh debug
-│   ├── 4. Check Device Capabilities ───> lyrebird-mic-check.sh
-│   ├── 5. View System Status ──────────> status display
-│   └── 6. View Logs ───────────────────> log viewer
+│   ├── 1. Quick Health Check -> diagnostics.sh quick
+│   ├── 2. Full Diagnostic -> diagnostics.sh full
+│   ├── 3. Debug Diagnostic -> diagnostics.sh debug
+│   ├── 4. Check Device Capabilities -> lyrebird-mic-check.sh
+│   ├── 5. View System Status -> status display
+│   └── 6. View Logs -> log viewer
 ```
 
 ### Orchestrator Integration Flow

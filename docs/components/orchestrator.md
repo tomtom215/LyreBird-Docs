@@ -20,32 +20,32 @@ The Orchestrator is the central command interface for LyreBirdAudio, providing a
 <div class="grid" markdown>
 
 <div markdown>
-### :material-auto-fix: Quick Setup Wizard
+### Quick Setup Wizard
 Complete installation from zero to streaming in minutes with automated guidance through all steps.
 </div>
 
 <div markdown>
-### :material-check-circle: Device Capability Inspection
+### Device Capability Inspection
 Automatically detect and validate hardware capabilities without manual configuration.
 </div>
 
 <div markdown>
-### :material-chart-box: Real-Time System Status
+### Real-Time System Status
 Live monitoring of MediaMTX service, active streams, and system resources.
 </div>
 
 <div markdown>
-### :material-shield-check: SHA256 Integrity Checking
+### SHA256 Integrity Checking
 Verify script integrity during updates to ensure secure operation.
 </div>
 
 <div markdown>
-### :material-file-rotate: Auto Log Rotation
+### Auto Log Rotation
 Automatic management of log files to prevent disk space issues.
 </div>
 
 <div markdown>
-### :material-console: EOF/stdin Handling
+### EOF/stdin Handling
 Robust handling of user input with graceful error recovery.
 </div>
 
@@ -120,7 +120,7 @@ The Quick Setup Wizard guides you through a complete installation:
    - Validates USB devices, MediaMTX service, RTSP connectivity
    - Reports any issues with remediation steps
 
-**Note:** The wizard does NOT automatically generate device configuration. Use option 3 (USB Device Management) → option 5 (Generate Device Configuration) after the wizard completes if you need custom quality settings.
+**Note:** The wizard does NOT automatically generate device configuration. Use option 3 (USB Device Management) -> option 5 (Generate Device Configuration) after the wizard completes if you need custom quality settings.
 
 **Usage:**
 ```bash
@@ -413,11 +413,11 @@ sudo ./lyrebird-orchestrator.sh
 
 ```bash
 sudo ./lyrebird-orchestrator.sh
-# 1. Main Menu → 3. USB Device Management
+# 1. Main Menu -> 3. USB Device Management
 # 2. Select: Map USB Devices
 # 3. Follow prompts to map new device
 # 4. Reboot system for udev rules to take effect
-# 5. Main Menu → 4. Audio Streaming Control
+# 5. Main Menu -> 4. Audio Streaming Control
 # 6. Select: Add New Stream
 # 7. Choose newly mapped device
 ```
@@ -426,7 +426,7 @@ sudo ./lyrebird-orchestrator.sh
 
 ```bash
 sudo ./lyrebird-orchestrator.sh
-# 1. Main Menu → 6. Version Management
+# 1. Main Menu -> 6. Version Management
 # 2. Select: Check for Updates
 # 3. Review changes
 # 4. Select: Upgrade to Latest
@@ -438,11 +438,11 @@ sudo ./lyrebird-orchestrator.sh
 
 ```bash
 sudo ./lyrebird-orchestrator.sh
-# 1. Main Menu → 5. System Diagnostics
+# 1. Main Menu -> 5. System Diagnostics
 # 2. Select: Full Diagnostic
 # 3. Review output for errors
 # 4. Follow remediation steps
-# 5. Main Menu → 7. Logs & Status
+# 5. Main Menu -> 7. Logs & Status
 # 6. Select: View Stream Manager Log
 # 7. Check for specific error messages
 ```

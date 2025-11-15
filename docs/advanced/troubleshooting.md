@@ -701,10 +701,8 @@ sudo /usr/local/bin/mediamtx /etc/mediamtx/mediamtx.yml
 
    **Solution:**
    ```bash
-   # Validate YAML syntax
-   sudo /usr/local/bin/mediamtx --validate /etc/mediamtx/mediamtx.yml
-
-   # Common issues:
+   # Check YAML syntax manually or use a YAML validator
+   # Common issues in mediamtx.yml:
    # - Incorrect indentation
    # - Missing colons
    # - Wrong data types

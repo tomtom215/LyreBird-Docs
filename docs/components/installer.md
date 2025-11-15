@@ -20,32 +20,32 @@ The MediaMTX Installer provides automated, platform-aware installation and updat
 <div class="grid" markdown>
 
 <div markdown>
-### :material-laptop: Platform-Aware Installation
+### Platform-Aware Installation
 Automatic detection and installation for Linux, macOS (Darwin), and FreeBSD on x86_64, ARM64, ARMv7, and ARMv6 architectures.
 </div>
 
 <div markdown>
-### :material-github: GitHub Release Fetching
+### GitHub Release Fetching
 Fetches latest releases from MediaMTX GitHub repository with fallback parsers for reliability.
 </div>
 
 <div markdown>
-### :material-shield-check-outline: SHA256 Checksum Verification
+### SHA256 Checksum Verification
 Verifies download integrity with SHA256 checksums to prevent corrupted or tampered binaries.
 </div>
 
 <div markdown>
-### :material-update: Atomic Updates with Rollback
+### Atomic Updates with Rollback
 Transaction-based updates preserve old binary and automatically rollback on installation failures.
 </div>
 
 <div markdown>
-### :material-cog-outline: Systemd Service Management
+### Systemd Service Management
 Creates and manages systemd service files with proper user isolation and automatic startup configuration.
 </div>
 
 <div markdown>
-### :material-test-tube: Dry-Run Mode
+### Dry-Run Mode
 Preview what would be done without making any changes to the system, perfect for testing and validation.
 </div>
 
@@ -214,7 +214,7 @@ sudo ./install_mediamtx.sh update
 5. **Verification**
    ```
    Verifying new installation...
-   Update successful: v1.14.0 → v1.15.0
+   Update successful: v1.14.0 -> v1.15.0
    ```
 
 **If Update Fails:**
@@ -249,12 +249,12 @@ OS=$(uname -s)      # Linux, Darwin, FreeBSD
 ARCH=$(uname -m)    # x86_64, aarch64, armv7l, armv6l
 
 # Mapping to MediaMTX binary names
-Linux + x86_64  → mediamtx_vX.X.X_linux_amd64.tar.gz
-Linux + aarch64 → mediamtx_vX.X.X_linux_arm64v8.tar.gz
-Linux + armv7l  → mediamtx_vX.X.X_linux_armv7.tar.gz
-Linux + armv6l  → mediamtx_vX.X.X_linux_armv6.tar.gz
-Darwin + x86_64 → mediamtx_vX.X.X_darwin_amd64.tar.gz
-Darwin + arm64  → mediamtx_vX.X.X_darwin_arm64.tar.gz
+Linux + x86_64  -> mediamtx_vX.X.X_linux_amd64.tar.gz
+Linux + aarch64 -> mediamtx_vX.X.X_linux_arm64v8.tar.gz
+Linux + armv7l  -> mediamtx_vX.X.X_linux_armv7.tar.gz
+Linux + armv6l  -> mediamtx_vX.X.X_linux_armv6.tar.gz
+Darwin + x86_64 -> mediamtx_vX.X.X_darwin_amd64.tar.gz
+Darwin + arm64  -> mediamtx_vX.X.X_darwin_arm64.tar.gz
 ```
 
 ### ARM Platform Support
@@ -263,9 +263,9 @@ Darwin + arm64  → mediamtx_vX.X.X_darwin_arm64.tar.gz
 
 The installer properly detects Raspberry Pi models and selects the correct ARM variant:
 
-- **Raspberry Pi 4/5** → ARM64v8 (if running 64-bit OS)
-- **Raspberry Pi 3B+** → ARMv7 (or ARM64 on 64-bit OS)
-- **Raspberry Pi Zero/1** → ARMv6
+- **Raspberry Pi 4/5** -> ARM64v8 (if running 64-bit OS)
+- **Raspberry Pi 3B+** -> ARMv7 (or ARM64 on 64-bit OS)
+- **Raspberry Pi Zero/1** -> ARMv6
 
 **Verification:**
 ```bash
@@ -433,12 +433,12 @@ sudo ./install_mediamtx.sh verify
 ```
 Verifying MediaMTX Installation
 ================================
-✓ Binary: /usr/local/bin/mediamtx (executable)
-✓ Version: v1.15.0
-✓ Config: /etc/mediamtx/mediamtx.yml (valid YAML)
-✓ Service: mediamtx.service (exists)
-✓ Service User: mediamtx (exists)
-✓ Permissions: correct
+[PASS] Binary: /usr/local/bin/mediamtx (executable)
+[PASS] Version: v1.15.0
+[PASS] Config: /etc/mediamtx/mediamtx.yml (valid YAML)
+[PASS] Service: mediamtx.service (exists)
+[PASS] Service User: mediamtx (exists)
+[PASS] Permissions: correct
 
 Verification successful
 ```
@@ -669,7 +669,7 @@ Ensures downloaded binaries are:
    ```
    Expected: abc123def456789...
    Actual:   abc123def456789...
-   Result:   MATCH ✓
+   Result:   MATCH [PASS]
    ```
 
 4. **Proceed or Abort**
@@ -735,11 +735,11 @@ The Installer integrates with the Orchestrator for convenient access:
 ```
 Orchestrator Main Menu
 ├── 2. MediaMTX Installation & Updates
-│   ├── 1. Install MediaMTX ────────────> install_mediamtx.sh install
-│   ├── 2. Update MediaMTX ─────────────> install_mediamtx.sh update
-│   ├── 3. Check Installation Status ───> install_mediamtx.sh status
-│   ├── 4. Verify Installation ─────────> install_mediamtx.sh verify
-│   ├── 5. Uninstall MediaMTX ──────────> install_mediamtx.sh uninstall
+│   ├── 1. Install MediaMTX -> install_mediamtx.sh install
+│   ├── 2. Update MediaMTX -> install_mediamtx.sh update
+│   ├── 3. Check Installation Status -> install_mediamtx.sh status
+│   ├── 4. Verify Installation -> install_mediamtx.sh verify
+│   ├── 5. Uninstall MediaMTX -> install_mediamtx.sh uninstall
 │   └── 6. Return to Main Menu
 ```
 
@@ -756,7 +756,7 @@ Orchestrator Quick Setup Wizard
       ├─ Verifying checksum...
       ├─ Installing binary...
       ├─ Creating service...
-      └─ MediaMTX v1.15.0 installed ✓
+      └─ MediaMTX v1.15.0 installed [PASS]
 
 [2/5] Mapping USB devices...
 [3/5] Generating configuration...

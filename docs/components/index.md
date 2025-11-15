@@ -52,7 +52,7 @@ graph TD
 <div class="grid" markdown>
 
 <div markdown>
-### :material-view-dashboard: [Orchestrator](orchestrator.md)
+### [Orchestrator](orchestrator.md)
 
 **Script:** `lyrebird-orchestrator.sh`
 
@@ -65,11 +65,11 @@ The central command interface providing interactive menu-driven management for a
 - Viewing logs and status
 - Learning the system
 
-[Learn More →](orchestrator.md)
+[Learn More](orchestrator.md)
 </div>
 
 <div markdown>
-### :material-play-network: [Stream Manager](stream-manager.md)
+### [Stream Manager](stream-manager.md)
 
 **Script:** `mediamtx-stream-manager.sh`
 
@@ -82,11 +82,11 @@ The core engine managing FFmpeg process lifecycle, health monitoring, and automa
 - Multiplex streaming setup
 - Stream status checking
 
-[Learn More →](stream-manager.md)
+[Learn More](stream-manager.md)
 </div>
 
 <div markdown>
-### :material-usb: [USB Audio Mapper](usb-audio-mapper.md)
+### [USB Audio Mapper](usb-audio-mapper.md)
 
 **Script:** `usb-audio-mapper.sh`
 
@@ -99,11 +99,11 @@ Solves USB enumeration order problems by creating persistent udev rules based on
 - Handling identical devices
 - Complex USB topologies
 
-[Learn More →](usb-audio-mapper.md)
+[Learn More](usb-audio-mapper.md)
 </div>
 
 <div markdown>
-### :material-chip: [Capability Checker](capability-checker.md)
+### [Capability Checker](capability-checker.md)
 
 **Script:** `lyrebird-mic-check.sh`
 
@@ -116,11 +116,11 @@ Non-invasive hardware capability detection that generates optimal configuration 
 - Quality tier selection
 - Troubleshooting audio issues
 
-[Learn More →](capability-checker.md)
+[Learn More](capability-checker.md)
 </div>
 
 <div markdown>
-### :material-stethoscope: [Diagnostics](diagnostics.md)
+### [Diagnostics](diagnostics.md)
 
 **Script:** `lyrebird-diagnostics.sh`
 
@@ -133,11 +133,11 @@ Comprehensive system health validation with 20+ automated checks across system r
 - GitHub issue preparation
 - Weekly maintenance
 
-[Learn More →](diagnostics.md)
+[Learn More](diagnostics.md)
 </div>
 
 <div markdown>
-### :material-update: [Version Manager](version-manager.md)
+### [Version Manager](version-manager.md)
 
 **Script:** `lyrebird-updater.sh`
 
@@ -150,11 +150,11 @@ Safe git-based version management with transaction-based updates, automatic roll
 - Switching to specific version
 - Testing development branches
 
-[Learn More →](version-manager.md)
+[Learn More](version-manager.md)
 </div>
 
 <div markdown>
-### :material-download: [Installer](installer.md)
+### [Installer](installer.md)
 
 **Script:** `install_mediamtx.sh`
 
@@ -167,7 +167,7 @@ Platform-aware MediaMTX installation with automatic platform detection, SHA256 v
 - Installing specific versions
 - Platform migration
 
-[Learn More →](installer.md)
+[Learn More](installer.md)
 </div>
 
 </div>
@@ -212,7 +212,7 @@ Each specialized component handles its specific domain:
 
 ## Integration Patterns
 
-### Orchestrator → Component
+### Orchestrator to Component
 
 ```bash
 # Orchestrator menu selection
@@ -230,7 +230,7 @@ sudo ./usb-audio-mapper.sh
 
 ---
 
-### Component → Component
+### Component to Component
 
 ```bash
 # Stream Manager needs device capabilities
@@ -245,7 +245,7 @@ ffmpeg -f alsa -i hw:CARD=Device_1 -ar 48000 -ac 2 ...
 
 ---
 
-### Diagnostics → All Components
+### Diagnostics to All Components
 
 ```bash
 # Diagnostics checks all components

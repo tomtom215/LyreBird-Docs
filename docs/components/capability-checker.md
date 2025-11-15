@@ -20,32 +20,32 @@ The Capability Checker is a sophisticated hardware detection tool that automatic
 <div class="grid" markdown>
 
 <div markdown>
-### :material-magnify: Non-Invasive Detection
+### Non-Invasive Detection
 Uses `/proc/asound` filesystem to detect capabilities without opening hardware devices.
 </div>
 
 <div markdown>
-### :material-shield-check: Device Busy Detection
+### Device Busy Detection
 Checks if devices are in use without interrupting active streams.
 </div>
 
 <div markdown>
-### :material-file-cog: Auto-Configuration
+### Auto-Configuration
 Generates complete configuration files with optimal settings for your hardware.
 </div>
 
 <div markdown>
-### :material-backup-restore: Automatic Backup
+### Automatic Backup
 Backs up existing configurations before making changes, with easy restore capability.
 </div>
 
 <div markdown>
-### :material-code-json: JSON Output
+### JSON Output
 Provides machine-readable output for integration with other tools.
 </div>
 
 <div markdown>
-### :material-alert: USB Adapter Warnings
+### USB Adapter Warnings
 Detects USB audio adapters and warns about chip vs. microphone capabilities.
 </div>
 
@@ -105,7 +105,7 @@ Device 1: USB Audio Interface
     Product: 0x0014
     Bus-Port: 1-1.5
 
-  ⚠️  WARNING: This appears to be a USB audio adapter chip.
+  WARNING: This appears to be a USB audio adapter chip.
       If using 3.5mm analog input, detected capabilities
       reflect the chip, not your connected microphone.
 
@@ -171,13 +171,13 @@ sudo ./lyrebird-mic-check.sh -V
 ```
 Validating /etc/mediamtx/audio-devices.conf...
 
-✓ DEVICE_FRONT_YARD_MIC_SAMPLE_RATE=48000
+[PASS] DEVICE_FRONT_YARD_MIC_SAMPLE_RATE=48000
   Hardware supports: 16000, 44100, 48000 Hz
 
-✓ DEVICE_FRONT_YARD_MIC_CHANNELS=2
+[PASS] DEVICE_FRONT_YARD_MIC_CHANNELS=2
   Hardware supports: 1 (mono), 2 (stereo)
 
-✗ DEVICE_STUDIO_INTERFACE_SAMPLE_RATE=192000
+[FAIL] DEVICE_STUDIO_INTERFACE_SAMPLE_RATE=192000
   ERROR: Hardware only supports up to 96000 Hz
   Supported: 44100, 48000, 96000 Hz
 
@@ -387,8 +387,8 @@ cat /proc/asound/card0/stream0
 # Check if device is currently in use
 cat /proc/asound/card0/pcm0c/sub0/hw_params
 
-# If file exists and contains parameters → Device is busy
-# If file is empty or doesn't exist → Device is available
+# If file exists and contains parameters -> Device is busy
+# If file is empty or doesn't exist -> Device is available
 ```
 
 **4. USB Device Information:**
@@ -428,14 +428,14 @@ USB audio adapters with 3.5mm analog inputs have **two** sets of capabilities:
 **Example Scenario:**
 ```
 USB Audio Adapter Chip:
-  ✓ Supports 96kHz sample rate
-  ✓ Supports 24-bit depth
-  ✓ Supports stereo channels
+  [SUPPORTED] Supports 96kHz sample rate
+  [SUPPORTED] Supports 24-bit depth
+  [SUPPORTED] Supports stereo channels
 
 Your Connected Microphone:
-  ✗ Actually only mono
-  ✗ Quality peaks at 48kHz
-  ✗ Effective depth is 16-bit
+  [NOT SUPPORTED] Actually only mono
+  [NOT SUPPORTED] Quality peaks at 48kHz
+  [NOT SUPPORTED] Effective depth is 16-bit
 ```
 
 ### Warning System
@@ -443,14 +443,14 @@ Your Connected Microphone:
 The Capability Checker detects USB audio adapters and issues warnings:
 
 ```
-⚠️  WARNING: This appears to be a USB audio adapter chip.
+WARNING: This appears to be a USB audio adapter chip.
 
 If you're using a 3.5mm analog input (microphone or line-in):
-  • Detected capabilities reflect the USB chip, NOT your microphone
-  • Always verify your microphone is physically connected
-  • Check correct input type selected (mic vs. line level)
-  • Verify channel configuration (mono mic on stereo jack?)
-  • Test recorded audio quality after configuration
+  * Detected capabilities reflect the USB chip, NOT your microphone
+  * Always verify your microphone is physically connected
+  * Check correct input type selected (mic vs. line level)
+  * Verify channel configuration (mono mic on stereo jack?)
+  * Test recorded audio quality after configuration
 
 For USB microphones (native USB), ignore this warning.
 ```
@@ -597,7 +597,7 @@ The Orchestrator integrates capability checking into setup workflows:
 **Quick Setup Wizard:**
 1. Install MediaMTX
 2. Run USB Audio Mapper
-3. **Run Capability Checker** ← Auto-generates config
+3. **Run Capability Checker** <- Auto-generates config
 4. Start streams
 5. Install systemd service
 
@@ -712,9 +712,9 @@ aplay test.wav
 sudo ./lyrebird-mic-check.sh -V
 
 # Common fixes:
-# 1. Sample rate not supported → Use detected rate
-# 2. Channel count mismatch → Check mono vs. stereo
-# 3. Format unavailable → Use S16_LE (universally supported)
+# 1. Sample rate not supported -> Use detected rate
+# 2. Channel count mismatch -> Check mono vs. stereo
+# 3. Format unavailable -> Use S16_LE (universally supported)
 
 # Regenerate with conservative settings
 sudo ./lyrebird-mic-check.sh -g --quality=normal

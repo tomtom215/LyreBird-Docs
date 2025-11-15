@@ -17,7 +17,7 @@ Complete feature list for LyreBirdAudio.
 
 ## Audio Features
 
-- Multiple codec support (AAC, MP3, PCM)
+- Multiple codec support (Opus, AAC, MP3, PCM)
 - Configurable sample rates and bit depths
 - Bitrate optimization
 - Multi-channel audio support

@@ -150,31 +150,31 @@ After setup, you'll have:
 <div class="grid" markdown>
 
 <div markdown>
-### :material-tune: Configuration
+###  Configuration
 Learn about advanced audio settings and stream options
 
-[Configuration Guide →](../user-guide/configuration.md)
+[Configuration Guide ->](../user-guide/configuration.md)
 </div>
 
 <div markdown>
-### :material-monitor-multiple: Multiple Devices
+###  Multiple Devices
 Setup and manage multiple USB microphones
 
-[USB Device Management →](../user-guide/usb-device-management.md)
+[USB Device Management ->](../user-guide/usb-device-management.md)
 </div>
 
 <div markdown>
-### :material-chart-line: Monitoring
+###  Monitoring
 Setup health checks and monitoring
 
-[Diagnostics →](../advanced/diagnostics-monitoring.md)
+[Diagnostics ->](../advanced/diagnostics-monitoring.md)
 </div>
 
 <div markdown>
-### :material-help-circle: Troubleshooting
+###  Troubleshooting
 Common issues and solutions
 
-[Troubleshooting →](../advanced/troubleshooting.md)
+[Troubleshooting ->](../advanced/troubleshooting.md)
 </div>
 
 </div>
