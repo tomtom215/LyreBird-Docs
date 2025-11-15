@@ -109,11 +109,11 @@ Expected files:
 ```
 lyrebird-orchestrator.sh
 mediamtx-stream-manager.sh
-lyrebird-usb-mapper.sh
-lyrebird-capability-checker.sh
+usb-audio-mapper.sh
+lyrebird-mic-check.sh
 lyrebird-diagnostics.sh
-lyrebird-version-manager.sh
-install-mediamtx.sh
+lyrebird-updater.sh
+install_mediamtx.sh
 README.md
 LICENSE
 ```
@@ -421,7 +421,8 @@ arecord -l
 
 Check device capabilities:
 ```bash
-sudo ./lyrebird-capability-checker.sh /dev/lyrebird-mic-1
+# List all devices and their capabilities
+sudo ./lyrebird-mic-check.sh
 ```
 
 ---
@@ -432,12 +433,12 @@ To remove LyreBirdAudio:
 
 ```bash
 # Stop and disable service
-sudo systemctl stop mediamtx-stream-manager
-sudo systemctl disable mediamtx-stream-manager
-sudo rm /etc/systemd/system/mediamtx-stream-manager.service
+sudo systemctl stop mediamtx-audio
+sudo systemctl disable mediamtx-audio
+sudo rm /etc/systemd/system/mediamtx-audio.service
 
 # Remove udev rules
-sudo rm /etc/udev/rules.d/99-lyrebird-*.rules
+sudo rm /etc/udev/rules.d/99-usb-soundcards.rules
 sudo udevadm control --reload-rules
 
 # Remove software

@@ -74,9 +74,9 @@ graph TB
     end
 
     subgraph "Device Layer"
-        E1[/dev/lyrebird-mic-1<br/>Persistent Device]
-        E2[/dev/lyrebird-mic-2<br/>Persistent Device]
-        E3[/dev/lyrebird-mic-N<br/>Persistent Device]
+        E1[ALSA: plughw:0,0<br/>USB Device via udev]
+        E2[ALSA: plughw:1,0<br/>USB Device via udev]
+        E3[ALSA: plughw:N,0<br/>USB Device via udev]
     end
 
     subgraph "Hardware Layer"
@@ -127,11 +127,11 @@ sudo ./lyrebird-orchestrator.sh
 Access your stream:
 
 ```bash
-# Using VLC
-vlc rtsp://localhost:8554/lyrebird-mic-1
+# Using VLC (stream name depends on your device naming)
+vlc rtsp://localhost:8554/Device_1
 
 # Using FFmpeg
-ffmpeg -i rtsp://localhost:8554/lyrebird-mic-1 -acodec copy output.aac
+ffmpeg -i rtsp://localhost:8554/Device_1 -acodec copy output.aac
 ```
 
 ---

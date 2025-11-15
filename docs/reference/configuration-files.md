@@ -16,7 +16,7 @@ LyreBirdAudio uses multiple configuration files to manage audio devices, streami
 | `mediamtx.yml` | MediaMTX server config | `/etc/mediamtx/mediamtx.yml` |
 | `99-usb-soundcards.rules` | USB persistence rules | `/etc/udev/rules.d/99-usb-soundcards.rules` |
 | `mediamtx.service` | MediaMTX systemd service | `/etc/systemd/system/mediamtx.service` |
-| `mediamtx-stream-manager.service` | Stream manager service | `/etc/systemd/system/mediamtx-stream-manager.service` |
+| `mediamtx-audio.service` | Stream manager service | `/etc/systemd/system/mediamtx-audio.service` |
 
 ---
 
@@ -119,15 +119,15 @@ FFmpeg thread queue size for buffering.
 
 - **Type:** Integer
 - **Required:** No
-- **Valid Values:** `512` to `4096`
-- **Default:** `1024`
+- **Valid Values:** `512` to `32768`
+- **Default:** `8192`
 
 **Examples:**
 
 ```bash
-DEVICE_Blue_Yeti_THREAD_QUEUE=1024      # Default
-DEVICE_Unreliable_USB_THREAD_QUEUE=2048 # Increased stability
-DEVICE_Low_Latency_THREAD_QUEUE=512     # Reduced latency
+DEVICE_Blue_Yeti_THREAD_QUEUE=8192      # Default
+DEVICE_Unreliable_USB_THREAD_QUEUE=16384 # Increased stability
+DEVICE_Low_Latency_THREAD_QUEUE=1024     # Reduced buffer size
 ```
 
 ### Complete Example
@@ -140,28 +140,28 @@ DEVICE_Blue_Yeti_CODEC=opus
 DEVICE_Blue_Yeti_SAMPLE_RATE=48000
 DEVICE_Blue_Yeti_BITRATE=128k
 DEVICE_Blue_Yeti_CHANNELS=1
-DEVICE_Blue_Yeti_THREAD_QUEUE=1024
+# THREAD_QUEUE defaults to 8192 if not specified
 
 # Studio Microphone - Stereo AAC for music
 DEVICE_Studio_Mic_CODEC=aac
 DEVICE_Studio_Mic_SAMPLE_RATE=48000
 DEVICE_Studio_Mic_BITRATE=192k
 DEVICE_Studio_Mic_CHANNELS=2
-DEVICE_Studio_Mic_THREAD_QUEUE=2048
+DEVICE_Studio_Mic_THREAD_QUEUE=16384  # Increased for high-quality stereo
 
 # USB Microphone - Low bandwidth voice
 DEVICE_USB_Microphone_CODEC=opus
 DEVICE_USB_Microphone_SAMPLE_RATE=16000
 DEVICE_USB_Microphone_BITRATE=64k
 DEVICE_USB_Microphone_CHANNELS=1
-DEVICE_USB_Microphone_THREAD_QUEUE=1024
+# THREAD_QUEUE defaults to 8192 if not specified
 
 # Conference Room Mic - Standard quality
 DEVICE_Conference_Room_CODEC=opus
 DEVICE_Conference_Room_SAMPLE_RATE=24000
 DEVICE_Conference_Room_BITRATE=96k
 DEVICE_Conference_Room_CHANNELS=1
-DEVICE_Conference_Room_THREAD_QUEUE=1024
+# THREAD_QUEUE defaults to 8192 if not specified
 ```
 
 ### Codec-Specific Guidelines
@@ -534,7 +534,7 @@ sudo journalctl -u mediamtx -f
 
 ### Stream Manager Service
 
-**File Location:** `/etc/systemd/system/mediamtx-stream-manager.service`
+**File Location:** `/etc/systemd/system/mediamtx-audio.service`
 
 **Purpose:** Manages audio stream lifecycle with automatic recovery.
 
