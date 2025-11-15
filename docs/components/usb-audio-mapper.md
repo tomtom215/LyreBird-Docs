@@ -633,11 +633,11 @@ You can manually edit rules to add additional matching criteria:
 ```bash
 # Match by serial number (if available)
 SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825",
-ATTRS{serial}=="ABC123", SYMLINK+="snd/by-usb-port/mic-serial-abc"
+ATTR{id}="mic-serial-abc", SYMLINK+="sound/by-id/mic-serial-abc"
 
 # Match by bus and port
 SUBSYSTEM=="sound", ATTRS{busnum}=="1", ATTRS{devnum}=="4",
-SYMLINK+="snd/by-usb-port/mic-bus1-dev4"
+ATTR{id}="mic-bus1-dev4", SYMLINK+="sound/by-id/mic-bus1-dev4"
 ```
 
 ### Multiple Symlinks per Device
