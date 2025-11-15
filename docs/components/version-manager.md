@@ -62,12 +62,12 @@ Lock file prevents multiple updater instances from running simultaneously and co
 ./lyrebird-updater.sh
 
 # Menu options:
-# 1. Check Current Version
-# 2. Upgrade to Latest Version
-# 3. Switch to Specific Version
-# 4. View Available Versions
-# 5. View Update Log
-# 6. Exit
+# 1) Switch to Latest Stable Release
+# 2) Switch to Development Version (develop/main)
+# 3) Switch to Specific Version or Branch
+# 4) Check for New Updates
+# 5) Show Detailed Status
+# 6) Discard All Changes & Reset
 ```
 
 ### Command-Line Options
@@ -84,7 +84,7 @@ Lock file prevents multiple updater instances from running simultaneously and co
 ```
 
 !!! note "User Privileges"
-    The updater should be run as a normal user (not root). It will use `sudo` internally when needed for service management.
+    The updater should be run as a normal user (not root). The script does NOT use `sudo` internally - ensure you have necessary permissions before running.
 
 ---
 
@@ -100,11 +100,23 @@ Lock file prevents multiple updater instances from running simultaneously and co
 
 **Example Output:**
 ```
-Current Version: v1.2.0
-Latest Tag: v1.3.0
-Status: Update available
+=== Repository Status ===
 
-Your installation is 1 version behind.
+Current State:
+  Status:     On branch main
+  Version:    v1.2.0
+
+Working Directory:
+  Status:     clean
+
+Repository Info:
+  Remote:     https://github.com/tomtom215/LyreBirdAudio.git
+  Last fetch: 2 hours ago
+
+Systemd Service:
+  Service:    mediamtx-audio
+  Status:     running
+  Enabled:    yes
 ```
 
 ---
@@ -120,13 +132,18 @@ Your installation is 1 version behind.
 
 **What Happens:**
 1. Fetches latest version information from remote
-2. Stops running services (mediamtx-audio, mediamtx)
-3. Stashes any local changes
+2. Stops running mediamtx-audio service (if running)
+3. Stashes any local changes with `-u` flag (includes untracked files)
 4. Checks out latest tag
-5. Restores executable permissions on all scripts
-6. Reinstalls systemd service files
+5. Restores executable permissions on specific scripts:
+   - install_mediamtx.sh
+   - lyrebird-orchestrator.sh
+   - lyrebird-updater.sh
+   - mediamtx-stream-manager.sh
+   - usb-audio-mapper.sh
+6. Reinstalls systemd service files (if customizations detected)
 7. Restores stashed changes (if any)
-8. Restarts services
+8. Restarts mediamtx-audio service (only one service managed)
 9. Displays updated version information
 
 ---
@@ -304,26 +321,25 @@ When the updater script itself changes:
 
 **Before Version Switch:**
 ```bash
-# Stop running services
-sudo systemctl stop mediamtx-audio 2>/dev/null
-sudo systemctl stop mediamtx 2>/dev/null
+# Stop running service (mediamtx-audio only)
+systemctl stop mediamtx-audio 2>/dev/null
 ```
 
 **After Version Switch:**
 ```bash
-# Reinstall service files (if changed)
-sudo ./mediamtx-stream-manager.sh install
+# Reinstall service files (if customizations detected)
+./mediamtx-stream-manager.sh install
 
-# Restart services
-sudo systemctl start mediamtx 2>/dev/null
-sudo systemctl start mediamtx-audio 2>/dev/null
+# Restart service
+systemctl start mediamtx-audio 2>/dev/null
 ```
 
-**Why This Matters:**
+**Important Notes:**
+- Script does NOT use `sudo` - assumes user has necessary permissions
+- Only manages `mediamtx-audio` service (NOT a separate `mediamtx` service)
+- Service reinstallation is conditional (only if customizations detected)
 - Service files may change between versions
-- Prevents service file version mismatches
 - Ensures clean service state after updates
-- Handles cron job updates
 
 ---
 
@@ -368,8 +384,8 @@ graph TD
 Prevents concurrent executions:
 
 ```bash
-# Lock file location
-/var/lock/lyrebird-updater.lock
+# Lock file location (in script directory, NOT /var/lock)
+${SCRIPT_DIR}/.lyrebird-updater.lock
 
 # If lock exists
 # - Checks if process is still running
@@ -548,11 +564,11 @@ git tag -l
 # Checkout specific version
 git checkout v1.2.0
 
-# Restore permissions
-chmod +x *.sh
+# Restore permissions (specific scripts only)
+chmod +x install_mediamtx.sh lyrebird-orchestrator.sh lyrebird-updater.sh mediamtx-stream-manager.sh usb-audio-mapper.sh
 
 # Reinstall services
-sudo ./mediamtx-stream-manager.sh install
+./mediamtx-stream-manager.sh install
 ```
 
 !!! warning "Not Recommended"
@@ -568,13 +584,16 @@ The Version Manager integrates with the Orchestrator for convenient access:
 
 ```
 Orchestrator Main Menu
-├── 6. Version & Update Management
-│   ├── 1. Check Current Version ──────────> updater.sh --status
-│   ├── 2. Check for Updates ──────────────> updater.sh --list
-│   ├── 3. Upgrade to Latest ──────────────> updater.sh (option 2)
-│   ├── 4. Switch to Specific Version ─────> updater.sh (option 3)
-│   ├── 5. View Update Log ────────────────> git log
-│   └── 6. Return to Main Menu
+├── 6. Version Management
+│   ├── 1. Launch Update Manager (Interactive) ──> updater.sh (full menu)
+│   │   ├── Option 1: Switch to Latest Stable Release
+│   │   ├── Option 2: Switch to Development Version
+│   │   ├── Option 3: Switch to Specific Version or Branch
+│   │   ├── Option 4: Check for New Updates
+│   │   ├── Option 5: Show Detailed Status
+│   │   └── Option 6: Discard All Changes & Reset
+│   ├── 2. Show Component Versions ────────────> Version info display
+│   └── 0. Back to Main Menu
 ```
 
 ### Orchestrator Integration Flow
