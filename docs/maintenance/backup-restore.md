@@ -703,4 +703,22 @@ sudo /opt/LyreBirdAudio/usb-audio-mapper.sh
 
 ---
 
-**Next Steps:** [Version Management](version-management.md) | [Main Documentation](../index.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Version Management
+Safe updates, rollbacks, and version control
+
+[Version Management →](version-management.md)
+</div>
+
+<div markdown>
+### Main Documentation
+Complete documentation index
+
+[Main Documentation →](../index.md)
+</div>
+
+</div>

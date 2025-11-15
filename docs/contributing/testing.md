@@ -931,4 +931,22 @@ None
 
 ---
 
-**Next Steps:** [Development Setup](development-setup.md) | [Contributing Overview](index.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Development Setup
+Setting up development environment
+
+[Development Setup →](development-setup.md)
+</div>
+
+<div markdown>
+### Contributing Overview
+Contributing guidelines and workflows
+
+[Contributing Overview →](index.md)
+</div>
+
+</div>

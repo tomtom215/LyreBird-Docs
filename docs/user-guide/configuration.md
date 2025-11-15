@@ -522,4 +522,22 @@ MediaMTX server configuration is stored in `/etc/mediamtx/mediamtx.yml`. See [Me
 
 ---
 
-**Next Steps:** [USB Device Management](usb-device-management.md) | [Stream Management](stream-management.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### USB Device Management
+Learn about device detection and mapping
+
+[USB Device Management →](usb-device-management.md)
+</div>
+
+<div markdown>
+### Stream Management
+Starting and managing streams
+
+[Stream Management →](stream-management.md)
+</div>
+
+</div>

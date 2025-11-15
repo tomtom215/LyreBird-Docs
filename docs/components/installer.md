@@ -552,6 +552,8 @@ id mediamtx
 
 ### Update Process
 
+**Atomic Update and Rollback Flow:** The update process starts by checking the current version. If no update is available, it exits as "Already Up-to-Date." If an update is available, it backs up the current binary and downloads the new version. SHA256 checksum verification occurs next - if invalid (red), the update aborts with "Checksum Failed"; if valid, the service stops and the binary is replaced atomically. After starting the service, the new version is verified. On success (green), the backup is removed and "Update Successful" is reported. On failure (orange), the system rolls back by restoring the backup, restarting the service, verifying the rollback, and reporting "Rollback Successful" (green). This ensures that updates either complete successfully or automatically revert to the previous working version.
+
 ```mermaid
 graph TD
     A[Start Update] --> B[Check Current Version]
@@ -960,12 +962,12 @@ sudo chown root:mediamtx /etc/mediamtx/mediamtx.yml
 
 ## Related Documentation
 
-- **[Orchestrator](orchestrator.md)** - Unified management interface with installer integration
-- **[Version Manager](version-manager.md)** - LyreBirdAudio script updates (separate from MediaMTX)
-- **[Stream Manager](stream-manager.md)** - Stream lifecycle management using MediaMTX
-- **[Diagnostics](diagnostics.md)** - MediaMTX service health checks
-- **[Getting Started: Installation](../getting-started/installation.md)** - Complete installation guide
-- **[Maintenance: Version Management](../maintenance/version-management.md)** - Update procedures
+- [Orchestrator](orchestrator.md) - Unified management interface with installer integration
+- [Version Manager](version-manager.md) - LyreBirdAudio script updates (separate from MediaMTX)
+- [Stream Manager](stream-manager.md) - Stream lifecycle management using MediaMTX
+- [Diagnostics](diagnostics.md) - MediaMTX service health checks
+- [Getting Started: Installation](../getting-started/installation.md) - Complete installation guide
+- [Maintenance: Version Management](../maintenance/version-management.md) - Update procedures
 
 ---
 

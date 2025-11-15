@@ -25,6 +25,8 @@ This guide covers:
 
 LyreBirdAudio's architecture follows a layered design pattern, where each layer has specific responsibilities and well-defined interfaces:
 
+**Layer Hierarchy Diagram:** The system is organized into 6 distinct layers in a linear flow from hardware to clients. The Client Layer (RTSP Clients) connects to the Management Layer (Stream Manager), which communicates with the Streaming Layer (MediaMTX). MediaMTX interfaces with the Processing Layer (FFmpeg), which reads from the Device Layer (udev), which finally accesses the Hardware Layer (USB Devices). This top-to-bottom flow shows the chain of dependencies in the system.
+
 ```mermaid
 graph TD
     A[Client Layer - RTSP Clients] --> B[Management Layer - Stream Manager]
@@ -259,14 +261,16 @@ sudo ./lyrebird-orchestrator.sh
 
 **Component Interactions:**
 
+**Component Delegation Diagram:** The Orchestrator serves as the central hub that delegates to six specialized components. From the Orchestrator, arrows point to Stream Manager, USB Mapper, Capability Checker, Diagnostics, Updater, and Installer. This hub-and-spoke pattern shows the Orchestrator's role as a coordination layer that doesn't contain business logic but delegates to appropriate specialists.
+
 ```mermaid
 graph LR
-    A[Orchestrator] --> B[Stream Manager]
-    A --> C[USB Mapper]
-    A --> D[Capability Checker]
-    A --> E[Diagnostics]
-    A --> F[Updater]
-    A --> G[Installer]
+    A[Orchestrator<br/>lyrebird-orchestrator.sh] --> B[Stream Manager<br/>mediamtx-stream-manager.sh]
+    A --> C[USB Mapper<br/>usb-audio-mapper.sh]
+    A --> D[Capability Checker<br/>lyrebird-mic-check.sh]
+    A --> E[Diagnostics<br/>lyrebird-diagnostics.sh]
+    A --> F[Updater<br/>lyrebird-updater.sh]
+    A --> G[Installer<br/>install_mediamtx.sh]
 ```
 
 ### Stream Manager
@@ -501,6 +505,8 @@ sudo ./lyrebird-updater.sh --update
 
 ### End-to-End Stream Pipeline
 
+**Data Flow Pipeline:** Audio data flows through six stages in a left-to-right pipeline. Starting from the USB Microphone, audio samples flow to the ALSA Driver, which provides a hw:CARD interface to FFmpeg Capture. The raw audio goes through the FFmpeg Encoder, producing an encoded stream that flows to MediaMTX. Finally, MediaMTX distributes via RTSP protocol to Network Clients. This shows the complete journey of audio data from hardware capture to network distribution.
+
 ```mermaid
 graph LR
     A[USB Microphone] -->|Audio Samples| B[ALSA Driver]
@@ -564,6 +570,8 @@ RTSP Packets -> Network -> Client Decoder -> Audio Output
 - Sends to audio output device
 
 ### Control Flow
+
+**Stream Lifecycle Sequence:** This sequence diagram shows the interactions between User, Orchestrator, StreamManager, FFmpeg, and MediaMTX during stream startup and monitoring. The flow begins with the User sending a "Start streams" command to the Orchestrator, which initializes the StreamManager. The StreamManager launches FFmpeg processes that connect to MediaMTX via RTSP. MediaMTX confirms the stream is active back to the StreamManager, which reports success to the User. A monitoring loop then shows the StreamManager continuously checking MediaMTX health status. If a stream failure is detected, the StreamManager automatically restarts the FFmpeg process and reconnects to MediaMTX.
 
 ```mermaid
 sequenceDiagram
@@ -736,13 +744,15 @@ Server 3: Devices 21-30 -> streams3.example.com
 
 ### Dependency Graph
 
+**Component Dependencies:** This diagram shows how LyreBirdAudio components depend on each other and external systems. The Orchestrator depends on Stream Manager, USB Mapper, Capability Checker, Diagnostics, and Updater. Stream Manager depends on MediaMTX, FFmpeg, and Capability Checker. USB Mapper depends on udev. Capability Checker depends on FFmpeg and ALSA. Diagnostics depends on MediaMTX, Stream Manager, and USB Mapper. Updater depends on Git/Curl. The external dependencies (MediaMTX, FFmpeg, udev, ALSA, Git/Curl) are highlighted in different colors to distinguish them from internal components.
+
 ```mermaid
 graph TD
-    A[Orchestrator] --> B[Stream Manager]
-    A --> C[USB Mapper]
-    A --> D[Capability Checker]
-    A --> E[Diagnostics]
-    A --> F[Updater]
+    A[Orchestrator<br/>lyrebird-orchestrator.sh] --> B[Stream Manager<br/>mediamtx-stream-manager.sh]
+    A --> C[USB Mapper<br/>usb-audio-mapper.sh]
+    A --> D[Capability Checker<br/>lyrebird-mic-check.sh]
+    A --> E[Diagnostics<br/>lyrebird-diagnostics.sh]
+    A --> F[Updater<br/>lyrebird-updater.sh]
 
     B --> G[MediaMTX]
     B --> H[FFmpeg]
@@ -829,4 +839,22 @@ sudo ./lyrebird-diagnostics.sh --check-deps
 
 ---
 
-**Next Steps:** [Performance Tuning](performance.md) | [Troubleshooting](troubleshooting.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Performance Tuning
+Optimization strategies and best practices
+
+[Performance Tuning →](performance.md)
+</div>
+
+<div markdown>
+### Troubleshooting
+Common issues and solutions
+
+[Troubleshooting →](troubleshooting.md)
+</div>
+
+</div>

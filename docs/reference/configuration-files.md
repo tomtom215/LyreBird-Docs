@@ -663,4 +663,22 @@ DEVICE_Blue_Yeti_THREAD_QUEUE=2048  # Increased for USB stability
 
 ---
 
-**Next Steps:** [Environment Variables](environment-variables.md) | [Command Reference](command-reference.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Environment Variables
+Runtime configuration and customization
+
+[Environment Variables →](environment-variables.md)
+</div>
+
+<div markdown>
+### Command Reference
+All available commands and utilities
+
+[Command Reference →](command-reference.md)
+</div>
+
+</div>

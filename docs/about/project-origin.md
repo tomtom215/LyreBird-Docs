@@ -38,3 +38,12 @@ The system has been battle-tested in continuous operation:
 LyreBirdAudio is open source under the Apache 2.0 license, allowing anyone to use, modify, and deploy the system for their own use cases.
 
 [View License](license.md) | [GitHub Repository](https://github.com/tomtom215/LyreBirdAudio)
+
+---
+
+## Get Started
+
+Try LyreBirdAudio for yourself:
+
+[Quick Start Guide →](../getting-started/quick-start.md){ .md-button .md-button--primary }
+[Installation Guide →](../getting-started/installation.md){ .md-button }

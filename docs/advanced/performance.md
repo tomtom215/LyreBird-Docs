@@ -880,4 +880,22 @@ Timestamp,CPU%,MemoryMB,FileDescriptors
 
 ---
 
-**Next Steps:** [Troubleshooting](troubleshooting.md) | [Diagnostics & Monitoring](diagnostics-monitoring.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Troubleshooting
+Common issues and solutions
+
+[Troubleshooting →](troubleshooting.md)
+</div>
+
+<div markdown>
+### Diagnostics & Monitoring
+System health monitoring
+
+[Diagnostics & Monitoring →](diagnostics-monitoring.md)
+</div>
+
+</div>

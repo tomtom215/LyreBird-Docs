@@ -334,6 +334,8 @@ sudo ./lyrebird-mic-check.sh -g --quality=high
 
 The Capability Checker uses the ALSA proc filesystem for detection, which doesn't require opening devices:
 
+**Non-Invasive Detection Workflow:** The process begins with "Start Capability Check" and reads from /proc/asound/cards. For each detected card, it reads the stream parameters from /proc/asound/cardN/stream0, then parses hardware parameters to extract sample rates, formats, and channels. It also checks /proc/asound/cardN/pcm0c/sub0/hw_params to determine if the device is busy (in use) or available. All detected capabilities are stored, and finally a configuration file is generated. This workflow is shown in purple (main processing) with cyan highlighting for key steps (parsing and generation), demonstrating how the tool gathers hardware information without interrupting active audio streams.
+
 ```mermaid
 graph TD
     A[Start Capability Check] --> B[Read /proc/asound/cards]
@@ -803,11 +805,11 @@ fi
 
 ## Related Documentation
 
-- **[USB Audio Mapper](usb-audio-mapper.md)** - Create persistent device names
-- **[Stream Manager](stream-manager.md)** - Uses generated configuration
-- **[Orchestrator](orchestrator.md)** - Integrates capability checking
-- **[User Guide: Configuration](../user-guide/configuration.md)** - Configuration guide
-- **[Reference: Configuration Files](../reference/configuration-files.md)** - Config reference
+- [USB Audio Mapper](usb-audio-mapper.md) - Create persistent device names
+- [Stream Manager](stream-manager.md) - Uses generated configuration
+- [Orchestrator](orchestrator.md) - Integrates capability checking
+- [User Guide: Configuration](../user-guide/configuration.md) - Configuration guide
+- [Reference: Configuration Files](../reference/configuration-files.md) - Config reference
 
 ---
 

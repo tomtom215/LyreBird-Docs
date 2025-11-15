@@ -305,4 +305,22 @@ If components show version mismatches:
 
 ---
 
-**Next Steps:** [Backup & Restore](backup-restore.md) | [Main Documentation](../index.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Backup & Restore
+Configuration backup and recovery procedures
+
+[Backup & Restore →](backup-restore.md)
+</div>
+
+<div markdown>
+### Main Documentation
+Complete documentation index
+
+[Main Documentation →](../index.md)
+</div>
+
+</div>

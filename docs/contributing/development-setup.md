@@ -816,4 +816,22 @@ time {
 
 ---
 
-**Next Steps:** [Code Standards](code-standards.md) | [Contributing Overview](index.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Code Standards
+Coding conventions and best practices
+
+[Code Standards →](code-standards.md)
+</div>
+
+<div markdown>
+### Contributing Overview
+Contributing guidelines and workflows
+
+[Contributing Overview →](index.md)
+</div>
+
+</div>

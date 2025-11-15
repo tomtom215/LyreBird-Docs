@@ -873,4 +873,22 @@ automation:
 
 ---
 
-**Next Steps:** [Diagnostics & Monitoring](diagnostics-monitoring.md) | [Architecture](architecture.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Diagnostics & Monitoring
+System health checks and monitoring
+
+[Diagnostics & Monitoring →](diagnostics-monitoring.md)
+</div>
+
+<div markdown>
+### Architecture
+System design and component overview
+
+[Architecture →](architecture.md)
+</div>
+
+</div>

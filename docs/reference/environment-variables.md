@@ -686,4 +686,22 @@ export MAX_CPU_WARNING=70
 
 ---
 
-**Next Steps:** [Command Reference](command-reference.md) | [Configuration Files](configuration-files.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Command Reference
+All available commands and utilities
+
+[Command Reference →](command-reference.md)
+</div>
+
+<div markdown>
+### Configuration Files
+File-based settings and formats
+
+[Configuration Files →](configuration-files.md)
+</div>
+
+</div>
