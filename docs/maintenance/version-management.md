@@ -292,7 +292,7 @@ If components show version mismatches:
 ```bash
 # Verify all scripts are from same version
 ./lyrebird-orchestrator.sh
-# Select: Version Management → Show Component Versions
+# Select: Version Management -> Show Component Versions
 ```
 
 ---

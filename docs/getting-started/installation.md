@@ -217,7 +217,7 @@ Creating persistent device link: /dev/lyrebird-mic-1
 Writing udev rule: /etc/udev/rules.d/99-lyrebird-mic-1.rules
 Reloading udev rules...
 
-✓ Device mapped successfully!
+[PASS] Device mapped successfully!
 ```
 
 Repeat for additional microphones.
@@ -257,7 +257,7 @@ Bitrate: 128 kbps
 
 Create this stream? (y/n): y
 
-✓ Stream configuration created
+[PASS] Stream configuration created
   Config file: /opt/mediamtx/streams/lyrebird-mic-1.env
   RTSP URL: rtsp://localhost:8554/lyrebird-mic-1
 ```
@@ -278,15 +278,15 @@ Output:
 ```
 Installing Stream Manager Service...
 
-Creating service file: /etc/systemd/system/mediamtx-stream-manager.service
+Creating service file: /etc/systemd/system/mediamtx-audio.service
 Reloading systemd daemon...
 Enabling service for auto-start...
 Starting service...
 
-✓ Service installed and started
+[PASS] Service installed and started
 
 Service Status:
-● mediamtx-stream-manager.service - MediaMTX Stream Manager
+● mediamtx-audio.service - MediaMTX Stream Manager
    Loaded: loaded
    Active: active (running) since [timestamp]
    Process: MediaMTX Server, Stream Monitor
@@ -299,7 +299,7 @@ Service Status:
 ### Check Service Status
 
 ```bash
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 ```
 
 ### List Active Streams
@@ -386,7 +386,7 @@ After installation, verify:
 
 Check logs:
 ```bash
-journalctl -u mediamtx-stream-manager -n 50
+journalctl -u mediamtx-audio -n 50
 ```
 
 ---
@@ -453,31 +453,31 @@ sudo rm -rf /opt/mediamtx
 <div class="grid" markdown>
 
 <div markdown>
-### :material-book-open-variant: Basic Usage
+###  Basic Usage
 Learn how to manage streams and monitor your system
 
-[Basic Usage →](basic-usage.md)
+[Basic Usage ->](basic-usage.md)
 </div>
 
 <div markdown>
-### :material-tune: Configuration
+###  Configuration
 Configure advanced audio settings and stream options
 
-[Configuration →](../user-guide/configuration.md)
+[Configuration ->](../user-guide/configuration.md)
 </div>
 
 <div markdown>
-### :material-monitor-multiple: Multiple Devices
+###  Multiple Devices
 Add and manage additional USB microphones
 
-[USB Management →](../user-guide/usb-device-management.md)
+[USB Management ->](../user-guide/usb-device-management.md)
 </div>
 
 <div markdown>
-### :material-lifebuoy: Troubleshooting
+###  Troubleshooting
 Solutions for common issues
 
-[Troubleshooting →](../advanced/troubleshooting.md)
+[Troubleshooting ->](../advanced/troubleshooting.md)
 </div>
 
 </div>

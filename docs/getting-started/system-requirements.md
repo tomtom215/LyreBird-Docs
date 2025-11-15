@@ -271,4 +271,4 @@ If you currently have:
 
 Ready to install? Proceed to the installation guide.
 
-[Installation Guide →](installation.md){ .md-button .md-button--primary }
+[Installation Guide ->](installation.md){ .md-button .md-button--primary }

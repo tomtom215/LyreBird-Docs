@@ -10,16 +10,16 @@ A permissive free software license written by the Apache Software Foundation.
 
 ### Key Points
 
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed
-- ✅ Patent use allowed
-- ✅ Private use allowed
-- ⚠️ License and copyright notice required
-- ⚠️ State changes required
-- ❌ Trademark use not allowed
-- ❌ Liability limitation
-- ❌ Warranty disclaimer
+- YES Commercial use allowed
+- YES Modification allowed
+- YES Distribution allowed
+- YES Patent use allowed
+- YES Private use allowed
+- WARNING: License and copyright notice required
+- WARNING: State changes required
+- NO Trademark use not allowed
+- NO Liability limitation
+- NO Warranty disclaimer
 
 ---
 

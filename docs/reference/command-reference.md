@@ -295,14 +295,6 @@ sudo ./lyrebird-diagnostics.sh --verbose
 
 Includes extended device information, logs, and configuration validation.
 
-### --export=<file>
-
-Export diagnostic report to file.
-
-```bash
-sudo ./lyrebird-diagnostics.sh --export=/tmp/diagnostic-report.txt
-```
-
 **Exit Codes:**
 
 | Code | Status | Description |

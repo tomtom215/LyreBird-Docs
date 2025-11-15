@@ -139,7 +139,7 @@ rtsp://myserver.local:8554/bird-monitor
 === "VLC GUI"
 
     1. Open VLC
-    2. Media → Open Network Stream
+    2. Media -> Open Network Stream
     3. Enter: `rtsp://localhost:8554/lyrebird-mic-1`
     4. Click Play
 
@@ -271,12 +271,12 @@ Output:
 LyreBirdAudio System Diagnostics
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-✓ MediaMTX Server: Running
-✓ Stream Manager: Active
-✓ USB Devices: 2 mapped
-✓ Active Streams: 2/2
-✓ Disk Space: 45% used
-✓ System Load: Normal
+[PASS] MediaMTX Server: Running
+[PASS] Stream Manager: Active
+[PASS] USB Devices: 2 mapped
+[PASS] Active Streams: 2/2
+[PASS] Disk Space: 45% used
+[PASS] System Load: Normal
 
 Status: HEALTHY
 ```
@@ -311,7 +311,7 @@ git status
 ### Apply Updates
 
 ```bash
-sudo ./lyrebird-version-manager.sh update
+sudo ./lyrebird-updater.sh update
 ```
 
 The version manager will:
@@ -324,7 +324,7 @@ The version manager will:
 ### Rollback if Needed
 
 ```bash
-sudo ./lyrebird-version-manager.sh rollback
+sudo ./lyrebird-updater.sh rollback
 ```
 
 ---
@@ -441,31 +441,31 @@ sudo lsof -i :8554
 <div class="grid" markdown>
 
 <div markdown>
-### :material-tune: Advanced Configuration
+###  Advanced Configuration
 Learn about codec selection, sample rates, and bitrate tuning
 
-[Configuration Guide →](../user-guide/configuration.md)
+[Configuration Guide ->](../user-guide/configuration.md)
 </div>
 
 <div markdown>
-### :material-monitor-dashboard: Monitoring
+###  Monitoring
 Setup comprehensive monitoring and alerts
 
-[Diagnostics & Monitoring →](../advanced/diagnostics-monitoring.md)
+[Diagnostics & Monitoring ->](../advanced/diagnostics-monitoring.md)
 </div>
 
 <div markdown>
-### :material-alert-circle: Troubleshooting
+###  Troubleshooting
 Solutions for common issues
 
-[Troubleshooting →](../advanced/troubleshooting.md)
+[Troubleshooting ->](../advanced/troubleshooting.md)
 </div>
 
 <div markdown>
-### :material-file-cog: Component Reference
+###  Component Reference
 Deep dive into each component
 
-[Components →](../components/index.md)
+[Components ->](../components/index.md)
 </div>
 
 </div>

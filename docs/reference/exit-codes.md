@@ -78,6 +78,10 @@ esac
 | 2 | Complete Failure | All operations failed |
 | 3 | Configuration Error | Invalid configuration detected |
 | 4 | Service Error | MediaMTX service not running |
+| 5 | Lock Failed | Another instance is already running |
+| 6 | No USB Devices | No USB audio devices detected |
+| 7 | MediaMTX Down | MediaMTX server is not responding |
+| 10 | Monitor Degraded | Monitoring active but with degraded state |
 
 **Command-Specific Codes:**
 
@@ -246,28 +250,43 @@ fi
 
 | Code | Status | Description |
 |------|--------|-------------|
-| 0 | Success | Update completed or no update needed |
-| 1 | Update Available | Update available but not applied |
-| 2 | Update Failed | Update failed |
-| 3 | Network Error | Cannot reach update server |
+| 0 | Success | Update completed successfully |
+| 1 | General Error | Generic error occurred |
+| 2 | Prerequisites Missing | Required tools not installed (git, etc.) |
+| 3 | Not a Git Repository | Directory is not a git repository |
+| 4 | No Remote Configured | Git remote not configured |
+| 5 | Permission Denied | Insufficient permissions |
+| 7 | Locked | Another instance is already running |
+| 8 | Bad Git State | Git repository in inconsistent state |
+| 9 | User Aborted | Operation cancelled by user |
 
 **Example Usage:**
 
 ```bash
 #!/bin/bash
-sudo ./lyrebird-updater.sh --status
+sudo ./lyrebird-updater.sh --update
 
 case $? in
     0)
-        echo "System up to date"
+        echo "Update successful"
         ;;
     1)
-        echo "Update available"
-        # Optionally auto-update
-        sudo ./lyrebird-updater.sh --update
+        echo "General error occurred"
+        ;;
+    2)
+        echo "Missing prerequisites - install git"
         ;;
     3)
-        echo "Cannot check for updates - network issue"
+        echo "Not a git repository"
+        ;;
+    5)
+        echo "Permission denied - run with sudo"
+        ;;
+    7)
+        echo "Another update is already running"
+        ;;
+    9)
+        echo "Update cancelled by user"
         ;;
 esac
 ```
@@ -413,11 +432,11 @@ exit $EXIT_CODE
 | Command | Success (0) | Warning (1) | Failure (2) | Other |
 |---------|-------------|-------------|-------------|-------|
 | `lyrebird-diagnostics.sh` | All passed | Warnings present | Failures detected | 127: Tool error |
-| `mediamtx-stream-manager.sh` | All streams OK | Partial success | Complete failure | 3: Config error, 4: Service error |
+| `mediamtx-stream-manager.sh` | All streams OK | Partial success | Complete failure | 3: Config error, 4: Service error, 5: Lock failed, 6: No USB devices, 7: MediaMTX down, 10: Monitor degraded |
 | `lyrebird-mic-check.sh` | Success | Validation failed | No devices | 3: Permission error |
 | `usb-audio-mapper.sh` | Success | Warning | No devices | 3: Permission error |
 | `install_mediamtx.sh` | Success | N/A | Install failed | 3: Service failed |
-| `lyrebird-updater.sh` | Up to date | Update available | Update failed | 3: Network error |
+| `lyrebird-updater.sh` | Success | General error | Prerequisites missing | 3: Not git repo, 4: No remote, 5: Permission denied, 7: Locked, 8: Bad git state, 9: User aborted |
 
 ---
 

@@ -20,32 +20,32 @@ The Stream Manager is the core engine of LyreBirdAudio, responsible for managing
 <div class="grid" markdown>
 
 <div markdown>
-### :material-play-circle: Stream Lifecycle Management
+### Stream Lifecycle Management
 Complete control over FFmpeg process creation, monitoring, and termination with graceful shutdown procedures.
 </div>
 
 <div markdown>
-### :material-heart-pulse: Automatic Health Monitoring
+### Automatic Health Monitoring
 Continuous stream health checks via MediaMTX API with automatic restart of failed streams.
 </div>
 
 <div markdown>
-### :material-restart-alert: Exponential Backoff Recovery
+### Exponential Backoff Recovery
 Intelligent restart delays (10s to 300s) prevent resource exhaustion from rapid failure loops.
 </div>
 
 <div markdown>
-### :material-file-multiple: Dual-Lookup Configuration
+### Dual-Lookup Configuration
 Support for both friendly device names and full device IDs ensures reliable configuration.
 </div>
 
 <div markdown>
-### :material-shield-lock: Lock-Based Concurrency
+### Lock-Based Concurrency
 File-based locking prevents multiple instances from conflicting operations.
 </div>
 
 <div markdown>
-### :material-gauge: Resource Monitoring
+### Resource Monitoring
 Tracks CPU usage, file descriptors, and process counts with configurable thresholds.
 </div>
 
@@ -83,7 +83,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 ### Multiplex Streaming
 
 ```bash
-# Audio mixing mode (all mics → single stereo stream)
+# Audio mixing mode (all mics -> single stereo stream)
 sudo ./mediamtx-stream-manager.sh -m multiplex -f amix start
 
 # Channel merging mode (preserve channel separation)
@@ -329,14 +329,14 @@ sudo ./mediamtx-stream-manager.sh config
 
 | Feature | Direct Execution | Systemd Service |
 |---------|------------------|-----------------|
-| **Reboot survival** | ❌ Streams stop | ✅ Auto-start on boot |
-| **Crash recovery** | ❌ Manual restart required | ✅ Automatic restart |
-| **Process monitoring** | ❌ None | ✅ Continuous supervision |
-| **Health checks** | ❌ Manual | ✅ Automated cron (5 min) |
-| **System integration** | ❌ No logging | ✅ journald integration |
-| **Resource limits** | ❌ None | ✅ Configured limits |
-| **Graceful shutdown** | ⚠️ Manual | ✅ Automatic |
-| **Production ready** | ❌ No | ✅ Yes |
+| **Reboot survival** | NO - Streams stop | YES - Auto-start on boot |
+| **Crash recovery** | NO - Manual restart required | YES - Automatic restart |
+| **Process monitoring** | NO - None | YES - Continuous supervision |
+| **Health checks** | NO - Manual | YES - Automated cron (5 min) |
+| **System integration** | NO - No logging | YES - journald integration |
+| **Resource limits** | NO - None | YES - Configured limits |
+| **Graceful shutdown** | [NOTICE] Manual | YES - Automatic |
+| **Production ready** | NO | YES |
 
 #### When Direct Execution is Acceptable
 

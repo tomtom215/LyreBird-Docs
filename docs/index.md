@@ -14,32 +14,32 @@ Transform USB microphones into reliable RTSP streams for continuous monitoring a
 <div class="grid" markdown>
 
 <div markdown>
-### :material-auto-fix: No Configuration Guesswork
+### No Configuration Guesswork
 Automatically detects hardware capabilities and optimal settings for your USB audio devices.
 </div>
 
 <div markdown>
-### :material-restart: Survives Reboots
+### Survives Reboots
 USB devices maintain consistent names via udev rules. No manual intervention after system restarts.
 </div>
 
 <div markdown>
-### :material-heart-pulse: Self-Healing
+### Self-Healing
 Automatic recovery from crashes and failures. Built-in watchdog ensures streams stay alive.
 </div>
 
 <div markdown>
-### :material-update: Easy Updates
+### Easy Updates
 Git-based version management with rollback capability. Update or revert with simple commands.
 </div>
 
 <div markdown>
-### :material-server: Production-Ready
+### Production-Ready
 Designed for unattended 24/7 operation with comprehensive logging and monitoring.
 </div>
 
 <div markdown>
-### :material-chart-timeline: Real-Time Streaming
+### Real-Time Streaming
 Low-latency RTSP streams compatible with VLC, FFmpeg, and all standard RTSP clients.
 </div>
 
@@ -141,12 +141,12 @@ ffmpeg -i rtsp://localhost:8554/Device_1 -acodec copy output.aac
 <div class="grid" markdown>
 
 <div markdown>
-### :fontawesome-brands-linux: Linux
+### Linux
 Full support for Ubuntu, Debian, Raspberry Pi OS, and derivatives
 </div>
 
 <div markdown>
-### :material-chip: Architectures
+### Architectures
 **x86_64** · **ARM64** · **ARMv7** · **ARMv6**
 </div>
 

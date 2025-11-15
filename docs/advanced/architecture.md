@@ -127,7 +127,7 @@ ffmpeg -f alsa -i hw:CARD=Blue_Yeti \
   -f rtsp rtsp://localhost:8554/Blue_Yeti
 ```
 
-**Interface:** ALSA input → RTSP output
+**Interface:** ALSA input -> RTSP output
 
 ### Layer 4: Streaming Layer
 
@@ -522,7 +522,7 @@ graph LR
 **Stage 1: Audio Capture**
 
 ```
-USB Device → USB Controller → ALSA Driver → Application Buffer
+USB Device -> USB Controller -> ALSA Driver -> Application Buffer
 ```
 
 - USB device captures analog audio
@@ -533,7 +533,7 @@ USB Device → USB Controller → ALSA Driver → Application Buffer
 **Stage 2: FFmpeg Processing**
 
 ```
-ALSA Buffer → FFmpeg Input → Resampler → Encoder → RTSP Muxer
+ALSA Buffer -> FFmpeg Input -> Resampler -> Encoder -> RTSP Muxer
 ```
 
 - FFmpeg reads from ALSA device
@@ -544,7 +544,7 @@ ALSA Buffer → FFmpeg Input → Resampler → Encoder → RTSP Muxer
 **Stage 3: MediaMTX Distribution**
 
 ```
-RTSP Stream → MediaMTX Receiver → Stream Buffer → Client Connections
+RTSP Stream -> MediaMTX Receiver -> Stream Buffer -> Client Connections
 ```
 
 - MediaMTX receives RTSP stream
@@ -555,7 +555,7 @@ RTSP Stream → MediaMTX Receiver → Stream Buffer → Client Connections
 **Stage 4: Client Playback**
 
 ```
-RTSP Packets → Network → Client Decoder → Audio Output
+RTSP Packets -> Network -> Client Decoder -> Audio Output
 ```
 
 - Client receives RTSP packets
@@ -700,9 +700,9 @@ For larger deployments, distribute across multiple servers:
 **Deployment Pattern:**
 
 ```
-Server 1: Devices 1-10  → streams.example.com
-Server 2: Devices 11-20 → streams2.example.com
-Server 3: Devices 21-30 → streams3.example.com
+Server 1: Devices 1-10  -> streams.example.com
+Server 2: Devices 11-20 -> streams2.example.com
+Server 3: Devices 21-30 -> streams3.example.com
 ```
 
 **Load Balancing:**

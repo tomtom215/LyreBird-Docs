@@ -36,7 +36,6 @@ Before removing LyreBirdAudio, consider:
 
 ```bash
 # Create final backup before uninstallation
-sudo /opt/LyreBirdAudio/scripts/backup-config.sh 2>/dev/null || \
 sudo mkdir -p /var/backups/lyrebird/final-backup && \
 sudo cp /etc/mediamtx/mediamtx.yml \
        /etc/mediamtx/audio-devices.conf \
@@ -55,8 +54,8 @@ echo "Final backup saved to /var/backups/lyrebird/final-backup"
 Complete removal with a single command:
 
 ```bash
-sudo systemctl stop mediamtx-stream-manager 2>/dev/null && \
-sudo systemctl disable mediamtx-stream-manager 2>/dev/null && \
+sudo systemctl stop mediamtx-audio 2>/dev/null && \
+sudo systemctl disable mediamtx-audio 2>/dev/null && \
 sudo systemctl stop mediamtx 2>/dev/null && \
 sudo systemctl disable mediamtx 2>/dev/null && \
 sudo rm -f /etc/systemd/system/mediamtx*.service && \
@@ -82,10 +81,10 @@ Stop running services gracefully:
 
 ```bash
 # Stop stream manager service
-sudo systemctl stop mediamtx-stream-manager
+sudo systemctl stop mediamtx-audio
 
 # Verify stopped
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 ```
 
 ```bash
@@ -102,10 +101,10 @@ Prevent services from starting on boot:
 
 ```bash
 # Disable stream manager
-sudo systemctl disable mediamtx-stream-manager
+sudo systemctl disable mediamtx-audio
 
 # Verify disabled
-sudo systemctl is-enabled mediamtx-stream-manager || echo "Service disabled"
+sudo systemctl is-enabled mediamtx-audio || echo "Service disabled"
 ```
 
 ```bash
@@ -122,7 +121,7 @@ Delete service configuration files:
 
 ```bash
 # Remove service files
-sudo rm -f /etc/systemd/system/mediamtx-stream-manager.service
+sudo rm -f /etc/systemd/system/mediamtx-audio.service
 sudo rm -f /etc/systemd/system/mediamtx.service
 
 # Verify removal
@@ -309,9 +308,9 @@ Keep MediaMTX but remove LyreBird stream management:
 
 ```bash
 # Stop and disable stream manager
-sudo systemctl stop mediamtx-stream-manager
-sudo systemctl disable mediamtx-stream-manager
-sudo rm -f /etc/systemd/system/mediamtx-stream-manager.service
+sudo systemctl stop mediamtx-audio
+sudo systemctl disable mediamtx-audio
+sudo rm -f /etc/systemd/system/mediamtx-audio.service
 sudo systemctl daemon-reload
 
 # Remove LyreBird scripts
@@ -549,7 +548,7 @@ sudo rm -f <file_path>
 
 ```bash
 # Mask service to prevent activation
-sudo systemctl mask mediamtx-stream-manager
+sudo systemctl mask mediamtx-audio
 sudo systemctl mask mediamtx
 
 # Remove service files
@@ -557,7 +556,7 @@ sudo rm -f /etc/systemd/system/mediamtx*.service
 sudo systemctl daemon-reload
 
 # Unmask (service is now gone)
-sudo systemctl unmask mediamtx-stream-manager 2>/dev/null || true
+sudo systemctl unmask mediamtx-audio 2>/dev/null || true
 sudo systemctl unmask mediamtx 2>/dev/null || true
 ```
 

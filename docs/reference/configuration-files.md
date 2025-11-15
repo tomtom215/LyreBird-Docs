@@ -629,9 +629,6 @@ sudo git commit -am "Update Blue Yeti bitrate"
 Validate configurations before applying:
 
 ```bash
-# Validate MediaMTX configuration
-sudo /usr/local/bin/mediamtx --validate /etc/mediamtx/mediamtx.yml
-
 # Validate audio device configuration
 sudo ./lyrebird-mic-check.sh -V
 

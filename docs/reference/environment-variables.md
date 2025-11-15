@@ -265,33 +265,9 @@ UDEV_RULES_FILE=/tmp/test-udev.rules sudo ./usb-audio-mapper.sh
 
 ## Operational Parameters
 
-### LOGLEVEL
-
-**Description:** Logging verbosity level.
-
-**Default:** `INFO`
-
-**Valid Values:** `DEBUG`, `INFO`, `WARN`, `ERROR`
-
-**Usage:**
-
-```bash
-# Enable debug logging
-LOGLEVEL=DEBUG sudo ./mediamtx-stream-manager.sh start
-```
-
-**Output Levels:**
-
-| Level | Description | Use Case |
-|-------|-------------|----------|
-| DEBUG | All messages including internal details | Troubleshooting |
-| INFO | Normal operational messages | Production |
-| WARN | Warnings and errors only | Quiet mode |
-| ERROR | Errors only | Critical issues only |
-
 ### DRY_RUN
 
-**Description:** Preview actions without executing them.
+**Description:** Preview actions without executing them. **Only supported by `install_mediamtx.sh`.**
 
 **Default:** `false`
 
@@ -300,60 +276,18 @@ LOGLEVEL=DEBUG sudo ./mediamtx-stream-manager.sh start
 **Usage:**
 
 ```bash
-# Preview what would be done
-DRY_RUN=true sudo ./mediamtx-stream-manager.sh start
+# Preview MediaMTX installation steps without actually installing
+DRY_RUN=true sudo ./install_mediamtx.sh
 ```
 
 **Purpose:**
 
-- Test scripts safely
-- Preview configuration changes
-- Validate commands
+- Preview installation steps before executing
+- Test installation script logic
+- Validate system compatibility
 
-### FORCE
-
-**Description:** Force operations without confirmation prompts.
-
-**Default:** `false`
-
-**Valid Values:** `true`, `false`, `1`, `0`
-
-**Usage:**
-
-```bash
-# Skip all confirmation prompts
-FORCE=true sudo ./lyrebird-mic-check.sh -g
-```
-
-**Purpose:**
-
-- Automation and scripting
-- Non-interactive operation
-- CI/CD pipelines
-
-### SKIP_VALIDATION
-
-**Description:** Skip configuration validation checks.
-
-**Default:** `false`
-
-**Valid Values:** `true`, `false`, `1`, `0`
-
-**Usage:**
-
-```bash
-# Skip validation (not recommended)
-SKIP_VALIDATION=true sudo ./mediamtx-stream-manager.sh start
-```
-
-**Purpose:**
-
-- Speed up operations in trusted environments
-- Testing edge cases
-- Advanced users only
-
-!!! warning "Use with Caution"
-    Skipping validation can lead to undefined behavior if configuration is invalid.
+!!! note "Limited Support"
+    The DRY_RUN variable is only implemented in `install_mediamtx.sh`. It is not supported by other LyreBirdAudio scripts.
 
 ---
 
@@ -635,7 +569,7 @@ source /etc/environment
 Configure environment variables in systemd service files:
 
 ```ini
-# /etc/systemd/system/mediamtx-stream-manager.service
+# /etc/systemd/system/mediamtx-audio.service
 
 [Service]
 Environment="STREAM_STARTUP_DELAY=15"
@@ -650,7 +584,7 @@ ExecStart=/opt/lyrebird/mediamtx-stream-manager.sh monitor
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl restart mediamtx-stream-manager
+sudo systemctl restart mediamtx-audio
 ```
 
 ---

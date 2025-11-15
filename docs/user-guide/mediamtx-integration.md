@@ -541,7 +541,7 @@ vlc rtsp://localhost:8554/Blue_Yeti
 **GUI:**
 
 1. Open VLC
-2. Media → Open Network Stream
+2. Media -> Open Network Stream
 3. Enter URL: `rtsp://localhost:8554/Blue_Yeti`
 4. Click Play
 

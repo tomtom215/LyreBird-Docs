@@ -464,7 +464,7 @@ ffplay -af "pan=mono|c0=c1" rtsp://localhost:8554/Bird_Array
 
 **Audacity (multi-track recording):**
 
-1. File → Import → Audio
+1. File -> Import -> Audio
 2. Enter URL: `rtsp://localhost:8554/Bird_Array`
 3. Each channel appears as separate track
 
