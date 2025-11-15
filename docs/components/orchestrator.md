@@ -280,7 +280,7 @@ View logs and system status:
 **Note:** Log files are located at:
 - MediaMTX: `/var/log/mediamtx.out`
 - Orchestrator: `/var/log/lyrebird-orchestrator.log`
-- Stream Manager: `/var/log/lyrebird/stream-manager.log`
+- Stream Manager: `/var/log/mediamtx-stream-manager.log`
 - FFmpeg Streams: `/var/log/lyrebird/*.log`
 
 ---

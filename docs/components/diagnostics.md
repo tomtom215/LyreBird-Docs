@@ -236,7 +236,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 - Device mapping status (udev rules)
 - USB port path validation
 - Device busy state (hw_params check)
-- Device symlinks (`/dev/snd/by-usb-port/`)
+- Device symlinks (`/dev/sound/by-id/`)
 
 **Example Output:**
 ```
@@ -346,7 +346,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 **Log Locations Checked:**
 - `/var/log/mediamtx.out` - MediaMTX service
-- `/var/log/lyrebird/stream-manager.log` - Stream Manager
+- `/var/log/mediamtx-stream-manager.log` - Stream Manager
 - `/var/log/lyrebird-diagnostics.log` - Diagnostics
 - `/var/log/lyrebird/*.log` - Per-device FFmpeg logs
 
