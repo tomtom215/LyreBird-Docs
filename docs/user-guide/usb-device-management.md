@@ -566,8 +566,8 @@ Device IDs must match the symlink names created by udev rules.
 
 - [Configuration](configuration.md) - Audio encoding and streaming settings
 - [Stream Management](stream-management.md) - Managing RTSP streams
-- [Capability Checker](../reference/capability-checker.md) - Testing device capabilities
-- [Troubleshooting](../troubleshooting/common-issues.md) - Common problems and solutions
+- [Command Reference](../reference/command-reference.md) - All available commands
+- [Troubleshooting](../advanced/troubleshooting.md) - Common problems and solutions
 
 ---
 

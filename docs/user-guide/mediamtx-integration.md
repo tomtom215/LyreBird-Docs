@@ -943,7 +943,7 @@ iftop -i eth0
 - [Configuration](configuration.md) - Audio encoding settings
 - [Multiplex Streaming](multiplex-streaming.md) - Combining multiple audio sources
 - [Installation](../getting-started/installation.md) - Initial setup guide
-- [Troubleshooting](../troubleshooting/common-issues.md) - Common problems and solutions
+- [Troubleshooting](../advanced/troubleshooting.md) - Common problems and solutions
 
 ---
 
