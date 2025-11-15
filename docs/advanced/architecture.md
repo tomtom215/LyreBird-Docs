@@ -94,7 +94,7 @@ graph TD
 ```bash
 # /etc/udev/rules.d/99-usb-soundcards.rules
 SUBSYSTEM=="sound", ACTION=="add", ATTRS{idVendor}=="046d", \
-  ATTRS{idProduct}=="0a44", SYMLINK+="snd/Blue_Yeti"
+  ATTRS{idProduct}=="0a44", ATTR{id}="Blue_Yeti", SYMLINK+="sound/by-id/Blue_Yeti"
 ```
 
 **Interface:** Device nodes in `/dev/snd/` and `/proc/asound/cards`

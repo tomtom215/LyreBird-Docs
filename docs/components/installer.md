@@ -609,6 +609,38 @@ sudo cp /usr/local/bin/mediamtx.backup /usr/local/bin/mediamtx
 sudo systemctl restart mediamtx
 ```
 
+### Backup Cleanup Policy
+
+The installer automatically manages backup files to prevent unbounded disk usage:
+
+**Automatic Cleanup:**
+- Keeps the **last 3 backup files** (most recent)
+- Removes backups older than **7 days** automatically
+- Cleanup occurs after each successful installation
+- No user intervention required
+
+**Backup File Naming:**
+```
+/usr/local/bin/mediamtx.backup           # Latest backup
+/usr/local/bin/mediamtx.backup.1         # Second most recent
+/usr/local/bin/mediamtx.backup.2         # Third most recent
+(Older backups are automatically removed)
+```
+
+**Manual Backup Management:**
+```bash
+# List all existing backups
+ls -lh /usr/local/bin/mediamtx.backup*
+
+# Manually remove old backups if needed
+sudo rm /usr/local/bin/mediamtx.backup.2
+
+# Create additional manual backup
+sudo cp /usr/local/bin/mediamtx /usr/local/bin/mediamtx.manual-backup
+```
+
+**Note:** The automatic cleanup ensures production systems don't accumulate old backup files while still maintaining enough history for emergency rollback.
+
 ---
 
 ## SHA256 Verification

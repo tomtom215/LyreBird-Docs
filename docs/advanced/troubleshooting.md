@@ -203,8 +203,8 @@ sudo udevadm test /sys/class/sound/card0
    # Edit /etc/udev/rules.d/99-usb-soundcards.rules
 
    # Example: Use KERNELS (USB port) instead of just vendor/product
-   SUBSYSTEM=="sound", KERNELS=="1-1.2", SYMLINK+="snd/Mic_Port_1"
-   SUBSYSTEM=="sound", KERNELS=="1-1.3", SYMLINK+="snd/Mic_Port_2"
+   SUBSYSTEM=="sound", KERNELS=="1-1.2", ATTR{id}="Mic_Port_1", SYMLINK+="sound/by-id/Mic_Port_1"
+   SUBSYSTEM=="sound", KERNELS=="1-1.3", ATTR{id}="Mic_Port_2", SYMLINK+="sound/by-id/Mic_Port_2"
 
    # Reload rules
    sudo udevadm control --reload-rules

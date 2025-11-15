@@ -73,7 +73,7 @@ Device 0: USB Microphone
 ═══════════════════════════════════════════════════
   Card: 0
   Device Path: /dev/snd/pcmC0D0c
-  Persistent Path: /dev/snd/by-usb-port/front-yard-mic
+  Persistent Path: /dev/sound/by-id/front-yard-mic
 
   Capabilities:
     Sample Rates: 16000, 44100, 48000 Hz
@@ -92,7 +92,7 @@ Device 1: USB Audio Interface
 ═══════════════════════════════════════════════════
   Card: 1
   Device Path: /dev/snd/pcmC1D0c
-  Persistent Path: /dev/snd/by-usb-port/studio-interface
+  Persistent Path: /dev/sound/by-id/studio-interface
 
   Capabilities:
     Sample Rates: 44100, 48000, 96000 Hz
@@ -202,7 +202,7 @@ Get machine-readable output for scripting and automation:
       "card": 0,
       "name": "USB Microphone",
       "device_path": "/dev/snd/pcmC0D0c",
-      "persistent_path": "/dev/snd/by-usb-port/front-yard-mic",
+      "persistent_path": "/dev/sound/by-id/front-yard-mic",
       "capabilities": {
         "sample_rates": [16000, 44100, 48000],
         "channels": [1, 2],
@@ -622,6 +622,37 @@ The Orchestrator integrates capability checking into setup workflows:
 | `--format=<format>` | | Output format: text (default) or json |
 | `--list-backups` | | List all available config backups |
 | `--restore [timestamp]` | | Restore config from backup |
+
+---
+
+## Exit Codes
+
+The script uses standard exit codes for automation and error handling:
+
+| Code | Meaning | Details |
+|------|---------|---------|
+| `0` | Success | Operation completed successfully |
+| `1` | General Error | Invalid arguments, no devices found, or operation failed |
+| `2` | Configuration Error | Validation failed, write error, or configuration is invalid |
+
+**Usage in Scripts:**
+```bash
+#!/bin/bash
+
+# Check if config is valid
+if sudo ./lyrebird-mic-check.sh -V; then
+    echo "Configuration is valid"
+else
+    exit_code=$?
+    if [ $exit_code -eq 2 ]; then
+        echo "Configuration validation failed - regenerating..."
+        sudo ./lyrebird-mic-check.sh -g -f
+    else
+        echo "General error occurred"
+        exit 1
+    fi
+fi
+```
 
 ---
 

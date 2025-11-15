@@ -144,7 +144,7 @@ Each detected USB audio device gets a udev rule:
 
 ```bash
 SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", \
-ATTRS{serial}=="12345678", SYMLINK+="snd/by-id/usb-046d_0825_12345678"
+ATTR{id}="usb-046d_0825_12345678", SYMLINK+="sound/by-id/usb-046d_0825_12345678"
 ```
 
 **Rule Components:**
@@ -165,15 +165,15 @@ ATTRS{serial}=="12345678", SYMLINK+="snd/by-id/usb-046d_0825_12345678"
 
 # Blue Yeti Microphone
 SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", \
-ATTRS{serial}=="12345678", SYMLINK+="snd/by-id/usb-046d_0825_12345678"
+ATTR{id}="usb-046d_0825_12345678", SYMLINK+="sound/by-id/usb-046d_0825_12345678"
 
 # Generic USB Audio Device
 SUBSYSTEM=="sound", ATTRS{idVendor}=="0d8c", ATTRS{idProduct}=="0014", \
-ATTRS{serial}=="56789012", SYMLINK+="snd/by-id/usb-0d8c_0014_56789012"
+ATTR{id}="usb-0d8c_0014_56789012", SYMLINK+="sound/by-id/usb-0d8c_0014_56789012"
 
 # Logitech Webcam with Microphone
 SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", \
-ATTRS{serial}=="98765432", SYMLINK+="snd/by-id/usb-046d_0825_98765432"
+ATTR{id}="usb-046d_0825_98765432", SYMLINK+="sound/by-id/usb-046d_0825_98765432"
 ```
 
 ---
@@ -441,7 +441,7 @@ Manually create port-specific rules:
 ```bash
 # Add to 99-usb-soundcards.rules
 # Device on specific USB port
-SUBSYSTEM=="sound", KERNELS=="1-1.2", SYMLINK+="snd/by-id/usb-port-1-1-2"
+SUBSYSTEM=="sound", KERNELS=="1-1.2", ATTR{id}="usb-port-1-1-2", SYMLINK+="sound/by-id/usb-port-1-1-2"
 ```
 
 ### Permission Issues
@@ -534,11 +534,11 @@ MODE="0666", GROUP="audio"
 
 # Create multiple symlinks for same device
 SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", \
-SYMLINK+="snd/by-id/blue-yeti", SYMLINK+="snd/by-id/primary-mic"
+ATTR{id}="blue-yeti", SYMLINK+="sound/by-id/blue-yeti", SYMLINK+="sound/by-id/primary-mic"
 
 # Port-specific naming
 SUBSYSTEM=="sound", KERNELS=="1-1.2", \
-SYMLINK+="snd/by-id/front-panel-mic"
+ATTR{id}="front-panel-mic", SYMLINK+="sound/by-id/front-panel-mic"
 ```
 
 After editing, reload rules:

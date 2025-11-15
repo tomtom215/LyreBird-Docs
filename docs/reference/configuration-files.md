@@ -415,7 +415,8 @@ SUBSYSTEM=="sound", \
 SUBSYSTEM=="sound", \
   ATTRS{idVendor}=="<vendor_id>", \
   ATTRS{idProduct}=="<product_id>", \
-  SYMLINK+="snd/<device_name>"
+  ATTR{id}="<device_name>", \
+  SYMLINK+="sound/by-id/<device_name>"
 ```
 
 ### Complete Example
@@ -441,7 +442,8 @@ SUBSYSTEM=="sound", \
 SUBSYSTEM=="sound", \
   ATTRS{idVendor}=="0763", \
   ATTRS{idProduct}=="2030", \
-  SYMLINK+="snd/Studio_Mic"
+  ATTR{id}="Studio_Mic", \
+  SYMLINK+="sound/by-id/Studio_Mic"
 
 # Conference Room Mic - USB topology based
 SUBSYSTEM=="sound", \
