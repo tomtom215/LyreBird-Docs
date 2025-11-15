@@ -449,4 +449,22 @@ exit $EXIT_CODE
 
 ---
 
-**Next Steps:** [Log Files](log-files.md) | [Command Reference](command-reference.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Log Files
+Log locations, formats, and analysis
+
+[Log Files →](log-files.md)
+</div>
+
+<div markdown>
+### Command Reference
+All available commands and utilities
+
+[Command Reference →](command-reference.md)
+</div>
+
+</div>

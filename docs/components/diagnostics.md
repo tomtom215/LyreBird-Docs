@@ -632,6 +632,8 @@ Orchestrator Main Menu
 
 ### Orchestrator Integration Flow
 
+**Diagnostics Integration Decision Tree:** Users access diagnostics through the Orchestrator Menu (option 5) to reach the Diagnostics Menu (purple). From there, they can choose Quick Health Check (option 1), Full Diagnostic (option 2), or Debug Diagnostic (option 3), all shown in cyan. Each diagnostic type displays results, which lead to one of three outcomes based on exit codes: All Checks Passed (green, exit code 0), Warnings Detected (orange, exit code 1), or Failures Detected (red, exit code 2). Warnings lead to Review Warnings, while Failures lead to the Troubleshooting Guide. All paths eventually return to the menu, creating a complete diagnostic and remediation workflow.
+
 ```mermaid
 graph TD
     A[Orchestrator Menu] -->|5| B[Diagnostics Menu]
@@ -820,14 +822,14 @@ lsusb >> system-info.txt
 
 ## Related Documentation
 
-- **[Orchestrator](orchestrator.md)** - Unified management interface with diagnostics integration
-- **[Stream Manager](stream-manager.md)** - Stream health monitoring
-- **[Capability Checker](capability-checker.md)** - Hardware capability validation
-- **[USB Audio Mapper](usb-audio-mapper.md)** - Device persistence verification
-- **[Advanced: Troubleshooting](../advanced/troubleshooting.md)** - Comprehensive troubleshooting guide
-- **[Advanced: Diagnostics & Monitoring](../advanced/diagnostics-monitoring.md)** - Detailed monitoring strategies
-- **[Reference: Log Files](../reference/log-files.md)** - Log file reference
-- **[Reference: Exit Codes](../reference/exit-codes.md)** - Complete exit code reference
+- [Orchestrator](orchestrator.md) - Unified management interface with diagnostics integration
+- [Stream Manager](stream-manager.md) - Stream health monitoring
+- [Capability Checker](capability-checker.md) - Hardware capability validation
+- [USB Audio Mapper](usb-audio-mapper.md) - Device persistence verification
+- [Advanced: Troubleshooting](../advanced/troubleshooting.md) - Comprehensive troubleshooting guide
+- [Advanced: Diagnostics & Monitoring](../advanced/diagnostics-monitoring.md) - Detailed monitoring strategies
+- [Reference: Log Files](../reference/log-files.md) - Log file reference
+- [Reference: Exit Codes](../reference/exit-codes.md) - Complete exit code reference
 
 ---
 

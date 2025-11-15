@@ -786,4 +786,22 @@ sudo ./mediamtx-stream-manager.sh start -m multiplex -f amerge -n Bird_Habitat
 
 ---
 
-**Next Steps:** [Stream Management](stream-management.md) | [MediaMTX Integration](mediamtx-integration.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Stream Management
+Managing stream lifecycle and health
+
+[Stream Management →](stream-management.md)
+</div>
+
+<div markdown>
+### MediaMTX Integration
+RTSP server configuration
+
+[MediaMTX Integration →](mediamtx-integration.md)
+</div>
+
+</div>

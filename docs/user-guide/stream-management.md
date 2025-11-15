@@ -808,4 +808,22 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
 
 ---
 
-**Next Steps:** [MediaMTX Integration](mediamtx-integration.md) | [Multiplex Streaming](multiplex-streaming.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### MediaMTX Integration
+RTSP server configuration and setup
+
+[MediaMTX Integration →](mediamtx-integration.md)
+</div>
+
+<div markdown>
+### Multiplex Streaming
+Multi-microphone stream combining
+
+[Multiplex Streaming →](multiplex-streaming.md)
+</div>
+
+</div>

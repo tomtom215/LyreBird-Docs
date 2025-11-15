@@ -622,4 +622,22 @@ fi
 
 ---
 
-**Next Steps:** [Backup and Restore](backup-restore.md) | [Main Documentation](../index.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Backup and Restore
+Configuration backup and recovery procedures
+
+[Backup and Restore →](backup-restore.md)
+</div>
+
+<div markdown>
+### Main Documentation
+Complete documentation index
+
+[Main Documentation →](../index.md)
+</div>
+
+</div>

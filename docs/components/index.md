@@ -8,6 +8,8 @@ LyreBirdAudio is built from seven specialized components that work together to p
 
 The components form a modular architecture where the Orchestrator serves as the user-facing interface, delegating operations to specialized components:
 
+**Component Architecture:** The Orchestrator (purple, top) delegates to seven specialized components (all in purple): Installer, USB Audio Mapper, Capability Checker, Stream Manager, Diagnostics, and Version Manager. The Stream Manager has dependencies on Capability Checker and USB Audio Mapper. The Diagnostics component depends on both Stream Manager and Installer. This hierarchical structure shows clear separation of concerns with the Orchestrator as the coordination layer.
+
 ```mermaid
 graph TD
     A[Orchestrator<br/>lyrebird-orchestrator.sh] --> B[Installer<br/>install_mediamtx.sh]
@@ -265,6 +267,8 @@ ffmpeg -f alsa -i hw:CARD=Device_1 -ar 48000 -ac 2 ...
 
 The typical setup workflow using components:
 
+**Quick Setup Workflow:** This left-to-right workflow shows six sequential steps for initial setup. Step 1 (Installer) installs MediaMTX, flowing to Step 2 (USB Mapper) which maps USB devices, then to Step 3 (Capability Checker) which checks capabilities, to Step 4 (Capability Checker again) which generates config, to Step 5 (Stream Manager) which starts streams, and finally to Step 6 (Diagnostics, green) which verifies health. Each step must complete before the next begins, representing the recommended setup sequence.
+
 ```mermaid
 graph LR
     A[1. Install MediaMTX<br/>Installer] --> B[2. Map USB Devices<br/>USB Mapper]
@@ -438,11 +442,11 @@ Components integrated with Orchestrator should:
 
 ## Related Documentation
 
-- **[Getting Started: Quick Start](../getting-started/quick-start.md)** - Complete setup walkthrough
-- **[Getting Started: Installation](../getting-started/installation.md)** - Detailed installation guide
-- **[User Guide: Configuration](../user-guide/configuration.md)** - Configuration reference
-- **[Advanced: Architecture](../advanced/architecture.md)** - Deep dive into system design
-- **[Advanced: Troubleshooting](../advanced/troubleshooting.md)** - Comprehensive troubleshooting
+- [Getting Started: Quick Start](../getting-started/quick-start.md) - Complete setup walkthrough
+- [Getting Started: Installation](../getting-started/installation.md) - Detailed installation guide
+- [User Guide: Configuration](../user-guide/configuration.md) - Configuration reference
+- [Advanced: Architecture](../advanced/architecture.md) - Deep dive into system design
+- [Advanced: Troubleshooting](../advanced/troubleshooting.md) - Comprehensive troubleshooting
 
 ---
 

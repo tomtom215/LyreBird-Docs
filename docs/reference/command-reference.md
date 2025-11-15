@@ -484,4 +484,22 @@ sudo systemctl status mediamtx-stream-manager
 
 ---
 
-**Next Steps:** [Exit Codes](exit-codes.md) | [Log Files](log-files.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Exit Codes
+Command return values and status codes
+
+[Exit Codes →](exit-codes.md)
+</div>
+
+<div markdown>
+### Log Files
+Log locations, formats, and analysis
+
+[Log Files →](log-files.md)
+</div>
+
+</div>

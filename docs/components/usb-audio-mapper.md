@@ -276,6 +276,8 @@ The mapper uses the Linux USB subsystem to identify physical port locations usin
 **Method 1 (Primary):** Direct sysfs search through `/sys/bus/usb/devices` matching bus/device numbers
 **Method 2 (Fallback):** udevadm query for device properties
 
+**USB Port Detection Workflow:** When a USB device is connected, the kernel assigns it a card number. The mapper reads /proc/asound/cards and extracts bus and device numbers. It then tries Method 1 by searching /sys/bus/usb/devices. If the port is found, it extracts the USB port path; if not, it falls back to Method 2 using udevadm to query device properties. Once the port path is obtained, the mapper gets the platform ID if available and generates a udev rule. This rule maps the physical USB port to a friendly device name. After a reboot, the device appears at /dev/sound/by-id/device-name. The key steps (rule generation) are shown in purple, with the final symlink shown in cyan, illustrating the complete process from device detection to persistent naming.
+
 ```mermaid
 graph TD
     A[USB Device Connected] --> B[Kernel Assigns Card Number]
@@ -664,11 +666,11 @@ KERNELS=="1-1.4", ATTR{id}="front-yard-mic", SYMLINK+="sound/by-id/front-yard-mi
 
 ## Related Documentation
 
-- **[Orchestrator](orchestrator.md)** - Includes USB mapping in setup wizard
-- **[Capability Checker](capability-checker.md)** - Uses persistent names for config
-- **[Stream Manager](stream-manager.md)** - Creates streams using persistent names
-- **[User Guide: USB Device Management](../user-guide/usb-device-management.md)** - Operational guide
-- **[Advanced: Troubleshooting](../advanced/troubleshooting.md)** - Device naming issues
+- [Orchestrator](orchestrator.md) - Includes USB mapping in setup wizard
+- [Capability Checker](capability-checker.md) - Uses persistent names for config
+- [Stream Manager](stream-manager.md) - Creates streams using persistent names
+- [User Guide: USB Device Management](../user-guide/usb-device-management.md) - Operational guide
+- [Advanced: Troubleshooting](../advanced/troubleshooting.md) - Device naming issues
 
 ---
 

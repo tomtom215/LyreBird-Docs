@@ -449,4 +449,22 @@ sudo find /var/log/lyrebird -name "*.gz" -mtime +30 -delete
 
 ---
 
-**Next Steps:** [Diagnostics & Monitoring](../advanced/diagnostics-monitoring.md) | [Troubleshooting](../advanced/troubleshooting.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Diagnostics & Monitoring
+System health checks and monitoring
+
+[Diagnostics & Monitoring →](../advanced/diagnostics-monitoring.md)
+</div>
+
+<div markdown>
+### Troubleshooting
+Resolve common issues and problems
+
+[Troubleshooting →](../advanced/troubleshooting.md)
+</div>
+
+</div>

@@ -136,6 +136,9 @@ rtsp://your-server:8554/device3
 - Flexible client connections
 
 **Architecture:**
+
+**Individual Mode Data Flow:** Three USB microphones (USB Mic 1, 2, and 3) each connect to their own dedicated FFmpeg process (FFmpeg 1, 2, and 3, shown in cyan). All three FFmpeg processes feed their streams into the central MediaMTX server (purple). MediaMTX then creates three separate stream outputs (device1, device2, device3), allowing clients to connect to individual microphone streams. This one-to-one mapping between microphones, FFmpeg processes, and output streams provides maximum flexibility for selective monitoring.
+
 ```mermaid
 graph LR
     A[USB Mic 1] --> B[FFmpeg 1]
@@ -434,6 +437,8 @@ The systemd installation automatically creates `/etc/cron.d/mediamtx-monitor` wi
 
 The Stream Manager uses a sophisticated wrapper-based process supervision system:
 
+**Process Supervision Architecture:** The Stream Manager (purple, top) spawns three Wrapper Scripts (purple, middle layer), one for each audio device. Each wrapper script manages and monitors its own FFmpeg Process (cyan, bottom layer). The wrappers continuously monitor their FFmpeg processes, and if a crash is detected (shown by dotted lines), the wrapper implements exponential backoff before restarting the FFmpeg process. This three-tier architecture provides resilient process management where each stream can fail and recover independently without affecting others.
+
 ```mermaid
 graph TD
     A[Stream Manager] -->|Spawns| B[Wrapper Script 1]
@@ -490,13 +495,13 @@ When a stream fails, the wrapper implements exponential backoff:
 
 ## Related Documentation
 
-- **[Orchestrator](orchestrator.md)** - Unified management interface
-- **[USB Audio Mapper](usb-audio-mapper.md)** - Device persistence
-- **[Capability Checker](capability-checker.md)** - Hardware detection
-- **[User Guide: Stream Management](../user-guide/stream-management.md)** - Operational guide
-- **[User Guide: Multiplex Streaming](../user-guide/multiplex-streaming.md)** - Multiplex modes explained
-- **[Advanced: Performance Tuning](../advanced/performance.md)** - Optimization guide
-- **[Reference: Configuration Files](../reference/configuration-files.md)** - Config reference
+- [Orchestrator](orchestrator.md) - Unified management interface
+- [USB Audio Mapper](usb-audio-mapper.md) - Device persistence
+- [Capability Checker](capability-checker.md) - Hardware detection
+- [User Guide: Stream Management](../user-guide/stream-management.md) - Operational guide
+- [User Guide: Multiplex Streaming](../user-guide/multiplex-streaming.md) - Multiplex modes explained
+- [Advanced: Performance Tuning](../advanced/performance.md) - Optimization guide
+- [Reference: Configuration Files](../reference/configuration-files.md) - Config reference
 
 ---
 

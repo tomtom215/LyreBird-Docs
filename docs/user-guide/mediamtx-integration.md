@@ -947,4 +947,22 @@ iftop -i eth0
 
 ---
 
-**Next Steps:** [Multiplex Streaming](multiplex-streaming.md) | [Stream Management](stream-management.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Multiplex Streaming
+Multi-microphone stream combining
+
+[Multiplex Streaming →](multiplex-streaming.md)
+</div>
+
+<div markdown>
+### Stream Management
+Managing stream lifecycle
+
+[Stream Management →](stream-management.md)
+</div>
+
+</div>

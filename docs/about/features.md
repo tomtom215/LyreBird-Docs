@@ -33,4 +33,11 @@ Complete feature list for LyreBirdAudio.
 - Automatic service start
 - Comprehensive logging
 
-[Main Documentation](../index.md)
+---
+
+## Get Started
+
+Ready to use these features?
+
+[Quick Start Guide →](../getting-started/quick-start.md){ .md-button .md-button--primary }
+[Main Documentation →](../index.md){ .md-button }

@@ -22,3 +22,12 @@ LyreBirdAudio transforms USB microphones into reliable RTSP streams through a la
 See the [Components Overview](../components/index.md) for detailed information.
 
 [Architecture Details](../advanced/architecture.md) | [Main Documentation](../index.md)
+
+---
+
+## Get Started
+
+Learn more about the system:
+
+[Architecture Guide →](../advanced/architecture.md){ .md-button .md-button--primary }
+[Quick Start →](../getting-started/quick-start.md){ .md-button }

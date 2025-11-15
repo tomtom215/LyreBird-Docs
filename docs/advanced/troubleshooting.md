@@ -1070,4 +1070,22 @@ When seeking help, collect:
 
 ---
 
-**Next Steps:** [Diagnostics & Monitoring](diagnostics-monitoring.md) | [Performance Tuning](performance.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Diagnostics & Monitoring
+Health check tools and monitoring
+
+[Diagnostics & Monitoring →](diagnostics-monitoring.md)
+</div>
+
+<div markdown>
+### Performance Tuning
+Resource optimization strategies
+
+[Performance Tuning →](performance.md)
+</div>
+
+</div>

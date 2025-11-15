@@ -571,4 +571,22 @@ Device IDs must match the symlink names created by udev rules.
 
 ---
 
-**Next Steps:** [Stream Management](stream-management.md) | [Configuration Guide](configuration.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Stream Management
+Managing RTSP streams and playback
+
+[Stream Management →](stream-management.md)
+</div>
+
+<div markdown>
+### Configuration Guide
+Audio encoding and streaming settings
+
+[Configuration Guide →](configuration.md)
+</div>
+
+</div>

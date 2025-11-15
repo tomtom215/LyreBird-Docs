@@ -296,6 +296,8 @@ The Orchestrator follows the **Single-Responsibility Principle**:
 - **Consistent Error Handling**: Unified error reporting across all operations
 - **Comprehensive Feedback**: Clear progress indicators and status messages
 
+**Orchestrator Delegation Architecture:** The User interacts with the Orchestrator TUI (text user interface, shown in purple). The Orchestrator delegates different operations to six specialized scripts (all shown in purple): install_mediamtx.sh for installation/updates, mediamtx-stream-manager.sh for stream control, usb-audio-mapper.sh for device mapping, lyrebird-mic-check.sh for capability checking, lyrebird-diagnostics.sh for health checks, and lyrebird-updater.sh for version updates. These scripts then interact with actual system components: install_mediamtx.sh produces MediaMTX Binary, stream-manager produces FFmpeg Pipelines, usb-audio-mapper creates udev Rules, and capability-checker generates Audio Configs. This shows the clear separation between user interface, delegation layer, and actual system operations.
+
 ```mermaid
 graph TD
     A[User] -->|Interacts| B[Orchestrator TUI]
@@ -520,12 +522,12 @@ df -h /var/log
 
 ## Related Documentation
 
-- **[Stream Manager](stream-manager.md)** - FFmpeg process lifecycle management
-- **[USB Audio Mapper](usb-audio-mapper.md)** - Device persistence configuration
-- **[Capability Checker](capability-checker.md)** - Hardware detection details
-- **[Diagnostics Tool](diagnostics.md)** - System health monitoring
-- **[Version Manager](version-manager.md)** - Git-based updates
-- **[MediaMTX Installer](installer.md)** - Server installation
+- [Stream Manager](stream-manager.md) - FFmpeg process lifecycle management
+- [USB Audio Mapper](usb-audio-mapper.md) - Device persistence configuration
+- [Capability Checker](capability-checker.md) - Hardware detection details
+- [Diagnostics Tool](diagnostics.md) - System health monitoring
+- [Version Manager](version-manager.md) - Git-based updates
+- [MediaMTX Installer](installer.md) - Server installation
 
 ---
 

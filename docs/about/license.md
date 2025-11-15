@@ -39,3 +39,12 @@ LyreBirdAudio uses the following open source components:
 ---
 
 [Main Documentation](../index.md) | [GitHub Repository](https://github.com/tomtom215/LyreBirdAudio)
+
+---
+
+## Get Started
+
+Ready to use LyreBirdAudio?
+
+[Quick Start Guide →](../getting-started/quick-start.md){ .md-button .md-button--primary }
+[Installation Guide →](../getting-started/installation.md){ .md-button }

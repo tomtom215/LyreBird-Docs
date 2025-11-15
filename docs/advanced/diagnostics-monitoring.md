@@ -982,4 +982,22 @@ ffmpeg -i "$STREAM_URL" -t $DURATION -f null - 2>&1 | \
 
 ---
 
-**Next Steps:** [Custom Integration](custom-integration.md) | [Troubleshooting](troubleshooting.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Custom Integration
+Integrate LyreBirdAudio with external systems
+
+[Custom Integration →](custom-integration.md)
+</div>
+
+<div markdown>
+### Troubleshooting
+Resolve common issues and problems
+
+[Troubleshooting →](troubleshooting.md)
+</div>
+
+</div>

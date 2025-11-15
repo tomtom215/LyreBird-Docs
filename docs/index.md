@@ -49,6 +49,17 @@ Low-latency RTSP streams compatible with VLC, FFmpeg, and all standard RTSP clie
 
 ## System Architecture
 
+**Architecture Overview:** LyreBirdAudio uses a 6-layer architecture connecting RTSP clients to USB microphones:
+
+- **Client Layer**: VLC Player, FFmpeg, Recording Software, and Monitoring Tools connect via RTSP on port 8554
+- **Streaming Layer**: MediaMTX Server manages all RTSP streams and distributes to clients
+- **Management Layer**: Stream Manager (systemd service) and Orchestrator coordinate operations
+- **Processing Layer**: FFmpeg pipelines capture and encode audio from each USB device
+- **Device Layer**: ALSA interfaces (plughw) provide access to USB audio devices via udev rules
+- **Hardware Layer**: Physical USB microphones connected to the system
+
+Data flows upward from USB microphones through each layer to RTSP clients, with management and monitoring occurring at the middle layers.
+
 ```mermaid
 graph TB
     subgraph "Client Layer"

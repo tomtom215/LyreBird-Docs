@@ -811,4 +811,22 @@ Before submitting code for review:
 
 ---
 
-**Next Steps:** [Testing Guidelines](testing.md) | [Contributing Overview](index.md)
+## Next Steps
+
+<div class="grid" markdown>
+
+<div markdown>
+### Testing Guidelines
+Comprehensive testing procedures
+
+[Testing Guidelines →](testing.md)
+</div>
+
+<div markdown>
+### Contributing Overview
+Contributing guidelines and workflows
+
+[Contributing Overview →](index.md)
+</div>
+
+</div>

@@ -354,6 +354,8 @@ systemctl start mediamtx-audio 2>/dev/null
 
 All version changes are transaction-based:
 
+**Transaction-Based Update Workflow:** The update process begins at "Start Update" (purple) and acquires a lock to prevent concurrent updates. Services are stopped, and local changes are stashed before fetching remote updates and checking out the target version (cyan). If successful, the flow proceeds to restore permissions and reinstall services. If the checkout fails (red), the system rolls back to restore the previous version. After permissions are restored, stashed changes are applied back. If this succeeds, services restart (green); if conflicts occur, the stash is preserved with a warning (orange). Both paths release the lock and exit with a status code. This workflow ensures atomic updates where failures trigger automatic rollback to maintain system integrity.
+
 ```mermaid
 graph TD
     A[Start Update] --> B[Acquire Lock]
@@ -605,6 +607,8 @@ Orchestrator Main Menu
 
 ### Orchestrator Integration Flow
 
+**Version Management Decision Flow:** From the Orchestrator Menu (option 6), users access the Version Management Menu (purple). They can check the current version, check for updates, upgrade to latest, or switch to a specific version. Checking current version and updates leads to displaying information. Upgrading executes the upgrade process, which can succeed (green) showing success or fail (red) showing error with rollback. Switching to a specific version shows a version list, user selects a version, and executes the version switch, which also has success/failure paths. All outcomes return to the menu, creating a complete version management workflow with clear success and failure handling.
+
 ```mermaid
 graph TD
     A[Orchestrator Menu] -->|6| B[Version Management Menu]
@@ -847,12 +851,12 @@ sudo ./mediamtx-stream-manager.sh status
 
 ## Related Documentation
 
-- **[Orchestrator](orchestrator.md)** - Unified management interface with version management integration
-- **[Installer](installer.md)** - MediaMTX installation and updates
-- **[Stream Manager](stream-manager.md)** - Service reinstallation after updates
-- **[Maintenance: Version Management](../maintenance/version-management.md)** - Detailed update procedures
-- **[Maintenance: Backup & Restore](../maintenance/backup-restore.md)** - Backup strategies before updates
-- **[Advanced: Custom Integration](../advanced/custom-integration.md)** - Automated update workflows
+- [Orchestrator](orchestrator.md) - Unified management interface with version management integration
+- [Installer](installer.md) - MediaMTX installation and updates
+- [Stream Manager](stream-manager.md) - Service reinstallation after updates
+- [Maintenance: Version Management](../maintenance/version-management.md) - Detailed update procedures
+- [Maintenance: Backup & Restore](../maintenance/backup-restore.md) - Backup strategies before updates
+- [Advanced: Custom Integration](../advanced/custom-integration.md) - Automated update workflows
 
 ---
 
