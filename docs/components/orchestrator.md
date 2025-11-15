@@ -75,15 +75,15 @@ When you launch the Orchestrator, you'll see an interactive menu:
 LyreBirdAudio Orchestrator v2.1.0
 ========================================
 
-Main Menu:
-1. Quick Setup Wizard
-2. MediaMTX Installation & Updates
-3. USB Device Management
-4. Audio Streaming Control
-5. System Diagnostics
-6. Version Management
-7. Logs & Status
-8. Exit
+Menu Options:
+  1) Quick Setup Wizard
+  2) MediaMTX Installation & Updates
+  3) USB Device Management
+  4) Audio Streaming Control
+  5) System Diagnostics
+  6) Version Management
+  7) Logs & Status
+  0) Exit
 
 Select an option:
 ```
@@ -98,33 +98,29 @@ The Quick Setup Wizard guides you through a complete installation:
 
 **Wizard Steps:**
 
-1. **MediaMTX Installation**
+1. **MediaMTX Installation (Step 1/4)**
    - Detects your system architecture automatically
    - Downloads and installs the latest MediaMTX version
    - Configures the server for audio streaming
    - Creates systemd service
 
-2. **USB Device Mapping**
+2. **USB Device Mapping (Step 2/4)**
    - Scans for connected USB audio devices
    - Creates persistent device names via udev rules
    - Maps devices to physical USB ports
-   - Generates `/dev/snd/by-usb-port/*` symlinks
+   - Generates `/dev/sound/by-id/*` symlinks
 
-3. **Generate Optimal Configuration**
-   - Runs hardware capability detection
-   - Determines supported sample rates and formats
-   - Creates `/etc/mediamtx/audio-devices.conf`
-   - Sets quality tier (low/normal/high)
-
-4. **Start Streams**
+3. **Start Audio Streams (Step 3/4)**
    - Launches FFmpeg pipelines for all detected devices
    - Validates RTSP connectivity
    - Confirms stream health via MediaMTX API
 
-5. **Run Diagnostics**
-   - Executes comprehensive system health check
+4. **Run Quick Diagnostics (Step 4/4)**
+   - Executes quick system health check
    - Validates USB devices, MediaMTX service, RTSP connectivity
    - Reports any issues with remediation steps
+
+**Note:** The wizard does NOT automatically generate device configuration. Use option 3 (USB Device Management) → option 5 (Generate Device Configuration) after the wizard completes if you need custom quality settings.
 
 **Usage:**
 ```bash
@@ -141,11 +137,12 @@ Manage MediaMTX server installation and updates:
 
 **Sub-Options:**
 
-- **Install MediaMTX**: Fresh installation
-- **Update MediaMTX**: Upgrade to latest version
-- **Check MediaMTX Status**: Verify installation and running status
-- **Verify MediaMTX**: Validate binary integrity with SHA256 checksums
-- **Uninstall MediaMTX**: Complete removal (with confirmation)
+1. Install MediaMTX (Fresh Install)
+2. Update MediaMTX
+3. Reinstall MediaMTX (Force)
+4. Uninstall MediaMTX
+5. Check Installation Status
+0. Back to Main Menu
 
 **Delegated to:** `install_mediamtx.sh`
 
@@ -164,22 +161,31 @@ Manage USB audio device persistence and mapping:
 
 **Sub-Options:**
 
-- **Map USB Devices**: Interactive device mapping wizard
-- **List Mapped Devices**: Show all persistent device mappings
-- **Test Device Detection**: Validate udev rules and device paths
-- **Remove Mappings**: Clear all USB mappings
+1. Map USB Audio Devices (Interactive)
+2. Test Device Mapping (Dry-run)
+3. View Current Mappings
+4. Detect Device Capabilities
+5. Generate Device Configuration
+6. Validate Device Configuration
+7. Remove Device Mappings
+8. Reload udev Rules
+0. Back to Main Menu
 
-**Delegated to:** `usb-audio-mapper.sh`
+**Delegated to:** `usb-audio-mapper.sh` (options 1-3, 7-8), `lyrebird-mic-check.sh` (options 4-6)
 
 **Features:**
 - Physical USB port mapping
 - Support for multiple identical devices
+- Automatic hardware capability detection (new in v2.1.0)
+- Optimal configuration generation based on hardware
+- Configuration validation against actual capabilities
 - udev rule generation
 - Persistent naming across reboots
 
 **Generated Files:**
 - `/etc/udev/rules.d/99-usb-soundcards.rules`
-- `/dev/snd/by-usb-port/Device_N` symlinks (after reboot)
+- `/dev/sound/by-id/Device_N` symlinks (after reboot)
+- `/etc/mediamtx/audio-devices.conf` (from capability detection)
 
 ---
 
@@ -189,15 +195,13 @@ Control stream lifecycle and configuration:
 
 **Sub-Options:**
 
-- **List Available Streams**: Show all configured streams
-- **Add New Stream**: Create a new stream configuration
-- **Remove Stream**: Delete a stream configuration
-- **Start All Streams**: Launch all FFmpeg processes
-- **Stop All Streams**: Gracefully terminate all streams
-- **Restart All Streams**: Stop and start all streams
-- **Stream Status**: Real-time status of all active streams
-- **Multiplex Configuration**: Setup merged/mixed streams
-- **Install Stream Manager Service**: Enable auto-start on boot
+1. Start All Streams
+2. Stop All Streams
+3. Restart All Streams
+4. View Stream Status
+5. View Stream URLs
+6. Monitor Stream Health
+0. Back to Main Menu
 
 **Delegated to:** `mediamtx-stream-manager.sh`
 
@@ -216,9 +220,11 @@ Run comprehensive system health checks:
 
 **Sub-Options:**
 
-- **Quick Health Check**: Essential systems only (~30 seconds)
-- **Full Diagnostic**: Comprehensive analysis (~2 minutes)
-- **Debug Diagnostic**: Maximum verbosity for troubleshooting
+1. Quick Diagnostics (Fast)
+2. Full System Diagnostics
+3. Verbose Diagnostics (Detailed)
+4. Export Diagnostic Report
+0. Back to Main Menu
 
 **Delegated to:** `lyrebird-diagnostics.sh`
 
@@ -240,11 +246,11 @@ Manage script updates and rollbacks:
 
 **Sub-Options:**
 
-- **Check for Updates**: Compare local vs. remote versions
-- **Upgrade to Latest**: Update to main branch HEAD
-- **Switch to Specific Version**: Choose tag or branch
-- **Rollback to Previous**: Revert to earlier version
-- **Version Status**: Show current version and available updates
+1. Launch Update Manager (Interactive)
+2. Show Component Versions
+0. Back to Main Menu
+
+**Note:** The Update Manager (option 1) provides an interactive interface with additional sub-options for switching versions, checking updates, and managing git state.
 
 **Delegated to:** `lyrebird-updater.sh`
 
@@ -264,12 +270,18 @@ View logs and system status:
 
 **Sub-Options:**
 
-- **View MediaMTX Log**: Tail `/var/log/mediamtx.out`
-- **View Stream Manager Log**: Tail `/var/log/mediamtx-stream-manager.log`
-- **View Orchestrator Log**: Tail `/var/log/lyrebird-orchestrator.log`
-- **View Stream Logs**: Tail individual FFmpeg logs from `/var/log/lyrebird/`
-- **System Status Summary**: Comprehensive overview of all services
-- **Resource Monitoring**: Real-time CPU, memory, file descriptor usage
+1. View MediaMTX Log (Last 50 lines)
+2. View Orchestrator Log
+3. View Stream Manager Log
+4. View Stream Logs (FFmpeg)
+5. Quick System Health Check
+0. Back to Main Menu
+
+**Note:** Log files are located at:
+- MediaMTX: `/var/log/mediamtx.out`
+- Orchestrator: `/var/log/lyrebird-orchestrator.log`
+- Stream Manager: `/var/log/lyrebird/stream-manager.log`
+- FFmpeg Streams: `/var/log/lyrebird/*.log`
 
 ---
 
@@ -360,22 +372,21 @@ The Orchestrator integrates real-time hardware capability detection:
 
 ### SHA256 Integrity Verification
 
-For security-conscious environments, the Orchestrator can verify script integrity:
+The Orchestrator automatically verifies script integrity:
 
-```bash
-# Enable integrity checking
-export VERIFY_INTEGRITY=1
-sudo ./lyrebird-orchestrator.sh
-```
+- Integrity checking is **always enabled** when `sha256sum` is available
+- No environment variable needed - verification is automatic
+- Scripts are validated before execution
+- Warnings displayed if checksums don't match
 
 ### Auto Log Rotation
 
 The Orchestrator automatically manages its own logs:
 
 - **Location:** `/var/log/lyrebird-orchestrator.log`
-- **Rotation:** When exceeding 10MB
-- **Retention:** Last 3 rotations kept
-- **Compression:** Automatic gzip compression
+- **Rotation:** When exceeding 1MB
+- **Retention:** Last 1 rotation kept (`.1` backup file)
+- **Compression:** None (plain text backups)
 
 ---
 

@@ -139,9 +139,17 @@ sudo ./lyrebird-mic-check.sh -g --quality=high
 
 # Low quality (speech/monitoring, bandwidth-constrained)
 sudo ./lyrebird-mic-check.sh -g --quality=low
+
+# Force regenerate without confirmation (useful for automation)
+sudo ./lyrebird-mic-check.sh -g -f
+
+# Generate without automatic backup (NOT recommended)
+sudo ./lyrebird-mic-check.sh -g --no-backup
 ```
 
 **Generated File:** `/etc/mediamtx/audio-devices.conf`
+
+**Note:** If config already exists, you'll be prompted for confirmation unless using `-f/--force`. An automatic backup is created before overwriting (unless `--no-backup` is used).
 
 ---
 
@@ -183,7 +191,7 @@ Validation: 2 passed, 1 failed
 Get machine-readable output for scripting and automation:
 
 ```bash
-./lyrebird-mic-check.sh --json
+./lyrebird-mic-check.sh --format=json
 ```
 
 **Output Format:**
@@ -224,7 +232,7 @@ sudo ./lyrebird-mic-check.sh --restore
 
 Restores the most recent automatic backup of `/etc/mediamtx/audio-devices.conf`.
 
-**Backup Location:** `/etc/mediamtx.backup.YYYYMMDD-HHMMSS/`
+**Backup Location:** `/etc/mediamtx/audio-devices.conf.backup.YYYYMMDD_HHMMSS`
 
 ---
 
@@ -240,10 +248,11 @@ sudo ./lyrebird-mic-check.sh -g --quality=low
 ```
 
 **Settings:**
-- **Sample Rate:** 16000 Hz
-- **Bitrate:** 64 kbps
-- **Codec:** Opus
-- **Channels:** As detected (typically mono)
+- **Sample Rate:** Prefers 44100 Hz (if supported), otherwise 48000 Hz, otherwise lowest available
+- **Channels:** Prefers mono (1 channel) if supported, otherwise maximum available
+- **Bitrate:** Dynamic based on sample rate and channels:
+  - If rate ≥ 44100 Hz: 96 kbps (mono) or 128 kbps (stereo)
+  - If rate < 44100 Hz: 64 kbps (mono) or 96 kbps (stereo)
 
 **Best For:**
 - Speech monitoring
@@ -251,7 +260,9 @@ sudo ./lyrebird-mic-check.sh -g --quality=low
 - Long-term storage (smaller files)
 - Raspberry Pi deployments (lower CPU)
 
-**File Size:** ~28 MB/hour (mono)
+**File Size:**
+- Mono at 44.1 kHz: ~42 MB/hour
+- Stereo at 44.1 kHz: ~56 MB/hour
 
 ---
 
@@ -265,10 +276,12 @@ sudo ./lyrebird-mic-check.sh -g
 ```
 
 **Settings:**
-- **Sample Rate:** 48000 Hz
-- **Bitrate:** 128 kbps
-- **Codec:** Opus
-- **Channels:** As detected
+- **Sample Rate:** Prefers 48000 Hz (if supported), otherwise 44100 Hz
+- **Channels:** Prefers stereo (2 channels) if supported, otherwise maximum available
+- **Bitrate:** Dynamic based on sample rate and channels:
+  - If rate ≥ 96000 Hz: 192 kbps (mono) or 256 kbps (stereo)
+  - If rate ≥ 44100 Hz: 128 kbps (mono) or 192 kbps (stereo)
+  - If rate < 44100 Hz: 96 kbps (mono) or 128 kbps (stereo)
 
 **Best For:**
 - General-purpose bird song recording
@@ -276,7 +289,9 @@ sudo ./lyrebird-mic-check.sh -g
 - Most USB microphones
 - 24/7 continuous monitoring
 
-**File Size:** ~56 MB/hour (stereo)
+**File Size:**
+- Stereo at 48 kHz: ~84 MB/hour
+- Mono at 48 kHz: ~56 MB/hour
 
 ---
 
@@ -288,10 +303,17 @@ sudo ./lyrebird-mic-check.sh -g --quality=high
 ```
 
 **Settings:**
-- **Sample Rate:** 48000 Hz or higher (96000 Hz if supported)
-- **Bitrate:** 256 kbps
-- **Codec:** Opus or AAC
-- **Channels:** As detected (prefer stereo)
+- **Sample Rate:** Prefers highest available in 96-192 kHz range:
+  - If max ≥ 192000 Hz: uses 192000 Hz
+  - If max ≥ 96000 Hz: uses 96000 Hz
+  - If max ≥ 48000 Hz: uses 48000 Hz
+  - Otherwise: uses maximum available
+- **Channels:** Prefers stereo (2 channels) if supported, otherwise maximum available
+- **Bitrate:** Dynamic based on sample rate and channels:
+  - If rate ≥ 192000 Hz: 192 kbps (mono) or 320 kbps (stereo)
+  - If rate ≥ 96000 Hz: 160 kbps (mono) or 256 kbps (stereo)
+  - If rate ≥ 48000 Hz: 128 kbps (mono) or 192 kbps (stereo)
+  - Otherwise: 96 kbps (mono) or 128 kbps (stereo)
 
 **Best For:**
 - Music recording
@@ -299,7 +321,10 @@ sudo ./lyrebird-mic-check.sh -g --quality=high
 - High-fidelity bird vocalizations
 - Post-processing and analysis
 
-**File Size:** ~112 MB/hour (stereo)
+**File Size:**
+- Stereo at 96 kHz: ~112 MB/hour
+- Stereo at 192 kHz: ~140 MB/hour
+- Mono at 96 kHz: ~70 MB/hour
 
 ---
 
@@ -455,28 +480,32 @@ For USB microphones (native USB), ignore this warning.
 # Generation date: 2025-11-15 14:30:00
 
 # Device: USB Microphone (Card 0)
-# Persistent path: /dev/snd/by-usb-port/front-yard-mic
+# Hardware capabilities:
+#   Sample rates: 44100 48000 Hz
+#   Channels: 1 2
+#   Formats: S16_LE S24_3LE
+# Selected settings (quality tier: normal):
 DEVICE_FRONT_YARD_MIC_SAMPLE_RATE=48000
 DEVICE_FRONT_YARD_MIC_CHANNELS=2
-DEVICE_FRONT_YARD_MIC_BITRATE=128k
-DEVICE_FRONT_YARD_MIC_CODEC=opus
-DEVICE_FRONT_YARD_MIC_THREAD_QUEUE=8192
+DEVICE_FRONT_YARD_MIC_BITRATE=192k
 
 # Device: USB Audio Interface (Card 1)
-# Persistent path: /dev/snd/by-usb-port/studio-interface
+# Hardware capabilities:
+#   Sample rates: 44100 48000 96000 Hz
+#   Channels: 2
+#   Formats: S16_LE S24_LE S32_LE
+# Selected settings (quality tier: normal):
 DEVICE_STUDIO_INTERFACE_SAMPLE_RATE=48000
 DEVICE_STUDIO_INTERFACE_CHANNELS=2
-DEVICE_STUDIO_INTERFACE_BITRATE=128k
-DEVICE_STUDIO_INTERFACE_CODEC=opus
-DEVICE_STUDIO_INTERFACE_THREAD_QUEUE=8192
+DEVICE_STUDIO_INTERFACE_BITRATE=192k
 
 # Fallback defaults (for devices without specific config)
 DEFAULT_SAMPLE_RATE=48000
 DEFAULT_CHANNELS=2
 DEFAULT_BITRATE=128k
-DEFAULT_CODEC=opus
-DEFAULT_THREAD_QUEUE=8192
 ```
+
+**Note:** This script only generates `SAMPLE_RATE`, `CHANNELS`, and `BITRATE` variables. The `CODEC` and `THREAD_QUEUE` settings are managed by the stream-manager and have defaults (opus and 8192 respectively). You can manually add these to the config file if needed.
 
 ### Dual-Lookup System
 
@@ -502,31 +531,28 @@ The Stream Manager tries friendly names first, then falls back to full IDs, ensu
 
 Every time you generate a new configuration, the previous one is automatically backed up:
 
-**Backup Location:** `/etc/mediamtx.backup.YYYYMMDD-HHMMSS/`
+**Backup Location:** `/etc/mediamtx/audio-devices.conf.backup.YYYYMMDD_HHMMSS`
 
 **Example:**
 ```
-/etc/mediamtx.backup.20251115-143000/
-└── audio-devices.conf
+/etc/mediamtx/audio-devices.conf.backup.20251115_143000
 ```
 
 ### Restore Process
 
 ```bash
 # List available backups
-ls -ltr /etc/mediamtx.backup.*/
+ls -ltr /etc/mediamtx/audio-devices.conf.backup.*
 
 # Restore most recent backup
 sudo ./lyrebird-mic-check.sh --restore
 
 # Manual restore (specific backup)
-sudo cp /etc/mediamtx.backup.20251115-143000/audio-devices.conf \
+sudo cp /etc/mediamtx/audio-devices.conf.backup.20251115_143000 \
          /etc/mediamtx/audio-devices.conf
 ```
 
-**Automatic Cleanup:**
-- Backups older than 30 days are automatically removed
-- Minimum 3 most recent backups always retained
+**Note:** Backups are retained indefinitely. You may want to manually clean up old backups periodically to save disk space.
 
 ---
 
@@ -585,12 +611,17 @@ The Orchestrator integrates capability checking into setup workflows:
 |--------|-------|-------------|
 | (no args) | | List all devices with capabilities |
 | `<card_number>` | | Show details for specific card |
-| `--generate` | `-g` | Generate configuration file |
+| `--help` | `-h` | Show help message |
+| `--version` | | Show version information |
+| `--generate-config` | `-g` | Generate configuration file |
+| `--force` | `-f` | Force overwrite existing config (with -g) |
+| `--no-backup` | | Skip automatic backup (NOT recommended) |
 | `--quality=<tier>` | | Set quality tier (low/normal/high) |
 | `--validate` | `-V` | Validate existing configuration |
-| `--json` | | Output in JSON format |
-| `--restore` | | Restore from most recent backup |
-| `--help` | `-h` | Show help message |
+| `--quiet` | `-q` | Quiet mode (errors/warnings only) |
+| `--format=<format>` | | Output format: text (default) or json |
+| `--list-backups` | | List all available config backups |
+| `--restore [timestamp]` | | Restore config from backup |
 
 ---
 

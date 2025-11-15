@@ -64,6 +64,9 @@ sudo ./mediamtx-stream-manager.sh start
 # Stop all streams gracefully
 sudo ./mediamtx-stream-manager.sh stop
 
+# Force stop all processes (emergency use - doesn't rely on graceful termination)
+sudo ./mediamtx-stream-manager.sh force-stop
+
 # Restart all streams
 sudo ./mediamtx-stream-manager.sh restart
 
@@ -368,7 +371,7 @@ sudo systemctl status mediamtx-audio
 
 **Expected Output:**
 ```
-● mediamtx-audio.service - MediaMTX Audio Stream Manager
+● mediamtx-audio.service - MediaMTX Audio Stream Manager v1.4.1
      Loaded: loaded (/etc/systemd/system/mediamtx-audio.service; enabled)
      Active: active (running) since ...
    Main PID: 12345
@@ -405,17 +408,23 @@ sudo systemctl status mediamtx-audio
 
 ### Cron Monitoring
 
-The systemd installation automatically creates `/etc/cron.d/mediamtx-monitor`:
+The systemd installation automatically creates `/etc/cron.d/mediamtx-monitor` with production-grade safety:
 
 ```bash
-*/5 * * * * root /path/to/mediamtx-stream-manager.sh monitor >> /var/log/mediamtx-monitor.log 2>&1
+*/5 * * * * root flock -n /run/mediamtx-monitor.lock -c '${SCRIPT_DIR}/${SCRIPT_NAME} monitor; EXIT=$?; if [ $EXIT -eq 2 ]; then systemctl restart mediamtx-audio; elif [ $EXIT -ne 0 ]; then logger -t mediamtx-monitor "Non-critical exit code $EXIT (no restart)"; fi' || logger -t mediamtx-monitor "Monitor already running or locked"
 ```
+
+**Key Features:**
+- **flock-based overlap protection**: Prevents concurrent monitor runs
+- **Conditional restart logic**: Only restarts service on exit code 2 (critical resources)
+- **Logging via syslog**: Uses `logger` for system integration, not file redirection
+- **Error handling**: Non-critical errors logged but don't trigger restart
 
 **Monitoring actions:**
 - Checks stream health every 5 minutes
 - Detects degraded states (FFmpeg accumulation, resource exhaustion)
-- Automatically restarts unhealthy streams
-- Logs all actions for audit trail
+- Automatically restarts service ONLY on critical issues (exit code 2)
+- Logs all actions to syslog for audit trail
 
 ---
 
