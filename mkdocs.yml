@@ -1,0 +1,198 @@
+# Site Metadata
+site_name: LyreBirdAudio Documentation
+site_url: https://lyrebird-docs.pages.dev
+site_description: Production-hardened RTSP audio streaming suite for USB microphones with 24/7 reliability
+site_author: Tom F
+repo_url: https://github.com/tomtom215/LyreBirdAudio
+repo_name: tomtom215/LyreBirdAudio
+edit_uri: blob/main/
+
+# Copyright
+copyright: Copyright &copy; 2024-2025 LyreBirdAudio Contributors - Apache 2.0 License
+
+# Theme Configuration
+theme:
+  name: material
+  language: en
+
+  # Color Palette - Dark Mode Default
+  palette:
+    # Dark mode (default)
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+    # Light mode (optional)
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+  # Features
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.tabs.link
+    - content.tooltips
+    - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+
+  # Icons
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
+      cache_safe: true
+
+# Extensions
+markdown_extensions:
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      title: On this page
+      toc_depth: 3
+
+  # PyMdown Extensions
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Navigation Structure
+nav:
+  - Home: index.md
+
+  - Getting Started:
+    - Quick Start: getting-started/quick-start.md
+    - System Requirements: getting-started/system-requirements.md
+    - Installation: getting-started/installation.md
+    - Basic Usage: getting-started/basic-usage.md
+
+  - User Guide:
+    - Configuration: user-guide/configuration.md
+    - USB Device Management: user-guide/usb-device-management.md
+    - Stream Management: user-guide/stream-management.md
+    - MediaMTX Integration: user-guide/mediamtx-integration.md
+    - Multiplex Streaming: user-guide/multiplex-streaming.md
+
+  - Components:
+    - Overview: components/index.md
+    - Orchestrator: components/orchestrator.md
+    - Stream Manager: components/stream-manager.md
+    - USB Audio Mapper: components/usb-audio-mapper.md
+    - Capability Checker: components/capability-checker.md
+    - Diagnostics Tool: components/diagnostics.md
+    - Version Manager: components/version-manager.md
+    - MediaMTX Installer: components/installer.md
+
+  - Advanced:
+    - Architecture: advanced/architecture.md
+    - Performance Tuning: advanced/performance.md
+    - Troubleshooting: advanced/troubleshooting.md
+    - Diagnostics & Monitoring: advanced/diagnostics-monitoring.md
+    - Custom Integration: advanced/custom-integration.md
+
+  - Reference:
+    - Configuration Files: reference/configuration-files.md
+    - Environment Variables: reference/environment-variables.md
+    - Command Reference: reference/command-reference.md
+    - Exit Codes: reference/exit-codes.md
+    - Log Files: reference/log-files.md
+
+  - Maintenance:
+    - Version Management: maintenance/version-management.md
+    - Backup & Restore: maintenance/backup-restore.md
+    - Uninstallation: maintenance/uninstallation.md
+
+  - Contributing:
+    - Overview: contributing/index.md
+    - Development Setup: contributing/development-setup.md
+    - Code Standards: contributing/code-standards.md
+    - Testing: contributing/testing.md
+
+  - About:
+    - Features: about/features.md
+    - System Overview: about/system-overview.md
+    - Project Origin: about/project-origin.md
+    - License: about/license.md
+
+# Extra Configuration
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/tomtom215/LyreBirdAudio
+      name: GitHub Repository
+    - icon: fontawesome/solid/bug
+      link: https://github.com/tomtom215/LyreBirdAudio/issues
+      name: Report Issues
+    - icon: fontawesome/solid/comments
+      link: https://github.com/tomtom215/LyreBirdAudio/discussions
+      name: Discussions
+
+# Custom CSS
+extra_css:
+  - stylesheets/extra.css

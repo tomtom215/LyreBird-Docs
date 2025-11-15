@@ -1,0 +1,113 @@
+/* Custom CSS for LyreBirdAudio Documentation */
+
+/* Enhance code block appearance */
+.highlight pre {
+  border-radius: 0.4em;
+  padding: 1em;
+}
+
+/* Improve admonition styling */
+.admonition {
+  border-radius: 0.4em;
+}
+
+/* Better spacing for definition lists */
+dd {
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+/* Enhance table appearance */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table th {
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Print optimization */
+@media print {
+  .md-header,
+  .md-tabs,
+  .md-sidebar,
+  .md-footer {
+    display: none;
+  }
+
+  .md-content {
+    max-width: 100%;
+  }
+}
+
+/* Improve keyboard shortcuts display */
+kbd {
+  background-color: var(--md-code-bg-color);
+  border: 0.1rem solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+  box-shadow: 0 0.2rem 0 0.1rem var(--md-default-fg-color--lighter);
+  color: var(--md-code-fg-color);
+  display: inline-block;
+  font-size: 0.75em;
+  padding: 0 0.4rem;
+  vertical-align: text-top;
+  word-break: break-word;
+}
+
+/* Enhance feature grid on homepage */
+.md-typeset .grid {
+  grid-gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  margin: 1em 0;
+}
+
+/* Better spacing for navigation items */
+.md-nav__item {
+  padding: 0.2rem 0;
+}
+
+/* Improve logo/title alignment */
+.md-header__title {
+  line-height: 1.4;
+}
+
+/* Custom styling for version badges */
+.version-badge {
+  background-color: var(--md-accent-fg-color);
+  color: white;
+  padding: 0.2em 0.5em;
+  border-radius: 0.3em;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+/* Enhance external link icons */
+.md-content a[href^="http"]::after {
+  content: "↗";
+  font-size: 0.8em;
+  margin-left: 0.2em;
+  opacity: 0.5;
+}
+
+.md-content a[href^="https://github.com/tomtom215/LyreBirdAudio"]::after,
+.md-content a[href^="http://127.0.0.1"]::after,
+.md-content a[href^="http://localhost"]::after {
+  content: "";
+}
+
+/* Responsive improvements for mobile */
+@media screen and (max-width: 76.1875em) {
+  .md-content {
+    padding: 1.2rem;
+  }
+}
+
+/* Better code block scrolling on mobile */
+@media screen and (max-width: 44.9375em) {
+  .highlight pre {
+    font-size: 0.85em;
+  }
+}
