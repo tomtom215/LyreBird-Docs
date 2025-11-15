@@ -183,7 +183,7 @@ Validation: 2 passed, 1 failed
 Get machine-readable output for scripting and automation:
 
 ```bash
-./lyrebird-mic-check.sh --json
+./lyrebird-mic-check.sh --format=json
 ```
 
 **Output Format:**
@@ -224,7 +224,7 @@ sudo ./lyrebird-mic-check.sh --restore
 
 Restores the most recent automatic backup of `/etc/mediamtx/audio-devices.conf`.
 
-**Backup Location:** `/etc/mediamtx.backup.YYYYMMDD-HHMMSS/`
+**Backup Location:** `/etc/mediamtx/audio-devices.conf.backup.YYYYMMDD_HHMMSS`
 
 ---
 
@@ -502,31 +502,28 @@ The Stream Manager tries friendly names first, then falls back to full IDs, ensu
 
 Every time you generate a new configuration, the previous one is automatically backed up:
 
-**Backup Location:** `/etc/mediamtx.backup.YYYYMMDD-HHMMSS/`
+**Backup Location:** `/etc/mediamtx/audio-devices.conf.backup.YYYYMMDD_HHMMSS`
 
 **Example:**
 ```
-/etc/mediamtx.backup.20251115-143000/
-└── audio-devices.conf
+/etc/mediamtx/audio-devices.conf.backup.20251115_143000
 ```
 
 ### Restore Process
 
 ```bash
 # List available backups
-ls -ltr /etc/mediamtx.backup.*/
+ls -ltr /etc/mediamtx/audio-devices.conf.backup.*
 
 # Restore most recent backup
 sudo ./lyrebird-mic-check.sh --restore
 
 # Manual restore (specific backup)
-sudo cp /etc/mediamtx.backup.20251115-143000/audio-devices.conf \
+sudo cp /etc/mediamtx/audio-devices.conf.backup.20251115_143000 \
          /etc/mediamtx/audio-devices.conf
 ```
 
-**Automatic Cleanup:**
-- Backups older than 30 days are automatically removed
-- Minimum 3 most recent backups always retained
+**Note:** Backups are retained indefinitely. You may want to manually clean up old backups periodically to save disk space.
 
 ---
 

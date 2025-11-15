@@ -42,9 +42,9 @@ USB Mic in port 1-1.4 → /dev/snd/pcmC2D0c (card 2)  ← Different!
 The USB Audio Mapper creates udev rules that map each USB port to a consistent device name:
 
 ```
-Port 1-1.4 → /dev/snd/by-usb-port/Device_1 → /dev/snd/pcmC0D0c
-Port 1-1.5 → /dev/snd/by-usb-port/Device_2 → /dev/snd/pcmC1D0c
-Port 2-1.2 → /dev/snd/by-usb-port/Device_3 → /dev/snd/pcmC2D0c
+Port 1-1.4 → /dev/sound/by-id/Device_1 → /dev/snd/pcmC0D0c
+Port 1-1.5 → /dev/sound/by-id/Device_2 → /dev/snd/pcmC1D0c
+Port 2-1.2 → /dev/sound/by-id/Device_3 → /dev/snd/pcmC2D0c
 ```
 
 **Regardless of enumeration order**, each physical port always maps to the same friendly name.
@@ -105,32 +105,32 @@ sudo ./usb-audio-mapper.sh
 2. **Device Selection**: Shows list of detected devices with details
 3. **Port Identification**: Identifies physical USB port for selected device
 4. **Friendly Name**: Prompts for easy-to-remember device name
-5. **Rule Generation**: Creates udev rule for persistent mapping
-6. **Verification**: Shows generated rule for confirmation
+5. **Rule Generation**: Creates udev rule and writes to `/etc/udev/rules.d/99-usb-soundcards.rules`
 
 **Example Session:**
 ```
-=== USB Audio Device Mapper ===
+===== USB Sound Card Mapper =====
 
-Detected USB Audio Devices:
-1. USB Microphone (Vendor: 0x046d, Product: 0x0825)
-   Current: /dev/snd/pcmC0D0c
-   USB Port: 1-1.4
+[Shows lsusb output]
+[Shows /proc/asound/cards output]
 
-2. USB Audio Interface (Vendor: 0x0d8c, Product: 0x0014)
-   Current: /dev/snd/pcmC1D0c
-   USB Port: 1-1.5
+Enter the number of the sound card you want to map: 0
 
-Select device (1-2): 1
 Enter friendly name for this device: front-yard-mic
 
-Creating udev rule:
-SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825",
-KERNELS=="1-1.4", SYMLINK+="snd/by-usb-port/front-yard-mic"
+[USB devices listed with numbers]
+
+Select USB device (1-N): 1
 
 Rule written to /etc/udev/rules.d/99-usb-soundcards.rules
 
 Reboot required for changes to take effect.
+```
+
+**Note:** The actual rule generated will be:
+```
+SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825",
+KERNELS=="1-1.4", ATTR{id}="front-yard-mic", SYMLINK+="sound/by-id/front-yard-mic"
 ```
 
 ---
@@ -209,6 +209,7 @@ Shows detailed information about:
 
 | Option | Short | Description |
 |--------|-------|-------------|
+| `--help` | `-h` | Show help message and exit |
 | `--interactive` | `-i` | Run in interactive mode (default) |
 | `--non-interactive` | `-n` | Run without prompts (requires other params) |
 | `--device <name>` | `-d` | Device name for logging purposes |
@@ -230,32 +231,33 @@ Shows detailed information about:
 **Format:**
 ```bash
 # USB Microphone - Front Yard
-SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", KERNELS=="1-1.4", SYMLINK+="snd/by-usb-port/front-yard-mic"
+SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", KERNELS=="1-1.4", ATTR{id}="front-yard-mic", SYMLINK+="sound/by-id/front-yard-mic"
 
 # USB Microphone - Back Yard
-SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", KERNELS=="1-1.5", SYMLINK+="snd/by-usb-port/back-yard-mic"
+SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", KERNELS=="1-1.5", ATTR{id}="back-yard-mic", SYMLINK+="sound/by-id/back-yard-mic"
 
 # USB Audio Interface - Studio
-SUBSYSTEM=="sound", ATTRS{idVendor}=="0d8c", ATTRS{idProduct}=="0014", KERNELS=="2-1.2", SYMLINK+="snd/by-usb-port/studio-interface"
+SUBSYSTEM=="sound", ATTRS{idVendor}=="0d8c", ATTRS{idProduct}=="0014", KERNELS=="2-1.2", ATTR{id}="studio-interface", SYMLINK+="sound/by-id/studio-interface"
 ```
 
 **Rule Breakdown:**
 - `SUBSYSTEM=="sound"`: Match sound subsystem devices
 - `ATTRS{idVendor}=="046d"`: Match USB Vendor ID
 - `ATTRS{idProduct}=="0825"`: Match USB Product ID
-- `KERNELS=="1-1.4"`: Match specific USB port
-- `SYMLINK+="snd/by-usb-port/..."`: Create persistent symlink
+- `KERNELS=="1-1.4"`: Match specific USB port (or `ENV{ID_PATH}` for complex topologies)
+- `ATTR{id}="front-yard-mic"`: Set ALSA card ID
+- `SYMLINK+="sound/by-id/..."`: Create persistent symlink
 
 ### Device Symlinks
 
-**Location:** `/dev/snd/by-usb-port/`
+**Location:** `/dev/sound/by-id/`
 
 **Created After Reboot:**
 ```
-/dev/snd/by-usb-port/
-├── front-yard-mic -> /dev/snd/pcmC0D0c
-├── back-yard-mic -> /dev/snd/pcmC1D0c
-└── studio-interface -> /dev/snd/pcmC2D0c
+/dev/sound/by-id/
+├── front-yard-mic -> ../../snd/controlC0
+├── back-yard-mic -> ../../snd/controlC1
+└── studio-interface -> ../../snd/controlC2
 ```
 
 **Usage in Configuration:**
@@ -282,7 +284,7 @@ graph TD
     F --> G[Creates udev Rule]
     G --> H[Maps Port to Friendly Name]
     H --> I[Reboot]
-    I --> J[/dev/snd/by-usb-port/device-name]
+    I --> J[/dev/sound/by-id/device-name]
 
     style G fill:#4051b5,color:#fff
     style J fill:#00bcd4,color:#fff
@@ -348,10 +350,10 @@ The USB Audio Mapper uses **physical port location** as the differentiator:
 ```bash
 # Two identical microphones - differentiated by USB port
 SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825",
-KERNELS=="1-1.4", SYMLINK+="snd/by-usb-port/mic-left"
+KERNELS=="1-1.4", ATTR{id}="mic-left", SYMLINK+="sound/by-id/mic-left"
 
 SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825",
-KERNELS=="1-1.5", SYMLINK+="snd/by-usb-port/mic-right"
+KERNELS=="1-1.5", ATTR{id}="mic-right", SYMLINK+="sound/by-id/mic-right"
 ```
 
 **Result:**
@@ -397,7 +399,7 @@ sudo ./usb-audio-mapper.sh
 sudo reboot
 
 # 5. Verify symlink creation
-ls -la /dev/snd/by-usb-port/
+ls -la /dev/sound/by-id/
 
 # 6. Use in stream configuration
 sudo ./mediamtx-stream-manager.sh start
@@ -437,7 +439,7 @@ sudo ./usb-audio-mapper.sh -n -v 046d -p 0825 -u 2-1.2 -f mic-east
 
 # Reload udev rules
 sudo udevadm control --reload-rules
-sudo udevadm trigger
+sudo udevadm trigger --subsystem-match=sound
 
 # Reboot recommended but can try without
 echo "Reboot recommended: sudo reboot"
@@ -455,10 +457,10 @@ cat /etc/udev/rules.d/99-usb-soundcards.rules
 sudo ./usb-audio-mapper.sh --test
 
 # After reboot, verify symlinks
-ls -la /dev/snd/by-usb-port/
+ls -la /dev/sound/by-id/
 
-# Test with ALSA
-arecord -L | grep -A2 "by-usb-port"
+# Test with ALSA (use the friendly name directly)
+arecord -L | grep -i front-yard-mic
 ```
 
 ---
@@ -467,7 +469,7 @@ arecord -L | grep -A2 "by-usb-port"
 
 ### Symlinks Not Created After Reboot
 
-**Symptoms:** `/dev/snd/by-usb-port/` directory is empty
+**Symptoms:** `/dev/sound/by-id/` directory is empty or symlinks missing
 
 **Solutions:**
 
@@ -645,12 +647,12 @@ Create multiple symlinks for the same device:
 ```bash
 # Device accessible via multiple names
 SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825",
-KERNELS=="1-1.4", SYMLINK+="snd/by-usb-port/front-yard-mic snd/by-usb-port/mic-1"
+KERNELS=="1-1.4", ATTR{id}="front-yard-mic", SYMLINK+="sound/by-id/front-yard-mic sound/by-id/mic-1"
 ```
 
 **Result:**
-- `/dev/snd/by-usb-port/front-yard-mic` → `/dev/snd/pcmC0D0c`
-- `/dev/snd/by-usb-port/mic-1` → `/dev/snd/pcmC0D0c`
+- `/dev/sound/by-id/front-yard-mic` → `../../snd/controlC0`
+- `/dev/sound/by-id/mic-1` → `../../snd/controlC0`
 
 ---
 
