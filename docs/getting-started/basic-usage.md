@@ -11,25 +11,25 @@ Learn the essential operations for managing LyreBirdAudio streams.
 The systemd service starts automatically on boot. To start manually:
 
 ```bash
-sudo systemctl start mediamtx-stream-manager
+sudo systemctl start mediamtx-audio
 ```
 
 ### Stopping Streams
 
 ```bash
-sudo systemctl stop mediamtx-stream-manager
+sudo systemctl stop mediamtx-audio
 ```
 
 ### Restarting Streams
 
 ```bash
-sudo systemctl restart mediamtx-stream-manager
+sudo systemctl restart mediamtx-audio
 ```
 
 ### Checking Status
 
 ```bash
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 ```
 
 ---
@@ -96,13 +96,13 @@ sudo ./mediamtx-stream-manager.sh logs lyrebird-mic-1
 
 ```bash
 # Last 50 lines
-journalctl -u mediamtx-stream-manager -n 50
+journalctl -u mediamtx-audio -n 50
 
 # Follow live logs
-journalctl -u mediamtx-stream-manager -f
+journalctl -u mediamtx-audio -f
 
 # Logs since boot
-journalctl -u mediamtx-stream-manager -b
+journalctl -u mediamtx-audio -b
 ```
 
 ### MediaMTX Server Logs
@@ -373,11 +373,11 @@ Streams automatically restart on failure, but you can manually restart:
 
 ```bash
 # Stop the stream
-sudo systemctl stop mediamtx-stream-manager
+sudo systemctl stop mediamtx-audio
 sudo pkill -f "lyrebird-mic-1"
 
 # Start the service again
-sudo systemctl start mediamtx-stream-manager
+sudo systemctl start mediamtx-audio
 ```
 
 ### Change Stream Settings
@@ -391,7 +391,7 @@ sudo nano /opt/mediamtx/streams/lyrebird-mic-1.env
 Restart for changes to take effect:
 
 ```bash
-sudo systemctl restart mediamtx-stream-manager
+sudo systemctl restart mediamtx-audio
 ```
 
 ### Test Audio Input

@@ -381,7 +381,7 @@ files before uninstallation. To restore:
 1. Copy configuration files to original locations
 2. Reinstall LyreBirdAudio from GitHub
 3. Reload services: systemctl daemon-reload
-4. Start services: systemctl start mediamtx-stream-manager
+4. Start services: systemctl start mediamtx-audio
 
 For support: https://github.com/tomtom215/LyreBirdAudio
 EOF"
@@ -397,7 +397,7 @@ echo "Archive created: lyrebird-archive-$(date +%Y%m%d).tar.gz"
 
 ```bash
 # Export logs for analysis
-sudo journalctl -u mediamtx-stream-manager > /tmp/lyrebird-logs-$(date +%Y%m%d).txt
+sudo journalctl -u mediamtx-audio > /tmp/lyrebird-logs-$(date +%Y%m%d).txt
 sudo journalctl -u mediamtx >> /tmp/lyrebird-logs-$(date +%Y%m%d).txt 2>/dev/null || true
 
 echo "Logs exported to: /tmp/lyrebird-logs-$(date +%Y%m%d).txt"
@@ -433,7 +433,7 @@ sudo /opt/LyreBirdAudio/lyrebird-orchestrator.sh
 # Apply configuration
 sudo udevadm control --reload-rules
 sudo systemctl daemon-reload
-sudo systemctl start mediamtx-stream-manager
+sudo systemctl start mediamtx-audio
 
 echo "LyreBirdAudio restored from archive"
 ```

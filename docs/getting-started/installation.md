@@ -337,7 +337,7 @@ apiAddress: :9997
 
 Restart services:
 ```bash
-sudo systemctl restart mediamtx-stream-manager
+sudo systemctl restart mediamtx-audio
 ```
 
 Access Web UI: `http://your-server-ip:8889`

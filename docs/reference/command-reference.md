@@ -462,15 +462,15 @@ sudo ./lyrebird-mic-check.sh -V
 ```bash
 # Enable automatic startup
 sudo systemctl enable mediamtx
-sudo systemctl enable mediamtx-stream-manager
+sudo systemctl enable mediamtx-audio
 
 # Start services
 sudo systemctl start mediamtx
-sudo systemctl start mediamtx-stream-manager
+sudo systemctl start mediamtx-audio
 
 # Verify status
 sudo systemctl status mediamtx
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 ```
 
 ---

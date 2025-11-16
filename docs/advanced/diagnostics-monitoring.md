@@ -576,16 +576,16 @@ For production environments, monitor via systemd:
 
 ```bash
 # Check service status
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 
 # Follow logs in real-time
-sudo journalctl -u mediamtx-stream-manager -f
+sudo journalctl -u mediamtx-audio -f
 
 # Filter for errors only
-sudo journalctl -u mediamtx-stream-manager -p err
+sudo journalctl -u mediamtx-audio -p err
 
 # View logs since boot
-sudo journalctl -u mediamtx-stream-manager -b
+sudo journalctl -u mediamtx-audio -b
 ```
 
 ### Automated Health Checks

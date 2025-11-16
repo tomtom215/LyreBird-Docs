@@ -110,7 +110,7 @@ ERR [RTSP] [conn] unable to bind to port 8554: address already in use
 
 **File:** `/var/log/mediamtx-stream-manager.log`
 
-**Journalctl:** `journalctl -u mediamtx-stream-manager`
+**Journalctl:** `journalctl -u mediamtx-audio`
 
 ### Access
 
@@ -345,7 +345,7 @@ LyreBird logs should be rotated to prevent disk space exhaustion:
     notifempty
     create 0640 root root
     postrotate
-        systemctl reload mediamtx-stream-manager 2>/dev/null || true
+        systemctl reload mediamtx-audio 2>/dev/null || true
     endscript
 }
 ```

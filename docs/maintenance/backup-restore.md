@@ -54,7 +54,7 @@ sudo cp $LATEST/mediamtx*.service /etc/systemd/system/ 2>/dev/null || true
 # Apply changes
 sudo udevadm control --reload-rules
 sudo systemctl daemon-reload
-sudo systemctl restart mediamtx-stream-manager
+sudo systemctl restart mediamtx-audio
 
 echo "Restored from: $LATEST"
 ```

@@ -234,7 +234,7 @@ if sudo ./mediamtx-stream-manager.sh status | grep -q "running"; then
     echo "PASS: Streams started successfully"
 else
     echo "FAIL: Streams failed to start"
-    sudo journalctl -u mediamtx-stream-manager -n 20
+    sudo journalctl -u mediamtx-audio -n 20
     exit 1
 fi
 

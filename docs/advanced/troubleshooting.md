@@ -537,10 +537,10 @@ sudo udevadm monitor --environment --udev
 
 ```bash
 # Check if monitoring is active
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 
 # Check auto-recovery logs
-sudo journalctl -u mediamtx-stream-manager | grep -i recover
+sudo journalctl -u mediamtx-audio | grep -i recover
 ```
 
 **Solutions:**
@@ -553,11 +553,11 @@ sudo journalctl -u mediamtx-stream-manager | grep -i recover
    sudo ./mediamtx-stream-manager.sh install-service
 
    # Enable and start
-   sudo systemctl enable mediamtx-stream-manager
-   sudo systemctl start mediamtx-stream-manager
+   sudo systemctl enable mediamtx-audio
+   sudo systemctl start mediamtx-audio
 
    # Verify monitoring active
-   sudo systemctl status mediamtx-stream-manager
+   sudo systemctl status mediamtx-audio
    ```
 
 2. **Maximum Retry Attempts Reached**
@@ -565,7 +565,7 @@ sudo journalctl -u mediamtx-stream-manager | grep -i recover
    **Solution:**
    ```bash
    # Check retry count in logs
-   sudo journalctl -u mediamtx-stream-manager | grep "attempt"
+   sudo journalctl -u mediamtx-audio | grep "attempt"
 
    # If max retries reached, fix underlying issue then restart
    sudo ./mediamtx-stream-manager.sh restart
@@ -972,7 +972,7 @@ sudo reboot
 2. **Check Logs**
    ```bash
    sudo journalctl -u mediamtx -n 50
-   sudo journalctl -u mediamtx-stream-manager -n 50
+   sudo journalctl -u mediamtx-audio -n 50
    tail -f /var/log/lyrebird/*.log
    ```
 
@@ -1049,7 +1049,7 @@ When seeking help, collect:
 4. **Service Logs**
    ```bash
    sudo journalctl -u mediamtx -n 100 > /tmp/mediamtx.log
-   sudo journalctl -u mediamtx-stream-manager -n 100 > /tmp/stream-manager.log
+   sudo journalctl -u mediamtx-audio -n 100 > /tmp/stream-manager.log
    ```
 
 5. **Configuration Files**

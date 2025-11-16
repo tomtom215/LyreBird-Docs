@@ -544,7 +544,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 
 4. **Check FFmpeg filter syntax:**
    ```bash
-   sudo journalctl -u mediamtx-stream-manager -n 50
+   sudo journalctl -u mediamtx-audio -n 50
    ```
 
 ### Audio Out of Sync

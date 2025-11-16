@@ -571,22 +571,22 @@ WantedBy=multi-user.target
 
 ```bash
 # Enable automatic startup
-sudo systemctl enable mediamtx-stream-manager
+sudo systemctl enable mediamtx-audio
 
 # Start service
-sudo systemctl start mediamtx-stream-manager
+sudo systemctl start mediamtx-audio
 
 # Stop service
-sudo systemctl stop mediamtx-stream-manager
+sudo systemctl stop mediamtx-audio
 
 # Restart service
-sudo systemctl restart mediamtx-stream-manager
+sudo systemctl restart mediamtx-audio
 
 # Check status
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 
 # View logs
-sudo journalctl -u mediamtx-stream-manager -f
+sudo journalctl -u mediamtx-audio -f
 ```
 
 ---

@@ -190,7 +190,7 @@ sudo ./mediamtx-stream-manager.sh start|stop|restart|status
 sudo ./mediamtx-stream-manager.sh monitor
 
 # Service management
-sudo systemctl enable|start|stop mediamtx-stream-manager
+sudo systemctl enable|start|stop mediamtx-audio
 ```
 
 **Interface:** CLI commands, systemd integration
