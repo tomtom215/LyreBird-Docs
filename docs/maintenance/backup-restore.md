@@ -157,10 +157,9 @@ cat $BACKUP_DIR/MANIFEST.txt
 
 ## Automated Backup
 
-!!! info "Backup Script - TBD"
-    A dedicated `backup-config.sh` script is planned for future implementation. For now, you can create your own backup script using the example below.
+## Create Custom Backup Script
 
-## Backup Script
+While LyreBirdAudio does not include a built-in backup script, you can create a reusable backup script using the example below:
 
 Create a reusable backup script:
 
