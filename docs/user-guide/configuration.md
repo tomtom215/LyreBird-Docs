@@ -19,13 +19,13 @@ LyreBirdAudio provides flexible configuration options for audio encoding and str
 
 ## Configuration Files
 
-### Audio Devices Configuration
+## Audio Devices Configuration
 
 **Location:** `/etc/mediamtx/audio-devices.conf`
 
 This file contains device-specific audio settings using a dual-lookup system that supports both friendly names and full device IDs for guaranteed uniqueness.
 
-#### Configuration Format
+### Configuration Format
 
 Parameters are defined using the pattern:
 
@@ -79,11 +79,11 @@ This automatically:
 3. Generates optimal settings for each device
 4. Writes configuration to `/etc/mediamtx/audio-devices.conf`
 
-### Quality Tiers
+## Quality Tiers
 
 LyreBirdAudio supports three predefined quality tiers:
 
-#### Low Quality (Speech/Monitoring)
+### Low Quality (Speech/Monitoring)
 
 ```bash
 sudo ./lyrebird-mic-check.sh -g --quality=low
@@ -116,7 +116,7 @@ sudo ./lyrebird-mic-check.sh -g --quality=high
 - **Use Cases:** Music recording, professional audio, high-fidelity capture
 - **Bandwidth:** ~32 KB/s per stream
 
-### Force Configuration Override
+## Force Configuration Override
 
 To force configuration generation without interactive prompts:
 
@@ -235,7 +235,7 @@ DEVICE_MICROPHONE_CODEC=pcm
 
 ## Sample Rate Configuration
 
-### Common Sample Rates
+## Common Sample Rates
 
 | Sample Rate | Use Case | Quality Level |
 |-------------|----------|---------------|
@@ -246,7 +246,7 @@ DEVICE_MICROPHONE_CODEC=pcm
 | 48000 Hz | Professional audio (default) | High |
 | 96000 Hz | High-resolution audio | Very High |
 
-### Selecting Sample Rate
+## Selecting Sample Rate
 
 **General Recommendation:** Use 48000 Hz for most applications.
 
@@ -269,7 +269,7 @@ DEVICE_MICROPHONE_CODEC=pcm
 DEVICE_MICROPHONE_SAMPLE_RATE=48000
 ```
 
-### Verifying Hardware Capabilities
+## Verifying Hardware Capabilities
 
 Check what sample rates your device supports:
 
@@ -293,7 +293,7 @@ Higher bitrates provide better audio quality but consume more bandwidth and CPU.
 | AAC | 64-96 | 128-192 | 256-320 |
 | MP3 | 96-128 | 192 | 256-320 |
 
-### Bitrate Selection Guidelines
+## Bitrate Selection Guidelines
 
 **64 kbps:**
 
@@ -375,14 +375,14 @@ DEVICE_MICROPHONE_CHANNELS=2
 
 The `THREAD_QUEUE` parameter configures FFmpeg's internal buffer for audio processing.
 
-### Default Settings
+## Default Settings
 
 ```bash
 # Default is 8192 if not specified
 DEVICE_MICROPHONE_THREAD_QUEUE=8192
 ```
 
-### When to Adjust
+## When to Adjust
 
 **Increase (16384, 32768):**
 
@@ -407,7 +407,7 @@ DEVICE_MICROPHONE_THREAD_QUEUE=2048
 
 ## Configuration Validation
 
-### Validate Configuration
+## Validate Configuration
 
 After making changes, validate your configuration:
 
@@ -422,7 +422,7 @@ This checks:
 - Sample rate support
 - Channel configuration validity
 
-### Test Configuration
+## Test Configuration
 
 Restart streams with new configuration:
 
@@ -430,7 +430,7 @@ Restart streams with new configuration:
 sudo ./mediamtx-stream-manager.sh restart
 ```
 
-### Monitor Stream Health
+## Monitor Stream Health
 
 ```bash
 sudo ./mediamtx-stream-manager.sh monitor
@@ -444,7 +444,7 @@ Watch for errors or warnings related to configuration issues.
 
 Override default configuration paths and parameters using environment variables:
 
-### Common Overrides
+## Common Overrides
 
 ```bash
 # Override startup delay
@@ -457,7 +457,7 @@ USB_STABILIZATION_DELAY=10 ./mediamtx-stream-manager.sh start
 MAX_RESTART_DELAY=600 ./mediamtx-stream-manager.sh start
 ```
 
-### Timing Controls
+## Timing Controls
 
 | Variable | Default | Description |
 |----------|---------|-------------|
@@ -465,7 +465,7 @@ MAX_RESTART_DELAY=600 ./mediamtx-stream-manager.sh start
 | `USB_STABILIZATION_DELAY` | 5 seconds | USB device initialization time |
 | `MAX_RESTART_DELAY` | 300 seconds | Maximum exponential backoff |
 
-### Resource Thresholds
+## Resource Thresholds
 
 | Variable | Default | Description |
 |----------|---------|-------------|
@@ -476,11 +476,11 @@ MAX_RESTART_DELAY=600 ./mediamtx-stream-manager.sh start
 
 ## Advanced Configuration
 
-### Custom FFmpeg Options
+## Custom FFmpeg Options
 
 For advanced users, FFmpeg pipeline customization may be available through the stream manager. Consult the [Custom Integration](../advanced/custom-integration.md) guide for details.
 
-### MediaMTX Server Settings
+## MediaMTX Server Settings
 
 MediaMTX server configuration is stored in `/etc/mediamtx/mediamtx.yml`. See [MediaMTX Integration](mediamtx-integration.md) for details.
 
@@ -488,7 +488,7 @@ MediaMTX server configuration is stored in `/etc/mediamtx/mediamtx.yml`. See [Me
 
 ## Best Practices
 
-### Production Deployments
+## Production Deployments
 
 1. **Use automatic configuration generation** for initial setup
 2. **Test configuration thoroughly** before production deployment
@@ -496,7 +496,7 @@ MediaMTX server configuration is stored in `/etc/mediamtx/mediamtx.yml`. See [Me
 4. **Document custom settings** for future reference
 5. **Backup configuration files** before making changes
 
-### Performance Optimization
+## Performance Optimization
 
 1. **Start with normal quality tier** and adjust as needed
 2. **Use Opus codec** for best quality/bandwidth ratio
@@ -504,7 +504,7 @@ MediaMTX server configuration is stored in `/etc/mediamtx/mediamtx.yml`. See [Me
 4. **Match sample rates** to actual hardware capabilities
 5. **Monitor CPU and bandwidth** under full load
 
-### Troubleshooting Configuration Issues
+## Troubleshooting Configuration Issues
 
 1. **Validate after every change** using `-V` flag
 2. **Check logs** for configuration-related errors
@@ -527,14 +527,14 @@ MediaMTX server configuration is stored in `/etc/mediamtx/mediamtx.yml`. See [Me
 <div class="grid" markdown>
 
 <div markdown>
-### USB Device Management
+## USB Device Management
 Learn about device detection and mapping
 
 [USB Device Management →](usb-device-management.md)
 </div>
 
 <div markdown>
-### Stream Management
+## Stream Management
 Starting and managing streams
 
 [Stream Management →](stream-management.md)

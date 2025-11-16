@@ -25,27 +25,27 @@ Automated validation of system resources, USB devices, MediaMTX service, streams
 </div>
 
 <div markdown>
-### Three Diagnostic Modes
+## Three Diagnostic Modes
 Quick (essential checks), Full (comprehensive analysis), and Debug (maximum verbosity) modes for different use cases.
 </div>
 
 <div markdown>
-### Actionable Error Reporting
+## Actionable Error Reporting
 Clear identification of failures with specific remediation steps and guidance for GitHub issue submission.
 </div>
 
 <div markdown>
-### Resource Constraint Detection
+## Resource Constraint Detection
 Monitors CPU, memory, file descriptors, and disk space to identify performance bottlenecks before they cause failures.
 </div>
 
 <div markdown>
-### Process Stability Analysis
+## Process Stability Analysis
 Validates FFmpeg process counts, detects process accumulation, and identifies stream health issues.
 </div>
 
 <div markdown>
-### Audio Subsystem Conflict Detection
+## Audio Subsystem Conflict Detection
 Detects device conflicts, ALSA state issues, and USB device problems that prevent stream startup.
 </div>
 
@@ -55,7 +55,7 @@ Detects device conflicts, ALSA state issues, and USB device problems that preven
 
 ## Usage
 
-### Basic Commands
+## Basic Commands
 
 ```bash
 # Quick check (essential systems only)
@@ -68,7 +68,7 @@ sudo ./lyrebird-diagnostics.sh full
 sudo ./lyrebird-diagnostics.sh debug
 ```
 
-### Advanced Options
+## Advanced Options
 
 ```bash
 # Specify alternate MediaMTX config
@@ -87,7 +87,7 @@ sudo ./lyrebird-diagnostics.sh --quiet quick
 sudo ./lyrebird-diagnostics.sh --no-color full
 ```
 
-### Integration with Orchestrator
+## Integration with Orchestrator
 
 The Diagnostics component is accessible through the Orchestrator menu:
 
@@ -101,7 +101,7 @@ sudo ./lyrebird-orchestrator.sh
 
 ## Diagnostic Modes
 
-### Quick Mode (Essential Checks)
+## Quick Mode (Essential Checks)
 
 **Purpose:** Fast verification of critical systems
 
@@ -205,7 +205,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 ## Check Categories
 
-### System Health
+## System Health
 
 **What Gets Checked:**
 - Operating system type and version
@@ -217,7 +217,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 - Required utilities presence (ffmpeg, arecord, jq, curl)
 
 **Example Output:**
-```
+```text
 [PASS] OS: Ubuntu 22.04.3 LTS
 [PASS] Kernel: 5.15.0-91-generic
 [PASS] Uptime: 15 days, 7 hours
@@ -228,7 +228,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 ---
 
-### USB Audio Devices
+## USB Audio Devices
 
 **What Gets Checked:**
 - USB audio device detection via `lsusb`
@@ -239,7 +239,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 - Device symlinks (`/dev/sound/by-id/`)
 
 **Example Output:**
-```
+```text
 [PASS] Found 3 USB audio devices
 [PASS] ALSA cards: Card 0, Card 1, Card 2
 [PASS] udev rules: /etc/udev/rules.d/99-usb-soundcards.rules
@@ -256,7 +256,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 ---
 
-### MediaMTX Service
+## MediaMTX Service
 
 **What Gets Checked:**
 - MediaMTX binary installation (`/usr/local/bin/mediamtx`)
@@ -267,7 +267,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 **Note:** MediaMTX version is checked in the `check_project_info` section, not here. API port 9997 is NOT checked.
 
 **Example Output:**
-```
+```text
   [PASS] MediaMTX binary: /usr/local/bin/mediamtx
   [PASS] Config file: /etc/mediamtx/mediamtx.yml (valid)
   [PASS] Service: active (running)
@@ -284,7 +284,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 ---
 
-### Stream Status
+## Stream Status
 
 **What Gets Checked:**
 - Active stream count via MediaMTX API
@@ -295,7 +295,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 - Process accumulation detection
 
 **Example Output:**
-```
+```text
 [PASS] Active streams: 3
 [PASS] FFmpeg processes: 3 (healthy)
 [PASS] All streams publishing
@@ -312,7 +312,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 ---
 
-### RTSP Connectivity
+## RTSP Connectivity
 
 **What Gets Checked:**
 - RTSP port 8554 accessibility
@@ -321,7 +321,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 - Client connection simulation
 
 **Example Output:**
-```
+```text
 [PASS] Port 8554: LISTENING
 [PASS] RTSP protocol: responding
 [PASS] Stream test: rtsp://localhost:8554/Device_1 (OK)
@@ -335,7 +335,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 
 ---
 
-### Log Analysis
+## Log Analysis
 
 **What Gets Checked:**
 - Log file accessibility
@@ -353,7 +353,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 **Note:** Orchestrator log is NOT checked by diagnostics script.
 
 **Example Output:**
-```
+```text
 [PASS] All log files accessible
 [PASS] No critical errors in last 100 lines
 WARNING: 2 warnings detected (device temporarily unavailable)
@@ -368,7 +368,7 @@ WARNING: 2 warnings detected (device temporarily unavailable)
 
 ---
 
-### System Resources
+## System Resources
 
 **What Gets Checked:**
 - File descriptor usage (current vs. limit)
@@ -378,7 +378,7 @@ WARNING: 2 warnings detected (device temporarily unavailable)
 - Process counts
 
 **Example Output:**
-```
+```text
 [PASS] File descriptors: 347 / 4096 (8%)
 [PASS] CPU usage: ffmpeg processes < 50%
 [PASS] Memory available: 4.8G (60%)
@@ -395,7 +395,7 @@ WARNING: 2 warnings detected (device temporarily unavailable)
 
 ---
 
-### Time Synchronization
+## Time Synchronization
 
 **What Gets Checked:**
 - NTP service status
@@ -404,7 +404,7 @@ WARNING: 2 warnings detected (device temporarily unavailable)
 - Clock synchronization state
 
 **Example Output:**
-```
+```text
 [PASS] Chrony service: active (synchronized)
 [PASS] Time drift: < 50ms
 [PASS] System clock: synchronized
@@ -458,7 +458,7 @@ case $EXIT_CODE in
 esac
 ```
 
-### Cron Integration
+## Cron Integration
 
 ```bash
 # Add to crontab for daily monitoring
@@ -499,7 +499,7 @@ else
 fi
 ```
 
-### Automated Daily Health Check
+## Automated Daily Health Check
 
 ```bash
 #!/bin/bash
@@ -521,7 +521,7 @@ fi
 echo "Health check completed with exit code: $EXIT_CODE" >> "$LOG_FILE"
 ```
 
-### Troubleshooting Workflow
+## Troubleshooting Workflow
 
 ```bash
 # Step 1: Quick check to identify if issue exists
@@ -552,7 +552,7 @@ fi
 
 ## Monitoring Best Practices
 
-### Daily Monitoring
+## Daily Monitoring
 
 Run quick diagnostics daily to catch issues early:
 
@@ -569,7 +569,7 @@ Run quick diagnostics daily to catch issues early:
 
 ---
 
-### Weekly Comprehensive Checks
+## Weekly Comprehensive Checks
 
 Run full diagnostics weekly for comprehensive analysis:
 
@@ -586,7 +586,7 @@ Run full diagnostics weekly for comprehensive analysis:
 
 ---
 
-### Troubleshooting Protocol
+## Troubleshooting Protocol
 
 When issues occur, follow this diagnostic protocol:
 
@@ -617,7 +617,7 @@ When issues occur, follow this diagnostic protocol:
 
 The Diagnostics component integrates seamlessly with the Orchestrator:
 
-### Menu Access
+## Menu Access
 
 ```
 Orchestrator Main Menu
@@ -628,9 +628,9 @@ Orchestrator Main Menu
 │   ├── 4. Check Device Capabilities -> lyrebird-mic-check.sh
 │   ├── 5. View System Status -> status display
 │   └── 6. View Logs -> log viewer
-```
+```text
 
-### Orchestrator Integration Flow
+## Orchestrator Integration Flow
 
 **Diagnostics Integration Decision Tree:** Users access diagnostics through the Orchestrator Menu (option 5) to reach the Diagnostics Menu (purple). From there, they can choose Quick Health Check (option 1), Full Diagnostic (option 2), or Debug Diagnostic (option 3), all shown in cyan. Each diagnostic type displays results, which lead to one of three outcomes based on exit codes: All Checks Passed (green, exit code 0), Warnings Detected (orange, exit code 1), or Failures Detected (red, exit code 2). Warnings lead to Review Warnings, while Failures lead to the Troubleshooting Guide. All paths eventually return to the menu, creating a complete diagnostic and remediation workflow.
 
@@ -669,9 +669,9 @@ graph TD
 
 ## Troubleshooting
 
-### Common Issues
+## Common Issues
 
-#### Diagnostics Script Not Found
+### Diagnostics Script Not Found
 
 **Symptom:** `./lyrebird-diagnostics.sh: No such file or directory`
 
@@ -689,7 +689,7 @@ sudo ./lyrebird-diagnostics.sh quick
 
 ---
 
-#### Prerequisites Missing (Exit Code 127)
+## Prerequisites Missing (Exit Code 127)
 
 **Symptom:** `Prerequisites missing: ffmpeg`
 
@@ -708,7 +708,7 @@ brew install ffmpeg jq
 
 ---
 
-#### Permission Denied
+## Permission Denied
 
 **Symptom:** `Permission denied` when accessing log files
 
@@ -724,7 +724,7 @@ sudo chmod 755 /var/log/lyrebird
 
 ---
 
-#### False Positives (Warnings for Normal Conditions)
+## False Positives (Warnings for Normal Conditions)
 
 **Symptom:** Warnings reported during expected operations
 
@@ -739,7 +739,7 @@ sudo chmod 755 /var/log/lyrebird
 
 ---
 
-#### High Resource Usage Detected
+### High Resource Usage Detected
 
 **Symptom:** Diagnostics report high CPU or memory usage
 
@@ -761,7 +761,7 @@ sudo ./lyrebird-mic-check.sh -V
 
 When filing a GitHub issue, include diagnostic output:
 
-### Collect Diagnostic Information
+## Collect Diagnostic Information
 
 ```bash
 # 1. Run full diagnostics
@@ -786,7 +786,7 @@ uname -a >> system-info.txt
 lsusb >> system-info.txt
 ```
 
-### GitHub Issue Template
+## GitHub Issue Template
 
 ```markdown
 **Description:**

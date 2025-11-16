@@ -43,7 +43,7 @@ git remote -v
 ```
 
 Expected output:
-```
+```text
 origin    https://github.com/YOUR-USERNAME/LyreBirdAudio.git (fetch)
 origin    https://github.com/YOUR-USERNAME/LyreBirdAudio.git (push)
 upstream  https://github.com/tomtom215/LyreBirdAudio.git (fetch)
@@ -70,7 +70,7 @@ git checkout -b fix/your-bug-fix
 
 ## Development Environment Setup
 
-### Install System Dependencies
+## Install System Dependencies
 
 === "Ubuntu/Debian"
 
@@ -139,7 +139,7 @@ git checkout -b fix/your-bug-fix
         tree
     ```
 
-### Verify Installation
+## Verify Installation
 
 ```bash
 # Check Bash version (must be 4.0+)
@@ -161,7 +161,7 @@ arecord -l
 
 Understanding the codebase organization:
 
-```
+```text
 LyreBirdAudio/
 ├── lyrebird-orchestrator.sh          # Main TUI management interface
 ├── mediamtx-stream-manager.sh        # Stream lifecycle manager
@@ -191,7 +191,7 @@ LyreBirdAudio/
 
 ## Local Development Workflow
 
-### Setting Up Test Environment
+## Setting Up Test Environment
 
 **1. Create Development Installation**
 
@@ -224,7 +224,7 @@ sudo ./lyrebird-usb-mapper.sh
 ls -l /dev/lyrebird-*
 ```
 
-### Making Changes
+## Making Changes
 
 **1. Edit Scripts**
 
@@ -279,7 +279,7 @@ git diff lyrebird-orchestrator.sh
 
 ## Testing Your Changes
 
-### Unit Testing Individual Scripts
+## Unit Testing Individual Scripts
 
 **Test USB Mapper:**
 
@@ -317,7 +317,7 @@ sudo ./mediamtx-stream-manager.sh status
 sudo ./mediamtx-stream-manager.sh stop
 ```
 
-### Integration Testing
+## Integration Testing
 
 **Full System Test:**
 
@@ -345,7 +345,7 @@ sudo ./lyrebird-diagnostics.sh full
 sudo ./mediamtx-stream-manager.sh stop
 ```
 
-### Hardware Testing
+## Hardware Testing
 
 **Multiple USB Devices:**
 
@@ -401,7 +401,7 @@ git rebase main
 git push origin feature/your-feature-name --force-with-lease
 ```
 
-### Resolve Conflicts
+## Resolve Conflicts
 
 ```bash
 # If conflicts occur during rebase
@@ -421,7 +421,7 @@ git rebase --continue
 
 ## Code Validation
 
-### Shellcheck Validation
+## Shellcheck Validation
 
 **Check All Scripts:**
 
@@ -450,7 +450,7 @@ GOOD: local var
       var=$(command)
 ```
 
-### Bash Compatibility Testing
+## Bash Compatibility Testing
 
 ```bash
 # Ensure Bash 4.0+ compatibility
@@ -466,7 +466,7 @@ echo "${test_array["key"]}"
 
 ## Committing Changes
 
-### Commit Guidelines
+## Commit Guidelines
 
 **1. Stage Your Changes**
 
@@ -493,7 +493,7 @@ Fixes #42"
 
 **Commit Message Format:**
 
-```
+```text
 Type: Brief summary (50 chars or less)
 
 Detailed explanation of what changed and why.
@@ -521,7 +521,7 @@ git push origin feature/your-feature-name
 
 ## Creating Pull Requests
 
-### Before Submitting
+## Before Submitting
 
 **Pre-PR Checklist:**
 
@@ -533,7 +533,7 @@ git push origin feature/your-feature-name
 - [ ] Branch is up-to-date with main
 - [ ] No merge conflicts
 
-### Submit Pull Request
+## Submit Pull Request
 
 **1. Go to GitHub**
 
@@ -582,7 +582,7 @@ Tag maintainers or wait for automated review assignment.
 
 ## Development Best Practices
 
-### Code Organization
+## Code Organization
 
 **Modular Design:**
 
@@ -621,7 +621,7 @@ critical_command_2
 set +e
 ```
 
-### Documentation
+## Documentation
 
 **Inline Comments:**
 
@@ -657,7 +657,7 @@ function validate_device() {
 }
 ```
 
-### Security Considerations
+## Security Considerations
 
 **Input Validation:**
 
@@ -697,7 +697,7 @@ install -m 644 config.yml "$CONFIG_FILE"
 
 ## Debugging
 
-### Enable Debug Output
+## Enable Debug Output
 
 **Bash Debug Mode:**
 
@@ -727,7 +727,7 @@ function log_debug() {
 VERBOSE=1 sudo ./script.sh
 ```
 
-### Common Debugging Techniques
+## Common Debugging Techniques
 
 **Print Variables:**
 
@@ -760,7 +760,7 @@ echo "Exit code: $EXIT_CODE" >&2
 
 ## Performance Testing
 
-### Monitor Resource Usage
+## Monitor Resource Usage
 
 ```bash
 # Monitor script execution
@@ -773,7 +773,7 @@ top -p $(pgrep -d',' ffmpeg)
 ps aux | grep ffmpeg | awk '{print $6}'
 ```
 
-### Profiling Scripts
+## Profiling Scripts
 
 ```bash
 # Time specific operations
@@ -788,7 +788,7 @@ time {
 
 ## Getting Help
 
-### Development Support
+## Development Support
 
 **Documentation:**
 - [Code Standards](code-standards.md) - Coding conventions
@@ -821,14 +821,14 @@ time {
 <div class="grid" markdown>
 
 <div markdown>
-### Code Standards
+## Code Standards
 Coding conventions and best practices
 
 [Code Standards →](code-standards.md)
 </div>
 
 <div markdown>
-### Contributing Overview
+## Contributing Overview
 Contributing guidelines and workflows
 
 [Contributing Overview →](index.md)

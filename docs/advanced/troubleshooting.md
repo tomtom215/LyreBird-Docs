@@ -48,7 +48,7 @@ The diagnostics tool performs 24+ automated checks and reports:
 
 ## Device Detection Issues
 
-### USB Device Not Detected
+## USB Device Not Detected
 
 **Symptoms:**
 
@@ -143,7 +143,7 @@ arecord -l
    echo -n "0000:00:14.0" | sudo tee /sys/bus/pci/drivers/xhci_hcd/bind
    ```
 
-### Device Detected But Not Persistent
+## Device Detected But Not Persistent
 
 **Symptoms:**
 
@@ -211,7 +211,7 @@ sudo udevadm test /sys/class/sound/card0
    sudo udevadm trigger
    ```
 
-### Device Access Permission Issues
+## Device Access Permission Issues
 
 **Symptoms:**
 
@@ -354,7 +354,7 @@ ffmpeg -f alsa -i hw:CARD=Blue_Yeti -f null -
    DEVICE_NAME_CODEC=mp3  # Instead of opus
    ```
 
-### Streams Start Then Immediately Fail
+## Streams Start Then Immediately Fail
 
 **Symptoms:**
 
@@ -455,7 +455,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 
 ## Stream Stability Issues
 
-### Intermittent Stream Dropouts
+## Intermittent Stream Dropouts
 
 **Symptoms:**
 
@@ -525,7 +525,7 @@ sudo udevadm monitor --environment --udev
    # Use QoS on router to prioritize RTSP traffic
    ```
 
-### Streams Fail to Auto-Recover
+## Streams Fail to Auto-Recover
 
 **Symptoms:**
 
@@ -537,10 +537,10 @@ sudo udevadm monitor --environment --udev
 
 ```bash
 # Check if monitoring is active
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 
 # Check auto-recovery logs
-sudo journalctl -u mediamtx-stream-manager | grep -i recover
+sudo journalctl -u mediamtx-audio | grep -i recover
 ```
 
 **Solutions:**
@@ -553,11 +553,11 @@ sudo journalctl -u mediamtx-stream-manager | grep -i recover
    sudo ./mediamtx-stream-manager.sh install-service
 
    # Enable and start
-   sudo systemctl enable mediamtx-stream-manager
-   sudo systemctl start mediamtx-stream-manager
+   sudo systemctl enable mediamtx-audio
+   sudo systemctl start mediamtx-audio
 
    # Verify monitoring active
-   sudo systemctl status mediamtx-stream-manager
+   sudo systemctl status mediamtx-audio
    ```
 
 2. **Maximum Retry Attempts Reached**
@@ -565,7 +565,7 @@ sudo journalctl -u mediamtx-stream-manager | grep -i recover
    **Solution:**
    ```bash
    # Check retry count in logs
-   sudo journalctl -u mediamtx-stream-manager | grep "attempt"
+   sudo journalctl -u mediamtx-audio | grep "attempt"
 
    # If max retries reached, fix underlying issue then restart
    sudo ./mediamtx-stream-manager.sh restart
@@ -588,7 +588,7 @@ sudo journalctl -u mediamtx-stream-manager | grep -i recover
 
 ## USB Persistence Problems
 
-### Device Names Change After Reboot
+## Device Names Change After Reboot
 
 **Symptoms:**
 
@@ -625,7 +625,7 @@ sudo journalctl -u mediamtx-stream-manager | grep -i recover
    # All references should use CARD=<name> format
    ```
 
-### Multiple Boot Ordering Issues
+## Multiple Boot Ordering Issues
 
 **Symptoms:**
 
@@ -740,7 +740,7 @@ sudo /usr/local/bin/mediamtx /etc/mediamtx/mediamtx.yml
    sudo chmod 644 /etc/mediamtx/mediamtx.yml
    ```
 
-### MediaMTX API Not Responding
+## MediaMTX API Not Responding
 
 **Symptoms:**
 
@@ -781,7 +781,7 @@ sudo /usr/local/bin/mediamtx /etc/mediamtx/mediamtx.yml
 
 ## Resource Exhaustion
 
-### CPU Overload
+## CPU Overload
 
 **Symptoms:**
 
@@ -804,7 +804,7 @@ See [Performance Tuning](performance.md) for detailed optimization strategies:
 top -p $(pgrep ffmpeg | tr '\n' ',')
 ```
 
-### Memory Exhaustion
+## Memory Exhaustion
 
 **Symptoms:**
 
@@ -827,7 +827,7 @@ sudo swapon /swapfile
 # Reduce stream count or upgrade RAM
 ```
 
-### File Descriptor Exhaustion
+## File Descriptor Exhaustion
 
 **Symptoms:**
 
@@ -854,7 +854,7 @@ sudo reboot
 
 ## Audio Quality Problems
 
-### Poor Audio Quality
+## Poor Audio Quality
 
 **Symptoms:**
 
@@ -962,7 +962,7 @@ sudo reboot
 
 ## Best Practices
 
-### Systematic Troubleshooting
+## Systematic Troubleshooting
 
 1. **Start with Diagnostics**
    ```bash
@@ -972,7 +972,7 @@ sudo reboot
 2. **Check Logs**
    ```bash
    sudo journalctl -u mediamtx -n 50
-   sudo journalctl -u mediamtx-stream-manager -n 50
+   sudo journalctl -u mediamtx-audio -n 50
    tail -f /var/log/lyrebird/*.log
    ```
 
@@ -986,7 +986,7 @@ sudo reboot
    - Note what changed before failure
    - Keep diagnostic reports
 
-### Prevention
+## Prevention
 
 1. **Regular Health Checks**
    ```bash
@@ -1049,7 +1049,7 @@ When seeking help, collect:
 4. **Service Logs**
    ```bash
    sudo journalctl -u mediamtx -n 100 > /tmp/mediamtx.log
-   sudo journalctl -u mediamtx-stream-manager -n 100 > /tmp/stream-manager.log
+   sudo journalctl -u mediamtx-audio -n 100 > /tmp/stream-manager.log
    ```
 
 5. **Configuration Files**
@@ -1082,7 +1082,7 @@ Health check tools and monitoring
 </div>
 
 <div markdown>
-### Performance Tuning
+## Performance Tuning
 Resource optimization strategies
 
 [Performance Tuning →](performance.md)

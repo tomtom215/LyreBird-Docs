@@ -183,7 +183,7 @@ sudo ./usb-audio-mapper.sh --test
 
 **Example Output:**
 
-```
+```text
 Detected USB Audio Devices:
 ===========================
 Card 0: Blue_Yeti
@@ -243,7 +243,7 @@ Force overwrite existing configuration.
 sudo ./lyrebird-mic-check.sh -g -f
 ```
 
-### -V
+## -V
 
 Validate existing configuration.
 
@@ -340,7 +340,7 @@ sudo ./lyrebird-updater.sh --status
 
 **Output:**
 
-```
+```text
 Current Version: 1.2.0
 Latest Version: 1.3.0
 Update Available: Yes
@@ -409,7 +409,7 @@ sudo systemctl status mediamtx
 
 ## Common Usage Patterns
 
-### Initial Setup
+## Initial Setup
 
 ```bash
 # 1. Install MediaMTX
@@ -428,7 +428,7 @@ sudo ./mediamtx-stream-manager.sh start
 sudo ./lyrebird-diagnostics.sh
 ```
 
-### Daily Operations
+## Daily Operations
 
 ```bash
 # Check stream status
@@ -441,7 +441,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 sudo ./lyrebird-diagnostics.sh
 ```
 
-### Troubleshooting
+## Troubleshooting
 
 ```bash
 # Detailed diagnostics
@@ -457,20 +457,20 @@ sudo ./usb-audio-mapper.sh
 sudo ./lyrebird-mic-check.sh -V
 ```
 
-### Production Deployment
+## Production Deployment
 
 ```bash
 # Enable automatic startup
 sudo systemctl enable mediamtx
-sudo systemctl enable mediamtx-stream-manager
+sudo systemctl enable mediamtx-audio
 
 # Start services
 sudo systemctl start mediamtx
-sudo systemctl start mediamtx-stream-manager
+sudo systemctl start mediamtx-audio
 
 # Verify status
 sudo systemctl status mediamtx
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 ```
 
 ---
@@ -489,14 +489,14 @@ sudo systemctl status mediamtx-stream-manager
 <div class="grid" markdown>
 
 <div markdown>
-### Exit Codes
+## Exit Codes
 Command return values and status codes
 
 [Exit Codes →](exit-codes.md)
 </div>
 
 <div markdown>
-### Log Files
+## Log Files
 Log locations, formats, and analysis
 
 [Log Files →](log-files.md)

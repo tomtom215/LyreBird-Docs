@@ -20,12 +20,12 @@ The Orchestrator is the central command interface for LyreBirdAudio, providing a
 <div class="grid" markdown>
 
 <div markdown>
-### Quick Setup Wizard
+## Quick Setup Wizard
 Complete installation from zero to streaming in minutes with automated guidance through all steps.
 </div>
 
 <div markdown>
-### Device Capability Inspection
+## Device Capability Inspection
 Automatically detect and validate hardware capabilities without manual configuration.
 </div>
 
@@ -40,7 +40,7 @@ Verify script integrity during updates to ensure secure operation.
 </div>
 
 <div markdown>
-### Auto Log Rotation
+## Auto Log Rotation
 Automatic management of log files to prevent disk space issues.
 </div>
 
@@ -55,7 +55,7 @@ Robust handling of user input with graceful error recovery.
 
 ## Usage
 
-### Basic Invocation
+## Basic Invocation
 
 ```bash
 sudo ./lyrebird-orchestrator.sh
@@ -70,7 +70,7 @@ sudo ./lyrebird-orchestrator.sh
 
 When you launch the Orchestrator, you'll see an interactive menu:
 
-```
+```text
 ========================================
 LyreBirdAudio Orchestrator v2.1.0
 ========================================
@@ -92,7 +92,7 @@ Select an option:
 
 ## Menu Options Explained
 
-### 1. Quick Setup Wizard
+## 1. Quick Setup Wizard
 
 The Quick Setup Wizard guides you through a complete installation:
 
@@ -131,7 +131,7 @@ sudo ./lyrebird-orchestrator.sh
 
 ---
 
-### 2. MediaMTX Installation & Updates
+## 2. MediaMTX Installation & Updates
 
 Manage MediaMTX server installation and updates:
 
@@ -155,7 +155,7 @@ Manage MediaMTX server installation and updates:
 
 ---
 
-### 3. USB Device Management
+## 3. USB Device Management
 
 Manage USB audio device persistence and mapping:
 
@@ -189,7 +189,7 @@ Manage USB audio device persistence and mapping:
 
 ---
 
-### 4. Audio Streaming Control
+## 4. Audio Streaming Control
 
 Control stream lifecycle and configuration:
 
@@ -214,7 +214,7 @@ Control stream lifecycle and configuration:
 
 ---
 
-### 5. System Diagnostics
+## 5. System Diagnostics
 
 Run comprehensive system health checks:
 
@@ -240,7 +240,7 @@ Run comprehensive system health checks:
 
 ---
 
-### 6. Version Management
+## 6. Version Management
 
 Manage script updates and rollbacks:
 
@@ -264,7 +264,7 @@ Manage script updates and rollbacks:
 
 ---
 
-### 7. Logs & Status
+## 7. Logs & Status
 
 View logs and system status:
 
@@ -287,7 +287,7 @@ View logs and system status:
 
 ## Architecture
 
-### Design Philosophy
+## Design Philosophy
 
 The Orchestrator follows the **Single-Responsibility Principle**:
 
@@ -322,7 +322,7 @@ graph TD
     style H fill:#7c4dff,color:#fff
 ```
 
-### Component Integration
+## Component Integration
 
 The Orchestrator integrates all LyreBirdAudio components:
 
@@ -363,7 +363,7 @@ fi
 
 ## Advanced Features
 
-### Hardware Capability Integration
+## Hardware Capability Integration
 
 The Orchestrator integrates real-time hardware capability detection:
 
@@ -381,7 +381,7 @@ The Orchestrator automatically verifies script integrity:
 - Scripts are validated before execution
 - Warnings displayed if checksums don't match
 
-### Auto Log Rotation
+## Auto Log Rotation
 
 The Orchestrator automatically manages its own logs:
 
@@ -411,7 +411,7 @@ sudo ./lyrebird-orchestrator.sh
 # Follow prompts for complete installation
 ```
 
-### Adding a New USB Microphone
+## Adding a New USB Microphone
 
 ```bash
 sudo ./lyrebird-orchestrator.sh
@@ -424,7 +424,7 @@ sudo ./lyrebird-orchestrator.sh
 # 7. Choose newly mapped device
 ```
 
-### Updating to Latest Version
+## Updating to Latest Version
 
 ```bash
 sudo ./lyrebird-orchestrator.sh
@@ -436,7 +436,7 @@ sudo ./lyrebird-orchestrator.sh
 # System will update and reload Orchestrator
 ```
 
-### Troubleshooting a Stream Issue
+## Troubleshooting a Stream Issue
 
 ```bash
 sudo ./lyrebird-orchestrator.sh
@@ -486,7 +486,7 @@ bash --version  # Must be 4.0+
 command -v git ffmpeg curl
 ```
 
-### Menu Options Don't Work
+## Menu Options Don't Work
 
 **Symptoms:** Selecting menu options results in "script not found" errors
 
@@ -502,7 +502,7 @@ chmod +x *.sh
 ls -l lyrebird-orchestrator.sh
 ```
 
-### Log File Errors
+## Log File Errors
 
 **Symptoms:** "Cannot write to log file" errors
 

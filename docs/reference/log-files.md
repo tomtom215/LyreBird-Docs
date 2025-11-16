@@ -22,13 +22,13 @@ LyreBirdAudio generates logs across multiple components for debugging, monitorin
 
 ## MediaMTX Logs
 
-### Location
+## Location
 
 **File:** `/var/log/mediamtx.out` (if using file logging)
 
 **Journalctl:** `journalctl -u mediamtx`
 
-### Access
+## Access
 
 ```bash
 # View recent logs
@@ -47,15 +47,15 @@ sudo journalctl -u mediamtx -b
 sudo journalctl -u mediamtx --since today > /tmp/mediamtx-today.log
 ```
 
-### Log Format
+## Log Format
 
-```
+```text
 YYYY-MM-DD HH:MM:SS [LEVEL] [component] message
 ```
 
 **Example Entries:**
 
-```
+```log
 2025-11-15 10:00:00 INF [RTSP] [listener] opened
 2025-11-15 10:00:01 INF [path Blue_Yeti] opened
 2025-11-15 10:00:02 INF [conn] [c->s] 192.168.1.100:54321 reader opened
@@ -63,7 +63,7 @@ YYYY-MM-DD HH:MM:SS [LEVEL] [component] message
 2025-11-15 10:05:00 WRN [path Blue_Yeti] [c->s] no packets received, disconnecting reader
 ```
 
-### Log Levels
+## Log Levels
 
 | Level | Description | Example |
 |-------|-------------|---------|
@@ -72,32 +72,32 @@ YYYY-MM-DD HH:MM:SS [LEVEL] [component] message
 | **WRN** | Warning messages | Connection timeouts, packet loss |
 | **ERR** | Error messages | Stream failures, configuration errors |
 
-### Common Log Patterns
+## Common Log Patterns
 
 **Stream Connection:**
 
-```
+```log
 INF [path Blue_Yeti] opened
 INF [path Blue_Yeti] [s->c] runOnReady command started
 ```
 
 **Client Connection:**
 
-```
+```log
 INF [conn] [c->s] 192.168.1.100:54321 reader opened
 INF [path Blue_Yeti] [c->s] reader 192.168.1.100:54321 opened
 ```
 
 **Stream Disconnection:**
 
-```
+```log
 INF [path Blue_Yeti] [s->c] runOnDisconnect command started
 INF [path Blue_Yeti] closed
 ```
 
 **Errors:**
 
-```
+```log
 ERR [path Blue_Yeti] [s->c] publisher error: EOF
 ERR [RTSP] [conn] unable to bind to port 8554: address already in use
 ```
@@ -106,13 +106,13 @@ ERR [RTSP] [conn] unable to bind to port 8554: address already in use
 
 ## Stream Manager Logs
 
-### Location
+## Location
 
 **File:** `/var/log/mediamtx-stream-manager.log`
 
-**Journalctl:** `journalctl -u mediamtx-stream-manager`
+**Journalctl:** `journalctl -u mediamtx-audio`
 
-### Access
+## Access
 
 ```bash
 # View recent logs
@@ -128,15 +128,15 @@ sudo grep -i "restart" /var/log/mediamtx-stream-manager.log
 sudo grep "$(date '+%Y-%m-%d')" /var/log/mediamtx-stream-manager.log
 ```
 
-### Log Format
+## Log Format
 
-```
+```text
 [YYYY-MM-DD HH:MM:SS] [LEVEL] message
 ```
 
 **Example Entries:**
 
-```
+```log
 [2025-11-15 10:00:00] [INFO] Starting stream: Blue_Yeti
 [2025-11-15 10:00:01] [INFO] Started stream: Blue_Yeti (PID: 12345)
 [2025-11-15 10:00:15] [INFO] Stream Blue_Yeti validated: HEALTHY
@@ -145,11 +145,11 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/mediamtx-stream-manager.log
 [2025-11-15 10:30:11] [INFO] Restarted Blue_Yeti successfully (PID: 12567)
 ```
 
-### Common Log Patterns
+## Common Log Patterns
 
 **Stream Startup:**
 
-```
+```log
 [INFO] Starting stream manager
 [INFO] Found 2 devices in configuration
 [INFO] Starting stream: Blue_Yeti
@@ -159,7 +159,7 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/mediamtx-stream-manager.log
 
 **Stream Failure and Recovery:**
 
-```
+```log
 [ERROR] Stream Blue_Yeti failed health check
 [INFO] Attempting restart (1/5) in 10 seconds
 [INFO] Restarting stream: Blue_Yeti
@@ -169,7 +169,7 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/mediamtx-stream-manager.log
 
 **Maximum Retries Reached:**
 
-```
+```log
 [ERROR] Stream Blue_Yeti failed health check
 [INFO] Attempting restart (5/5) in 300 seconds
 [ERROR] Maximum restart attempts reached for Blue_Yeti
@@ -178,7 +178,7 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/mediamtx-stream-manager.log
 
 **Resource Warnings:**
 
-```
+```log
 [WARN] CPU usage high: 85%
 [WARN] Memory available low: 150 MB
 [WARN] File descriptors: 850 / 1024 (83%)
@@ -188,13 +188,13 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/mediamtx-stream-manager.log
 
 ## FFmpeg Device Logs
 
-### Location
+## Location
 
 **Directory:** `/var/log/lyrebird/`
 
 **Files:** `<device-name>.log` (one per device)
 
-### Access
+## Access
 
 ```bash
 # View specific device log
@@ -210,17 +210,17 @@ sudo grep -i error /var/log/lyrebird/*.log
 sudo ls /var/log/lyrebird/*.log | xargs -I {} sh -c 'echo "=== {} ==="; tail -100 {}'
 ```
 
-### Log Format
+## Log Format
 
 FFmpeg native format with timestamps:
 
-```
+```text
 [YYYY-MM-DD HH:MM:SS] ffmpeg message
 ```
 
 **Example Entries:**
 
-```
+```log
 ffmpeg version 4.4.2 Copyright (c) 2000-2021 the FFmpeg developers
 Input #0, alsa, from 'hw:CARD=Blue_Yeti':
   Duration: N/A, start: 1699876800.000000, bitrate: N/A
@@ -234,11 +234,11 @@ Stream mapping:
 frame= 1000 fps= 24 size= 512kB time=00:00:41.66 bitrate= 100.6kbits/s
 ```
 
-### Common Log Patterns
+## Common Log Patterns
 
 **Successful Stream Start:**
 
-```
+```log
 Input #0, alsa, from 'hw:CARD=Blue_Yeti':
   Duration: N/A, start: 1699876800.000000, bitrate: 768 kb/s
   Stream #0:0: Audio: pcm_s16le, 48000 Hz, 1 channels
@@ -248,19 +248,19 @@ Output #0, rtsp, to 'rtsp://localhost:8554/Blue_Yeti':
 
 **Buffer Issues (ALSA overrun):**
 
-```
+```log
 ALSA buffer xrun
 ```
 
 **Device Busy:**
 
-```
+```log
 hw:CARD=Blue_Yeti: Device or resource busy
 ```
 
 **Encoding Statistics:**
 
-```
+```log
 frame= 5000 fps= 24 size= 2560kB time=00:03:28.33 bitrate= 100.8kbits/s speed=1x
 ```
 
@@ -268,11 +268,11 @@ frame= 5000 fps= 24 size= 2560kB time=00:03:28.33 bitrate= 100.8kbits/s speed=1x
 
 ## Diagnostic Logs
 
-### Location
+## Location
 
 **File:** `/var/log/lyrebird-diagnostics.log`
 
-### Access
+## Access
 
 ```bash
 # View diagnostic history
@@ -285,15 +285,15 @@ sudo grep FAIL /var/log/lyrebird-diagnostics.log | tail -20
 sudo grep "$(date '+%Y-%m-%d')" /var/log/lyrebird-diagnostics.log
 ```
 
-### Log Format
+## Log Format
 
-```
+```text
 [YYYY-MM-DD HH:MM:SS] [STATUS] Check: message
 ```
 
 **Example Entries:**
 
-```
+```log
 [2025-11-15 02:00:00] [PASS] Operating System: Ubuntu 22.04.3 LTS
 [2025-11-15 02:00:00] [PASS] FFmpeg: version 4.4.2
 [2025-11-15 02:00:00] [PASS] USB Audio Devices: 2 found
@@ -308,7 +308,7 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/lyrebird-diagnostics.log
 
 ## Log Rotation
 
-### Configuration
+## Configuration
 
 LyreBird logs should be rotated to prevent disk space exhaustion:
 
@@ -345,7 +345,7 @@ LyreBird logs should be rotated to prevent disk space exhaustion:
     notifempty
     create 0640 root root
     postrotate
-        systemctl reload mediamtx-stream-manager 2>/dev/null || true
+        systemctl reload mediamtx-audio 2>/dev/null || true
     endscript
 }
 ```
@@ -364,7 +364,7 @@ sudo logrotate -f /etc/logrotate.d/lyrebird
 
 ## Log Analysis
 
-### Common Error Patterns
+## Common Error Patterns
 
 **USB Device Issues:**
 
@@ -401,7 +401,7 @@ sudo journalctl -k | grep -i "out of memory"
 
 ## Best Practices
 
-### 1. Regular Log Review
+## 1. Regular Log Review
 
 ```bash
 # Daily log check script
@@ -417,14 +417,14 @@ echo "Stream restarts:"
 sudo grep -c "Restarted" /var/log/mediamtx-stream-manager.log
 ```
 
-### 2. Log Retention Policy
+## 2. Log Retention Policy
 
 - Keep 7 days of detailed logs
 - Archive weekly summaries for 4 weeks
 - Maintain monthly summaries for 1 year
 - Delete logs older than 1 year
 
-### 3. Storage Management
+## 3. Storage Management
 
 ```bash
 # Check log directory size
@@ -461,7 +461,7 @@ System health checks and monitoring
 </div>
 
 <div markdown>
-### Troubleshooting
+## Troubleshooting
 Resolve common issues and problems
 
 [Troubleshooting →](../advanced/troubleshooting.md)

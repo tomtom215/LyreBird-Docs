@@ -21,7 +21,7 @@ This guide covers:
 
 ## Diagnostic Tool
 
-### Overview
+## Overview
 
 The `lyrebird-diagnostics.sh` script performs comprehensive system health checks:
 
@@ -44,7 +44,7 @@ sudo ./lyrebird-diagnostics.sh --export=/tmp/diagnostic-report.txt
 - Machine-readable exit codes
 - Export capability for support tickets
 
-### Diagnostic Modes
+## Diagnostic Modes
 
 **Quick Mode (Default):**
 
@@ -98,7 +98,7 @@ sudo DIAGNOSTIC_DEBUG=1 ./lyrebird-diagnostics.sh --verbose
 
 ## Diagnostic Checks
 
-### System Checks
+## System Checks
 
 **1. Operating System Compatibility**
 
@@ -110,7 +110,7 @@ Validates OS is supported:
 
 **Example Output:**
 
-```
+```text
 [PASS] Operating System: Ubuntu 22.04.3 LTS
 [PASS] Kernel Version: 5.15.0-89-generic
 [PASS] Architecture: x86_64
@@ -127,7 +127,7 @@ Verifies all dependencies present:
 
 **Example Output:**
 
-```
+```text
 [PASS] FFmpeg: version 4.4.2 (required: 4.4+)
 [PASS] alsa-utils: installed
 [PASS] curl: installed
@@ -144,13 +144,13 @@ Checks access to required directories and files:
 
 **Example Output:**
 
-```
+```text
 [PASS] Configuration directory accessible: /etc/mediamtx/
 [PASS] Log directory writable: /var/log/lyrebird/
 [PASS] Script permissions correct
 ```
 
-### Device Checks
+## Device Checks
 
 **4. USB Audio Devices Detected**
 
@@ -162,7 +162,7 @@ Scans for connected USB audio devices:
 
 **Example Output:**
 
-```
+```text
 [PASS] Found 2 USB audio devices:
   - Card 0: Blue_Yeti
   - Card 1: USB_Microphone
@@ -178,7 +178,7 @@ Validates USB persistence configuration:
 
 **Example Output:**
 
-```
+```text
 [PASS] udev rules file exists: /etc/udev/rules.d/99-usb-soundcards.rules
 [PASS] Rules syntax valid
 [PASS] Symlinks created: 2 devices
@@ -194,7 +194,7 @@ Tests that device names remain consistent:
 
 **Example Output:**
 
-```
+```text
 [PASS] Device persistence verified:
   - Blue_Yeti: hw:0 (persistent)
   - USB_Microphone: hw:1 (persistent)
@@ -210,13 +210,13 @@ Validates user can access audio devices:
 
 **Example Output:**
 
-```
+```text
 [PASS] Current user in audio group
 [PASS] Device permissions correct (660, group: audio)
 [PASS] Can access all audio devices
 ```
 
-### Service Checks
+## Service Checks
 
 **8. MediaMTX Service Running**
 
@@ -228,7 +228,7 @@ Checks MediaMTX service status:
 
 **Example Output:**
 
-```
+```text
 [PASS] MediaMTX service: active (running)
 [PASS] Process ID: 12340
 [PASS] Uptime: 2 days, 5 hours
@@ -244,7 +244,7 @@ Tests HTTP API connectivity:
 
 **Example Output:**
 
-```
+```text
 [PASS] MediaMTX API responding on port 9997
 [PASS] API version: v3
 [PASS] Endpoint accessible: /v3/paths/list
@@ -260,13 +260,13 @@ Checks stream manager service (if installed):
 
 **Example Output:**
 
-```
+```text
 [PASS] Stream Manager service: active (running)
 [PASS] Monitoring mode: enabled
 [PASS] No recent errors
 ```
 
-### Stream Checks
+## Stream Checks
 
 **11. RTSP Port Listening**
 
@@ -278,7 +278,7 @@ Validates MediaMTX RTSP server:
 
 **Example Output:**
 
-```
+```text
 [PASS] RTSP port 8554: listening
 [PASS] Process: mediamtx (PID: 12340)
 ```
@@ -293,7 +293,7 @@ Enumerates currently active streams:
 
 **Example Output:**
 
-```
+```text
 [PASS] Found 2 active streams:
   - Blue_Yeti
   - USB_Microphone
@@ -309,7 +309,7 @@ Tests stream connectivity and data flow:
 
 **Example Output:**
 
-```
+```text
 [PASS] Blue_Yeti: healthy (codec: opus, rate: 48000)
 [PASS] USB_Microphone: healthy (codec: opus, rate: 48000)
 ```
@@ -324,13 +324,13 @@ Validates device configuration file:
 
 **Example Output:**
 
-```
+```text
 [PASS] Configuration file exists
 [PASS] Configuration syntax valid
 [PASS] 2 devices configured
 ```
 
-### Resource Checks
+## Resource Checks
 
 **15. CPU Usage**
 
@@ -342,7 +342,7 @@ Monitors system CPU utilization:
 
 **Example Output:**
 
-```
+```text
 [PASS] System CPU usage: 25.3% (threshold: 80%)
 [PASS] FFmpeg processes: 6.5% total
   - Blue_Yeti: 3.2%
@@ -359,7 +359,7 @@ Checks memory availability:
 
 **Example Output:**
 
-```
+```text
 [PASS] Memory available: 2.4 GB (threshold: 200 MB)
 [PASS] Swap usage: 0 MB
 [PASS] Memory per stream average: 48 MB
@@ -375,7 +375,7 @@ Monitors file descriptor usage:
 
 **Example Output:**
 
-```
+```text
 [PASS] File descriptors: 245 / 1024 (24%)
 [PASS] Within safe limits
 ```
@@ -390,12 +390,12 @@ Checks disk space for logs:
 
 **Example Output:**
 
-```
+```text
 [PASS] Log directory space: 15.2 GB available
 [PASS] Root filesystem: 42.8 GB available
 ```
 
-### Network Checks
+## Network Checks
 
 **19. Network Connectivity**
 
@@ -407,7 +407,7 @@ Tests local network connectivity:
 
 **Example Output:**
 
-```
+```text
 [PASS] Localhost connectivity: OK
 [PASS] Network interfaces: 2 active
 [PASS] Primary IP: 192.168.1.100
@@ -423,7 +423,7 @@ Tests RTSP stream access:
 
 **Example Output:**
 
-```
+```text
 [PASS] Local RTSP connectivity: OK
 [PASS] Stream connection latency: 15ms
 ```
@@ -438,13 +438,13 @@ Checks firewall configuration:
 
 **Example Output:**
 
-```
+```text
 [PASS] Firewall: active
 [PASS] RTSP port 8554: allowed
 [PASS] API port 9997: allowed
 ```
 
-### Log Checks
+## Log Checks
 
 **22. Log Files Accessible**
 
@@ -456,7 +456,7 @@ Validates log file access:
 
 **Example Output:**
 
-```
+```text
 [PASS] MediaMTX logs: accessible
 [PASS] Stream manager logs: accessible
 [PASS] Device logs: 2 files accessible
@@ -472,7 +472,7 @@ Scans logs for recent errors:
 
 **Example Output:**
 
-```
+```text
 [PASS] No critical errors in last 24 hours
 [WARN] 3 warnings found (USB resets)
 ```
@@ -487,7 +487,7 @@ Checks log rotation configuration:
 
 **Example Output:**
 
-```
+```text
 [PASS] Log rotation: configured
 [PASS] Largest log file: 2.4 MB
 [PASS] Rotation schedule: weekly
@@ -536,7 +536,7 @@ esac
 
 ## Continuous Monitoring
 
-### Stream Manager Monitoring
+## Stream Manager Monitoring
 
 The stream manager provides continuous monitoring:
 
@@ -555,7 +555,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 
 **Example Output:**
 
-```
+```text
 Stream Monitor - Updating every 5 seconds (Ctrl+C to exit)
 ===========================================================
 [10:30:15] Blue_Yeti: HEALTHY (CPU: 3.2%, MEM: 45 MB)
@@ -570,25 +570,25 @@ Resource Summary:
   Failed Streams: 0
 ```
 
-### Systemd Service Monitoring
+## Systemd Service Monitoring
 
 For production environments, monitor via systemd:
 
 ```bash
 # Check service status
-sudo systemctl status mediamtx-stream-manager
+sudo systemctl status mediamtx-audio
 
 # Follow logs in real-time
-sudo journalctl -u mediamtx-stream-manager -f
+sudo journalctl -u mediamtx-audio -f
 
 # Filter for errors only
-sudo journalctl -u mediamtx-stream-manager -p err
+sudo journalctl -u mediamtx-audio -p err
 
 # View logs since boot
-sudo journalctl -u mediamtx-stream-manager -b
+sudo journalctl -u mediamtx-audio -b
 ```
 
-### Automated Health Checks
+## Automated Health Checks
 
 Schedule regular diagnostics:
 
@@ -622,7 +622,7 @@ fi
 
 ## Integration with Monitoring Systems
 
-### Prometheus Integration
+## Prometheus Integration
 
 Export metrics for Prometheus:
 
@@ -660,7 +660,7 @@ scrape_configs:
     metrics_path: '/lyrebird-metrics'
 ```
 
-### Grafana Dashboard
+## Grafana Dashboard
 
 Create visualization dashboard:
 
@@ -689,7 +689,7 @@ lyrebird_memory_bytes / 1024 / 1024
 up{job="lyrebird"}
 ```
 
-### Nagios/Icinga Integration
+## Nagios/Icinga Integration
 
 Create Nagios check plugin:
 
@@ -741,7 +741,7 @@ define service{
 
 ## Log Analysis
 
-### MediaMTX Logs
+## MediaMTX Logs
 
 Location: `/var/log/mediamtx.out` (or via journalctl)
 
@@ -760,7 +760,7 @@ sudo journalctl -u mediamtx -p err
 
 **Key Log Patterns:**
 
-```
+```log
 # Stream connection
 "[path Blue_Yeti] opened"
 
@@ -774,7 +774,7 @@ sudo journalctl -u mediamtx -p err
 "[path Blue_Yeti] error"
 ```
 
-### Stream Manager Logs
+## Stream Manager Logs
 
 Location: `/var/log/mediamtx-stream-manager.log`
 
@@ -793,7 +793,7 @@ sudo grep -i "restart" /var/log/mediamtx-stream-manager.log
 
 **Key Log Patterns:**
 
-```
+```log
 # Stream started
 "Started stream: Blue_Yeti (PID: 12345)"
 
@@ -807,7 +807,7 @@ sudo grep -i "restart" /var/log/mediamtx-stream-manager.log
 "[INFO] Restarted Blue_Yeti successfully"
 ```
 
-### FFmpeg Device Logs
+## FFmpeg Device Logs
 
 Location: `/var/log/lyrebird/<device-name>.log`
 
@@ -823,7 +823,7 @@ sudo tail -f /var/log/lyrebird/*.log
 
 **Key Log Patterns:**
 
-```
+```log
 # Successful capture
 "[alsa] Estimating duration from bitrate"
 
@@ -837,7 +837,7 @@ sudo tail -f /var/log/lyrebird/*.log
 "frame= 1000 fps= 24 size= 512kB time=00:00:41.66"
 ```
 
-### Diagnostic Logs
+## Diagnostic Logs
 
 Location: `/var/log/lyrebird-diagnostics.log`
 
@@ -855,7 +855,7 @@ sudo grep FAIL /var/log/lyrebird-diagnostics.log | tail -20
 
 ## Performance Metrics Collection
 
-### Resource Metrics
+## Resource Metrics
 
 Collect system metrics over time:
 
@@ -888,7 +888,7 @@ echo "$TIMESTAMP,$CPU,$MEM,$FD,$STREAMS" >> "$LOGFILE"
 * * * * * /usr/local/bin/lyrebird-collect-metrics.sh
 ```
 
-### Stream Quality Metrics
+## Stream Quality Metrics
 
 Monitor stream quality:
 
@@ -908,7 +908,7 @@ ffmpeg -i "$STREAM_URL" -t $DURATION -f null - 2>&1 | \
 
 ## Best Practices
 
-### Regular Diagnostics
+## Regular Diagnostics
 
 1. **Daily Quick Checks**
    ```bash
@@ -927,7 +927,7 @@ ffmpeg -i "$STREAM_URL" -t $DURATION -f null - 2>&1 | \
    - Analyze metric trends
    - Capacity planning review
 
-### Monitoring Strategy
+## Monitoring Strategy
 
 1. **Real-Time Monitoring**
    - Use stream manager monitor mode
@@ -944,7 +944,7 @@ ffmpeg -i "$STREAM_URL" -t $DURATION -f null - 2>&1 | \
    - Define escalation procedures
    - Test alert paths regularly
 
-### Log Management
+## Log Management
 
 1. **Log Rotation**
    ```bash
@@ -987,14 +987,14 @@ ffmpeg -i "$STREAM_URL" -t $DURATION -f null - 2>&1 | \
 <div class="grid" markdown>
 
 <div markdown>
-### Custom Integration
+## Custom Integration
 Integrate LyreBirdAudio with external systems
 
 [Custom Integration →](custom-integration.md)
 </div>
 
 <div markdown>
-### Troubleshooting
+## Troubleshooting
 Resolve common issues and problems
 
 [Troubleshooting →](troubleshooting.md)

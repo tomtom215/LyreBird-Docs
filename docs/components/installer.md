@@ -25,7 +25,7 @@ Automatic detection and installation for Linux, macOS (Darwin), and FreeBSD on x
 </div>
 
 <div markdown>
-### GitHub Release Fetching
+## GitHub Release Fetching
 Fetches latest releases from MediaMTX GitHub repository with fallback parsers for reliability.
 </div>
 
@@ -40,7 +40,7 @@ Transaction-based updates preserve old binary and automatically rollback on inst
 </div>
 
 <div markdown>
-### Systemd Service Management
+## Systemd Service Management
 Creates and manages systemd service files with proper user isolation and automatic startup configuration.
 </div>
 
@@ -55,7 +55,7 @@ Preview what would be done without making any changes to the system, perfect for
 
 ## Usage
 
-### Basic Commands
+## Basic Commands
 
 ```bash
 # Install latest version
@@ -74,7 +74,7 @@ sudo ./install_mediamtx.sh verify
 sudo ./install_mediamtx.sh uninstall
 ```
 
-### Install Specific Version
+## Install Specific Version
 
 ```bash
 # Install specific version (e.g., v1.15.0)
@@ -84,7 +84,7 @@ sudo ./install_mediamtx.sh -V v1.15.0 install
 sudo ./install_mediamtx.sh -V v1.15.0 update
 ```
 
-### Custom Installation Options
+## Custom Installation Options
 
 ```bash
 # Install to custom prefix (default: /usr/local)
@@ -113,7 +113,7 @@ sudo ./install_mediamtx.sh --no-service install
 
 ## Installation Workflow
 
-### Fresh Installation
+## Fresh Installation
 
 **Step 1:** Run the installer
 
@@ -124,50 +124,50 @@ sudo ./install_mediamtx.sh install
 **What Happens:**
 
 1. **Platform Detection**
-   ```
+   ```text
    Detected platform: Linux x86_64
    ```
 
 2. **Fetch Latest Release**
-   ```
+   ```text
    Fetching latest MediaMTX release from GitHub...
    Latest version: v1.15.0
    ```
 
 3. **Download Binary**
-   ```
+   ```text
    Downloading: mediamtx_v1.15.0_linux_amd64.tar.gz
    Download complete: 15.2 MB
    ```
 
 4. **SHA256 Verification**
-   ```
+   ```text
    Verifying checksum...
    SHA256: abc123def456... [OK]
    ```
 
 5. **Extract and Install**
-   ```
+   ```text
    Extracting archive...
    Installing to: /usr/local/bin/mediamtx
    Setting permissions...
    ```
 
 6. **Configuration Setup**
-   ```
+   ```text
    Creating config directory: /etc/mediamtx
    Generating default configuration...
    ```
 
 7. **Service Creation**
-   ```
+   ```text
    Creating systemd service...
    Creating service user: mediamtx
    Service file: /etc/systemd/system/mediamtx.service
    ```
 
 8. **Verification**
-   ```
+   ```text
    MediaMTX v1.15.0 installed successfully
    Binary: /usr/local/bin/mediamtx
    Config: /etc/mediamtx/mediamtx.yml
@@ -176,7 +176,7 @@ sudo ./install_mediamtx.sh install
 
 ---
 
-### Updating Existing Installation
+## Updating Existing Installation
 
 **Step 2:** Update to latest version
 
@@ -187,32 +187,32 @@ sudo ./install_mediamtx.sh update
 **What Happens:**
 
 1. **Check Current Version**
-   ```
+   ```text
    Current version: v1.14.0
    Latest version: v1.15.0
    Update available
    ```
 
 2. **Backup Current Binary**
-   ```
+   ```text
    Backing up current binary...
    Backup: /usr/local/bin/mediamtx.backup
    ```
 
 3. **Download New Version**
-   ```
+   ```text
    Downloading MediaMTX v1.15.0...
    ```
 
 4. **Atomic Replacement**
-   ```
+   ```text
    Stopping service...
    Replacing binary...
    Starting service...
    ```
 
 5. **Verification**
-   ```
+   ```text
    Verifying new installation...
    Update successful: v1.14.0 -> v1.15.0
    ```
@@ -223,13 +223,13 @@ Error during installation
 Rolling back to previous version...
 Restoring: /usr/local/bin/mediamtx.backup
 Rollback successful: v1.14.0 restored
-```
+```text
 
 ---
 
 ## Platform Support
 
-### Supported Platforms
+## Supported Platforms
 
 The installer automatically detects and installs the correct binary for your platform:
 
@@ -239,7 +239,7 @@ The installer automatically detects and installs the correct binary for your pla
 | **macOS (Darwin)** | x86_64, ARM64 (M1/M2) | Full support with launchd |
 | **FreeBSD** | x86_64, ARM64 | Full support |
 
-### Platform Detection
+## Platform Detection
 
 The installer automatically detects:
 
@@ -257,7 +257,7 @@ Darwin + x86_64 -> mediamtx_vX.X.X_darwin_amd64.tar.gz
 Darwin + arm64  -> mediamtx_vX.X.X_darwin_arm64.tar.gz
 ```
 
-### ARM Platform Support
+## ARM Platform Support
 
 **Raspberry Pi Detection:**
 
@@ -271,7 +271,9 @@ The installer properly detects Raspberry Pi models and selects the correct ARM v
 ```bash
 # Check your platform
 ./install_mediamtx.sh status
+```
 
+```text
 # Example output
 Platform: Linux armv7l (Raspberry Pi 3B+)
 MediaMTX: v1.15.0 (linux_armv7)
@@ -281,36 +283,38 @@ MediaMTX: v1.15.0 (linux_armv7)
 
 ## Installation Locations
 
-### Default Installation
+## Default Installation
 
 **Binary Location:**
-```bash
+```text
 /usr/local/bin/mediamtx
 ```
 
 **Configuration Directory:**
-```bash
+```text
 /etc/mediamtx/
 ├── mediamtx.yml           # Main configuration
 └── audio-devices.conf     # LyreBirdAudio device config
 ```
 
 **Service Files:**
-```bash
+```text
 /etc/systemd/system/mediamtx.service
 ```
 
 **Log Files:**
-```bash
+```text
 /var/log/mediamtx.out
 ```
 
-### Custom Installation Prefix
+## Custom Installation Prefix
 
 ```bash
 # Install to /opt instead of /usr/local
 sudo ./install_mediamtx.sh -p /opt install
+```
 
+```text
 # Results in:
 /opt/bin/mediamtx           # Binary
 /opt/etc/mediamtx/          # Configuration
@@ -395,7 +399,7 @@ sudo ./install_mediamtx.sh update
 ```
 
 **Example Output:**
-```
+```text
 MediaMTX Installation Status
 ============================
 Binary: /usr/local/bin/mediamtx
@@ -430,7 +434,7 @@ sudo ./install_mediamtx.sh verify
 - Permissions are correct
 
 **Example Output:**
-```
+```text
 Verifying MediaMTX Installation
 ================================
 [PASS] Binary: /usr/local/bin/mediamtx (executable)
@@ -461,7 +465,7 @@ sudo ./install_mediamtx.sh uninstall
 - Service user (optional prompt)
 
 **Interactive Prompts:**
-```
+```text
 Remove MediaMTX binary? [Y/n]: y
   Removing: /usr/local/bin/mediamtx
 
@@ -481,7 +485,7 @@ Remove service user (mediamtx)? [y/N]: n
 
 ## Systemd Service Management
 
-### Service Creation
+## Service Creation
 
 The installer creates a systemd service for MediaMTX:
 
@@ -505,7 +509,7 @@ StandardError=append:/var/log/mediamtx.out
 WantedBy=multi-user.target
 ```
 
-### Service Management Commands
+## Service Management Commands
 
 ```bash
 # Start service
@@ -530,7 +534,7 @@ sudo systemctl status mediamtx
 sudo journalctl -u mediamtx -f
 ```
 
-### Service User
+## Service User
 
 The installer creates a dedicated `mediamtx` user for security:
 
@@ -543,6 +547,9 @@ The installer creates a dedicated `mediamtx` user for security:
 **Verification:**
 ```bash
 id mediamtx
+```
+
+```text
 # uid=999(mediamtx) gid=999(mediamtx) groups=999(mediamtx)
 ```
 
@@ -550,7 +557,7 @@ id mediamtx
 
 ## Atomic Updates and Rollback
 
-### Update Process
+## Update Process
 
 **Atomic Update and Rollback Flow:** The update process starts by checking the current version. If no update is available, it exits as "Already Up-to-Date." If an update is available, it backs up the current binary and downloads the new version. SHA256 checksum verification occurs next - if invalid (red), the update aborts with "Checksum Failed"; if valid, the service stops and the binary is replaced atomically. After starting the service, the new version is verified. On success (green), the backup is removed and "Update Successful" is reported. On failure (orange), the system rolls back by restoring the backup, restarting the service, verifying the rollback, and reporting "Rollback Successful" (green). This ensures that updates either complete successfully or automatically revert to the previous working version.
 
@@ -588,7 +595,7 @@ graph TD
     style R fill:#4caf50,color:#fff
 ```
 
-### Rollback Triggers
+## Rollback Triggers
 
 Automatic rollback occurs if:
 
@@ -611,7 +618,7 @@ sudo cp /usr/local/bin/mediamtx.backup /usr/local/bin/mediamtx
 sudo systemctl restart mediamtx
 ```
 
-### Backup Cleanup Policy
+## Backup Cleanup Policy
 
 The installer automatically manages backup files to prevent unbounded disk usage:
 
@@ -622,7 +629,7 @@ The installer automatically manages backup files to prevent unbounded disk usage
 - No user intervention required
 
 **Backup File Naming:**
-```
+```text
 /usr/local/bin/mediamtx.backup           # Latest backup
 /usr/local/bin/mediamtx.backup.1         # Second most recent
 /usr/local/bin/mediamtx.backup.2         # Third most recent
@@ -647,14 +654,14 @@ sudo cp /usr/local/bin/mediamtx /usr/local/bin/mediamtx.manual-backup
 
 ## SHA256 Verification
 
-### Why Checksum Verification Matters
+## Why Checksum Verification Matters
 
 Ensures downloaded binaries are:
 - **Authentic:** From official MediaMTX release
 - **Untampered:** Not modified during download
 - **Uncorrupted:** Complete and valid
 
-### Verification Process
+## Verification Process
 
 1. **Download Checksum File**
    ```bash
@@ -668,7 +675,7 @@ Ensures downloaded binaries are:
    ```
 
 3. **Compare Checksums**
-   ```
+   ```text
    Expected: abc123def456789...
    Actual:   abc123def456789...
    Result:   MATCH [PASS]
@@ -678,7 +685,7 @@ Ensures downloaded binaries are:
    - **Match:** Proceed with installation
    - **Mismatch:** Abort and report error
 
-### Manual Verification
+## Manual Verification
 
 ```bash
 # Download binary
@@ -696,7 +703,7 @@ sha256sum -c checksums.txt --ignore-missing
 
 ## Dry-Run Mode
 
-### Testing Installation
+## Testing Installation
 
 Preview what would happen without making changes:
 
@@ -705,7 +712,7 @@ sudo ./install_mediamtx.sh -n install
 ```
 
 **Example Output:**
-```
+```text
 [DRY-RUN] Detected platform: Linux x86_64
 [DRY-RUN] Would fetch latest MediaMTX release
 [DRY-RUN] Would download: mediamtx_v1.15.0_linux_amd64.tar.gz
@@ -732,9 +739,9 @@ sudo ./install_mediamtx.sh -n install
 
 The Installer integrates with the Orchestrator for convenient access:
 
-### Menu Access
+## Menu Access
 
-```
+```text
 Orchestrator Main Menu
 ├── 2. MediaMTX Installation & Updates
 │   ├── 1. Install MediaMTX -> install_mediamtx.sh install
@@ -745,11 +752,11 @@ Orchestrator Main Menu
 │   └── 6. Return to Main Menu
 ```
 
-### Quick Setup Wizard Integration
+## Quick Setup Wizard Integration
 
 The Quick Setup Wizard uses the installer as its first step:
 
-```bash
+```text
 Orchestrator Quick Setup Wizard
 ================================
 [1/5] Installing MediaMTX...
@@ -772,9 +779,9 @@ Setup complete!
 
 ## Troubleshooting
 
-### Common Issues
+## Common Issues
 
-#### Platform Not Supported
+### Platform Not Supported
 
 **Symptom:** `Error: Unsupported platform: <platform>`
 
@@ -791,7 +798,7 @@ uname -m  # Should be: x86_64, aarch64, armv7l, or armv6l
 
 ---
 
-#### Download Failed
+## Download Failed
 
 **Symptom:** `Error: Failed to download MediaMTX`
 
@@ -816,7 +823,7 @@ curl -L -o /tmp/mediamtx.tar.gz \
 
 ---
 
-#### SHA256 Checksum Mismatch
+## SHA256 Checksum Mismatch
 
 **Symptom:** `Error: SHA256 checksum verification failed`
 
@@ -837,7 +844,7 @@ curl -L https://github.com/bluenviron/mediamtx/releases/download/v1.15.0/checksu
 
 ---
 
-#### Service Creation Failed
+## Service Creation Failed
 
 **Symptom:** `Error: Failed to create systemd service`
 
@@ -858,7 +865,7 @@ ls -la /etc/systemd/system/mediamtx.service
 
 ---
 
-#### Permission Denied
+## Permission Denied
 
 **Symptom:** `Permission denied` during installation
 
@@ -881,7 +888,7 @@ sudo ./install_mediamtx.sh -p /opt install
 
 ## Best Practices
 
-### Production Deployments
+## Production Deployments
 
 **1. Install Specific Versions**
 ```bash
@@ -910,7 +917,7 @@ sudo ./install_mediamtx.sh -V v1.16.0 update
 
 ---
 
-### Update Strategy
+## Update Strategy
 
 ```bash
 # 1. Check current version
@@ -935,7 +942,7 @@ sudo systemctl restart mediamtx
 
 ---
 
-### Security Considerations
+## Security Considerations
 
 **1. Always Verify Checksums**
 ```bash

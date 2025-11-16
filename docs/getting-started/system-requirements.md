@@ -6,14 +6,14 @@ Hardware and software requirements for running LyreBirdAudio.
 
 ## Operating System
 
-### Supported Distributions
+## Supported Distributions
 
 - **Ubuntu** 20.04 LTS or later
 - **Debian** 11 (Bullseye) or later
 - **Raspberry Pi OS** (32-bit and 64-bit)
 - **Other Linux distributions** with systemd support
 
-### Minimum Kernel Version
+## Minimum Kernel Version
 
 - Linux kernel **4.9** or later
 - Recommended: **5.4** or later for best USB audio support
@@ -22,7 +22,7 @@ Hardware and software requirements for running LyreBirdAudio.
 
 ## Hardware Requirements
 
-### Minimum Specifications
+## Minimum Specifications
 
 | Component | Requirement |
 |-----------|-------------|
@@ -31,7 +31,7 @@ Hardware and software requirements for running LyreBirdAudio.
 | Storage | 500 MB free space |
 | USB | USB 2.0 port |
 
-### Recommended Specifications
+## Recommended Specifications
 
 | Component | Recommendation |
 |-----------|----------------|
@@ -55,7 +55,7 @@ LyreBirdAudio and MediaMTX support:
 
 ## USB Audio Devices
 
-### Compatible Devices
+## Compatible Devices
 
 Any USB audio device with ALSA support:
 
@@ -86,7 +86,7 @@ Any USB audio device with ALSA support:
 
 ## Software Dependencies
 
-### Required Packages
+## Required Packages
 
 === "Ubuntu/Debian"
 
@@ -109,7 +109,7 @@ Any USB audio device with ALSA support:
         ffmpeg
     ```
 
-### Automatic Installation
+## Automatic Installation
 
 The orchestrator will check for and install missing dependencies automatically.
 
@@ -117,7 +117,7 @@ The orchestrator will check for and install missing dependencies automatically.
 
 ## Network Requirements
 
-### Ports
+## Ports
 
 | Port | Protocol | Purpose |
 |------|----------|---------|
@@ -125,7 +125,7 @@ The orchestrator will check for and install missing dependencies automatically.
 | 8888 | TCP | MediaMTX Web UI (optional) |
 | 8889 | TCP | MediaMTX API (optional) |
 
-### Bandwidth
+## Bandwidth
 
 Per USB microphone stream:
 
@@ -140,13 +140,13 @@ Per USB microphone stream:
 
 ## Storage Considerations
 
-### System Files
+## System Files
 
 - LyreBirdAudio scripts: ~100 KB
 - MediaMTX binary: ~15-20 MB
 - Configuration files: ~10 KB per stream
 
-### Logging
+## Logging
 
 With default settings:
 
@@ -158,7 +158,7 @@ With default settings:
 
 ## Performance Expectations
 
-### CPU Usage
+## CPU Usage
 
 Per stream (typical):
 
@@ -166,7 +166,7 @@ Per stream (typical):
 - **Raspberry Pi 4:** 5-10% CPU
 - **Intel N100:** 2-5% CPU
 
-### Memory Usage
+## Memory Usage
 
 Per stream (typical):
 
@@ -178,21 +178,21 @@ Per stream (typical):
 
 ## Testing Your System
 
-### Check USB Audio Devices
+## Check USB Audio Devices
 
 ```bash
 arecord -l
 ```
 
 Expected output:
-```
+```text
 **** List of CAPTURE Hardware Devices ****
 card 1: Device [USB Audio Device], device 0: USB Audio [USB Audio]
   Subdevices: 1/1
   Subdevice #0: subdevice #0
 ```
 
-### Check ALSA Version
+## Check ALSA Version
 
 ```bash
 arecord --version
@@ -200,7 +200,7 @@ arecord --version
 
 Minimum required: **1.1.0**
 
-### Check FFmpeg Codecs
+## Check FFmpeg Codecs
 
 ```bash
 ffmpeg -codecs | grep aac
@@ -208,7 +208,7 @@ ffmpeg -codecs | grep aac
 
 Should show AAC encoder support.
 
-### Check Available Disk Space
+## Check Available Disk Space
 
 ```bash
 df -h /opt
@@ -220,7 +220,7 @@ Ensure at least 500 MB free.
 
 ## Recommended Platforms
 
-### Production Deployments
+## Production Deployments
 
 1. **Intel N100/N150 Mini PCs** (Best choice)
    - Excellent USB reliability

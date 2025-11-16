@@ -22,7 +22,7 @@ This guide covers:
 
 ## What is MediaMTX?
 
-### Purpose
+## Purpose
 
 MediaMTX is a ready-to-use RTSP server and proxy that:
 
@@ -67,7 +67,7 @@ This script:
 
 **Example output:**
 
-```
+```text
 Installing MediaMTX...
 Downloading MediaMTX v1.5.0...
 Installing to /usr/local/bin/mediamtx...
@@ -80,7 +80,7 @@ RTSP Server: rtsp://localhost:8554
 HTTP API: http://localhost:9997
 ```
 
-### Manual Installation
+## Manual Installation
 
 For manual installation or updates:
 
@@ -99,7 +99,7 @@ sudo mkdir -p /etc/mediamtx
 sudo /usr/local/bin/mediamtx --help > /dev/null
 ```
 
-### Updating MediaMTX
+## Updating MediaMTX
 
 To update to the latest version:
 
@@ -126,13 +126,13 @@ sudo systemctl start mediamtx
 
 ## Configuration
 
-### Configuration File Location
+## Configuration File Location
 
 **Path:** `/etc/mediamtx/mediamtx.yml`
 
 This YAML file controls all MediaMTX server settings.
 
-### Basic Configuration
+## Basic Configuration
 
 **Minimal configuration for LyreBirdAudio:**
 
@@ -164,7 +164,7 @@ paths:
     readIPs: []
 ```
 
-### Full Configuration Example
+## Full Configuration Example
 
 **Production-ready configuration:**
 
@@ -249,9 +249,9 @@ paths:
     runOnRead: ""
 ```
 
-### Configuration Parameters
+## Configuration Parameters
 
-#### Server Settings
+### Server Settings
 
 | Parameter | Description | Default | Recommended |
 |-----------|-------------|---------|-------------|
@@ -275,7 +275,7 @@ paths:
 
 ## Service Management
 
-### Systemd Service
+## Systemd Service
 
 MediaMTX runs as a systemd service for automatic startup and management.
 
@@ -299,7 +299,7 @@ RestartSec=5
 WantedBy=multi-user.target
 ```
 
-### Service Commands
+## Service Commands
 
 **Enable automatic startup:**
 
@@ -333,7 +333,7 @@ sudo systemctl status mediamtx
 
 **Example status output:**
 
-```
+```text
 ● mediamtx.service - MediaMTX RTSP Server
    Loaded: loaded (/etc/systemd/system/mediamtx.service; enabled)
    Active: active (running) since Mon 2025-11-15 10:00:00 UTC; 5h 23m ago
@@ -348,7 +348,7 @@ Nov 15 10:00:00 server mediamtx[1234]: 2025/11/15 10:00:00 INF [RTSP] listener o
 Nov 15 10:00:00 server mediamtx[1234]: 2025/11/15 10:00:00 INF [API] listener opened on :9997
 ```
 
-### View Logs
+## View Logs
 
 **Using journalctl:**
 
@@ -376,7 +376,7 @@ tail -f /var/log/mediamtx/mediamtx.log
 
 ## HTTP API
 
-### API Overview
+## API Overview
 
 MediaMTX provides a comprehensive HTTP API for monitoring and control.
 
@@ -384,9 +384,9 @@ MediaMTX provides a comprehensive HTTP API for monitoring and control.
 
 **API Version:** v3
 
-### Common API Endpoints
+## Common API Endpoints
 
-#### List All Streams
+### List All Streams
 
 Get list of all active RTSP paths:
 
@@ -507,11 +507,11 @@ echo "Stream $STREAM_NAME has $READERS active clients"
 
 ## RTSP Stream Access
 
-### Stream URL Format
+## Stream URL Format
 
 Streams are accessible via RTSP URLs:
 
-```
+```text
 rtsp://<hostname>:<port>/<stream-name>
 ```
 
@@ -528,9 +528,9 @@ rtsp://192.168.1.100:8554/Blue_Yeti
 rtsp://audio-server.local:8554/Blue_Yeti
 ```
 
-### Accessing Streams
+## Accessing Streams
 
-#### VLC Media Player
+### VLC Media Player
 
 **Command line:**
 
@@ -562,14 +562,14 @@ ffmpeg -i rtsp://localhost:8554/Blue_Yeti \
   -c:a libmp3lame -b:a 192k recording.mp3
 ```
 
-#### GStreamer
+## GStreamer
 
 ```bash
 gst-launch-1.0 rtspsrc location=rtsp://localhost:8554/Blue_Yeti ! \
   rtpopusdepay ! opusdec ! audioconvert ! autoaudiosink
 ```
 
-### Transport Protocols
+## Transport Protocols
 
 MediaMTX supports multiple RTSP transport protocols:
 
@@ -597,7 +597,7 @@ ffplay -rtsp_transport udp rtsp://localhost:8554/Blue_Yeti
 
 ## Authentication and Security
 
-### Basic Authentication
+## Basic Authentication
 
 Enable username/password authentication for streams:
 
@@ -630,7 +630,7 @@ ffmpeg -f alsa -i hw:CARD=Blue_Yeti \
   -f rtsp rtsp://publisher:secret123@localhost:8554/Blue_Yeti
 ```
 
-### IP-Based Access Control
+## IP-Based Access Control
 
 Restrict access by IP address:
 
@@ -691,7 +691,7 @@ vlc rtsps://localhost:8322/Blue_Yeti
 
 ## Performance Tuning
 
-### Connection Limits
+## Connection Limits
 
 Adjust maximum concurrent connections:
 
@@ -701,12 +701,12 @@ maxConnections: 1000
 
 **Calculation:**
 
-```
+```text
 Max Connections = (Streams × Clients per Stream) + Overhead
 Example: (10 streams × 5 clients) + 50 = 100 connections
 ```
 
-### Timeout Settings
+## Timeout Settings
 
 Configure client timeout values:
 
@@ -721,7 +721,7 @@ writeTimeout: 30s  # How long to wait for client writes
 - **Unstable networks:** 60-120 seconds
 - **Mobile clients:** 120+ seconds
 
-### Buffer Settings
+## Buffer Settings
 
 Optimize for latency vs. reliability:
 
@@ -741,7 +741,7 @@ paths:
     readBufferCount: 512
 ```
 
-### Resource Usage
+## Resource Usage
 
 **Typical resource consumption:**
 
@@ -790,7 +790,7 @@ iftop -i eth0
    sudo journalctl -u mediamtx -n 50
    ```
 
-### Cannot Access Streams
+## Cannot Access Streams
 
 **Symptom:** RTSP URLs don't work
 
@@ -847,7 +847,7 @@ iftop -i eth0
    ps aux | grep ffmpeg
    ```
 
-### High CPU Usage
+## High CPU Usage
 
 **Symptom:** MediaMTX consuming excessive CPU
 
@@ -873,7 +873,7 @@ iftop -i eth0
    top -p $(pidof mediamtx)
    ```
 
-### API Not Responding
+## API Not Responding
 
 **Symptom:** HTTP API returns errors or timeouts
 
@@ -903,7 +903,7 @@ iftop -i eth0
 
 ## Best Practices
 
-### Production Deployments
+## Production Deployments
 
 1. **Use systemd service** - Enable automatic startup and recovery
 2. **Configure logging** - Use file logging for long-term storage
@@ -911,7 +911,7 @@ iftop -i eth0
 4. **Implement monitoring** - Use API to monitor server health
 5. **Plan for scale** - Calculate resource requirements before deployment
 
-### Security
+## Security
 
 1. **Restrict publishing** - Use `publishIPs: [127.0.0.1]` for local-only
 2. **Use authentication** - Enable username/password for network access
@@ -919,7 +919,7 @@ iftop -i eth0
 4. **Consider VPN** - Use VPN for remote access instead of public exposure
 5. **Regular updates** - Keep MediaMTX updated to latest version
 
-### Performance
+## Performance
 
 1. **Monitor resources** - Track CPU, memory, and bandwidth usage
 2. **Optimize buffers** - Adjust based on use case (latency vs reliability)
@@ -927,7 +927,7 @@ iftop -i eth0
 4. **Use TCP transport** - More reliable for most use cases
 5. **Regular maintenance** - Restart service periodically to clear state
 
-### Reliability
+## Reliability
 
 1. **Enable auto-restart** - Configure systemd to restart on failure
 2. **Monitor logs** - Check for errors and warnings regularly
@@ -952,14 +952,14 @@ iftop -i eth0
 <div class="grid" markdown>
 
 <div markdown>
-### Multiplex Streaming
+## Multiplex Streaming
 Multi-microphone stream combining
 
 [Multiplex Streaming →](multiplex-streaming.md)
 </div>
 
 <div markdown>
-### Stream Management
+## Stream Management
 Managing stream lifecycle
 
 [Stream Management →](stream-management.md)

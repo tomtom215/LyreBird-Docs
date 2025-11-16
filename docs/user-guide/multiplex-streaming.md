@@ -27,7 +27,7 @@ This guide covers:
 
 LyreBirdAudio supports two primary multiplex modes using FFmpeg audio filters:
 
-### 1. amix (Audio Mixing)
+## 1. amix (Audio Mixing)
 
 **Filter:** `amix`
 
@@ -51,7 +51,7 @@ LyreBirdAudio supports two primary multiplex modes using FFmpeg audio filters:
 
 Office with 4 microphones capturing general ambient sound for presence detection.
 
-### 2. amerge (Audio Merging)
+## 2. amerge (Audio Merging)
 
 **Filter:** `amerge`
 
@@ -79,7 +79,7 @@ Bird monitoring with 4 microphones positioned around a habitat, maintaining spat
 
 ## Creating Multiplex Streams
 
-### Basic Multiplex Command
+## Basic Multiplex Command
 
 **Using amix (mixed output):**
 
@@ -93,7 +93,7 @@ sudo ./mediamtx-stream-manager.sh start -m multiplex -f amix
 sudo ./mediamtx-stream-manager.sh start -m multiplex -f amerge
 ```
 
-### Custom Stream Naming
+## Custom Stream Naming
 
 Specify a custom name for the multiplex stream:
 
@@ -103,11 +103,11 @@ sudo ./mediamtx-stream-manager.sh start -m multiplex -f amix -n Office_Audio
 
 This creates a stream accessible at:
 
-```
+```text
 rtsp://hostname:8554/Office_Audio
 ```
 
-### Selecting Specific Devices
+## Selecting Specific Devices
 
 To multiplex only specific devices (not all configured devices):
 
@@ -135,7 +135,7 @@ The `amix` filter combines multiple audio inputs into a single output by summing
 
 - Single stream containing all three sounds mixed together
 
-### Configuration Example
+## Configuration Example
 
 **Creating a mixed stream from 3 microphones:**
 
@@ -159,7 +159,7 @@ ffmpeg \
 
 **Filter syntax:**
 
-```
+```text
 amix=inputs=N:duration=MODE:dropout_transition=TIME
 ```
 
@@ -179,7 +179,7 @@ amix=inputs=3:duration=longest
 amix=inputs=4:duration=longest:dropout_transition=2
 ```
 
-### Volume Balancing
+## Volume Balancing
 
 When mixing multiple sources, you may need to adjust relative volumes:
 
@@ -191,7 +191,7 @@ When mixing multiple sources, you may need to adjust relative volumes:
 -filter_complex "[0:a]volume=1.5[a1];[1:a][2:a][a1]amix=inputs=3"
 ```
 
-### Use Case: Office Monitoring
+## Use Case: Office Monitoring
 
 **Scenario:** Monitor general office ambient audio with 4 microphones
 
@@ -230,7 +230,7 @@ The `amerge` filter combines inputs while keeping them as separate channels:
 - Channel 1: Microphone 2
 - Channel 2: Microphone 3
 
-### Configuration Example
+## Configuration Example
 
 **Creating a merged stream from 3 microphones:**
 
@@ -251,7 +251,7 @@ ffmpeg \
   -f rtsp rtsp://localhost:8554/Bird_Array
 ```
 
-### Channel Mapping
+## Channel Mapping
 
 Each input microphone is mapped to a specific channel:
 
@@ -262,7 +262,7 @@ Each input microphone is mapped to a specific channel:
 | Third device | 2 | Third channel |
 | Nth device | N-1 | Nth channel |
 
-### Extracting Individual Channels
+## Extracting Individual Channels
 
 **During playback, extract specific channels:**
 
@@ -290,19 +290,19 @@ ffmpeg -i rtsp://localhost:8554/Bird_Array \
   -map 0:a -af "pan=mono|c0=c2" mic3.opus
 ```
 
-### Bitrate Considerations
+## Bitrate Considerations
 
 Multi-channel streams require higher bitrates:
 
 **Bitrate calculation:**
 
-```
+```text
 Total Bitrate = Base Bitrate × Number of Channels
 ```
 
 **Example:**
 
-```
+```text
 Single channel: 128 kbps
 3 channels: 128 × 3 = 384 kbps (or use 256-320 kbps with compression)
 ```
@@ -316,7 +316,7 @@ Single channel: 128 kbps
 | 4 | 256 kbps | 320 kbps | 512 kbps |
 | 5+ | 320 kbps | 384 kbps | 640 kbps |
 
-### Use Case: Bird Monitoring Array
+## Use Case: Bird Monitoring Array
 
 **Scenario:** Record birds from 4 directional microphones for spatial analysis
 
@@ -339,7 +339,7 @@ sudo ./mediamtx-stream-manager.sh start -m multiplex -f amerge -n Bird_Array
 
 ## Comparison: amix vs amerge
 
-### Feature Comparison
+## Feature Comparison
 
 | Feature | amix | amerge |
 |---------|------|--------|
@@ -352,7 +352,7 @@ sudo ./mediamtx-stream-manager.sh start -m multiplex -f amerge -n Bird_Array
 | **Complexity** | Simple | Moderate |
 | **Client Compatibility** | Universal | Multi-channel support required |
 
-### When to Use Each
+## When to Use Each
 
 **Use amix when:**
 
@@ -374,7 +374,7 @@ sudo ./mediamtx-stream-manager.sh start -m multiplex -f amerge -n Bird_Array
 
 ## Advanced Configurations
 
-### Custom Filter Chains
+## Custom Filter Chains
 
 For advanced users, combine multiple filters:
 
@@ -391,7 +391,7 @@ For advanced users, combine multiple filters:
                  [a0][a1][a2]amerge=inputs=3[out]"
 ```
 
-### Synchronization
+## Synchronization
 
 Multiplex streams automatically synchronize inputs, but you can fine-tune:
 
@@ -404,7 +404,7 @@ Multiplex streams automatically synchronize inputs, but you can fine-tune:
 
 Delays in milliseconds compensate for physical distance between microphones.
 
-### Sample Rate Matching
+## Sample Rate Matching
 
 All inputs must have matching sample rates. LyreBirdAudio handles this automatically by:
 
@@ -425,11 +425,11 @@ DEVICE_MIC3_SAMPLE_RATE=48000
 
 ## Accessing Multiplex Streams
 
-### Stream URL
+## Stream URL
 
 Multiplex streams are accessed like any other RTSP stream:
 
-```
+```text
 rtsp://hostname:8554/stream-name
 ```
 
@@ -444,7 +444,7 @@ rtsp://localhost:8554/Office_Audio
 rtsp://localhost:8554/Bird_Array
 ```
 
-### Playback
+## Playback
 
 **VLC (automatic multi-channel support):**
 
@@ -472,7 +472,7 @@ ffplay -af "pan=mono|c0=c1" rtsp://localhost:8554/Bird_Array
 
 ## Monitoring Multiplex Streams
 
-### Check Stream Status
+## Check Stream Status
 
 ```bash
 # List all streams including multiplex
@@ -481,7 +481,7 @@ sudo ./mediamtx-stream-manager.sh list
 
 **Example output:**
 
-```
+```text
 Available RTSP Streams:
 =======================
 Blue_Yeti - rtsp://localhost:8554/Blue_Yeti
@@ -491,7 +491,7 @@ Office_Audio - rtsp://localhost:8554/Office_Audio (multiplex: 4 channels)
 Total: 3 streams
 ```
 
-### Verify Channel Count
+## Verify Channel Count
 
 Query MediaMTX API for stream details:
 
@@ -501,7 +501,7 @@ curl http://localhost:9997/v3/paths/get/Office_Audio
 
 Look for `tracks` field indicating number of audio channels.
 
-### Resource Usage
+## Resource Usage
 
 **Multiplex streams use more resources:**
 
@@ -544,7 +544,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 
 4. **Check FFmpeg filter syntax:**
    ```bash
-   sudo journalctl -u mediamtx-stream-manager -n 50
+   sudo journalctl -u mediamtx-audio -n 50
    ```
 
 ### Audio Out of Sync
@@ -569,7 +569,7 @@ sudo ./mediamtx-stream-manager.sh monitor
    - Avoid daisy-chaining hubs
    - Connect to same USB controller when possible
 
-### High CPU Usage
+## High CPU Usage
 
 **Symptom:** FFmpeg using excessive CPU for multiplex
 
@@ -598,7 +598,7 @@ sudo ./mediamtx-stream-manager.sh monitor
    DEVICE_*_BITRATE=256k
    ```
 
-### Cannot Hear All Channels
+## Cannot Hear All Channels
 
 **Symptom:** Only some microphones audible in amix output
 
@@ -648,7 +648,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 
 ## Best Practices
 
-### Planning Multiplex Deployments
+## Planning Multiplex Deployments
 
 1. **Start with individual streams** - Verify each device works alone first
 2. **Match configurations** - Use identical sample rates and formats
@@ -656,7 +656,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 4. **Test under load** - Verify performance with all devices active
 5. **Monitor resources** - Watch CPU and memory during operation
 
-### Performance Optimization
+## Performance Optimization
 
 1. **Limit input count** - Use 4-6 microphones maximum per multiplex stream
 2. **Use consistent hardware** - Same microphone models when possible
@@ -664,7 +664,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 4. **Right-size bitrate** - Balance quality vs bandwidth based on use case
 5. **Monitor continuously** - Track resource usage over time
 
-### Audio Quality
+## Audio Quality
 
 1. **Match microphone sensitivity** - Use similar microphones for consistent levels
 2. **Physical positioning** - Space microphones appropriately for coverage
@@ -672,7 +672,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 4. **Adjust individual levels** - Use volume filters to balance inputs
 5. **Record test samples** - Verify quality before production deployment
 
-### Reliability
+## Reliability
 
 1. **Use powered USB hubs** - Prevent power issues with multiple devices
 2. **Implement monitoring** - Track multiplex stream health
@@ -684,7 +684,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 
 ## Use Case Examples
 
-### Example 1: Office Ambient Monitoring (amix)
+## Example 1: Office Ambient Monitoring (amix)
 
 **Requirement:** Monitor general office noise with 4 ceiling-mounted microphones
 
@@ -721,7 +721,7 @@ sudo ./mediamtx-stream-manager.sh start -m multiplex -f amix -n Office_Ambient
 - Bandwidth: ~8 KB/s
 - Purpose: Activity detection, presence monitoring
 
-### Example 2: Bird Habitat Monitoring (amerge)
+## Example 2: Bird Habitat Monitoring (amerge)
 
 **Requirement:** Record bird calls from 3 directional microphones for species identification
 
@@ -755,7 +755,7 @@ sudo ./mediamtx-stream-manager.sh start -m multiplex -f amerge -n Bird_Habitat
 - Bandwidth: ~32 KB/s
 - Purpose: Species identification, directional analysis
 
-### Example 3: Meeting Room (amix with custom volumes)
+## Example 3: Meeting Room (amix with custom volumes)
 
 **Requirement:** Capture meeting audio with 2 table microphones and 1 presenter microphone
 
@@ -791,14 +791,14 @@ sudo ./mediamtx-stream-manager.sh start -m multiplex -f amerge -n Bird_Habitat
 <div class="grid" markdown>
 
 <div markdown>
-### Stream Management
+## Stream Management
 Managing stream lifecycle and health
 
 [Stream Management →](stream-management.md)
 </div>
 
 <div markdown>
-### MediaMTX Integration
+## MediaMTX Integration
 RTSP server configuration
 
 [MediaMTX Integration →](mediamtx-integration.md)

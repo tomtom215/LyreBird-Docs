@@ -106,7 +106,7 @@ ls -l
 ```
 
 Expected files:
-```
+```text
 lyrebird-orchestrator.sh
 mediamtx-stream-manager.sh
 usb-audio-mapper.sh
@@ -128,7 +128,7 @@ sudo ./lyrebird-orchestrator.sh
 
 You'll see the main menu:
 
-```
+```text
 ========================================
 LyreBirdAudio Orchestrator v2.1.0
 ========================================
@@ -167,7 +167,7 @@ The installer will:
 5. Set appropriate permissions
 
 Output:
-```
+```text
 Detecting system architecture...
 Architecture: x86_64
 
@@ -199,7 +199,7 @@ The mapper will:
 4. Configure udev rules
 
 Interactive session:
-```
+```text
 Scanning for USB audio devices...
 
 Found USB Audio Devices:
@@ -236,7 +236,7 @@ The stream wizard will:
 4. Create stream configuration
 
 Interactive session:
-```
+```text
 Available Devices:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 1. /dev/lyrebird-mic-1 (USB Audio Device)
@@ -275,7 +275,7 @@ The service installer will:
 3. Start the service immediately
 
 Output:
-```
+```text
 Installing Stream Manager Service...
 
 Creating service file: /etc/systemd/system/mediamtx-audio.service
@@ -296,19 +296,19 @@ Service Status:
 
 ## Step 9: Verify Installation
 
-### Check Service Status
+## Check Service Status
 
 ```bash
 sudo systemctl status mediamtx-audio
 ```
 
-### List Active Streams
+## List Active Streams
 
 ```bash
 sudo ./mediamtx-stream-manager.sh status
 ```
 
-### Test Stream Playback
+## Test Stream Playback
 
 ```bash
 # Test with FFmpeg (10 second capture)
@@ -337,7 +337,7 @@ apiAddress: :9997
 
 Restart services:
 ```bash
-sudo systemctl restart mediamtx-stream-manager
+sudo systemctl restart mediamtx-audio
 ```
 
 Access Web UI: `http://your-server-ip:8889`
@@ -357,7 +357,7 @@ sudo ufw allow 8889/tcp
 
 ---
 
-### Setup Monitoring (Recommended)
+## Setup Monitoring (Recommended)
 
 Create a cron job for health checks:
 
@@ -366,7 +366,7 @@ sudo crontab -e
 ```
 
 Add:
-```
+```text
 */5 * * * * /opt/LyreBirdAudio/lyrebird-diagnostics.sh quick >> /var/log/lyrebird-health.log 2>&1
 ```
 
@@ -393,14 +393,14 @@ journalctl -u mediamtx-audio -n 50
 
 ## Troubleshooting
 
-### Issue: "Permission Denied"
+## Issue: "Permission Denied"
 
 Run orchestrator with sudo:
 ```bash
 sudo ./lyrebird-orchestrator.sh
 ```
 
-### Issue: "MediaMTX Download Failed"
+## Issue: "MediaMTX Download Failed"
 
 Check internet connection:
 ```bash
@@ -409,7 +409,7 @@ curl -I https://github.com
 
 Download manually: [MediaMTX Releases](https://github.com/bluenviron/mediamtx/releases)
 
-### Issue: "No USB Audio Devices Found"
+## Issue: "No USB Audio Devices Found"
 
 Check device connection:
 ```bash
@@ -417,7 +417,7 @@ lsusb
 arecord -l
 ```
 
-### Issue: "Stream Won't Start"
+## Issue: "Stream Won't Start"
 
 Check device capabilities:
 ```bash

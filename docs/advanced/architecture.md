@@ -54,7 +54,7 @@ graph TD
 | 2. Device | udev | USB persistence | udev rules |
 | 1. Hardware | USB Devices | Audio capture | USB Audio Class |
 
-### Layer 1: Hardware Layer
+## Layer 1: Hardware Layer
 
 **Purpose:** Physical USB audio devices
 
@@ -74,7 +74,7 @@ graph TD
 
 **Interface:** USB protocol (ALSA drivers)
 
-### Layer 2: Device Layer
+## Layer 2: Device Layer
 
 **Purpose:** Persistent device identification and mapping
 
@@ -101,7 +101,7 @@ SUBSYSTEM=="sound", ACTION=="add", ATTRS{idVendor}=="046d", \
 
 **Interface:** Device nodes in `/dev/snd/` and `/proc/asound/cards`
 
-### Layer 3: Processing Layer
+## Layer 3: Processing Layer
 
 **Purpose:** Audio encoding and format conversion
 
@@ -131,7 +131,7 @@ ffmpeg -f alsa -i hw:CARD=Blue_Yeti \
 
 **Interface:** ALSA input -> RTSP output
 
-### Layer 4: Streaming Layer
+## Layer 4: Streaming Layer
 
 **Purpose:** RTSP stream distribution
 
@@ -161,7 +161,7 @@ GET http://localhost:9997/v3/paths/get/{stream-name}
 
 **Interface:** RTSP input on port 8554, client connections
 
-### Layer 5: Management Layer
+## Layer 5: Management Layer
 
 **Purpose:** Stream lifecycle and health management
 
@@ -190,12 +190,12 @@ sudo ./mediamtx-stream-manager.sh start|stop|restart|status
 sudo ./mediamtx-stream-manager.sh monitor
 
 # Service management
-sudo systemctl enable|start|stop mediamtx-stream-manager
+sudo systemctl enable|start|stop mediamtx-audio
 ```
 
 **Interface:** CLI commands, systemd integration
 
-### Layer 6: Client Layer
+## Layer 6: Client Layer
 
 **Purpose:** Stream consumption and playback
 
@@ -231,7 +231,7 @@ ffmpeg -i rtsp://server-ip:8554/Blue_Yeti output.opus
 
 ## Core Components
 
-### Orchestrator
+## Orchestrator
 
 **File:** `lyrebird-orchestrator.sh`
 
@@ -273,7 +273,7 @@ graph LR
     A --> G[Installer<br/>install_mediamtx.sh]
 ```
 
-### Stream Manager
+## Stream Manager
 
 **File:** `mediamtx-stream-manager.sh`
 
@@ -313,7 +313,7 @@ while monitoring:
                 attempt++
 ```
 
-### USB Mapper
+## USB Mapper
 
 **File:** `usb-audio-mapper.sh`
 
@@ -356,7 +356,7 @@ Card 1: USB_Microphone
 Generated udev rules: /etc/udev/rules.d/99-usb-soundcards.rules
 ```
 
-### Capability Checker
+## Capability Checker
 
 **File:** `lyrebird-mic-check.sh`
 
@@ -394,7 +394,7 @@ Generated udev rules: /etc/udev/rules.d/99-usb-soundcards.rules
 | Normal | 48 kHz | Opus | 128 kbps | General purpose |
 | High | 48 kHz | AAC | 192 kbps | High fidelity |
 
-### Diagnostics
+## Diagnostics
 
 **File:** `lyrebird-diagnostics.sh`
 
@@ -448,7 +448,7 @@ sudo ./lyrebird-diagnostics.sh --verbose
 sudo ./lyrebird-diagnostics.sh --export=/tmp/diagnostic-report.txt
 ```
 
-### Version Manager
+## Version Manager
 
 **File:** `lyrebird-updater.sh`
 
@@ -475,7 +475,7 @@ sudo ./lyrebird-updater.sh --list
 sudo ./lyrebird-updater.sh --update
 ```
 
-### Installer
+## Installer
 
 **File:** `install_mediamtx.sh`
 
@@ -523,11 +523,11 @@ graph LR
     style F fill:#e1f5ff
 ```
 
-### Detailed Data Flow
+## Detailed Data Flow
 
 **Stage 1: Audio Capture**
 
-```
+```text
 USB Device -> USB Controller -> ALSA Driver -> Application Buffer
 ```
 
@@ -538,7 +538,7 @@ USB Device -> USB Controller -> ALSA Driver -> Application Buffer
 
 **Stage 2: FFmpeg Processing**
 
-```
+```text
 ALSA Buffer -> FFmpeg Input -> Resampler -> Encoder -> RTSP Muxer
 ```
 
@@ -549,7 +549,7 @@ ALSA Buffer -> FFmpeg Input -> Resampler -> Encoder -> RTSP Muxer
 
 **Stage 3: MediaMTX Distribution**
 
-```
+```text
 RTSP Stream -> MediaMTX Receiver -> Stream Buffer -> Client Connections
 ```
 
@@ -560,7 +560,7 @@ RTSP Stream -> MediaMTX Receiver -> Stream Buffer -> Client Connections
 
 **Stage 4: Client Playback**
 
-```
+```text
 RTSP Packets -> Network -> Client Decoder -> Audio Output
 ```
 
@@ -569,7 +569,7 @@ RTSP Packets -> Network -> Client Decoder -> Audio Output
 - Buffers for smooth playback
 - Sends to audio output device
 
-### Control Flow
+## Control Flow
 
 **Stream Lifecycle Sequence:** This sequence diagram shows the interactions between User, Orchestrator, StreamManager, FFmpeg, and MediaMTX during stream startup and monitoring. The flow begins with the User sending a "Start streams" command to the Orchestrator, which initializes the StreamManager. The StreamManager launches FFmpeg processes that connect to MediaMTX via RTSP. MediaMTX confirms the stream is active back to the StreamManager, which reports success to the User. A monitoring loop then shows the StreamManager continuously checking MediaMTX health status. If a stream failure is detected, the StreamManager automatically restarts the FFmpeg process and reconnects to MediaMTX.
 
@@ -637,7 +637,7 @@ The system detects failures early and recovers automatically:
 - Clean up resources before restart
 - Validate recovery success
 
-### Idempotency
+## Idempotency
 
 Operations can be safely repeated without side effects:
 
@@ -655,7 +655,7 @@ sudo ./lyrebird-diagnostics.sh
 - Clean up previous state
 - Generate consistent output
 
-### Configuration as Code
+## Configuration as Code
 
 All configuration is stored in version-controllable files:
 
@@ -674,7 +674,7 @@ All configuration is stored in version-controllable files:
 
 ## Scalability
 
-### Vertical Scaling
+## Vertical Scaling
 
 **Single-Server Limits:**
 
@@ -686,7 +686,7 @@ All configuration is stored in version-controllable files:
 
 **Resource Calculation:**
 
-```
+```text
 CPU per stream: 1-5%
 Memory per stream: 40-80 MB
 Total CPU = Num_Streams × 3% (average)
@@ -695,19 +695,19 @@ Total Memory = (Num_Streams × 50 MB) + 200 MB base
 
 **Example:**
 
-```
+```text
 10 streams:
   CPU: 10 × 3% = 30% total
   Memory: (10 × 50 MB) + 200 MB = 700 MB
 ```
 
-### Horizontal Scaling
+## Horizontal Scaling
 
 For larger deployments, distribute across multiple servers:
 
 **Deployment Pattern:**
 
-```
+```text
 Server 1: Devices 1-10  -> streams.example.com
 Server 2: Devices 11-20 -> streams2.example.com
 Server 3: Devices 21-30 -> streams3.example.com
@@ -720,7 +720,7 @@ Server 3: Devices 21-30 -> streams3.example.com
 - Resource-based assignment
 - Failover configuration
 
-### Performance Optimization
+## Performance Optimization
 
 **Codec Selection:**
 
@@ -742,7 +742,7 @@ Server 3: Devices 21-30 -> streams3.example.com
 
 ## Component Dependencies
 
-### Dependency Graph
+## Dependency Graph
 
 **Component Dependencies:** This diagram shows how LyreBirdAudio components depend on each other and external systems. The Orchestrator depends on Stream Manager, USB Mapper, Capability Checker, Diagnostics, and Updater. Stream Manager depends on MediaMTX, FFmpeg, and Capability Checker. USB Mapper depends on udev. Capability Checker depends on FFmpeg and ALSA. Diagnostics depends on MediaMTX, Stream Manager, and USB Mapper. Updater depends on Git/Curl. The external dependencies (MediaMTX, FFmpeg, udev, ALSA, Git/Curl) are highlighted in different colors to distinguish them from internal components.
 
@@ -775,7 +775,7 @@ graph TD
     style K fill:#e1f5ff
 ```
 
-### External Dependencies
+## External Dependencies
 
 **Required Packages:**
 
@@ -803,7 +803,7 @@ sudo ./lyrebird-diagnostics.sh --check-deps
 
 ## Best Practices
 
-### Component Design
+## Component Design
 
 1. **Single Responsibility** - Each component does one thing well
 2. **Clear Interfaces** - Well-defined input/output contracts
@@ -811,7 +811,7 @@ sudo ./lyrebird-diagnostics.sh --check-deps
 4. **Logging** - Detailed logs for troubleshooting
 5. **Documentation** - Clear usage instructions
 
-### System Integration
+## System Integration
 
 1. **Use Systemd** - Manage services with systemd
 2. **Version Control** - Track configuration changes
@@ -819,7 +819,7 @@ sudo ./lyrebird-diagnostics.sh --check-deps
 4. **Backup Regularly** - Backup configurations and scripts
 5. **Test Thoroughly** - Validate before production deployment
 
-### Performance
+## Performance
 
 1. **Match Hardware** - Don't exceed platform capabilities
 2. **Optimize Settings** - Use appropriate quality for use case
@@ -844,14 +844,14 @@ sudo ./lyrebird-diagnostics.sh --check-deps
 <div class="grid" markdown>
 
 <div markdown>
-### Performance Tuning
+## Performance Tuning
 Optimization strategies and best practices
 
 [Performance Tuning →](performance.md)
 </div>
 
 <div markdown>
-### Troubleshooting
+## Troubleshooting
 Common issues and solutions
 
 [Troubleshooting →](troubleshooting.md)

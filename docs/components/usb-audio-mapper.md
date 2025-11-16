@@ -17,19 +17,19 @@ The USB Audio Mapper is a critical component that solves one of the most challen
 
 ## The Problem It Solves
 
-### USB Enumeration Order
+## USB Enumeration Order
 
 Without persistent naming, USB devices are enumerated in unpredictable order:
 
 **Boot 1:**
-```
+```text
 USB Mic in port 1-1.4 -> /dev/snd/pcmC0D0c (card 0)
 USB Mic in port 1-1.5 -> /dev/snd/pcmC1D0c (card 1)
 USB Mic in port 2-1.2 -> /dev/snd/pcmC2D0c (card 2)
 ```
 
 **Boot 2 (after power cycle):**
-```
+```text
 USB Mic in port 2-1.2 -> /dev/snd/pcmC0D0c (card 0)  <- Different!
 USB Mic in port 1-1.5 -> /dev/snd/pcmC1D0c (card 1)  <- Different!
 USB Mic in port 1-1.4 -> /dev/snd/pcmC2D0c (card 2)  <- Different!
@@ -41,7 +41,7 @@ USB Mic in port 1-1.4 -> /dev/snd/pcmC2D0c (card 2)  <- Different!
 
 The USB Audio Mapper creates udev rules that map each USB port to a consistent device name:
 
-```
+```text
 Port 1-1.4 -> /dev/sound/by-id/Device_1 -> /dev/snd/pcmC0D0c
 Port 1-1.5 -> /dev/sound/by-id/Device_2 -> /dev/snd/pcmC1D0c
 Port 2-1.2 -> /dev/sound/by-id/Device_3 -> /dev/snd/pcmC2D0c
@@ -56,32 +56,32 @@ Port 2-1.2 -> /dev/sound/by-id/Device_3 -> /dev/snd/pcmC2D0c
 <div class="grid" markdown>
 
 <div markdown>
-### Physical Port Mapping
+## Physical Port Mapping
 Maps devices to actual USB ports on your system, not enumeration order.
 </div>
 
 <div markdown>
-### Identical Device Support
+## Identical Device Support
 Handle multiple identical USB microphones by their physical location.
 </div>
 
 <div markdown>
-### Interactive Wizard
+## Interactive Wizard
 Step-by-step guided setup for easy device mapping.
 </div>
 
 <div markdown>
-### Automation Support
+## Automation Support
 Non-interactive mode for scripted deployments.
 </div>
 
 <div markdown>
-### Platform ID Support
+## Platform ID Support
 Handle complex USB topologies with platform-specific paths.
 </div>
 
 <div markdown>
-### Backwards Compatible
+## Backwards Compatible
 Maintains compatibility with existing udev rule formats.
 </div>
 
@@ -108,7 +108,7 @@ sudo ./usb-audio-mapper.sh
 5. **Rule Generation**: Creates udev rule and writes to `/etc/udev/rules.d/99-usb-soundcards.rules`
 
 **Example Session:**
-```
+```text
 ===== USB Sound Card Mapper =====
 
 [Shows lsusb output]
@@ -128,7 +128,7 @@ Reboot required for changes to take effect.
 ```
 
 **Note:** The actual rule generated will be:
-```
+```text
 SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825",
 KERNELS=="1-1.4", ATTR{id}="front-yard-mic", SYMLINK+="sound/by-id/front-yard-mic"
 ```
@@ -157,7 +157,7 @@ sudo ./usb-audio-mapper.sh -n \
 
 ---
 
-### Test Mode
+## Test Mode
 
 Verify USB port detection without making changes:
 
@@ -166,7 +166,7 @@ sudo ./usb-audio-mapper.sh --test
 ```
 
 **Output:**
-```
+```text
 INFO: Testing USB port detection...
 Found USB devices:
 Bus 001 Device 005: ID 046d:0825 Logitech, Inc. Webcam C270
@@ -186,7 +186,7 @@ SUCCESS: Port detection test successful! All device ports were mapped.
 
 ---
 
-### Debug Mode
+## Debug Mode
 
 Enable verbose output for troubleshooting:
 
@@ -204,7 +204,7 @@ Shows detailed information about:
 
 ## Command Options
 
-### Complete Option Reference
+## Complete Option Reference
 
 | Option | Short | Description |
 |--------|-------|-------------|
@@ -247,12 +247,12 @@ SUBSYSTEM=="sound", ATTRS{idVendor}=="0d8c", ATTRS{idProduct}=="0014", KERNELS==
 - `ATTR{id}="front-yard-mic"`: Set ALSA card ID
 - `SYMLINK+="sound/by-id/..."`: Create persistent symlink
 
-### Device Symlinks
+## Device Symlinks
 
 **Location:** `/dev/sound/by-id/`
 
 **Created After Reboot:**
-```
+```text
 /dev/sound/by-id/
 ├── front-yard-mic -> ../../snd/controlC0
 ├── back-yard-mic -> ../../snd/controlC1
@@ -269,7 +269,7 @@ ffmpeg -f alsa -i hw:CARD=front-yard-mic ...
 
 ## How It Works
 
-### USB Port Path Detection
+## USB Port Path Detection
 
 The mapper uses the Linux USB subsystem to identify physical port locations using two detection methods:
 
@@ -298,17 +298,17 @@ graph TD
     style M fill:#00bcd4,color:#fff
 ```
 
-### Port Path Examples
+## Port Path Examples
 
 **Simple Topology:**
-```
+```text
 1-1.4 -> USB Hub Port 4 on Bus 1
 1-1.5 -> USB Hub Port 5 on Bus 1
 2-1.2 -> USB Hub Port 2 on Bus 2
 ```
 
 **Complex Topology (Cascaded Hubs):**
-```
+```text
 1-1.4.2 -> Bus 1, Hub Port 4, Cascaded Hub Port 2
 1-1.4.3 -> Bus 1, Hub Port 4, Cascaded Hub Port 3
 ```
@@ -322,7 +322,7 @@ The mapper handles both simple and complex topologies automatically.
 For systems with complex USB architectures, the mapper supports platform-specific device identification:
 
 **Platform ID Format:**
-```
+```text
 platform-xhci-hcd.0-usb-0:1.4:1.0
 ```
 
@@ -342,7 +342,7 @@ The mapper automatically selects the most appropriate identifier:
 
 ## Multiple Identical Devices
 
-### The Challenge
+## The Challenge
 
 When you have multiple identical USB microphones:
 - Same Vendor ID
@@ -351,7 +351,7 @@ When you have multiple identical USB microphones:
 
 **Traditional udev rules can't distinguish them.**
 
-### The Solution
+## The Solution
 
 The USB Audio Mapper uses **physical port location** as the differentiator:
 
@@ -378,13 +378,13 @@ KERNELS=="1-1.5", ATTR{id}="mic-right", SYMLINK+="sound/by-id/mic-right"
 The mapper maintains compatibility with older naming schemes:
 
 **Legacy Format (Serial Number Suffix):**
-```
+```text
 Device_1_ABC123
 Device_2_DEF456
 ```
 
 **Current Format (No Suffix):**
-```
+```text
 Device_1
 Device_2
 ```
@@ -415,7 +415,7 @@ sudo ./mediamtx-stream-manager.sh start
 
 ---
 
-### Adding New Device
+## Adding New Device
 
 ```bash
 # 1. Connect new USB microphone
@@ -434,7 +434,7 @@ sudo ./mediamtx-stream-manager.sh restart
 
 ---
 
-### Automated Deployment
+## Automated Deployment
 
 ```bash
 #!/bin/bash
@@ -455,7 +455,7 @@ echo "Reboot recommended: sudo reboot"
 
 ---
 
-### Verifying Mappings
+## Verifying Mappings
 
 ```bash
 # Check if rules file exists
@@ -475,7 +475,7 @@ arecord -L | grep -i front-yard-mic
 
 ## Troubleshooting
 
-### Symlinks Not Created After Reboot
+## Symlinks Not Created After Reboot
 
 **Symptoms:** `/dev/sound/by-id/` directory is empty or symlinks missing
 
@@ -503,7 +503,7 @@ sudo udevadm test /sys/class/sound/card0
 
 ---
 
-### Device Mapping Changes After Reboot
+## Device Mapping Changes After Reboot
 
 **Symptoms:** Device gets different name after reboot
 
@@ -532,7 +532,7 @@ sudo nano /etc/udev/rules.d/99-usb-soundcards.rules
 
 ---
 
-### Multiple Devices Get Same Symlink
+## Multiple Devices Get Same Symlink
 
 **Symptoms:** Two devices compete for the same device name
 
@@ -551,7 +551,7 @@ grep KERNELS /etc/udev/rules.d/99-usb-soundcards.rules | sort | uniq -d
 
 ---
 
-### Permission Issues
+## Permission Issues
 
 **Symptoms:** "Permission denied" when running mapper
 
@@ -570,7 +570,7 @@ chmod +x usb-audio-mapper.sh
 
 ## Integration with Other Components
 
-### With Capability Checker
+## With Capability Checker
 
 The capability checker can use friendly names:
 
@@ -589,7 +589,7 @@ DEVICE_BACK_YARD_MIC_SAMPLE_RATE=48000
 DEVICE_BACK_YARD_MIC_CHANNELS=2
 ```
 
-### With Stream Manager
+## With Stream Manager
 
 The stream manager automatically uses friendly names:
 
@@ -600,7 +600,7 @@ rtsp://host:8554/back-yard-mic
 rtsp://host:8554/studio-interface
 ```
 
-### With Orchestrator
+## With Orchestrator
 
 The orchestrator integrates USB mapping into setup workflows:
 
@@ -634,7 +634,7 @@ The orchestrator integrates USB mapping into setup workflows:
 
 ## Advanced Usage
 
-### Custom Rule Attributes
+## Custom Rule Attributes
 
 You can manually edit rules to add additional matching criteria:
 
@@ -648,7 +648,7 @@ SUBSYSTEM=="sound", ATTRS{busnum}=="1", ATTRS{devnum}=="4",
 ATTR{id}="mic-bus1-dev4", SYMLINK+="sound/by-id/mic-bus1-dev4"
 ```
 
-### Multiple Symlinks per Device
+## Multiple Symlinks per Device
 
 Create multiple symlinks for the same device:
 

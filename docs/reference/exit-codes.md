@@ -295,7 +295,7 @@ esac
 
 ## Custom Script Exit Codes
 
-### Best Practices
+## Best Practices
 
 When creating custom LyreBird scripts, follow these conventions:
 
@@ -328,7 +328,7 @@ echo "Operation completed"
 exit $SUCCESS
 ```
 
-### Handling Multiple Commands
+## Handling Multiple Commands
 
 ```bash
 #!/bin/bash
@@ -359,7 +359,7 @@ exit $EXIT_CODE
 
 ## Monitoring and Alerting
 
-### Nagios/Icinga Integration
+## Nagios/Icinga Integration
 
 ```bash
 #!/bin/bash
@@ -388,7 +388,7 @@ case $RESULT in
 esac
 ```
 
-### Systemd Service Monitoring
+## Systemd Service Monitoring
 
 ```ini
 # /etc/systemd/system/lyrebird-health-check.service
@@ -402,7 +402,7 @@ Restart=on-failure
 RestartPreventExitStatus=1
 ```
 
-### Cron Job with Email Alerts
+## Cron Job with Email Alerts
 
 ```bash
 # /etc/cron.daily/lyrebird-health-check
@@ -427,7 +427,7 @@ exit $EXIT_CODE
 
 ## Exit Code Reference Summary
 
-### Quick Reference Table
+## Quick Reference Table
 
 | Command | Success (0) | Warning (1) | Failure (2) | Other |
 |---------|-------------|-------------|-------------|-------|
@@ -454,14 +454,14 @@ exit $EXIT_CODE
 <div class="grid" markdown>
 
 <div markdown>
-### Log Files
+## Log Files
 Log locations, formats, and analysis
 
 [Log Files →](log-files.md)
 </div>
 
 <div markdown>
-### Command Reference
+## Command Reference
 All available commands and utilities
 
 [Command Reference →](command-reference.md)

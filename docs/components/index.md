@@ -197,7 +197,7 @@ sudo ./usb-audio-mapper.sh
 
 ---
 
-### Specialized Components: Business Logic
+## Specialized Components: Business Logic
 
 Each specialized component handles its specific domain:
 
@@ -232,7 +232,7 @@ sudo ./usb-audio-mapper.sh
 
 ---
 
-### Component to Component
+## Component to Component
 
 ```bash
 # Stream Manager needs device capabilities
@@ -247,7 +247,7 @@ ffmpeg -f alsa -i hw:CARD=Device_1 -ar 48000 -ac 2 ...
 
 ---
 
-### Diagnostics to All Components
+## Diagnostics to All Components
 
 ```bash
 # Diagnostics checks all components
@@ -316,7 +316,7 @@ sudo ./lyrebird-diagnostics.sh quick
 
 For production deployments, use components in this order:
 
-### Initial Setup
+## Initial Setup
 
 1. **Version Manager** - Pin to specific stable tag
 2. **Installer** - Install MediaMTX specific version
@@ -325,7 +325,7 @@ For production deployments, use components in this order:
 5. **Stream Manager** - Install systemd service
 6. **Diagnostics** - Verify all systems healthy
 
-### Ongoing Maintenance
+## Ongoing Maintenance
 
 - **Daily:** Diagnostics (quick mode)
 - **Weekly:** Diagnostics (full mode)
@@ -336,7 +336,7 @@ For production deployments, use components in this order:
 
 ## Troubleshooting Guide
 
-### Problem: Can't find component scripts
+## Problem: Can't find component scripts
 
 **Solution:**
 ```bash
@@ -352,7 +352,7 @@ ls -la *.sh
 
 ---
 
-### Problem: Component execution fails
+## Problem: Component execution fails
 
 **Solution:**
 ```bash
@@ -369,7 +369,7 @@ ls -la /var/log/
 
 ---
 
-### Problem: Components out of sync
+## Problem: Components out of sync
 
 **Solution:**
 ```bash
@@ -388,7 +388,7 @@ ls -la /var/log/
 
 When modifying components, follow these principles:
 
-### Single Responsibility
+## Single Responsibility
 
 Each component should:
 - Handle exactly one concern
@@ -411,7 +411,7 @@ fi
 
 ---
 
-### Error Handling
+## Error Handling
 
 All components should:
 - Use consistent exit codes
@@ -430,7 +430,7 @@ All components should:
 
 ---
 
-### Orchestrator Integration
+## Orchestrator Integration
 
 Components integrated with Orchestrator should:
 - Support both interactive and non-interactive modes

@@ -14,12 +14,12 @@ Transform USB microphones into reliable RTSP streams for continuous monitoring a
 <div class="grid" markdown>
 
 <div markdown>
-### No Configuration Guesswork
+## No Configuration Guesswork
 Automatically detects hardware capabilities and optimal settings for your USB audio devices.
 </div>
 
 <div markdown>
-### Survives Reboots
+## Survives Reboots
 USB devices maintain consistent names via udev rules. No manual intervention after system restarts.
 </div>
 
@@ -29,7 +29,7 @@ Automatic recovery from crashes and failures. Built-in watchdog ensures streams 
 </div>
 
 <div markdown>
-### Easy Updates
+## Easy Updates
 Git-based version management with rollback capability. Update or revert with simple commands.
 </div>
 
@@ -152,12 +152,12 @@ ffmpeg -i rtsp://localhost:8554/Device_1 -acodec copy output.aac
 <div class="grid" markdown>
 
 <div markdown>
-### Linux
+## Linux
 Full support for Ubuntu, Debian, Raspberry Pi OS, and derivatives
 </div>
 
 <div markdown>
-### Architectures
+## Architectures
 **x86_64** · **ARM64** · **ARMv7** · **ARMv6**
 </div>
 

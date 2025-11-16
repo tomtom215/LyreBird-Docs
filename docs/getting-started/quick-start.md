@@ -43,7 +43,7 @@ The orchestrator wizard will guide you through:
 
 The orchestrator presents a menu-driven interface:
 
-```
+```text
 ========================================
 LyreBirdAudio Orchestrator v2.1.0
 ========================================
@@ -93,14 +93,14 @@ For a standard single-microphone setup:
 
 ## Verify Installation
 
-### Check Stream Status
+## Check Stream Status
 
 ```bash
 sudo ./mediamtx-stream-manager.sh status
 ```
 
 Expected output:
-```
+```text
 Stream Status:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Device_1    RUNNING    PID: 1234    Uptime: 5m

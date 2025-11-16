@@ -32,7 +32,7 @@ Before removing LyreBirdAudio, consider:
 - [ ] **Notify Users:** Inform anyone relying on your streams
 - [ ] **Alternative Solution:** Ensure replacement system is ready (if applicable)
 
-### Create Final Backup
+## Create Final Backup
 
 ```bash
 # Create final backup before uninstallation
@@ -75,7 +75,7 @@ echo "LyreBirdAudio uninstalled successfully"
 
 ## Step-by-Step Uninstallation
 
-### Step 1: Stop All Services
+## Step 1: Stop All Services
 
 Stop running services gracefully:
 
@@ -95,7 +95,7 @@ sudo systemctl stop mediamtx 2>/dev/null || true
 sudo systemctl status mediamtx 2>/dev/null || echo "MediaMTX service not found"
 ```
 
-### Step 2: Disable Auto-Start Services
+## Step 2: Disable Auto-Start Services
 
 Prevent services from starting on boot:
 
@@ -115,7 +115,7 @@ sudo systemctl disable mediamtx 2>/dev/null || true
 sudo systemctl is-enabled mediamtx 2>/dev/null || echo "Service disabled"
 ```
 
-### Step 3: Remove Systemd Service Files
+## Step 3: Remove Systemd Service Files
 
 Delete service configuration files:
 
@@ -136,7 +136,7 @@ sudo systemctl daemon-reload
 sudo systemctl reset-failed
 ```
 
-### Step 4: Remove USB Persistence Rules
+## Step 4: Remove USB Persistence Rules
 
 Delete udev rules for USB device mapping:
 
@@ -164,7 +164,7 @@ sudo rm -f /dev/lyrebird-* 2>/dev/null || true
 ls -l /dev/lyrebird-* 2>/dev/null || echo "Device symlinks removed"
 ```
 
-### Step 5: Remove MediaMTX Installation
+## Step 5: Remove MediaMTX Installation
 
 Delete MediaMTX binary and configuration:
 
@@ -184,7 +184,7 @@ sudo rm -rf /etc/mediamtx
 ls -ld /etc/mediamtx 2>/dev/null || echo "MediaMTX configuration removed"
 ```
 
-### Step 6: Remove LyreBirdAudio Scripts
+## Step 6: Remove LyreBirdAudio Scripts
 
 Delete all LyreBirdAudio components:
 
@@ -196,7 +196,7 @@ sudo rm -rf /opt/LyreBirdAudio
 ls -ld /opt/LyreBirdAudio 2>/dev/null || echo "LyreBirdAudio directory removed"
 ```
 
-### Step 7: Remove Log Files
+## Step 7: Remove Log Files
 
 Clean up application logs:
 
@@ -219,7 +219,7 @@ sudo journalctl --vacuum-time=1s --rotate
 echo "Systemd journal cleaned"
 ```
 
-### Step 8: Remove Backup Data (Optional)
+## Step 8: Remove Backup Data (Optional)
 
 Remove configuration backups:
 
@@ -240,7 +240,7 @@ ls -ld /var/backups/lyrebird 2>/dev/null || echo "Backup directory removed"
 !!! note "Preserve Backups"
     If you want to keep backups for potential future use, skip this step or move backups to a different location before uninstalling.
 
-### Step 9: Remove Cron Jobs (If Configured)
+## Step 9: Remove Cron Jobs (If Configured)
 
 Remove any scheduled backup or maintenance jobs:
 
@@ -259,7 +259,7 @@ sudo crontab -e
 # - mediamtx (if applicable)
 ```
 
-### Step 10: Verify Complete Removal
+## Step 10: Verify Complete Removal
 
 Confirm all components are removed:
 
@@ -302,7 +302,7 @@ ps aux | grep -i mediamtx | grep -v grep || echo "  No processes found"
 
 ## Selective Removal
 
-### Remove Only Stream Manager
+## Remove Only Stream Manager
 
 Keep MediaMTX but remove LyreBird stream management:
 
@@ -320,7 +320,7 @@ sudo rm -rf /opt/LyreBirdAudio
 echo "MediaMTX retained, stream manager removed"
 ```
 
-### Remove Only MediaMTX
+## Remove Only MediaMTX
 
 Keep LyreBird scripts but remove MediaMTX server:
 
@@ -338,7 +338,7 @@ sudo rm -rf /opt/mediamtx
 echo "MediaMTX removed, LyreBird scripts retained"
 ```
 
-### Remove Only USB Persistence
+## Remove Only USB Persistence
 
 Remove USB device mapping but keep services:
 
@@ -355,7 +355,7 @@ echo "USB persistence removed, services retained"
 
 ## Data Preservation
 
-### Archive Configuration Before Removal
+## Archive Configuration Before Removal
 
 ```bash
 # Create archival backup
@@ -381,7 +381,7 @@ files before uninstallation. To restore:
 1. Copy configuration files to original locations
 2. Reinstall LyreBirdAudio from GitHub
 3. Reload services: systemctl daemon-reload
-4. Start services: systemctl start mediamtx-stream-manager
+4. Start services: systemctl start mediamtx-audio
 
 For support: https://github.com/tomtom215/LyreBirdAudio
 EOF"
@@ -393,11 +393,11 @@ sudo tar czf lyrebird-archive-$(date +%Y%m%d).tar.gz $(basename $ARCHIVE_DIR)
 echo "Archive created: lyrebird-archive-$(date +%Y%m%d).tar.gz"
 ```
 
-### Export Logs Before Removal
+## Export Logs Before Removal
 
 ```bash
 # Export logs for analysis
-sudo journalctl -u mediamtx-stream-manager > /tmp/lyrebird-logs-$(date +%Y%m%d).txt
+sudo journalctl -u mediamtx-audio > /tmp/lyrebird-logs-$(date +%Y%m%d).txt
 sudo journalctl -u mediamtx >> /tmp/lyrebird-logs-$(date +%Y%m%d).txt 2>/dev/null || true
 
 echo "Logs exported to: /tmp/lyrebird-logs-$(date +%Y%m%d).txt"
@@ -433,7 +433,7 @@ sudo /opt/LyreBirdAudio/lyrebird-orchestrator.sh
 # Apply configuration
 sudo udevadm control --reload-rules
 sudo systemctl daemon-reload
-sudo systemctl start mediamtx-stream-manager
+sudo systemctl start mediamtx-audio
 
 echo "LyreBirdAudio restored from archive"
 ```
@@ -460,7 +460,7 @@ sudo apt-get autoremove
 !!! warning "System Dependencies"
     Only remove dependencies if you're certain they're not needed by other applications on your system.
 
-### Clean Package Cache
+## Clean Package Cache
 
 ```bash
 # Clean apt cache
@@ -470,7 +470,7 @@ sudo apt-get clean
 sudo apt-get autoclean
 ```
 
-### Verify USB Devices Return to Default
+## Verify USB Devices Return to Default
 
 ```bash
 # Check USB audio devices
@@ -487,7 +487,7 @@ cat /proc/asound/cards
 
 ## Troubleshooting Uninstallation
 
-### Issue: Services Won't Stop
+## Issue: Services Won't Stop
 
 **Force stop services:**
 
@@ -505,7 +505,7 @@ sudo pkill -9 -f mediamtx
 ps aux | grep mediamtx | grep -v grep || echo "All processes stopped"
 ```
 
-### Issue: Permission Denied
+## Issue: Permission Denied
 
 **Ensure running with sudo:**
 
@@ -516,7 +516,7 @@ sudo -i
 # Then run uninstallation commands
 ```
 
-### Issue: Directory Not Empty
+## Issue: Directory Not Empty
 
 **Force remove directories:**
 
@@ -530,7 +530,7 @@ sudo rm -rf /etc/mediamtx
 ls -ld /opt/LyreBirdAudio /opt/mediamtx /etc/mediamtx 2>/dev/null || echo "Removed"
 ```
 
-### Issue: Files Still Exist
+## Issue: Files Still Exist
 
 **Search for remaining files:**
 
@@ -542,7 +542,7 @@ sudo find / -name "*lyrebird*" -o -name "*mediamtx*" 2>/dev/null
 sudo rm -f <file_path>
 ```
 
-### Issue: Service Fails to Disable
+## Issue: Service Fails to Disable
 
 **Mask the service:**
 
@@ -634,7 +634,7 @@ Configuration backup and recovery procedures
 </div>
 
 <div markdown>
-### Main Documentation
+## Main Documentation
 Complete documentation index
 
 [Main Documentation →](../index.md)
