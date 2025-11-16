@@ -69,7 +69,7 @@ sudo ./usb-audio-mapper.sh --test
 
 **Example test output:**
 
-```
+```text
 [TEST MODE] Would create udev rules for:
   - Blue Yeti (usb-046d_0825_12345678)
   - USB Audio Device (usb-0d8c_0014_56789012)
@@ -92,7 +92,7 @@ LyreBirdAudio uses a dual-lookup system for maximum flexibility and uniqueness:
 
 Human-readable names for common devices:
 
-```
+```text
 Blue_Yeti
 USB_Microphone
 Logitech_Webcam
@@ -108,7 +108,7 @@ Logitech_Webcam
 
 Complete USB identification strings:
 
-```
+```text
 usb-046d_0825_12345678
 usb-0d8c_0014_56789012
 ```
@@ -206,7 +206,7 @@ ATTR{id}="usb-046d_0825_98765432", SYMLINK+="sound/by-id/usb-046d_0825_98765432"
 
 The mapper script collects information from:
 
-```bash
+```text
 /proc/asound/cards              # ALSA card enumeration
 /sys/class/sound/card*/         # Device attributes
 /sys/bus/usb/devices/           # USB device information
@@ -308,7 +308,7 @@ cat /proc/asound/cards
 
 **Example output:**
 
-```
+```text
  0 [PCH            ]: HDA-Intel - HDA Intel PCH
                       HDA Intel PCH at 0xf7f30000 irq 128
  1 [Yeti           ]: USB-Audio - Blue Yeti
@@ -327,7 +327,7 @@ ls -la /dev/snd/by-id/
 
 **Example output:**
 
-```
+```text
 lrwxrwxrwx 1 root root 12 Nov 15 10:30 usb-046d_0825_12345678 -> ../controlC1
 lrwxrwxrwx 1 root root 12 Nov 15 10:31 usb-0d8c_0014_56789012 -> ../controlC2
 ```

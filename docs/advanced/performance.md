@@ -71,7 +71,7 @@ Beyond per-stream costs, the system requires base resources:
 
 **Formula:**
 
-```
+```text
 Total CPU = Base_CPU + (Num_Streams × Stream_CPU)
 Total Memory = Base_Memory + (Num_Streams × Stream_Memory)
 Total FDs = Base_FDs + (Num_Streams × FDs_per_Stream)
@@ -79,7 +79,7 @@ Total FDs = Base_FDs + (Num_Streams × FDs_per_Stream)
 
 **Example Calculation (10 streams at normal quality):**
 
-```
+```text
 CPU: 3% + (10 × 3%) = 33% total
 Memory: 200 MB + (10 × 50 MB) = 700 MB total
 FDs: 100 + (10 × 12) = 220 file descriptors
@@ -616,7 +616,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 
 **Monitoring Output:**
 
-```
+```text
 Stream Monitor - Updating every 5 seconds
 ===========================================
 [10:30:15] Blue_Yeti: HEALTHY (CPU: 3.2%, MEM: 45 MB)
@@ -671,7 +671,7 @@ done
 
 **Metrics File Format:**
 
-```
+```text
 Timestamp,CPU%,MemoryMB,FileDescriptors
 2025-11-15 10:00:00,25.5,650,234
 2025-11-15 10:01:00,26.1,652,236

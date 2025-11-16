@@ -183,7 +183,7 @@ sudo ./usb-audio-mapper.sh --test
 
 **Example Output:**
 
-```
+```text
 Detected USB Audio Devices:
 ===========================
 Card 0: Blue_Yeti
@@ -340,7 +340,7 @@ sudo ./lyrebird-updater.sh --status
 
 **Output:**
 
-```
+```text
 Current Version: 1.2.0
 Latest Version: 1.3.0
 Update Available: Yes

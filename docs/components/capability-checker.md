@@ -64,7 +64,7 @@ Display all detected audio devices with their capabilities:
 ```
 
 **Example Output:**
-```
+```text
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 LyreBird Audio Device Capability Checker v1.0.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -168,7 +168,7 @@ sudo ./lyrebird-mic-check.sh -V
 - Configuration syntax is valid
 
 **Example Output:**
-```
+```text
 Validating /etc/mediamtx/audio-devices.conf...
 
 [PASS] DEVICE_FRONT_YARD_MIC_SAMPLE_RATE=48000
@@ -428,7 +428,7 @@ USB audio adapters with 3.5mm analog inputs have **two** sets of capabilities:
 2. **Microphone Capabilities**: What your analog microphone can actually deliver
 
 **Example Scenario:**
-```
+```text
 USB Audio Adapter Chip:
   [SUPPORTED] Supports 96kHz sample rate
   [SUPPORTED] Supports 24-bit depth
@@ -444,7 +444,7 @@ Your Connected Microphone:
 
 The Capability Checker detects USB audio adapters and issues warnings:
 
-```
+```text
 WARNING: This appears to be a USB audio adapter chip.
 
 If you're using a 3.5mm analog input (microphone or line-in):
@@ -536,7 +536,7 @@ Every time you generate a new configuration, the previous one is automatically b
 **Backup Location:** `/etc/mediamtx/audio-devices.conf.backup.YYYYMMDD_HHMMSS`
 
 **Example:**
-```
+```text
 /etc/mediamtx/audio-devices.conf.backup.20251115_143000
 ```
 

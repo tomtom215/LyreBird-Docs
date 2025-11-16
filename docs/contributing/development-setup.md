@@ -43,7 +43,7 @@ git remote -v
 ```
 
 Expected output:
-```
+```text
 origin    https://github.com/YOUR-USERNAME/LyreBirdAudio.git (fetch)
 origin    https://github.com/YOUR-USERNAME/LyreBirdAudio.git (push)
 upstream  https://github.com/tomtom215/LyreBirdAudio.git (fetch)
@@ -161,7 +161,7 @@ arecord -l
 
 Understanding the codebase organization:
 
-```
+```text
 LyreBirdAudio/
 ├── lyrebird-orchestrator.sh          # Main TUI management interface
 ├── mediamtx-stream-manager.sh        # Stream lifecycle manager
@@ -493,7 +493,7 @@ Fixes #42"
 
 **Commit Message Format:**
 
-```
+```text
 Type: Brief summary (50 chars or less)
 
 Detailed explanation of what changed and why.

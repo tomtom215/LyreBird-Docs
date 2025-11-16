@@ -110,7 +110,7 @@ Validates OS is supported:
 
 **Example Output:**
 
-```
+```text
 [PASS] Operating System: Ubuntu 22.04.3 LTS
 [PASS] Kernel Version: 5.15.0-89-generic
 [PASS] Architecture: x86_64
@@ -127,7 +127,7 @@ Verifies all dependencies present:
 
 **Example Output:**
 
-```
+```text
 [PASS] FFmpeg: version 4.4.2 (required: 4.4+)
 [PASS] alsa-utils: installed
 [PASS] curl: installed
@@ -144,7 +144,7 @@ Checks access to required directories and files:
 
 **Example Output:**
 
-```
+```text
 [PASS] Configuration directory accessible: /etc/mediamtx/
 [PASS] Log directory writable: /var/log/lyrebird/
 [PASS] Script permissions correct
@@ -162,7 +162,7 @@ Scans for connected USB audio devices:
 
 **Example Output:**
 
-```
+```text
 [PASS] Found 2 USB audio devices:
   - Card 0: Blue_Yeti
   - Card 1: USB_Microphone
@@ -178,7 +178,7 @@ Validates USB persistence configuration:
 
 **Example Output:**
 
-```
+```text
 [PASS] udev rules file exists: /etc/udev/rules.d/99-usb-soundcards.rules
 [PASS] Rules syntax valid
 [PASS] Symlinks created: 2 devices
@@ -194,7 +194,7 @@ Tests that device names remain consistent:
 
 **Example Output:**
 
-```
+```text
 [PASS] Device persistence verified:
   - Blue_Yeti: hw:0 (persistent)
   - USB_Microphone: hw:1 (persistent)
@@ -210,7 +210,7 @@ Validates user can access audio devices:
 
 **Example Output:**
 
-```
+```text
 [PASS] Current user in audio group
 [PASS] Device permissions correct (660, group: audio)
 [PASS] Can access all audio devices
@@ -228,7 +228,7 @@ Checks MediaMTX service status:
 
 **Example Output:**
 
-```
+```text
 [PASS] MediaMTX service: active (running)
 [PASS] Process ID: 12340
 [PASS] Uptime: 2 days, 5 hours
@@ -244,7 +244,7 @@ Tests HTTP API connectivity:
 
 **Example Output:**
 
-```
+```text
 [PASS] MediaMTX API responding on port 9997
 [PASS] API version: v3
 [PASS] Endpoint accessible: /v3/paths/list
@@ -260,7 +260,7 @@ Checks stream manager service (if installed):
 
 **Example Output:**
 
-```
+```text
 [PASS] Stream Manager service: active (running)
 [PASS] Monitoring mode: enabled
 [PASS] No recent errors
@@ -278,7 +278,7 @@ Validates MediaMTX RTSP server:
 
 **Example Output:**
 
-```
+```text
 [PASS] RTSP port 8554: listening
 [PASS] Process: mediamtx (PID: 12340)
 ```
@@ -293,7 +293,7 @@ Enumerates currently active streams:
 
 **Example Output:**
 
-```
+```text
 [PASS] Found 2 active streams:
   - Blue_Yeti
   - USB_Microphone
@@ -309,7 +309,7 @@ Tests stream connectivity and data flow:
 
 **Example Output:**
 
-```
+```text
 [PASS] Blue_Yeti: healthy (codec: opus, rate: 48000)
 [PASS] USB_Microphone: healthy (codec: opus, rate: 48000)
 ```
@@ -324,7 +324,7 @@ Validates device configuration file:
 
 **Example Output:**
 
-```
+```text
 [PASS] Configuration file exists
 [PASS] Configuration syntax valid
 [PASS] 2 devices configured
@@ -342,7 +342,7 @@ Monitors system CPU utilization:
 
 **Example Output:**
 
-```
+```text
 [PASS] System CPU usage: 25.3% (threshold: 80%)
 [PASS] FFmpeg processes: 6.5% total
   - Blue_Yeti: 3.2%
@@ -359,7 +359,7 @@ Checks memory availability:
 
 **Example Output:**
 
-```
+```text
 [PASS] Memory available: 2.4 GB (threshold: 200 MB)
 [PASS] Swap usage: 0 MB
 [PASS] Memory per stream average: 48 MB
@@ -375,7 +375,7 @@ Monitors file descriptor usage:
 
 **Example Output:**
 
-```
+```text
 [PASS] File descriptors: 245 / 1024 (24%)
 [PASS] Within safe limits
 ```
@@ -390,7 +390,7 @@ Checks disk space for logs:
 
 **Example Output:**
 
-```
+```text
 [PASS] Log directory space: 15.2 GB available
 [PASS] Root filesystem: 42.8 GB available
 ```
@@ -407,7 +407,7 @@ Tests local network connectivity:
 
 **Example Output:**
 
-```
+```text
 [PASS] Localhost connectivity: OK
 [PASS] Network interfaces: 2 active
 [PASS] Primary IP: 192.168.1.100
@@ -423,7 +423,7 @@ Tests RTSP stream access:
 
 **Example Output:**
 
-```
+```text
 [PASS] Local RTSP connectivity: OK
 [PASS] Stream connection latency: 15ms
 ```
@@ -438,7 +438,7 @@ Checks firewall configuration:
 
 **Example Output:**
 
-```
+```text
 [PASS] Firewall: active
 [PASS] RTSP port 8554: allowed
 [PASS] API port 9997: allowed
@@ -456,7 +456,7 @@ Validates log file access:
 
 **Example Output:**
 
-```
+```text
 [PASS] MediaMTX logs: accessible
 [PASS] Stream manager logs: accessible
 [PASS] Device logs: 2 files accessible
@@ -472,7 +472,7 @@ Scans logs for recent errors:
 
 **Example Output:**
 
-```
+```text
 [PASS] No critical errors in last 24 hours
 [WARN] 3 warnings found (USB resets)
 ```
@@ -487,7 +487,7 @@ Checks log rotation configuration:
 
 **Example Output:**
 
-```
+```text
 [PASS] Log rotation: configured
 [PASS] Largest log file: 2.4 MB
 [PASS] Rotation schedule: weekly
@@ -555,7 +555,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 
 **Example Output:**
 
-```
+```text
 Stream Monitor - Updating every 5 seconds (Ctrl+C to exit)
 ===========================================================
 [10:30:15] Blue_Yeti: HEALTHY (CPU: 3.2%, MEM: 45 MB)
@@ -760,7 +760,7 @@ sudo journalctl -u mediamtx -p err
 
 **Key Log Patterns:**
 
-```
+```log
 # Stream connection
 "[path Blue_Yeti] opened"
 
@@ -793,7 +793,7 @@ sudo grep -i "restart" /var/log/mediamtx-stream-manager.log
 
 **Key Log Patterns:**
 
-```
+```log
 # Stream started
 "Started stream: Blue_Yeti (PID: 12345)"
 
@@ -823,7 +823,7 @@ sudo tail -f /var/log/lyrebird/*.log
 
 **Key Log Patterns:**
 
-```
+```log
 # Successful capture
 "[alsa] Estimating duration from bitrate"
 

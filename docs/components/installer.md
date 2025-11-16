@@ -124,50 +124,50 @@ sudo ./install_mediamtx.sh install
 **What Happens:**
 
 1. **Platform Detection**
-   ```
+   ```text
    Detected platform: Linux x86_64
    ```
 
 2. **Fetch Latest Release**
-   ```
+   ```text
    Fetching latest MediaMTX release from GitHub...
    Latest version: v1.15.0
    ```
 
 3. **Download Binary**
-   ```
+   ```text
    Downloading: mediamtx_v1.15.0_linux_amd64.tar.gz
    Download complete: 15.2 MB
    ```
 
 4. **SHA256 Verification**
-   ```
+   ```text
    Verifying checksum...
    SHA256: abc123def456... [OK]
    ```
 
 5. **Extract and Install**
-   ```
+   ```text
    Extracting archive...
    Installing to: /usr/local/bin/mediamtx
    Setting permissions...
    ```
 
 6. **Configuration Setup**
-   ```
+   ```text
    Creating config directory: /etc/mediamtx
    Generating default configuration...
    ```
 
 7. **Service Creation**
-   ```
+   ```text
    Creating systemd service...
    Creating service user: mediamtx
    Service file: /etc/systemd/system/mediamtx.service
    ```
 
 8. **Verification**
-   ```
+   ```text
    MediaMTX v1.15.0 installed successfully
    Binary: /usr/local/bin/mediamtx
    Config: /etc/mediamtx/mediamtx.yml
@@ -187,32 +187,32 @@ sudo ./install_mediamtx.sh update
 **What Happens:**
 
 1. **Check Current Version**
-   ```
+   ```text
    Current version: v1.14.0
    Latest version: v1.15.0
    Update available
    ```
 
 2. **Backup Current Binary**
-   ```
+   ```text
    Backing up current binary...
    Backup: /usr/local/bin/mediamtx.backup
    ```
 
 3. **Download New Version**
-   ```
+   ```text
    Downloading MediaMTX v1.15.0...
    ```
 
 4. **Atomic Replacement**
-   ```
+   ```text
    Stopping service...
    Replacing binary...
    Starting service...
    ```
 
 5. **Verification**
-   ```
+   ```text
    Verifying new installation...
    Update successful: v1.14.0 -> v1.15.0
    ```
@@ -223,7 +223,7 @@ Error during installation
 Rolling back to previous version...
 Restoring: /usr/local/bin/mediamtx.backup
 Rollback successful: v1.14.0 restored
-```
+```text
 
 ---
 
@@ -271,7 +271,9 @@ The installer properly detects Raspberry Pi models and selects the correct ARM v
 ```bash
 # Check your platform
 ./install_mediamtx.sh status
+```
 
+```text
 # Example output
 Platform: Linux armv7l (Raspberry Pi 3B+)
 MediaMTX: v1.15.0 (linux_armv7)
@@ -284,24 +286,24 @@ MediaMTX: v1.15.0 (linux_armv7)
 ### Default Installation
 
 **Binary Location:**
-```bash
+```text
 /usr/local/bin/mediamtx
 ```
 
 **Configuration Directory:**
-```bash
+```text
 /etc/mediamtx/
 ├── mediamtx.yml           # Main configuration
 └── audio-devices.conf     # LyreBirdAudio device config
 ```
 
 **Service Files:**
-```bash
+```text
 /etc/systemd/system/mediamtx.service
 ```
 
 **Log Files:**
-```bash
+```text
 /var/log/mediamtx.out
 ```
 
@@ -310,7 +312,9 @@ MediaMTX: v1.15.0 (linux_armv7)
 ```bash
 # Install to /opt instead of /usr/local
 sudo ./install_mediamtx.sh -p /opt install
+```
 
+```text
 # Results in:
 /opt/bin/mediamtx           # Binary
 /opt/etc/mediamtx/          # Configuration
@@ -395,7 +399,7 @@ sudo ./install_mediamtx.sh update
 ```
 
 **Example Output:**
-```
+```text
 MediaMTX Installation Status
 ============================
 Binary: /usr/local/bin/mediamtx
@@ -430,7 +434,7 @@ sudo ./install_mediamtx.sh verify
 - Permissions are correct
 
 **Example Output:**
-```
+```text
 Verifying MediaMTX Installation
 ================================
 [PASS] Binary: /usr/local/bin/mediamtx (executable)
@@ -461,7 +465,7 @@ sudo ./install_mediamtx.sh uninstall
 - Service user (optional prompt)
 
 **Interactive Prompts:**
-```
+```text
 Remove MediaMTX binary? [Y/n]: y
   Removing: /usr/local/bin/mediamtx
 
@@ -543,6 +547,9 @@ The installer creates a dedicated `mediamtx` user for security:
 **Verification:**
 ```bash
 id mediamtx
+```
+
+```text
 # uid=999(mediamtx) gid=999(mediamtx) groups=999(mediamtx)
 ```
 
@@ -622,7 +629,7 @@ The installer automatically manages backup files to prevent unbounded disk usage
 - No user intervention required
 
 **Backup File Naming:**
-```
+```text
 /usr/local/bin/mediamtx.backup           # Latest backup
 /usr/local/bin/mediamtx.backup.1         # Second most recent
 /usr/local/bin/mediamtx.backup.2         # Third most recent
@@ -668,7 +675,7 @@ Ensures downloaded binaries are:
    ```
 
 3. **Compare Checksums**
-   ```
+   ```text
    Expected: abc123def456789...
    Actual:   abc123def456789...
    Result:   MATCH [PASS]
@@ -705,7 +712,7 @@ sudo ./install_mediamtx.sh -n install
 ```
 
 **Example Output:**
-```
+```text
 [DRY-RUN] Detected platform: Linux x86_64
 [DRY-RUN] Would fetch latest MediaMTX release
 [DRY-RUN] Would download: mediamtx_v1.15.0_linux_amd64.tar.gz
@@ -734,7 +741,7 @@ The Installer integrates with the Orchestrator for convenient access:
 
 ### Menu Access
 
-```
+```text
 Orchestrator Main Menu
 ├── 2. MediaMTX Installation & Updates
 │   ├── 1. Install MediaMTX -> install_mediamtx.sh install
@@ -749,7 +756,7 @@ Orchestrator Main Menu
 
 The Quick Setup Wizard uses the installer as its first step:
 
-```bash
+```text
 Orchestrator Quick Setup Wizard
 ================================
 [1/5] Installing MediaMTX...

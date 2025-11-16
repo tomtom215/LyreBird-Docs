@@ -217,7 +217,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 - Required utilities presence (ffmpeg, arecord, jq, curl)
 
 **Example Output:**
-```
+```text
 [PASS] OS: Ubuntu 22.04.3 LTS
 [PASS] Kernel: 5.15.0-91-generic
 [PASS] Uptime: 15 days, 7 hours
@@ -239,7 +239,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 - Device symlinks (`/dev/sound/by-id/`)
 
 **Example Output:**
-```
+```text
 [PASS] Found 3 USB audio devices
 [PASS] ALSA cards: Card 0, Card 1, Card 2
 [PASS] udev rules: /etc/udev/rules.d/99-usb-soundcards.rules
@@ -267,7 +267,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 **Note:** MediaMTX version is checked in the `check_project_info` section, not here. API port 9997 is NOT checked.
 
 **Example Output:**
-```
+```text
   [PASS] MediaMTX binary: /usr/local/bin/mediamtx
   [PASS] Config file: /etc/mediamtx/mediamtx.yml (valid)
   [PASS] Service: active (running)
@@ -295,7 +295,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 - Process accumulation detection
 
 **Example Output:**
-```
+```text
 [PASS] Active streams: 3
 [PASS] FFmpeg processes: 3 (healthy)
 [PASS] All streams publishing
@@ -321,7 +321,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 - Client connection simulation
 
 **Example Output:**
-```
+```text
 [PASS] Port 8554: LISTENING
 [PASS] RTSP protocol: responding
 [PASS] Stream test: rtsp://localhost:8554/Device_1 (OK)
@@ -353,7 +353,7 @@ Debug mode is NOT "Full mode with verbose output". It runs a different set of ch
 **Note:** Orchestrator log is NOT checked by diagnostics script.
 
 **Example Output:**
-```
+```text
 [PASS] All log files accessible
 [PASS] No critical errors in last 100 lines
 WARNING: 2 warnings detected (device temporarily unavailable)
@@ -378,7 +378,7 @@ WARNING: 2 warnings detected (device temporarily unavailable)
 - Process counts
 
 **Example Output:**
-```
+```text
 [PASS] File descriptors: 347 / 4096 (8%)
 [PASS] CPU usage: ffmpeg processes < 50%
 [PASS] Memory available: 4.8G (60%)
@@ -404,7 +404,7 @@ WARNING: 2 warnings detected (device temporarily unavailable)
 - Clock synchronization state
 
 **Example Output:**
-```
+```text
 [PASS] Chrony service: active (synchronized)
 [PASS] Time drift: < 50ms
 [PASS] System clock: synchronized
@@ -628,7 +628,7 @@ Orchestrator Main Menu
 │   ├── 4. Check Device Capabilities -> lyrebird-mic-check.sh
 │   ├── 5. View System Status -> status display
 │   └── 6. View Logs -> log viewer
-```
+```text
 
 ### Orchestrator Integration Flow
 

@@ -70,7 +70,7 @@ mkdocs build
 
 ## Project Structure
 
-```
+```text
 .
 ├── docs/                      # Documentation source files
 │   ├── index.md              # Homepage
@@ -104,12 +104,12 @@ pip install -r requirements.txt && mkdocs build
 ```
 
 **Build Output Directory:**
-```
+```text
 site
 ```
 
 **Environment Variables:**
-```
+```text
 PYTHON_VERSION = 3.11
 ```
 

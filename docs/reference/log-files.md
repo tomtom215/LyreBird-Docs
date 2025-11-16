@@ -49,13 +49,13 @@ sudo journalctl -u mediamtx --since today > /tmp/mediamtx-today.log
 
 ### Log Format
 
-```
+```text
 YYYY-MM-DD HH:MM:SS [LEVEL] [component] message
 ```
 
 **Example Entries:**
 
-```
+```log
 2025-11-15 10:00:00 INF [RTSP] [listener] opened
 2025-11-15 10:00:01 INF [path Blue_Yeti] opened
 2025-11-15 10:00:02 INF [conn] [c->s] 192.168.1.100:54321 reader opened
@@ -76,28 +76,28 @@ YYYY-MM-DD HH:MM:SS [LEVEL] [component] message
 
 **Stream Connection:**
 
-```
+```log
 INF [path Blue_Yeti] opened
 INF [path Blue_Yeti] [s->c] runOnReady command started
 ```
 
 **Client Connection:**
 
-```
+```log
 INF [conn] [c->s] 192.168.1.100:54321 reader opened
 INF [path Blue_Yeti] [c->s] reader 192.168.1.100:54321 opened
 ```
 
 **Stream Disconnection:**
 
-```
+```log
 INF [path Blue_Yeti] [s->c] runOnDisconnect command started
 INF [path Blue_Yeti] closed
 ```
 
 **Errors:**
 
-```
+```log
 ERR [path Blue_Yeti] [s->c] publisher error: EOF
 ERR [RTSP] [conn] unable to bind to port 8554: address already in use
 ```
@@ -130,13 +130,13 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/mediamtx-stream-manager.log
 
 ### Log Format
 
-```
+```text
 [YYYY-MM-DD HH:MM:SS] [LEVEL] message
 ```
 
 **Example Entries:**
 
-```
+```log
 [2025-11-15 10:00:00] [INFO] Starting stream: Blue_Yeti
 [2025-11-15 10:00:01] [INFO] Started stream: Blue_Yeti (PID: 12345)
 [2025-11-15 10:00:15] [INFO] Stream Blue_Yeti validated: HEALTHY
@@ -149,7 +149,7 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/mediamtx-stream-manager.log
 
 **Stream Startup:**
 
-```
+```log
 [INFO] Starting stream manager
 [INFO] Found 2 devices in configuration
 [INFO] Starting stream: Blue_Yeti
@@ -159,7 +159,7 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/mediamtx-stream-manager.log
 
 **Stream Failure and Recovery:**
 
-```
+```log
 [ERROR] Stream Blue_Yeti failed health check
 [INFO] Attempting restart (1/5) in 10 seconds
 [INFO] Restarting stream: Blue_Yeti
@@ -169,7 +169,7 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/mediamtx-stream-manager.log
 
 **Maximum Retries Reached:**
 
-```
+```log
 [ERROR] Stream Blue_Yeti failed health check
 [INFO] Attempting restart (5/5) in 300 seconds
 [ERROR] Maximum restart attempts reached for Blue_Yeti
@@ -178,7 +178,7 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/mediamtx-stream-manager.log
 
 **Resource Warnings:**
 
-```
+```log
 [WARN] CPU usage high: 85%
 [WARN] Memory available low: 150 MB
 [WARN] File descriptors: 850 / 1024 (83%)
@@ -214,13 +214,13 @@ sudo ls /var/log/lyrebird/*.log | xargs -I {} sh -c 'echo "=== {} ==="; tail -10
 
 FFmpeg native format with timestamps:
 
-```
+```text
 [YYYY-MM-DD HH:MM:SS] ffmpeg message
 ```
 
 **Example Entries:**
 
-```
+```log
 ffmpeg version 4.4.2 Copyright (c) 2000-2021 the FFmpeg developers
 Input #0, alsa, from 'hw:CARD=Blue_Yeti':
   Duration: N/A, start: 1699876800.000000, bitrate: N/A
@@ -238,7 +238,7 @@ frame= 1000 fps= 24 size= 512kB time=00:00:41.66 bitrate= 100.6kbits/s
 
 **Successful Stream Start:**
 
-```
+```log
 Input #0, alsa, from 'hw:CARD=Blue_Yeti':
   Duration: N/A, start: 1699876800.000000, bitrate: 768 kb/s
   Stream #0:0: Audio: pcm_s16le, 48000 Hz, 1 channels
@@ -248,19 +248,19 @@ Output #0, rtsp, to 'rtsp://localhost:8554/Blue_Yeti':
 
 **Buffer Issues (ALSA overrun):**
 
-```
+```log
 ALSA buffer xrun
 ```
 
 **Device Busy:**
 
-```
+```log
 hw:CARD=Blue_Yeti: Device or resource busy
 ```
 
 **Encoding Statistics:**
 
-```
+```log
 frame= 5000 fps= 24 size= 2560kB time=00:03:28.33 bitrate= 100.8kbits/s speed=1x
 ```
 
@@ -287,13 +287,13 @@ sudo grep "$(date '+%Y-%m-%d')" /var/log/lyrebird-diagnostics.log
 
 ### Log Format
 
-```
+```text
 [YYYY-MM-DD HH:MM:SS] [STATUS] Check: message
 ```
 
 **Example Entries:**
 
-```
+```log
 [2025-11-15 02:00:00] [PASS] Operating System: Ubuntu 22.04.3 LTS
 [2025-11-15 02:00:00] [PASS] FFmpeg: version 4.4.2
 [2025-11-15 02:00:00] [PASS] USB Audio Devices: 2 found

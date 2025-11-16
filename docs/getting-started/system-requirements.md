@@ -185,7 +185,7 @@ arecord -l
 ```
 
 Expected output:
-```
+```text
 **** List of CAPTURE Hardware Devices ****
 card 1: Device [USB Audio Device], device 0: USB Audio [USB Audio]
   Subdevices: 1/1

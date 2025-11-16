@@ -401,7 +401,7 @@ udev rules format.
 
 ### Rule Syntax
 
-```
+```text
 SUBSYSTEM=="sound", \
   ACTION=="add", \
   ATTRS{idVendor}=="<vendor_id>", \
@@ -411,7 +411,7 @@ SUBSYSTEM=="sound", \
 
 **Or for symbolic links:**
 
-```
+```text
 SUBSYSTEM=="sound", \
   ATTRS{idVendor}=="<vendor_id>", \
   ATTRS{idProduct}=="<product_id>", \

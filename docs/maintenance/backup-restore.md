@@ -252,14 +252,14 @@ sudo crontab -e
 ```
 
 Add:
-```
+```text
 # LyreBirdAudio daily backup at 2 AM
 0 2 * * * /opt/LyreBirdAudio/scripts/backup-config.sh >> /var/log/lyrebird-backup.log 2>&1
 ```
 
 **Weekly Backup (Sunday at 3 AM):**
 
-```
+```text
 # LyreBirdAudio weekly backup
 0 3 * * 0 /opt/LyreBirdAudio/scripts/backup-config.sh >> /var/log/lyrebird-backup.log 2>&1
 ```

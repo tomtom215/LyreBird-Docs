@@ -67,7 +67,7 @@ This script:
 
 **Example output:**
 
-```
+```text
 Installing MediaMTX...
 Downloading MediaMTX v1.5.0...
 Installing to /usr/local/bin/mediamtx...
@@ -333,7 +333,7 @@ sudo systemctl status mediamtx
 
 **Example status output:**
 
-```
+```text
 ● mediamtx.service - MediaMTX RTSP Server
    Loaded: loaded (/etc/systemd/system/mediamtx.service; enabled)
    Active: active (running) since Mon 2025-11-15 10:00:00 UTC; 5h 23m ago
@@ -511,7 +511,7 @@ echo "Stream $STREAM_NAME has $READERS active clients"
 
 Streams are accessible via RTSP URLs:
 
-```
+```text
 rtsp://<hostname>:<port>/<stream-name>
 ```
 
@@ -701,7 +701,7 @@ maxConnections: 1000
 
 **Calculation:**
 
-```
+```text
 Max Connections = (Streams × Clients per Stream) + Overhead
 Example: (10 streams × 5 clients) + 50 = 100 connections
 ```

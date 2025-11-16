@@ -70,7 +70,7 @@ sudo ./lyrebird-orchestrator.sh
 
 When you launch the Orchestrator, you'll see an interactive menu:
 
-```
+```text
 ========================================
 LyreBirdAudio Orchestrator v2.1.0
 ========================================

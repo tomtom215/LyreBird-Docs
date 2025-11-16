@@ -527,7 +527,7 @@ graph LR
 
 **Stage 1: Audio Capture**
 
-```
+```text
 USB Device -> USB Controller -> ALSA Driver -> Application Buffer
 ```
 
@@ -538,7 +538,7 @@ USB Device -> USB Controller -> ALSA Driver -> Application Buffer
 
 **Stage 2: FFmpeg Processing**
 
-```
+```text
 ALSA Buffer -> FFmpeg Input -> Resampler -> Encoder -> RTSP Muxer
 ```
 
@@ -549,7 +549,7 @@ ALSA Buffer -> FFmpeg Input -> Resampler -> Encoder -> RTSP Muxer
 
 **Stage 3: MediaMTX Distribution**
 
-```
+```text
 RTSP Stream -> MediaMTX Receiver -> Stream Buffer -> Client Connections
 ```
 
@@ -560,7 +560,7 @@ RTSP Stream -> MediaMTX Receiver -> Stream Buffer -> Client Connections
 
 **Stage 4: Client Playback**
 
-```
+```text
 RTSP Packets -> Network -> Client Decoder -> Audio Output
 ```
 
@@ -686,7 +686,7 @@ All configuration is stored in version-controllable files:
 
 **Resource Calculation:**
 
-```
+```text
 CPU per stream: 1-5%
 Memory per stream: 40-80 MB
 Total CPU = Num_Streams × 3% (average)
@@ -695,7 +695,7 @@ Total Memory = (Num_Streams × 50 MB) + 200 MB base
 
 **Example:**
 
-```
+```text
 10 streams:
   CPU: 10 × 3% = 30% total
   Memory: (10 × 50 MB) + 200 MB = 700 MB
@@ -707,7 +707,7 @@ For larger deployments, distribute across multiple servers:
 
 **Deployment Pattern:**
 
-```
+```text
 Server 1: Devices 1-10  -> streams.example.com
 Server 2: Devices 11-20 -> streams2.example.com
 Server 3: Devices 21-30 -> streams3.example.com

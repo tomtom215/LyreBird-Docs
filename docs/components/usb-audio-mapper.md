@@ -22,14 +22,14 @@ The USB Audio Mapper is a critical component that solves one of the most challen
 Without persistent naming, USB devices are enumerated in unpredictable order:
 
 **Boot 1:**
-```
+```text
 USB Mic in port 1-1.4 -> /dev/snd/pcmC0D0c (card 0)
 USB Mic in port 1-1.5 -> /dev/snd/pcmC1D0c (card 1)
 USB Mic in port 2-1.2 -> /dev/snd/pcmC2D0c (card 2)
 ```
 
 **Boot 2 (after power cycle):**
-```
+```text
 USB Mic in port 2-1.2 -> /dev/snd/pcmC0D0c (card 0)  <- Different!
 USB Mic in port 1-1.5 -> /dev/snd/pcmC1D0c (card 1)  <- Different!
 USB Mic in port 1-1.4 -> /dev/snd/pcmC2D0c (card 2)  <- Different!
@@ -41,7 +41,7 @@ USB Mic in port 1-1.4 -> /dev/snd/pcmC2D0c (card 2)  <- Different!
 
 The USB Audio Mapper creates udev rules that map each USB port to a consistent device name:
 
-```
+```text
 Port 1-1.4 -> /dev/sound/by-id/Device_1 -> /dev/snd/pcmC0D0c
 Port 1-1.5 -> /dev/sound/by-id/Device_2 -> /dev/snd/pcmC1D0c
 Port 2-1.2 -> /dev/sound/by-id/Device_3 -> /dev/snd/pcmC2D0c
@@ -108,7 +108,7 @@ sudo ./usb-audio-mapper.sh
 5. **Rule Generation**: Creates udev rule and writes to `/etc/udev/rules.d/99-usb-soundcards.rules`
 
 **Example Session:**
-```
+```text
 ===== USB Sound Card Mapper =====
 
 [Shows lsusb output]
@@ -128,7 +128,7 @@ Reboot required for changes to take effect.
 ```
 
 **Note:** The actual rule generated will be:
-```
+```text
 SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825",
 KERNELS=="1-1.4", ATTR{id}="front-yard-mic", SYMLINK+="sound/by-id/front-yard-mic"
 ```
@@ -166,7 +166,7 @@ sudo ./usb-audio-mapper.sh --test
 ```
 
 **Output:**
-```
+```text
 INFO: Testing USB port detection...
 Found USB devices:
 Bus 001 Device 005: ID 046d:0825 Logitech, Inc. Webcam C270
@@ -252,7 +252,7 @@ SUBSYSTEM=="sound", ATTRS{idVendor}=="0d8c", ATTRS{idProduct}=="0014", KERNELS==
 **Location:** `/dev/sound/by-id/`
 
 **Created After Reboot:**
-```
+```text
 /dev/sound/by-id/
 ├── front-yard-mic -> ../../snd/controlC0
 ├── back-yard-mic -> ../../snd/controlC1
@@ -301,14 +301,14 @@ graph TD
 ### Port Path Examples
 
 **Simple Topology:**
-```
+```text
 1-1.4 -> USB Hub Port 4 on Bus 1
 1-1.5 -> USB Hub Port 5 on Bus 1
 2-1.2 -> USB Hub Port 2 on Bus 2
 ```
 
 **Complex Topology (Cascaded Hubs):**
-```
+```text
 1-1.4.2 -> Bus 1, Hub Port 4, Cascaded Hub Port 2
 1-1.4.3 -> Bus 1, Hub Port 4, Cascaded Hub Port 3
 ```
@@ -322,7 +322,7 @@ The mapper handles both simple and complex topologies automatically.
 For systems with complex USB architectures, the mapper supports platform-specific device identification:
 
 **Platform ID Format:**
-```
+```text
 platform-xhci-hcd.0-usb-0:1.4:1.0
 ```
 
@@ -378,13 +378,13 @@ KERNELS=="1-1.5", ATTR{id}="mic-right", SYMLINK+="sound/by-id/mic-right"
 The mapper maintains compatibility with older naming schemes:
 
 **Legacy Format (Serial Number Suffix):**
-```
+```text
 Device_1_ABC123
 Device_2_DEF456
 ```
 
 **Current Format (No Suffix):**
-```
+```text
 Device_1
 Device_2
 ```

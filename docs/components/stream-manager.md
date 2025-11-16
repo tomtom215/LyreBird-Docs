@@ -123,7 +123,7 @@ sudo ./mediamtx-stream-manager.sh start
 ```
 
 **Result:**
-```
+```text
 rtsp://your-server:8554/device1
 rtsp://your-server:8554/device2
 rtsp://your-server:8554/device3
@@ -169,7 +169,7 @@ sudo ./mediamtx-stream-manager.sh -m multiplex -f amix start
 ```
 
 **Result:**
-```
+```text
 rtsp://your-server:8554/all_mics  (stereo, mixed audio)
 ```
 
@@ -199,7 +199,7 @@ sudo ./mediamtx-stream-manager.sh -m multiplex -f amerge start
 ```
 
 **Result:**
-```
+```text
 rtsp://your-server:8554/all_mics  (N channels, separated)
 ```
 
@@ -373,7 +373,7 @@ sudo systemctl status mediamtx-audio
 ```
 
 **Expected Output:**
-```
+```text
 ● mediamtx-audio.service - MediaMTX Audio Stream Manager v1.4.1
      Loaded: loaded (/etc/systemd/system/mediamtx-audio.service; enabled)
      Active: active (running) since ...

@@ -103,7 +103,7 @@ sudo ./mediamtx-stream-manager.sh start -m multiplex -f amix -n Office_Audio
 
 This creates a stream accessible at:
 
-```
+```text
 rtsp://hostname:8554/Office_Audio
 ```
 
@@ -159,7 +159,7 @@ ffmpeg \
 
 **Filter syntax:**
 
-```
+```text
 amix=inputs=N:duration=MODE:dropout_transition=TIME
 ```
 
@@ -296,13 +296,13 @@ Multi-channel streams require higher bitrates:
 
 **Bitrate calculation:**
 
-```
+```text
 Total Bitrate = Base Bitrate × Number of Channels
 ```
 
 **Example:**
 
-```
+```text
 Single channel: 128 kbps
 3 channels: 128 × 3 = 384 kbps (or use 256-320 kbps with compression)
 ```
@@ -429,7 +429,7 @@ DEVICE_MIC3_SAMPLE_RATE=48000
 
 Multiplex streams are accessed like any other RTSP stream:
 
-```
+```text
 rtsp://hostname:8554/stream-name
 ```
 
@@ -481,7 +481,7 @@ sudo ./mediamtx-stream-manager.sh list
 
 **Example output:**
 
-```
+```text
 Available RTSP Streams:
 =======================
 Blue_Yeti - rtsp://localhost:8554/Blue_Yeti

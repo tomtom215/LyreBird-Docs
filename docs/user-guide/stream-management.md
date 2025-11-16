@@ -62,7 +62,7 @@ This will:
 
 **Example output:**
 
-```
+```text
 Starting streams for all configured devices...
 Started stream: Blue_Yeti (PID: 12345)
 Started stream: USB_Microphone (PID: 12346)
@@ -88,7 +88,7 @@ This will:
 
 **Example output:**
 
-```
+```text
 Stopping all streams...
 Stopped stream: Blue_Yeti (PID: 12345)
 Stopped stream: USB_Microphone (PID: 12346)
@@ -120,7 +120,7 @@ sudo ./mediamtx-stream-manager.sh status
 
 **Example output:**
 
-```
+```text
 Stream Status:
 ==============
 Blue_Yeti: RUNNING (PID: 12345, Uptime: 2h 15m)
@@ -144,7 +144,7 @@ sudo ./mediamtx-stream-manager.sh list
 
 **Example output:**
 
-```
+```text
 Available RTSP Streams:
 =======================
 Blue_Yeti - rtsp://localhost:8554/Blue_Yeti
@@ -173,7 +173,7 @@ Displays:
 
 **Example output:**
 
-```
+```text
 Stream Monitor - Updating every 5 seconds (Ctrl+C to exit)
 ===========================================================
 [10:30:15] Blue_Yeti: HEALTHY (CPU: 3.2%, MEM: 45 MB)
@@ -256,7 +256,7 @@ When a stream failure is detected:
 
 **Example recovery log:**
 
-```
+```text
 [ERROR] Stream Blue_Yeti failed - device disconnected
 [INFO] Attempting restart (1/5) in 10 seconds...
 [INFO] Restarted Blue_Yeti successfully
@@ -387,13 +387,13 @@ Each FFmpeg stream typically uses 40-80 MB of RAM:
 
 **Memory calculation:**
 
-```
+```text
 Total Memory = (Number of Streams × 50 MB) + 200 MB base system
 ```
 
 **Example:**
 
-```
+```text
 10 streams × 50 MB = 500 MB
 + 200 MB system overhead
 = 700 MB total
@@ -487,7 +487,7 @@ sudo systemctl status mediamtx-audio
 
 **Example status output:**
 
-```
+```text
 ● mediamtx-audio.service - LyreBirdAudio Stream Manager
    Loaded: loaded (/etc/systemd/system/mediamtx-audio.service)
    Active: active (running) since Mon 2025-11-15 10:00:00 UTC; 2h 15m ago
@@ -520,7 +520,7 @@ sudo journalctl -u mediamtx-audio -p err
 
 **Example log output:**
 
-```
+```text
 Nov 15 10:00:00 server mediamtx-audio[12340]: Starting streams...
 Nov 15 10:00:01 server mediamtx-audio[12340]: Started Blue_Yeti (PID: 12345)
 Nov 15 10:00:02 server mediamtx-audio[12340]: Started USB_Microphone (PID: 12346)

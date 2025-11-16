@@ -106,7 +106,7 @@ ls -l
 ```
 
 Expected files:
-```
+```text
 lyrebird-orchestrator.sh
 mediamtx-stream-manager.sh
 usb-audio-mapper.sh
@@ -128,7 +128,7 @@ sudo ./lyrebird-orchestrator.sh
 
 You'll see the main menu:
 
-```
+```text
 ========================================
 LyreBirdAudio Orchestrator v2.1.0
 ========================================
@@ -167,7 +167,7 @@ The installer will:
 5. Set appropriate permissions
 
 Output:
-```
+```text
 Detecting system architecture...
 Architecture: x86_64
 
@@ -199,7 +199,7 @@ The mapper will:
 4. Configure udev rules
 
 Interactive session:
-```
+```text
 Scanning for USB audio devices...
 
 Found USB Audio Devices:
@@ -236,7 +236,7 @@ The stream wizard will:
 4. Create stream configuration
 
 Interactive session:
-```
+```text
 Available Devices:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 1. /dev/lyrebird-mic-1 (USB Audio Device)
@@ -275,7 +275,7 @@ The service installer will:
 3. Start the service immediately
 
 Output:
-```
+```text
 Installing Stream Manager Service...
 
 Creating service file: /etc/systemd/system/mediamtx-audio.service
@@ -366,7 +366,7 @@ sudo crontab -e
 ```
 
 Add:
-```
+```text
 */5 * * * * /opt/LyreBirdAudio/lyrebird-diagnostics.sh quick >> /var/log/lyrebird-health.log 2>&1
 ```
 

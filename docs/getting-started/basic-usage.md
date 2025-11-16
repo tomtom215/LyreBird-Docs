@@ -65,7 +65,7 @@ sudo ./mediamtx-stream-manager.sh status
 ```
 
 Example output:
-```
+```text
 Stream Status Report
 Generated: 2025-11-15 14:30:45
 
@@ -117,12 +117,12 @@ tail -f /opt/mediamtx/mediamtx.log
 
 ### RTSP URL Format
 
-```
+```text
 rtsp://[server-ip]:8554/[stream-name]
 ```
 
 Examples:
-```
+```text
 rtsp://localhost:8554/lyrebird-mic-1
 rtsp://192.168.1.100:8554/front-door
 rtsp://myserver.local:8554/bird-monitor
@@ -229,7 +229,7 @@ ls -l /dev/lyrebird-*
 ```
 
 Example output:
-```
+```text
 lrwxrwxrwx 1 root root 12 Nov 15 10:00 /dev/lyrebird-mic-1 -> snd/pcmC1D0c
 lrwxrwxrwx 1 root root 12 Nov 15 10:00 /dev/lyrebird-mic-2 -> snd/pcmC2D0c
 ```
@@ -267,7 +267,7 @@ sudo ./lyrebird-diagnostics.sh quick
 ```
 
 Output:
-```
+```text
 LyreBirdAudio System Diagnostics
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

@@ -99,7 +99,7 @@ Lock file prevents multiple updater instances from running simultaneously and co
 ```
 
 **Example Output:**
-```
+```text
 === Repository Status ===
 
 Current State:
@@ -591,7 +591,7 @@ The Version Manager integrates with the Orchestrator for convenient access:
 
 ### Menu Access
 
-```
+```text
 Orchestrator Main Menu
 ├── 6. Version Management
 │   ├── 1. Launch Update Manager (Interactive) ──> updater.sh (full menu)
