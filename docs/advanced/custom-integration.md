@@ -21,7 +21,7 @@ This guide covers:
 
 ## MediaMTX HTTP API Integration
 
-### API Overview
+## API Overview
 
 MediaMTX provides a comprehensive HTTP API for stream management and monitoring:
 
@@ -31,7 +31,7 @@ MediaMTX provides a comprehensive HTTP API for stream management and monitoring:
 
 **Format:** JSON request/response
 
-### Available Endpoints
+## Available Endpoints
 
 **List All Streams:**
 
@@ -112,7 +112,7 @@ GET http://localhost:9997/v3/paths/get/Blue_Yeti
 }
 ```
 
-### Python Integration Example
+## Python Integration Example
 
 ```python
 #!/usr/bin/env python3
@@ -178,7 +178,7 @@ if __name__ == "__main__":
         print(f"{stream['name']}: {stream['status']} ({stream['clients']} clients)")
 ```
 
-### Node.js Integration Example
+## Node.js Integration Example
 
 ```javascript
 // lyrebird-api.js
@@ -255,7 +255,7 @@ main();
 
 ## Custom FFmpeg Pipelines
 
-### Advanced FFmpeg Configuration
+## Advanced FFmpeg Configuration
 
 Create custom audio processing pipelines beyond standard configuration:
 
@@ -320,7 +320,7 @@ ffmpeg \
     $RTSP_URL
 ```
 
-### Stream Recording Integration
+## Stream Recording Integration
 
 Record streams automatically:
 
@@ -358,7 +358,7 @@ ffmpeg \
 
 ## External Monitoring Integration
 
-### Prometheus Metrics Exporter
+## Prometheus Metrics Exporter
 
 Complete metrics exporter for Prometheus:
 
@@ -445,7 +445,7 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 
-### InfluxDB Integration
+## InfluxDB Integration
 
 Send metrics to InfluxDB:
 
@@ -503,7 +503,7 @@ if __name__ == '__main__':
 
 ## Scripting and Automation
 
-### Automated Stream Rotation
+## Automated Stream Rotation
 
 Rotate between multiple devices:
 
@@ -533,7 +533,7 @@ while true; do
 done
 ```
 
-### Event-Driven Automation
+## Event-Driven Automation
 
 Trigger actions based on events:
 
@@ -567,7 +567,7 @@ tail -F /var/log/mediamtx.out | while read line; do
 done
 ```
 
-### Health Check Integration
+## Health Check Integration
 
 Create comprehensive health check script:
 
@@ -624,7 +624,7 @@ fi
 
 ## Webhook Integration
 
-### Stream Event Webhooks
+## Stream Event Webhooks
 
 Send webhooks on stream events:
 
@@ -721,7 +721,7 @@ if __name__ == '__main__':
 
 ## Third-Party Tool Integration
 
-### OBS Studio Integration
+## OBS Studio Integration
 
 Integrate with OBS for streaming/recording:
 
@@ -754,7 +754,7 @@ EOF
 echo "Import /tmp/lyrebird-scene.json into OBS Studio"
 ```
 
-### VLC Integration Script
+## VLC Integration Script
 
 Create VLC playlists from active streams:
 
@@ -780,7 +780,7 @@ echo "Playlist created: $OUTPUT_FILE"
 vlc "$OUTPUT_FILE"
 ```
 
-### Home Assistant Integration
+## Home Assistant Integration
 
 YAML configuration for Home Assistant:
 
@@ -828,7 +828,7 @@ automation:
 
 ## Best Practices
 
-### API Integration
+## API Integration
 
 1. **Implement Error Handling**
    - Always catch API timeouts
@@ -845,7 +845,7 @@ automation:
    - Restrict API access to localhost when possible
    - Validate all input data
 
-### Custom Pipelines
+## Custom Pipelines
 
 1. **Test Thoroughly**
    - Validate FFmpeg pipelines before production
@@ -885,7 +885,7 @@ System health checks and monitoring
 </div>
 
 <div markdown>
-### Architecture
+## Architecture
 System design and component overview
 
 [Architecture →](architecture.md)

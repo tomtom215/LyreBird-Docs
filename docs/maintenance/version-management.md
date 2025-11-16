@@ -18,7 +18,7 @@ The `lyrebird-updater.sh` script provides git-based version management with the 
 
 ## Version Management Tool
 
-### Checking Current Version
+## Checking Current Version
 
 ```bash
 ./lyrebird-updater.sh --status
@@ -31,7 +31,7 @@ This displays:
 - Available updates
 - Last update timestamp
 
-### Listing Available Versions
+## Listing Available Versions
 
 ```bash
 ./lyrebird-updater.sh --list
@@ -43,7 +43,7 @@ Shows all available:
 - Available branches
 - Commit information
 
-### Interactive Update Manager
+## Interactive Update Manager
 
 ```bash
 ./lyrebird-updater.sh
@@ -77,7 +77,7 @@ Tagged releases (e.g., v1.0.0, v1.1.0) are:
 # Choose: v1.1.0
 ```
 
-### Main Branch (Latest Features)
+## Main Branch (Latest Features)
 
 The main branch contains:
 
@@ -92,7 +92,7 @@ The main branch contains:
 
 ## Update Workflow
 
-### Standard Update Process
+## Standard Update Process
 
 1. **Check for updates:**
    ```bash
@@ -116,7 +116,7 @@ The main branch contains:
    sudo systemctl restart mediamtx-audio
    ```
 
-### Automated Update Check
+## Automated Update Check
 
 The updater can be integrated into cron jobs for periodic update notifications:
 
@@ -131,7 +131,7 @@ The updater can be integrated into cron jobs for periodic update notifications:
 
 If an update causes issues, you can rollback to a previous version:
 
-### Rollback Steps
+## Rollback Steps
 
 1. **Launch updater:**
    ```bash
@@ -147,7 +147,7 @@ If an update causes issues, you can rollback to a previous version:
    sudo systemctl restart mediamtx-audio
    ```
 
-### Immediate Rollback
+## Immediate Rollback
 
 If you know the previous version tag:
 
@@ -163,25 +163,25 @@ sudo systemctl restart mediamtx-audio
 
 After updating or rolling back:
 
-### Verify Installation
+## Verify Installation
 
 ```bash
 sudo ./lyrebird-diagnostics.sh quick
 ```
 
-### Check Service Status
+## Check Service Status
 
 ```bash
 sudo systemctl status mediamtx-audio
 ```
 
-### Validate Streams
+## Validate Streams
 
 ```bash
 sudo ./mediamtx-stream-manager.sh status
 ```
 
-### Test RTSP Connectivity
+## Test RTSP Connectivity
 
 ```bash
 ffmpeg -i rtsp://localhost:8554/device-name -t 5 -f null -
@@ -198,7 +198,7 @@ LyreBirdAudio uses git for version control, enabling:
 - **Branch switching** - Test features without affecting production
 - **Local modifications** - Track custom changes alongside updates
 
-### Checking Git Status
+## Checking Git Status
 
 ```bash
 cd /path/to/LyreBirdAudio
@@ -206,7 +206,7 @@ git status
 git log --oneline -10
 ```
 
-### Handling Local Modifications
+## Handling Local Modifications
 
 If you have local modifications:
 
@@ -225,7 +225,7 @@ git stash pop
 
 ## Best Practices
 
-### Production Environments
+## Production Environments
 
 1. **Always use tagged releases** for production deployments
 2. **Test updates in staging** environment first
@@ -234,14 +234,14 @@ git stash pop
 5. **Monitor services** after updates for 24-48 hours
 6. **Backup configuration** before major version changes
 
-### Development Environments
+## Development Environments
 
 1. **Main branch acceptable** for testing new features
 2. **Test thoroughly** before promoting to production
 3. **Report issues** on GitHub with version information
 4. **Contribute fixes** back to the project
 
-### Version Pinning
+## Version Pinning
 
 For critical production systems, consider pinning to specific versions:
 
@@ -272,7 +272,7 @@ git reset --hard HEAD
 ./lyrebird-updater.sh
 ```
 
-### Services Don't Restart After Update
+## Services Don't Restart After Update
 
 ```bash
 # Force stop all services
@@ -285,7 +285,7 @@ sudo systemctl restart mediamtx
 sudo ./mediamtx-stream-manager.sh start
 ```
 
-### Version Mismatch Issues
+## Version Mismatch Issues
 
 If components show version mismatches:
 
@@ -317,7 +317,7 @@ Configuration backup and recovery procedures
 </div>
 
 <div markdown>
-### Main Documentation
+## Main Documentation
 Complete documentation index
 
 [Main Documentation →](../index.md)

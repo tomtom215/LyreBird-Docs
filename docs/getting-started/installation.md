@@ -296,19 +296,19 @@ Service Status:
 
 ## Step 9: Verify Installation
 
-### Check Service Status
+## Check Service Status
 
 ```bash
 sudo systemctl status mediamtx-audio
 ```
 
-### List Active Streams
+## List Active Streams
 
 ```bash
 sudo ./mediamtx-stream-manager.sh status
 ```
 
-### Test Stream Playback
+## Test Stream Playback
 
 ```bash
 # Test with FFmpeg (10 second capture)
@@ -357,7 +357,7 @@ sudo ufw allow 8889/tcp
 
 ---
 
-### Setup Monitoring (Recommended)
+## Setup Monitoring (Recommended)
 
 Create a cron job for health checks:
 
@@ -393,14 +393,14 @@ journalctl -u mediamtx-audio -n 50
 
 ## Troubleshooting
 
-### Issue: "Permission Denied"
+## Issue: "Permission Denied"
 
 Run orchestrator with sudo:
 ```bash
 sudo ./lyrebird-orchestrator.sh
 ```
 
-### Issue: "MediaMTX Download Failed"
+## Issue: "MediaMTX Download Failed"
 
 Check internet connection:
 ```bash
@@ -409,7 +409,7 @@ curl -I https://github.com
 
 Download manually: [MediaMTX Releases](https://github.com/bluenviron/mediamtx/releases)
 
-### Issue: "No USB Audio Devices Found"
+## Issue: "No USB Audio Devices Found"
 
 Check device connection:
 ```bash
@@ -417,7 +417,7 @@ lsusb
 arecord -l
 ```
 
-### Issue: "Stream Won't Start"
+## Issue: "Stream Won't Start"
 
 Check device capabilities:
 ```bash

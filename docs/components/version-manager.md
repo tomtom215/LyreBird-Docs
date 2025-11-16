@@ -25,12 +25,12 @@ Complete version history with branch and tag switching, enabling instant rollbac
 </div>
 
 <div markdown>
-### Transaction-Based Updates
+## Transaction-Based Updates
 Atomic updates with automatic rollback on failures ensure system integrity during version changes.
 </div>
 
 <div markdown>
-### Systemd Service Coordination
+## Systemd Service Coordination
 Automatically stops services before updates, reinstalls service files after version changes, and restarts services.
 </div>
 
@@ -40,12 +40,12 @@ Updates itself when the updater script changes, with syntax validation to preven
 </div>
 
 <div markdown>
-### Stash Management
+## Stash Management
 Automatically stashes local changes before updates and restores them after, with conflict detection.
 </div>
 
 <div markdown>
-### Concurrent Execution Protection
+## Concurrent Execution Protection
 Lock file prevents multiple updater instances from running simultaneously and corrupting git state.
 </div>
 
@@ -55,7 +55,7 @@ Lock file prevents multiple updater instances from running simultaneously and co
 
 ## Usage
 
-### Interactive Menu
+## Interactive Menu
 
 ```bash
 # Launch interactive menu
@@ -70,7 +70,7 @@ Lock file prevents multiple updater instances from running simultaneously and co
 # 6) Discard All Changes & Reset
 ```
 
-### Command-Line Options
+## Command-Line Options
 
 ```bash
 # Check current version and update status
@@ -148,7 +148,7 @@ Systemd Service:
 
 ---
 
-### Switch to Specific Version
+## Switch to Specific Version
 
 **Step 3:** Switch to a specific tag or branch
 
@@ -198,7 +198,7 @@ v1.3.0  - Latest stable
 
 ---
 
-### Latest Features: main Branch
+## Latest Features: main Branch
 
 **Use with caution:** Contains newest functionality
 
@@ -224,7 +224,7 @@ v1.3.0  - Latest stable
 
 ---
 
-### Unstable Testing: development Branch
+## Unstable Testing: development Branch
 
 **Not recommended for production:** Active development code
 
@@ -252,7 +252,7 @@ v1.3.0  - Latest stable
 
 ## Update Behavior
 
-### Automatic Stash Management
+## Automatic Stash Management
 
 **Before Update:**
 ```bash
@@ -272,7 +272,7 @@ git stash pop
 # - Provides instructions for resolution
 ```
 
-### Conflict Resolution
+## Conflict Resolution
 
 If stashed changes conflict with new version:
 
@@ -290,7 +290,7 @@ git stash drop stash@{0}
 
 ---
 
-### Permission Preservation
+## Permission Preservation
 
 After version switch, executable permissions are automatically restored for core scripts:
 
@@ -324,7 +324,7 @@ When the updater script itself changes:
 
 ---
 
-### Systemd Service Coordination
+## Systemd Service Coordination
 
 **Before Version Switch:**
 ```bash
@@ -350,7 +350,7 @@ systemctl start mediamtx-audio 2>/dev/null
 
 ---
 
-### Transaction-Based Operations
+## Transaction-Based Operations
 
 All version changes are transaction-based:
 
@@ -388,7 +388,7 @@ graph TD
 
 ---
 
-### Lock File Protection
+## Lock File Protection
 
 Prevents concurrent executions:
 
@@ -411,7 +411,7 @@ ${SCRIPT_DIR}/.lyrebird-updater.lock
 
 ## Version Requirements
 
-### Git Repository Required
+## Git Repository Required
 
 !!! danger "Installation Method Requirement"
     The Version Manager **only works with git clone installations**. It is not compatible with standalone tarball installations.
@@ -435,7 +435,7 @@ cd LyreBirdAudio-main
 
 ---
 
-### Prerequisites
+## Prerequisites
 
 **Required:**
 - Git 2.0+ installed
@@ -513,7 +513,7 @@ fi
 
 ## Rollback Procedures
 
-### Immediate Rollback
+## Immediate Rollback
 
 If an update causes issues, immediately roll back to previous version:
 
@@ -523,7 +523,7 @@ If an update causes issues, immediately roll back to previous version:
 # Choose previous stable tag (e.g., v1.2.0)
 ```
 
-### Identifying Previous Version
+## Identifying Previous Version
 
 ```bash
 # View git history
@@ -538,7 +538,7 @@ git reflog
 # Select option 3, choose v1.2.0
 ```
 
-### Recovering Stashed Changes
+## Recovering Stashed Changes
 
 If changes were stashed during problematic update:
 
@@ -589,7 +589,7 @@ chmod +x install_mediamtx.sh lyrebird-orchestrator.sh lyrebird-updater.sh mediam
 
 The Version Manager integrates with the Orchestrator for convenient access:
 
-### Menu Access
+## Menu Access
 
 ```text
 Orchestrator Main Menu
@@ -605,7 +605,7 @@ Orchestrator Main Menu
 │   └── 0. Back to Main Menu
 ```
 
-### Orchestrator Integration Flow
+## Orchestrator Integration Flow
 
 **Version Management Decision Flow:** From the Orchestrator Menu (option 6), users access the Version Management Menu (purple). They can check the current version, check for updates, upgrade to latest, or switch to a specific version. Checking current version and updates leads to displaying information. Upgrading executes the upgrade process, which can succeed (green) showing success or fail (red) showing error with rollback. Switching to a specific version shows a version list, user selects a version, and executes the version switch, which also has success/failure paths. All outcomes return to the menu, creating a complete version management workflow with clear success and failure handling.
 
@@ -649,9 +649,9 @@ graph TD
 
 ## Troubleshooting
 
-### Common Issues
+## Common Issues
 
-#### Not a Git Repository (Exit Code 3)
+### Not a Git Repository (Exit Code 3)
 
 **Symptom:** `Error: Not a git repository`
 
@@ -670,7 +670,7 @@ cd LyreBirdAudio
 
 ---
 
-#### No Remote Configured (Exit Code 4)
+## No Remote Configured (Exit Code 4)
 
 **Symptom:** `Error: No remote origin configured`
 
@@ -688,7 +688,7 @@ git remote -v
 
 ---
 
-#### Another Instance Running (Exit Code 7)
+## Another Instance Running (Exit Code 7)
 
 **Symptom:** `Error: Another updater instance is running`
 
@@ -706,7 +706,7 @@ rm -f .lyrebird-updater.lock
 
 ---
 
-#### Bad Git State (Exit Code 8)
+## Bad Git State (Exit Code 8)
 
 **Symptom:** `Error: Git repository in bad state`
 
@@ -730,7 +730,7 @@ git fsck --full
 
 ---
 
-#### Merge Conflicts After Stash Pop
+## Merge Conflicts After Stash Pop
 
 **Symptom:** Conflicts when restoring stashed changes
 
@@ -756,7 +756,7 @@ git stash drop
 
 ---
 
-#### Permission Errors (Exit Code 5)
+## Permission Errors (Exit Code 5)
 
 **Symptom:** `Permission denied` during update
 
@@ -776,7 +776,7 @@ sudo chown -R $USER:$USER .
 
 ## Best Practices
 
-### Production Deployments
+## Production Deployments
 
 **1. Pin to Specific Tags**
 ```bash
@@ -808,7 +808,7 @@ cd /production/LyreBirdAudio
 
 ---
 
-### Backup Before Updates
+## Backup Before Updates
 
 ```bash
 # Backup configuration files
@@ -830,7 +830,7 @@ tar -czf lyrebird-config-backup-$(date +%Y%m%d).tar.gz \
 
 ---
 
-### Monitor Update Logs
+## Monitor Update Logs
 
 ```bash
 # View git operation history

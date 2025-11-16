@@ -243,7 +243,7 @@ Force overwrite existing configuration.
 sudo ./lyrebird-mic-check.sh -g -f
 ```
 
-### -V
+## -V
 
 Validate existing configuration.
 
@@ -409,7 +409,7 @@ sudo systemctl status mediamtx
 
 ## Common Usage Patterns
 
-### Initial Setup
+## Initial Setup
 
 ```bash
 # 1. Install MediaMTX
@@ -428,7 +428,7 @@ sudo ./mediamtx-stream-manager.sh start
 sudo ./lyrebird-diagnostics.sh
 ```
 
-### Daily Operations
+## Daily Operations
 
 ```bash
 # Check stream status
@@ -441,7 +441,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 sudo ./lyrebird-diagnostics.sh
 ```
 
-### Troubleshooting
+## Troubleshooting
 
 ```bash
 # Detailed diagnostics
@@ -457,7 +457,7 @@ sudo ./usb-audio-mapper.sh
 sudo ./lyrebird-mic-check.sh -V
 ```
 
-### Production Deployment
+## Production Deployment
 
 ```bash
 # Enable automatic startup
@@ -489,14 +489,14 @@ sudo systemctl status mediamtx-audio
 <div class="grid" markdown>
 
 <div markdown>
-### Exit Codes
+## Exit Codes
 Command return values and status codes
 
 [Exit Codes →](exit-codes.md)
 </div>
 
 <div markdown>
-### Log Files
+## Log Files
 Log locations, formats, and analysis
 
 [Log Files →](log-files.md)

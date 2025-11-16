@@ -20,7 +20,7 @@ LyreBirdAudio follows strict coding standards to ensure maintainability, reliabi
 
 ## Bash Scripting Standards
 
-### Bash Version Requirements
+## Bash Version Requirements
 
 **Minimum Version: Bash 4.0+**
 
@@ -37,7 +37,7 @@ if (( BASH_VERSINFO[0] < 4 )); then
 fi
 ```
 
-### Shebang and Script Header
+## Shebang and Script Header
 
 **Required Header:**
 
@@ -79,7 +79,7 @@ set -euo pipefail
     set -e
     ```
 
-### Variable Naming Conventions
+## Variable Naming Conventions
 
 **Constants (Uppercase):**
 
@@ -124,7 +124,7 @@ DEVICE_CONFIG["sample_rate"]="48000"
 DEVICE_CONFIG["codec"]="aac"
 ```
 
-### Quoting Rules
+## Quoting Rules
 
 **Always Quote Variables:**
 
@@ -172,7 +172,7 @@ done
 
 ## Function Standards
 
-### Function Declaration
+## Function Declaration
 
 **Preferred Style:**
 
@@ -197,7 +197,7 @@ function validate_device() {
 }
 ```
 
-### Function Documentation
+## Function Documentation
 
 **Standard Format:**
 
@@ -232,7 +232,7 @@ function configure_device() {
 }
 ```
 
-### Parameter Handling
+## Parameter Handling
 
 **Check Argument Count:**
 
@@ -305,7 +305,7 @@ create_stream --device "/dev/lyrebird-mic-1" --name "front-door" --bitrate "192k
 
 ## Error Handling
 
-### Exit Codes
+## Exit Codes
 
 **Standard Exit Codes:**
 
@@ -356,7 +356,7 @@ function main() {
 main "$@"
 ```
 
-### Error Messages
+## Error Messages
 
 **Format:**
 
@@ -393,7 +393,7 @@ function handle_error() {
 [[ -f "$CONFIG_FILE" ]] || handle_error "Configuration not found: $CONFIG_FILE" $EXIT_CONFIG
 ```
 
-### Trap Handlers
+## Trap Handlers
 
 **Cleanup on Exit:**
 
@@ -427,7 +427,7 @@ TEMP_FILES+=("$TEMP_CONFIG")
 
 ## Logging Standards
 
-### Log Levels
+## Log Levels
 
 **Implementation:**
 
@@ -477,7 +477,7 @@ log_warn "High CPU usage detected: ${cpu_usage}%"
 log_error "Failed to connect to MediaMTX API"
 ```
 
-### Log File Management
+## Log File Management
 
 **Rotating Logs:**
 
@@ -520,7 +520,7 @@ function log_to_file() {
 
 ## Configuration File Standards
 
-### YAML Configuration
+## YAML Configuration
 
 **MediaMTX Configuration (mediamtx.yml):**
 
@@ -568,7 +568,7 @@ function validate_yaml() {
 }
 ```
 
-### Bash Configuration Files
+## Bash Configuration Files
 
 **Format (audio-devices.conf):**
 
@@ -621,7 +621,7 @@ function load_device_config() {
 
 ## Security Best Practices
 
-### Input Validation
+## Input Validation
 
 **Sanitize User Input:**
 
@@ -678,7 +678,7 @@ function validate_device_path() {
 }
 ```
 
-### Privilege Management
+## Privilege Management
 
 **Check Root Requirements:**
 
@@ -730,7 +730,7 @@ function create_secure_directory() {
 }
 ```
 
-### Secure Temporary Files
+## Secure Temporary Files
 
 **Temp File Handling:**
 
@@ -758,42 +758,42 @@ process_file "$TEMP_FILE"
 
 Before submitting code for review:
 
-### Shellcheck Validation
+## Shellcheck Validation
 
 - [ ] All scripts pass `shellcheck` with zero warnings
 - [ ] SC2086 (Quote variables) addressed
 - [ ] SC2164 (Check cd return value) addressed
 - [ ] SC2155 (Separate declaration and assignment) addressed
 
-### Documentation
+## Documentation
 
 - [ ] Function headers complete with parameters and returns
 - [ ] Inline comments explain complex logic
 - [ ] README updated if new features added
 - [ ] Configuration examples provided
 
-### Error Handling
+## Error Handling
 
 - [ ] All commands checked for success
 - [ ] Appropriate exit codes used
 - [ ] Error messages go to stderr
 - [ ] Cleanup handlers registered
 
-### Security
+## Security
 
 - [ ] User input validated
 - [ ] File paths sanitized
 - [ ] Appropriate permissions set
 - [ ] No hardcoded credentials
 
-### Testing
+## Testing
 
 - [ ] Tested with multiple USB devices
 - [ ] Edge cases handled
 - [ ] Error conditions tested
 - [ ] Performance acceptable
 
-### Code Style
+## Code Style
 
 - [ ] Consistent naming conventions
 - [ ] Proper variable quoting
@@ -816,14 +816,14 @@ Before submitting code for review:
 <div class="grid" markdown>
 
 <div markdown>
-### Testing Guidelines
+## Testing Guidelines
 Comprehensive testing procedures
 
 [Testing Guidelines →](testing.md)
 </div>
 
 <div markdown>
-### Contributing Overview
+## Contributing Overview
 Contributing guidelines and workflows
 
 [Contributing Overview →](index.md)

@@ -20,17 +20,17 @@ The Stream Manager is the core engine of LyreBirdAudio, responsible for managing
 <div class="grid" markdown>
 
 <div markdown>
-### Stream Lifecycle Management
+## Stream Lifecycle Management
 Complete control over FFmpeg process creation, monitoring, and termination with graceful shutdown procedures.
 </div>
 
 <div markdown>
-### Automatic Health Monitoring
+## Automatic Health Monitoring
 Continuous stream health checks via MediaMTX API with automatic restart of failed streams.
 </div>
 
 <div markdown>
-### Exponential Backoff Recovery
+## Exponential Backoff Recovery
 Intelligent restart delays (10s to 300s) prevent resource exhaustion from rapid failure loops.
 </div>
 
@@ -45,7 +45,7 @@ File-based locking prevents multiple instances from conflicting operations.
 </div>
 
 <div markdown>
-### Resource Monitoring
+## Resource Monitoring
 Tracks CPU usage, file descriptors, and process counts with configurable thresholds.
 </div>
 
@@ -55,7 +55,7 @@ Tracks CPU usage, file descriptors, and process counts with configurable thresho
 
 ## Usage
 
-### Basic Commands
+## Basic Commands
 
 ```bash
 # Start all streams (individual mode)
@@ -80,7 +80,7 @@ sudo ./mediamtx-stream-manager.sh config
 sudo ./mediamtx-stream-manager.sh monitor
 ```
 
-### Multiplex Streaming
+## Multiplex Streaming
 
 ```bash
 # Audio mixing mode (all mics -> single stereo stream)
@@ -93,7 +93,7 @@ sudo ./mediamtx-stream-manager.sh -m multiplex -f amerge start
 sudo ./mediamtx-stream-manager.sh -m multiplex -n studio start
 ```
 
-### Systemd Service Installation
+## Systemd Service Installation
 
 ```bash
 # Install as systemd service (REQUIRED for production)
@@ -224,7 +224,7 @@ rtsp://your-server:8554/all_mics  (N channels, separated)
 
 ---
 
-### Mode Comparison
+## Mode Comparison
 
 | Feature | Individual | amix | amerge |
 |---------|-----------|------|--------|
@@ -268,7 +268,7 @@ esac
 
 ## Configuration
 
-### Configuration File
+## Configuration File
 
 **Location:** `/etc/mediamtx/audio-devices.conf`
 
@@ -296,7 +296,7 @@ DEFAULT_CODEC=opus
 DEFAULT_THREAD_QUEUE=8192
 ```
 
-### Configuration Generation
+## Configuration Generation
 
 ```bash
 # Auto-generate with normal quality
@@ -309,7 +309,7 @@ sudo ./lyrebird-mic-check.sh -g --quality=high
 sudo ./lyrebird-mic-check.sh -g --quality=low
 ```
 
-### Validate Configuration
+## Validate Configuration
 
 ```bash
 # Validate against hardware capabilities
@@ -356,7 +356,7 @@ sudo ./mediamtx-stream-manager.sh config
 - **Critical recording requirements**
 - **Any deployment requiring reliability**
 
-### Installation Steps
+## Installation Steps
 
 ```bash
 # Step 1: Install systemd service
@@ -387,7 +387,7 @@ sudo systemctl status mediamtx-audio
              └─12347 ffmpeg -f alsa -i hw:CARD=Device_2 ...
 ```
 
-### Service Management
+## Service Management
 
 ```bash
 # View live logs
@@ -409,7 +409,7 @@ sudo systemctl disable mediamtx-audio
 sudo systemctl status mediamtx-audio
 ```
 
-### Cron Monitoring
+## Cron Monitoring
 
 The systemd installation automatically creates `/etc/cron.d/mediamtx-monitor` with production-grade safety:
 
@@ -470,7 +470,7 @@ graph TD
     style G fill:#00bcd4,color:#fff
 ```
 
-### Exponential Backoff Strategy
+## Exponential Backoff Strategy
 
 When a stream fails, the wrapper implements exponential backoff:
 

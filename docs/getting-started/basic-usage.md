@@ -6,7 +6,7 @@ Learn the essential operations for managing LyreBirdAudio streams.
 
 ## Daily Operations
 
-### Starting Streams
+## Starting Streams
 
 The systemd service starts automatically on boot. To start manually:
 
@@ -14,19 +14,19 @@ The systemd service starts automatically on boot. To start manually:
 sudo systemctl start mediamtx-audio
 ```
 
-### Stopping Streams
+## Stopping Streams
 
 ```bash
 sudo systemctl stop mediamtx-audio
 ```
 
-### Restarting Streams
+## Restarting Streams
 
 ```bash
 sudo systemctl restart mediamtx-audio
 ```
 
-### Checking Status
+## Checking Status
 
 ```bash
 sudo systemctl status mediamtx-audio
@@ -42,7 +42,7 @@ The stream manager provides several commands:
 sudo ./mediamtx-stream-manager.sh <command>
 ```
 
-### Available Commands
+## Available Commands
 
 | Command | Description |
 |---------|-------------|
@@ -92,7 +92,7 @@ System Load: 0.45, 0.38, 0.32
 sudo ./mediamtx-stream-manager.sh logs lyrebird-mic-1
 ```
 
-### Service Logs
+## Service Logs
 
 ```bash
 # Last 50 lines
@@ -105,7 +105,7 @@ journalctl -u mediamtx-audio -f
 journalctl -u mediamtx-audio -b
 ```
 
-### MediaMTX Server Logs
+## MediaMTX Server Logs
 
 ```bash
 tail -f /opt/mediamtx/mediamtx.log
@@ -115,7 +115,7 @@ tail -f /opt/mediamtx/mediamtx.log
 
 ## Accessing Streams
 
-### RTSP URL Format
+## RTSP URL Format
 
 ```text
 rtsp://[server-ip]:8554/[stream-name]
@@ -128,7 +128,7 @@ rtsp://192.168.1.100:8554/front-door
 rtsp://myserver.local:8554/bird-monitor
 ```
 
-### Using VLC Player
+## Using VLC Player
 
 === "Command Line"
 
@@ -143,9 +143,9 @@ rtsp://myserver.local:8554/bird-monitor
     3. Enter: `rtsp://localhost:8554/lyrebird-mic-1`
     4. Click Play
 
-### Using FFmpeg
+## Using FFmpeg
 
-#### Listen to Stream
+### Listen to Stream
 
 ```bash
 ffplay -nodisp rtsp://localhost:8554/lyrebird-mic-1
@@ -161,7 +161,7 @@ ffmpeg -i rtsp://localhost:8554/lyrebird-mic-1 \
   recording.aac
 ```
 
-#### Continuous Recording
+## Continuous Recording
 
 ```bash
 # Record with automatic file rotation every hour
@@ -185,7 +185,7 @@ sudo ./lyrebird-orchestrator.sh
 
 Select **Option 4: Add New Stream**
 
-### Using Stream Manager Directly
+## Using Stream Manager Directly
 
 ```bash
 sudo ./mediamtx-stream-manager.sh add my-new-stream
@@ -209,7 +209,7 @@ sudo ./lyrebird-orchestrator.sh
 
 Select **Option 5: Remove Stream**
 
-### Using Stream Manager
+## Using Stream Manager
 
 ```bash
 sudo ./mediamtx-stream-manager.sh remove lyrebird-mic-1
@@ -222,7 +222,7 @@ sudo ./mediamtx-stream-manager.sh remove lyrebird-mic-1
 
 ## Managing USB Devices
 
-### List Mapped Devices
+## List Mapped Devices
 
 ```bash
 ls -l /dev/lyrebird-*
@@ -234,7 +234,7 @@ lrwxrwxrwx 1 root root 12 Nov 15 10:00 /dev/lyrebird-mic-1 -> snd/pcmC1D0c
 lrwxrwxrwx 1 root root 12 Nov 15 10:00 /dev/lyrebird-mic-2 -> snd/pcmC2D0c
 ```
 
-### Add New USB Device
+## Add New USB Device
 
 ```bash
 sudo ./lyrebird-orchestrator.sh
@@ -242,7 +242,7 @@ sudo ./lyrebird-orchestrator.sh
 
 Select **Option 2: Map USB Audio Devices**
 
-### Remove USB Device Mapping
+## Remove USB Device Mapping
 
 ```bash
 # Find the udev rule
@@ -260,7 +260,7 @@ sudo udevadm trigger
 
 ## System Diagnostics
 
-### Quick Health Check
+## Quick Health Check
 
 ```bash
 sudo ./lyrebird-diagnostics.sh quick
@@ -281,7 +281,7 @@ LyreBirdAudio System Diagnostics
 Status: HEALTHY
 ```
 
-### Comprehensive Diagnostics
+## Comprehensive Diagnostics
 
 ```bash
 sudo ./lyrebird-diagnostics.sh full
@@ -308,7 +308,7 @@ git fetch origin
 git status
 ```
 
-### Apply Updates
+## Apply Updates
 
 ```bash
 sudo ./lyrebird-updater.sh update
@@ -331,7 +331,7 @@ sudo ./lyrebird-updater.sh rollback
 
 ## Best Practices
 
-### Regular Monitoring
+## Regular Monitoring
 
 Setup a cron job for daily health checks:
 
@@ -344,7 +344,7 @@ Add:
 0 8 * * * /opt/LyreBirdAudio/lyrebird-diagnostics.sh quick | mail -s "LyreBird Status" admin@example.com
 ```
 
-### Log Rotation
+## Log Rotation
 
 Logs are automatically rotated. Verify configuration:
 
@@ -352,7 +352,7 @@ Logs are automatically rotated. Verify configuration:
 cat /etc/logrotate.d/mediamtx
 ```
 
-### Backup Configurations
+## Backup Configurations
 
 Regularly backup stream configurations:
 
@@ -380,7 +380,7 @@ sudo pkill -f "lyrebird-mic-1"
 sudo systemctl start mediamtx-audio
 ```
 
-### Change Stream Settings
+## Change Stream Settings
 
 Edit the stream configuration:
 
@@ -394,7 +394,7 @@ Restart for changes to take effect:
 sudo systemctl restart mediamtx-audio
 ```
 
-### Test Audio Input
+## Test Audio Input
 
 ```bash
 # Record 5 seconds directly from device
@@ -408,13 +408,13 @@ aplay test.wav
 
 ## Monitoring Stream Health
 
-### Check Stream Uptime
+## Check Stream Uptime
 
 ```bash
 ps -eo pid,etime,cmd | grep ffmpeg
 ```
 
-### Monitor Resource Usage
+## Monitor Resource Usage
 
 ```bash
 # Real-time process monitoring
@@ -424,7 +424,7 @@ htop -p $(pgrep -d',' ffmpeg)
 ps aux | grep ffmpeg
 ```
 
-### Network Traffic
+## Network Traffic
 
 ```bash
 # Monitor RTSP connections

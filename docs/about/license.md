@@ -8,7 +8,7 @@ LyreBirdAudio is licensed under the Apache License 2.0.
 
 A permissive free software license written by the Apache Software Foundation.
 
-### Key Points
+## Key Points
 
 - YES Commercial use allowed
 - YES Modification allowed

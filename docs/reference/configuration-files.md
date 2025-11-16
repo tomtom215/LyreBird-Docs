@@ -22,15 +22,15 @@ LyreBirdAudio uses multiple configuration files to manage audio devices, streami
 
 ## Audio Devices Configuration
 
-### File Location
+## File Location
 
 `/etc/mediamtx/audio-devices.conf`
 
-### Purpose
+## Purpose
 
 Defines audio encoding settings for each USB audio device, including codec, sample rate, bitrate, and channel configuration.
 
-### Format
+## Format
 
 Shell script format with environment variables:
 
@@ -44,7 +44,7 @@ DEVICE_<DEVICE_NAME>_CHANNELS=<channels>
 DEVICE_<DEVICE_NAME>_THREAD_QUEUE=<size>
 ```
 
-### Configuration Variables
+## Configuration Variables
 
 **DEVICE_<NAME>_CODEC**
 
@@ -130,7 +130,7 @@ DEVICE_Unreliable_USB_THREAD_QUEUE=16384 # Increased stability
 DEVICE_Low_Latency_THREAD_QUEUE=1024     # Reduced buffer size
 ```
 
-### Complete Example
+## Complete Example
 
 ```bash
 # /etc/mediamtx/audio-devices.conf
@@ -164,7 +164,7 @@ DEVICE_Conference_Room_CHANNELS=1
 # THREAD_QUEUE defaults to 8192 if not specified
 ```
 
-### Codec-Specific Guidelines
+## Codec-Specific Guidelines
 
 **Opus (Recommended for most use cases):**
 
@@ -224,19 +224,19 @@ DEVICE_<NAME>_CHANNELS=2         # Stereo
 
 ## MediaMTX Configuration
 
-### File Location
+## File Location
 
 `/etc/mediamtx/mediamtx.yml`
 
-### Purpose
+## Purpose
 
 Configures the MediaMTX RTSP server, including ports, protocols, authentication, and path configuration.
 
-### Format
+## Format
 
 YAML configuration file.
 
-### Key Configuration Sections
+## Key Configuration Sections
 
 **General Settings:**
 
@@ -315,7 +315,7 @@ paths:
     runOnDisconnect:
 ```
 
-### Complete Example
+## Complete Example
 
 ```yaml
 # /etc/mediamtx/mediamtx.yml
@@ -372,7 +372,7 @@ paths:
     # runOnReady: /path/to/multiplex-handler.sh
 ```
 
-### Path Variables
+## Path Variables
 
 When using `runOn*` commands, these variables are available:
 
@@ -387,19 +387,19 @@ When using `runOn*` commands, these variables are available:
 
 ## USB Persistence Rules
 
-### File Location
+## File Location
 
 `/etc/udev/rules.d/99-usb-soundcards.rules`
 
-### Purpose
+## Purpose
 
 Creates persistent device naming for USB audio devices to prevent card number changes across reboots.
 
-### Format
+## Format
 
 udev rules format.
 
-### Rule Syntax
+## Rule Syntax
 
 ```text
 SUBSYSTEM=="sound", \
@@ -419,7 +419,7 @@ SUBSYSTEM=="sound", \
   SYMLINK+="sound/by-id/<device_name>"
 ```
 
-### Complete Example
+## Complete Example
 
 ```bash
 # /etc/udev/rules.d/99-usb-soundcards.rules
@@ -451,7 +451,7 @@ SUBSYSTEM=="sound", \
   ATTR{number}="2"
 ```
 
-### Finding Device IDs
+## Finding Device IDs
 
 ```bash
 # List USB devices with vendor/product IDs
@@ -467,7 +467,7 @@ udevadm info -a -p $(udevadm info -q path -n /dev/snd/controlC0)
 lsusb -t
 ```
 
-### Applying Rules
+## Applying Rules
 
 ```bash
 # Reload udev rules
@@ -484,7 +484,7 @@ sudo udevadm test /sys/class/sound/card0
 
 ## Systemd Service Files
 
-### MediaMTX Service
+## MediaMTX Service
 
 **File Location:** `/etc/systemd/system/mediamtx.service`
 
@@ -534,7 +534,7 @@ sudo systemctl status mediamtx
 sudo journalctl -u mediamtx -f
 ```
 
-### Stream Manager Service
+## Stream Manager Service
 
 **File Location:** `/etc/systemd/system/mediamtx-audio.service`
 
@@ -593,7 +593,7 @@ sudo journalctl -u mediamtx-audio -f
 
 ## Configuration Best Practices
 
-### Backup Configurations
+## Backup Configurations
 
 Always backup before making changes:
 
@@ -608,7 +608,7 @@ sudo cp /etc/udev/rules.d/99-usb-soundcards.rules \
        /etc/mediamtx/backups/$(date +%Y%m%d)/
 ```
 
-### Version Control
+## Version Control
 
 Use git for configuration tracking:
 
@@ -624,7 +624,7 @@ sudo git diff audio-devices.conf
 sudo git commit -am "Update Blue Yeti bitrate"
 ```
 
-### Validation
+## Validation
 
 Validate configurations before applying:
 
@@ -636,7 +636,7 @@ sudo ./lyrebird-mic-check.sh -V
 sudo udevadm test /sys/class/sound/card0
 ```
 
-### Documentation
+## Documentation
 
 Document custom configurations:
 
@@ -668,14 +668,14 @@ DEVICE_Blue_Yeti_THREAD_QUEUE=2048  # Increased for USB stability
 <div class="grid" markdown>
 
 <div markdown>
-### Environment Variables
+## Environment Variables
 Runtime configuration and customization
 
 [Environment Variables →](environment-variables.md)
 </div>
 
 <div markdown>
-### Command Reference
+## Command Reference
 All available commands and utilities
 
 [Command Reference →](command-reference.md)

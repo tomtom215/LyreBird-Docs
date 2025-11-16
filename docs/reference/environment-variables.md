@@ -20,7 +20,7 @@ LyreBirdAudio scripts use environment variables to customize behavior without mo
 
 ## Timing Controls
 
-### STREAM_STARTUP_DELAY
+## STREAM_STARTUP_DELAY
 
 **Description:** Delay in seconds after starting streams before validation.
 
@@ -49,7 +49,7 @@ STREAM_STARTUP_DELAY=15 sudo ./mediamtx-stream-manager.sh start
 | Intel N100 | 10-15 seconds |
 | Workstation | 5-10 seconds |
 
-### USB_STABILIZATION_DELAY
+## USB_STABILIZATION_DELAY
 
 **Description:** Delay in seconds after USB device connection before accessing.
 
@@ -70,7 +70,7 @@ USB_STABILIZATION_DELAY=10 sudo ./usb-audio-mapper.sh
 - Prevents device access errors
 - Allows udev rules to apply
 
-### MAX_RESTART_DELAY
+## MAX_RESTART_DELAY
 
 **Description:** Maximum delay in seconds for exponential backoff recovery.
 
@@ -95,7 +95,7 @@ MAX_RESTART_DELAY=600 sudo ./mediamtx-stream-manager.sh start
 
 ## Resource Thresholds
 
-### MAX_CPU_WARNING
+## MAX_CPU_WARNING
 
 **Description:** CPU usage percentage threshold for warnings.
 
@@ -116,7 +116,7 @@ MAX_CPU_WARNING=70 sudo ./lyrebird-diagnostics.sh
 - Helps prevent resource exhaustion
 - Configurable based on system capacity
 
-### MAX_MEMORY_WARNING
+## MAX_MEMORY_WARNING
 
 **Description:** Minimum free memory in MB before warning.
 
@@ -137,7 +137,7 @@ MAX_MEMORY_WARNING=500 sudo ./lyrebird-diagnostics.sh
 - Prevents OOM conditions
 - Adjustable based on available RAM
 
-### MAX_FD_WARNING
+## MAX_FD_WARNING
 
 **Description:** File descriptor count threshold for warnings.
 
@@ -158,7 +158,7 @@ MAX_FD_WARNING=800 sudo ./mediamtx-stream-manager.sh monitor
 - Prevents "too many open files" errors
 - Configurable based on ulimit settings
 
-### MAX_DISK_WARNING
+## MAX_DISK_WARNING
 
 **Description:** Minimum free disk space in GB before warning.
 
@@ -183,7 +183,7 @@ MAX_DISK_WARNING=5 sudo ./lyrebird-diagnostics.sh
 
 ## Path Configuration
 
-### AUDIO_CONFIG
+## AUDIO_CONFIG
 
 **Description:** Path to audio devices configuration file.
 
@@ -203,7 +203,7 @@ AUDIO_CONFIG=/home/user/test-audio-devices.conf \
 - Support multiple configuration profiles
 - Development and testing
 
-### MEDIAMTX_CONFIG
+## MEDIAMTX_CONFIG
 
 **Description:** Path to MediaMTX configuration file.
 
@@ -223,7 +223,7 @@ MEDIAMTX_CONFIG=/home/user/test-mediamtx.yml \
 - Support multiple server configurations
 - Development environments
 
-### LOG_DIR
+## LOG_DIR
 
 **Description:** Directory for LyreBird log files.
 
@@ -242,7 +242,7 @@ LOG_DIR=/home/user/logs sudo ./mediamtx-stream-manager.sh start
 - Testing without system permissions
 - Separate logs per environment
 
-### UDEV_RULES_FILE
+## UDEV_RULES_FILE
 
 **Description:** Path to USB persistence udev rules.
 
@@ -265,7 +265,7 @@ UDEV_RULES_FILE=/tmp/test-udev.rules sudo ./usb-audio-mapper.sh
 
 ## Operational Parameters
 
-### DRY_RUN
+## DRY_RUN
 
 **Description:** Preview actions without executing them. **Only supported by `install_mediamtx.sh`.**
 
@@ -293,7 +293,7 @@ DRY_RUN=true sudo ./install_mediamtx.sh
 
 ## Debug and Logging
 
-### DIAGNOSTIC_DEBUG
+## DIAGNOSTIC_DEBUG
 
 **Description:** Enable detailed diagnostic tool debugging.
 
@@ -314,7 +314,7 @@ DIAGNOSTIC_DEBUG=1 sudo ./lyrebird-diagnostics.sh --verbose
 - Understand check logic
 - Report diagnostic issues
 
-### VERBOSE
+## VERBOSE
 
 **Description:** Enable verbose output in scripts.
 
@@ -335,7 +335,7 @@ VERBOSE=1 sudo ./mediamtx-stream-manager.sh status
 - Troubleshooting script issues
 - Understanding script behavior
 
-### QUIET
+## QUIET
 
 **Description:** Suppress non-error output.
 
@@ -356,7 +356,7 @@ QUIET=1 sudo ./mediamtx-stream-manager.sh start
 - Cron jobs
 - Clean output for parsing
 
-### NO_COLOR
+## NO_COLOR
 
 **Description:** Disable colored output.
 
@@ -381,7 +381,7 @@ NO_COLOR=1 sudo ./lyrebird-diagnostics.sh
 
 ## Quality Preset Overrides
 
-### DEFAULT_QUALITY
+## DEFAULT_QUALITY
 
 **Description:** Default quality preset for device configuration generation.
 
@@ -408,7 +408,7 @@ DEFAULT_QUALITY=high sudo ./lyrebird-mic-check.sh -g
 
 ## Stream Management
 
-### AUTO_RECOVERY_ENABLED
+## AUTO_RECOVERY_ENABLED
 
 **Description:** Enable automatic stream recovery.
 
@@ -429,7 +429,7 @@ AUTO_RECOVERY_ENABLED=false sudo ./mediamtx-stream-manager.sh monitor
 - Manual recovery control
 - Debugging stream issues
 
-### MAX_RETRY_ATTEMPTS
+## MAX_RETRY_ATTEMPTS
 
 **Description:** Maximum number of automatic restart attempts.
 
@@ -454,7 +454,7 @@ MAX_RETRY_ATTEMPTS=10 sudo ./mediamtx-stream-manager.sh start
 
 ## Environment Variable Combinations
 
-### Production Configuration
+## Production Configuration
 
 ```bash
 # Production environment settings
@@ -510,7 +510,7 @@ sudo ./mediamtx-stream-manager.sh start
 
 ## Persistent Configuration
 
-### Using .env Files
+## Using .env Files
 
 Create environment file for persistent settings:
 
@@ -543,7 +543,7 @@ source /opt/lyrebird/.env
 sudo ./mediamtx-stream-manager.sh start
 ```
 
-### System-Wide Configuration
+## System-Wide Configuration
 
 Add to `/etc/environment` for system-wide settings:
 
@@ -564,7 +564,7 @@ LOGLEVEL=INFO
 source /etc/environment
 ```
 
-### Systemd Service Configuration
+## Systemd Service Configuration
 
 Configure environment variables in systemd service files:
 
@@ -591,7 +591,7 @@ sudo systemctl restart mediamtx-audio
 
 ## Validation and Testing
 
-### Verify Environment Variables
+## Verify Environment Variables
 
 ```bash
 # Check if variable is set
@@ -604,7 +604,7 @@ env | grep -E '(STREAM|USB|MAX_|LOG)'
 VERBOSE=1 sudo ./mediamtx-stream-manager.sh status
 ```
 
-### Debugging Variable Issues
+## Debugging Variable Issues
 
 ```bash
 # Enable debug output to see variable usage
@@ -619,7 +619,7 @@ STREAM_STARTUP_DELAY=20 ./mediamtx-stream-manager.sh start
 
 ## Best Practices
 
-### 1. Document Custom Settings
+## 1. Document Custom Settings
 
 ```bash
 # Comment environment files
@@ -632,7 +632,7 @@ STREAM_STARTUP_DELAY=20
 MAX_MEMORY_WARNING=150
 ```
 
-### 2. Use Configuration Files
+## 2. Use Configuration Files
 
 Prefer `.env` files over inline variables for maintainability:
 
@@ -646,7 +646,7 @@ STREAM_STARTUP_DELAY=15 USB_STABILIZATION_DELAY=10 \
   MAX_RESTART_DELAY=300 sudo ./mediamtx-stream-manager.sh start
 ```
 
-### 3. Test Before Production
+## 3. Test Before Production
 
 Always test environment variable changes:
 
@@ -659,7 +659,7 @@ DRY_RUN=true STREAM_STARTUP_DELAY=20 \
 STREAM_STARTUP_DELAY=20 sudo ./mediamtx-stream-manager.sh start
 ```
 
-### 4. Platform-Specific Profiles
+## 4. Platform-Specific Profiles
 
 Create platform-specific environment files:
 
@@ -691,14 +691,14 @@ export MAX_CPU_WARNING=70
 <div class="grid" markdown>
 
 <div markdown>
-### Command Reference
+## Command Reference
 All available commands and utilities
 
 [Command Reference →](command-reference.md)
 </div>
 
 <div markdown>
-### Configuration Files
+## Configuration Files
 File-based settings and formats
 
 [Configuration Files →](configuration-files.md)

@@ -93,7 +93,7 @@ For a standard single-microphone setup:
 
 ## Verify Installation
 
-### Check Stream Status
+## Check Stream Status
 
 ```bash
 sudo ./mediamtx-stream-manager.sh status

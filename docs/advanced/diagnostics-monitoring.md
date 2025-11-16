@@ -21,7 +21,7 @@ This guide covers:
 
 ## Diagnostic Tool
 
-### Overview
+## Overview
 
 The `lyrebird-diagnostics.sh` script performs comprehensive system health checks:
 
@@ -44,7 +44,7 @@ sudo ./lyrebird-diagnostics.sh --export=/tmp/diagnostic-report.txt
 - Machine-readable exit codes
 - Export capability for support tickets
 
-### Diagnostic Modes
+## Diagnostic Modes
 
 **Quick Mode (Default):**
 
@@ -98,7 +98,7 @@ sudo DIAGNOSTIC_DEBUG=1 ./lyrebird-diagnostics.sh --verbose
 
 ## Diagnostic Checks
 
-### System Checks
+## System Checks
 
 **1. Operating System Compatibility**
 
@@ -150,7 +150,7 @@ Checks access to required directories and files:
 [PASS] Script permissions correct
 ```
 
-### Device Checks
+## Device Checks
 
 **4. USB Audio Devices Detected**
 
@@ -216,7 +216,7 @@ Validates user can access audio devices:
 [PASS] Can access all audio devices
 ```
 
-### Service Checks
+## Service Checks
 
 **8. MediaMTX Service Running**
 
@@ -266,7 +266,7 @@ Checks stream manager service (if installed):
 [PASS] No recent errors
 ```
 
-### Stream Checks
+## Stream Checks
 
 **11. RTSP Port Listening**
 
@@ -330,7 +330,7 @@ Validates device configuration file:
 [PASS] 2 devices configured
 ```
 
-### Resource Checks
+## Resource Checks
 
 **15. CPU Usage**
 
@@ -395,7 +395,7 @@ Checks disk space for logs:
 [PASS] Root filesystem: 42.8 GB available
 ```
 
-### Network Checks
+## Network Checks
 
 **19. Network Connectivity**
 
@@ -444,7 +444,7 @@ Checks firewall configuration:
 [PASS] API port 9997: allowed
 ```
 
-### Log Checks
+## Log Checks
 
 **22. Log Files Accessible**
 
@@ -536,7 +536,7 @@ esac
 
 ## Continuous Monitoring
 
-### Stream Manager Monitoring
+## Stream Manager Monitoring
 
 The stream manager provides continuous monitoring:
 
@@ -570,7 +570,7 @@ Resource Summary:
   Failed Streams: 0
 ```
 
-### Systemd Service Monitoring
+## Systemd Service Monitoring
 
 For production environments, monitor via systemd:
 
@@ -588,7 +588,7 @@ sudo journalctl -u mediamtx-audio -p err
 sudo journalctl -u mediamtx-audio -b
 ```
 
-### Automated Health Checks
+## Automated Health Checks
 
 Schedule regular diagnostics:
 
@@ -622,7 +622,7 @@ fi
 
 ## Integration with Monitoring Systems
 
-### Prometheus Integration
+## Prometheus Integration
 
 Export metrics for Prometheus:
 
@@ -660,7 +660,7 @@ scrape_configs:
     metrics_path: '/lyrebird-metrics'
 ```
 
-### Grafana Dashboard
+## Grafana Dashboard
 
 Create visualization dashboard:
 
@@ -689,7 +689,7 @@ lyrebird_memory_bytes / 1024 / 1024
 up{job="lyrebird"}
 ```
 
-### Nagios/Icinga Integration
+## Nagios/Icinga Integration
 
 Create Nagios check plugin:
 
@@ -741,7 +741,7 @@ define service{
 
 ## Log Analysis
 
-### MediaMTX Logs
+## MediaMTX Logs
 
 Location: `/var/log/mediamtx.out` (or via journalctl)
 
@@ -774,7 +774,7 @@ sudo journalctl -u mediamtx -p err
 "[path Blue_Yeti] error"
 ```
 
-### Stream Manager Logs
+## Stream Manager Logs
 
 Location: `/var/log/mediamtx-stream-manager.log`
 
@@ -807,7 +807,7 @@ sudo grep -i "restart" /var/log/mediamtx-stream-manager.log
 "[INFO] Restarted Blue_Yeti successfully"
 ```
 
-### FFmpeg Device Logs
+## FFmpeg Device Logs
 
 Location: `/var/log/lyrebird/<device-name>.log`
 
@@ -837,7 +837,7 @@ sudo tail -f /var/log/lyrebird/*.log
 "frame= 1000 fps= 24 size= 512kB time=00:00:41.66"
 ```
 
-### Diagnostic Logs
+## Diagnostic Logs
 
 Location: `/var/log/lyrebird-diagnostics.log`
 
@@ -855,7 +855,7 @@ sudo grep FAIL /var/log/lyrebird-diagnostics.log | tail -20
 
 ## Performance Metrics Collection
 
-### Resource Metrics
+## Resource Metrics
 
 Collect system metrics over time:
 
@@ -888,7 +888,7 @@ echo "$TIMESTAMP,$CPU,$MEM,$FD,$STREAMS" >> "$LOGFILE"
 * * * * * /usr/local/bin/lyrebird-collect-metrics.sh
 ```
 
-### Stream Quality Metrics
+## Stream Quality Metrics
 
 Monitor stream quality:
 
@@ -908,7 +908,7 @@ ffmpeg -i "$STREAM_URL" -t $DURATION -f null - 2>&1 | \
 
 ## Best Practices
 
-### Regular Diagnostics
+## Regular Diagnostics
 
 1. **Daily Quick Checks**
    ```bash
@@ -927,7 +927,7 @@ ffmpeg -i "$STREAM_URL" -t $DURATION -f null - 2>&1 | \
    - Analyze metric trends
    - Capacity planning review
 
-### Monitoring Strategy
+## Monitoring Strategy
 
 1. **Real-Time Monitoring**
    - Use stream manager monitor mode
@@ -944,7 +944,7 @@ ffmpeg -i "$STREAM_URL" -t $DURATION -f null - 2>&1 | \
    - Define escalation procedures
    - Test alert paths regularly
 
-### Log Management
+## Log Management
 
 1. **Log Rotation**
    ```bash
@@ -987,14 +987,14 @@ ffmpeg -i "$STREAM_URL" -t $DURATION -f null - 2>&1 | \
 <div class="grid" markdown>
 
 <div markdown>
-### Custom Integration
+## Custom Integration
 Integrate LyreBirdAudio with external systems
 
 [Custom Integration →](custom-integration.md)
 </div>
 
 <div markdown>
-### Troubleshooting
+## Troubleshooting
 Resolve common issues and problems
 
 [Troubleshooting →](troubleshooting.md)

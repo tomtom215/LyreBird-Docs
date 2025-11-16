@@ -21,7 +21,7 @@ This guide covers:
 
 ## Stream Manager Script
 
-### Purpose
+## Purpose
 
 The `mediamtx-stream-manager.sh` script manages all aspects of RTSP audio streaming:
 
@@ -31,7 +31,7 @@ The `mediamtx-stream-manager.sh` script manages all aspects of RTSP audio stream
 - Tracks system resources (CPU, memory, file descriptors)
 - Provides production-ready systemd integration
 
-### Key Features
+## Key Features
 
 - **Complete Lifecycle Control:** Start, stop, restart, and monitor streams
 - **Self-Healing:** Automatic recovery from failures with intelligent backoff
@@ -44,7 +44,7 @@ The `mediamtx-stream-manager.sh` script manages all aspects of RTSP audio stream
 
 ## Basic Commands
 
-### Start Streams
+## Start Streams
 
 Start all configured audio streams:
 
@@ -70,7 +70,7 @@ Waiting 10 seconds for streams to stabilize...
 All streams started successfully.
 ```
 
-### Stop Streams
+## Stop Streams
 
 Stop all running streams:
 
@@ -95,7 +95,7 @@ Stopped stream: USB_Microphone (PID: 12346)
 All streams stopped.
 ```
 
-### Restart Streams
+## Restart Streams
 
 Restart all streams (stop then start):
 
@@ -110,7 +110,7 @@ Useful after:
 - System updates
 - Troubleshooting stream issues
 
-### Check Stream Status
+## Check Stream Status
 
 View current status of all streams:
 
@@ -134,7 +134,7 @@ USB_Microphone: RUNNING (PID: 12346, Uptime: 2h 15m)
 Total Streams: 2 running, 0 failed
 ```
 
-### List Available Streams
+## List Available Streams
 
 List all streams available via MediaMTX:
 
@@ -154,7 +154,7 @@ Office_Multiplex - rtsp://localhost:8554/Office_Multiplex
 Total: 3 streams
 ```
 
-### Monitor Streams
+## Monitor Streams
 
 Continuous monitoring mode with real-time updates:
 
@@ -191,7 +191,7 @@ Press `Ctrl+C` to exit monitoring mode.
 
 ## Self-Healing Streams
 
-### Automatic Recovery System
+## Automatic Recovery System
 
 LyreBirdAudio implements intelligent self-healing for stream failures:
 
@@ -203,7 +203,7 @@ LyreBirdAudio implements intelligent self-healing for stream failures:
 - Resource cleanup between restarts
 - Health validation after recovery
 
-### Exponential Backoff Strategy
+## Exponential Backoff Strategy
 
 When a stream fails, the system uses exponential backoff to avoid rapid restart loops:
 
@@ -225,7 +225,7 @@ When a stream fails, the system uses exponential backoff to avoid rapid restart 
 MAX_RESTART_DELAY=600 ./mediamtx-stream-manager.sh start
 ```
 
-### Recovery Process
+## Recovery Process
 
 When a stream failure is detected:
 
@@ -265,7 +265,7 @@ When a stream failure is detected:
 [INFO] Restarted Blue_Yeti successfully
 ```
 
-### Permanent Failure Handling
+## Permanent Failure Handling
 
 After maximum retry attempts, the stream enters failed state:
 
@@ -287,7 +287,7 @@ sudo ./mediamtx-stream-manager.sh restart
 
 ## Health Monitoring
 
-### Stream Health Checks
+## Stream Health Checks
 
 The stream manager performs continuous health monitoring:
 
@@ -308,7 +308,7 @@ The stream manager performs continuous health monitoring:
    - Memory consumption
    - File descriptor count
 
-### Health Check Endpoints
+## Health Check Endpoints
 
 Query MediaMTX API directly for stream health:
 
@@ -332,7 +332,7 @@ curl http://localhost:9997/v3/paths/get/Blue_Yeti
 }
 ```
 
-### Health Status Indicators
+## Health Status Indicators
 
 | Status | Description | Action Required |
 |--------|-------------|-----------------|
@@ -346,7 +346,7 @@ curl http://localhost:9997/v3/paths/get/Blue_Yeti
 
 ## Resource Tracking
 
-### CPU Monitoring
+## CPU Monitoring
 
 Monitor CPU usage per stream and total system load:
 
@@ -375,7 +375,7 @@ sudo ./mediamtx-stream-manager.sh monitor
 - Reduce number of concurrent streams
 - Upgrade hardware
 
-### Memory Monitoring
+## Memory Monitoring
 
 Each FFmpeg stream typically uses 40-80 MB of RAM:
 
@@ -399,7 +399,7 @@ Total Memory = (Number of Streams × 50 MB) + 200 MB base system
 = 700 MB total
 ```
 
-### File Descriptor Tracking
+## File Descriptor Tracking
 
 Monitor file descriptor usage to prevent exhaustion:
 
@@ -436,7 +436,7 @@ ulimit -n 4096
 
 ## Production Deployment
 
-### Systemd Service Installation
+## Systemd Service Installation
 
 For production environments, install the stream manager as a systemd service:
 
@@ -451,7 +451,7 @@ This creates a systemd unit file that:
 - Provides logging via journalctl
 - Enables dependency management
 
-### Service Management
+## Service Management
 
 After installation, manage the service using systemd commands:
 
@@ -500,7 +500,7 @@ sudo systemctl status mediamtx-audio
            └─12346 ffmpeg -f alsa -i hw:CARD=USB_Microphone ...
 ```
 
-### Viewing Service Logs
+## Viewing Service Logs
 
 Monitor stream activity via journalctl:
 
@@ -532,7 +532,7 @@ Nov 15 12:15:30 server mediamtx-audio[12340]: Stream Blue_Yeti health check: OK
 
 ## Environment Variables
 
-### Timing Controls
+## Timing Controls
 
 Override default timing parameters:
 
@@ -555,7 +555,7 @@ MAX_RESTART_DELAY=600 ./mediamtx-stream-manager.sh start
 | `USB_STABILIZATION_DELAY` | 5 sec | USB device initialization time |
 | `MAX_RESTART_DELAY` | 300 sec | Maximum exponential backoff |
 
-### Resource Thresholds
+## Resource Thresholds
 
 Configure resource warning levels:
 
@@ -574,7 +574,7 @@ MAX_CPU_WARNING=30 ./mediamtx-stream-manager.sh monitor
 | `MAX_FD_WARNING` | 500 | File descriptor warning level |
 | `MAX_CPU_WARNING` | 20% | CPU usage warning threshold |
 
-### Configuration Paths
+## Configuration Paths
 
 Override default file locations:
 
@@ -621,7 +621,7 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
    sudo journalctl -u mediamtx-audio -n 50
    ```
 
-### Streams Start Then Fail
+## Streams Start Then Fail
 
 **Symptom:** Streams start successfully but fail after running
 
@@ -655,7 +655,7 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
    sudo journalctl -u mediamtx -f
    ```
 
-### High CPU Usage
+## High CPU Usage
 
 **Symptom:** FFmpeg processes consuming excessive CPU
 
@@ -680,7 +680,7 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
    - Reduce number of active devices
    - Implement stream rotation
 
-### Memory Exhaustion
+## Memory Exhaustion
 
 **Symptom:** System runs out of memory with many streams
 
@@ -704,7 +704,7 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
    top -p $(pgrep ffmpeg | tr '\n' ',')
    ```
 
-### File Descriptor Exhaustion
+## File Descriptor Exhaustion
 
 **Symptom:** "Too many open files" errors
 
@@ -734,7 +734,7 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
    ulimit -n
    ```
 
-### Automatic Recovery Not Working
+## Automatic Recovery Not Working
 
 **Symptom:** Failed streams don't restart automatically
 
@@ -764,7 +764,7 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
 
 ## Best Practices
 
-### Production Deployments
+## Production Deployments
 
 1. **Use systemd service** - Enable automatic startup and management
 2. **Monitor continuously** - Run in monitor mode or check status regularly
@@ -772,7 +772,7 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
 4. **Plan for capacity** - Calculate CPU and memory requirements before deployment
 5. **Implement alerting** - Monitor logs and integrate with monitoring systems
 
-### Performance Optimization
+## Performance Optimization
 
 1. **Start with normal quality** - Use default settings initially
 2. **Monitor resource usage** - Watch CPU, memory, and FD counts
@@ -780,7 +780,7 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
 4. **Use efficient codecs** - Prefer Opus for best quality/performance ratio
 5. **Match hardware capabilities** - Don't exceed device specifications
 
-### Reliability
+## Reliability
 
 1. **Test recovery** - Simulate failures to verify auto-recovery works
 2. **Use powered USB hubs** - Prevent power-related device issues
@@ -813,14 +813,14 @@ MEDIAMTX_CONFIG=/path/to/mediamtx.yml ./mediamtx-stream-manager.sh start
 <div class="grid" markdown>
 
 <div markdown>
-### MediaMTX Integration
+## MediaMTX Integration
 RTSP server configuration and setup
 
 [MediaMTX Integration →](mediamtx-integration.md)
 </div>
 
 <div markdown>
-### Multiplex Streaming
+## Multiplex Streaming
 Multi-microphone stream combining
 
 [Multiplex Streaming →](multiplex-streaming.md)

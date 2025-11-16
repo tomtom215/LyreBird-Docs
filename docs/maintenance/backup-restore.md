@@ -37,7 +37,7 @@ sudo cp /etc/systemd/system/mediamtx*.service \
 echo "Backup complete: /var/backups/lyrebird/$(date +%Y%m%d-%H%M%S)"
 ```
 
-### Quick Restore
+## Quick Restore
 
 Restore from the most recent backup:
 
@@ -160,7 +160,7 @@ cat $BACKUP_DIR/MANIFEST.txt
 !!! info "Backup Script - TBD"
     A dedicated `backup-config.sh` script is planned for future implementation. For now, you can create your own backup script using the example below.
 
-### Backup Script
+## Backup Script
 
 Create a reusable backup script:
 
@@ -236,7 +236,7 @@ EOF
 sudo chmod +x /opt/LyreBirdAudio/scripts/backup-config.sh
 ```
 
-### Run Backup Script
+## Run Backup Script
 
 ```bash
 sudo /opt/LyreBirdAudio/scripts/backup-config.sh
@@ -278,7 +278,7 @@ sudo vim /etc/mediamtx/audio-devices.conf
 
 ## Git-Based Backup
 
-### Initialize Git Repository
+## Initialize Git Repository
 
 ```bash
 # Create configuration repository
@@ -307,7 +307,7 @@ sudo git commit -m "Initial LyreBirdAudio configuration"
 echo "Git repository initialized"
 ```
 
-### Track Changes with Git
+## Track Changes with Git
 
 ```bash
 # Make configuration changes
@@ -326,7 +326,7 @@ sudo git commit -m "Update Blue Yeti bitrate to 192k"
 sudo git log --oneline
 ```
 
-### Remote Backup with Git
+## Remote Backup with Git
 
 ```bash
 # Add remote repository
@@ -351,7 +351,7 @@ sudo git push
 
 ## Restoration Procedures
 
-### Full System Restore
+## Full System Restore
 
 **1. Stop Services**
 
@@ -467,7 +467,7 @@ ffmpeg -i rtsp://localhost:8554/your-stream -t 5 -acodec copy test.aac
 
 ---
 
-### Selective Restore
+## Selective Restore
 
 **Restore Only MediaMTX Configuration:**
 
@@ -501,7 +501,7 @@ sudo udevadm trigger
 
 ## Migration to New System
 
-### Export Configuration
+## Export Configuration
 
 **On Source System:**
 
@@ -522,7 +522,7 @@ sudo tar czf lyrebird-migration-$(date +%Y%m%d).tar.gz latest/
 scp lyrebird-migration-*.tar.gz user@new-server:/tmp/
 ```
 
-### Import Configuration
+## Import Configuration
 
 **On Destination System:**
 
@@ -553,7 +553,7 @@ sudo systemctl restart mediamtx-audio
 
 ## Best Practices
 
-### Production Environment
+## Production Environment
 
 **1. Regular Scheduled Backups**
 
@@ -614,7 +614,7 @@ find /var/backups/lyrebird -type d -name "2025*" -mtime +7 -delete  # Daily
 find /var/backups/lyrebird -type d -name "2025*" -mtime +30 -delete # Weekly
 ```
 
-### Configuration Management
+## Configuration Management
 
 **Document Changes:**
 
@@ -640,7 +640,7 @@ sudo git push origin v1.0
 
 ## Troubleshooting
 
-### Backup Issues
+## Backup Issues
 
 **Issue: Permission Denied**
 
@@ -664,7 +664,7 @@ cd /var/backups/lyrebird
 sudo tar czf archive-$(date +%Y%m).tar.gz 2025* && sudo rm -rf 2025*
 ```
 
-### Restore Issues
+## Restore Issues
 
 **Issue: Service Won't Start After Restore**
 
@@ -708,14 +708,14 @@ sudo /opt/LyreBirdAudio/usb-audio-mapper.sh
 <div class="grid" markdown>
 
 <div markdown>
-### Version Management
+## Version Management
 Safe updates, rollbacks, and version control
 
 [Version Management →](version-management.md)
 </div>
 
 <div markdown>
-### Main Documentation
+## Main Documentation
 Complete documentation index
 
 [Main Documentation →](../index.md)

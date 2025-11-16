@@ -25,7 +25,7 @@ Uses `/proc/asound` filesystem to detect capabilities without opening hardware d
 </div>
 
 <div markdown>
-### Device Busy Detection
+## Device Busy Detection
 Checks if devices are in use without interrupting active streams.
 </div>
 
@@ -35,17 +35,17 @@ Generates complete configuration files with optimal settings for your hardware.
 </div>
 
 <div markdown>
-### Automatic Backup
+## Automatic Backup
 Backs up existing configurations before making changes, with easy restore capability.
 </div>
 
 <div markdown>
-### JSON Output
+## JSON Output
 Provides machine-readable output for integration with other tools.
 </div>
 
 <div markdown>
-### USB Adapter Warnings
+## USB Adapter Warnings
 Detects USB audio adapters and warns about chip vs. microphone capabilities.
 </div>
 
@@ -55,7 +55,7 @@ Detects USB audio adapters and warns about chip vs. microphone capabilities.
 
 ## Usage
 
-### List All Audio Devices
+## List All Audio Devices
 
 Display all detected audio devices with their capabilities:
 
@@ -114,7 +114,7 @@ Device 1: USB Audio Interface
 
 ---
 
-### Show Specific Device
+## Show Specific Device
 
 Get detailed information about a single device by card number:
 
@@ -126,7 +126,7 @@ Shows comprehensive capability information for card 0 only.
 
 ---
 
-### Generate Configuration
+## Generate Configuration
 
 Create optimized configuration files based on detected hardware:
 
@@ -153,7 +153,7 @@ sudo ./lyrebird-mic-check.sh -g --no-backup
 
 ---
 
-### Validate Configuration
+## Validate Configuration
 
 Verify existing configuration against hardware capabilities:
 
@@ -186,7 +186,7 @@ Validation: 2 passed, 1 failed
 
 ---
 
-### JSON Output
+## JSON Output
 
 Get machine-readable output for scripting and automation:
 
@@ -295,7 +295,7 @@ sudo ./lyrebird-mic-check.sh -g
 
 ---
 
-### High Quality (Music/High-Fidelity)
+## High Quality (Music/High-Fidelity)
 
 **Usage:**
 ```bash
@@ -358,7 +358,7 @@ graph TD
     style N fill:#00bcd4,color:#fff
 ```
 
-### Technical Approach
+## Technical Approach
 
 **1. Card Enumeration:**
 ```bash
@@ -402,7 +402,7 @@ readlink -f /sys/class/sound/card0/device
 # Extracts: Bus 1, Port 4
 ```
 
-### Bit Depth Derivation
+## Bit Depth Derivation
 
 ALSA format specifications encode bit depth:
 
@@ -420,7 +420,7 @@ The Capability Checker parses these formats to determine supported bit depths.
 
 ## USB Audio Adapter Detection
 
-### The Challenge
+## The Challenge
 
 USB audio adapters with 3.5mm analog inputs have **two** sets of capabilities:
 
@@ -440,7 +440,7 @@ Your Connected Microphone:
   [NOT SUPPORTED] Effective depth is 16-bit
 ```
 
-### Warning System
+## Warning System
 
 The Capability Checker detects USB audio adapters and issues warnings:
 
@@ -457,7 +457,7 @@ If you're using a 3.5mm analog input (microphone or line-in):
 For USB microphones (native USB), ignore this warning.
 ```
 
-### Best Practices with USB Adapters
+## Best Practices with USB Adapters
 
 !!! warning "Verify Physical Configuration"
     For USB audio adapters with 3.5mm inputs:
@@ -471,7 +471,7 @@ For USB microphones (native USB), ignore this warning.
 
 ## Configuration Generation
 
-### Generated File Format
+## Generated File Format
 
 **Location:** `/etc/mediamtx/audio-devices.conf`
 
@@ -509,7 +509,7 @@ DEFAULT_BITRATE=128k
 
 **Note:** This script only generates `SAMPLE_RATE`, `CHANNELS`, and `BITRATE` variables. The `CODEC` and `THREAD_QUEUE` settings are managed by the stream-manager and have defaults (opus and 8192 respectively). You can manually add these to the config file if needed.
 
-### Dual-Lookup System
+## Dual-Lookup System
 
 The configuration system supports both friendly names and full device IDs:
 
@@ -529,7 +529,7 @@ The Stream Manager tries friendly names first, then falls back to full IDs, ensu
 
 ## Automatic Backup
 
-### Backup Creation
+## Backup Creation
 
 Every time you generate a new configuration, the previous one is automatically backed up:
 
@@ -540,7 +540,7 @@ Every time you generate a new configuration, the previous one is automatically b
 /etc/mediamtx/audio-devices.conf.backup.20251115_143000
 ```
 
-### Restore Process
+## Restore Process
 
 ```bash
 # List available backups
@@ -560,7 +560,7 @@ sudo cp /etc/mediamtx/audio-devices.conf.backup.20251115_143000 \
 
 ## Integration with Other Components
 
-### With USB Audio Mapper
+## With USB Audio Mapper
 
 The Capability Checker automatically detects persistent device paths:
 
@@ -578,7 +578,7 @@ sudo ./lyrebird-mic-check.sh -g
 DEVICE_FRONT_YARD_MIC_SAMPLE_RATE=48000  # Uses friendly name!
 ```
 
-### With Stream Manager
+## With Stream Manager
 
 The Stream Manager reads the generated configuration:
 
@@ -592,7 +592,7 @@ sudo ./mediamtx-stream-manager.sh start
 
 No manual configuration editing required!
 
-### With Orchestrator
+## With Orchestrator
 
 The Orchestrator integrates capability checking into setup workflows:
 
@@ -607,7 +607,7 @@ The Orchestrator integrates capability checking into setup workflows:
 
 ## Command Line Options
 
-### Complete Reference
+## Complete Reference
 
 | Option | Short | Description |
 |--------|-------|-------------|
@@ -660,7 +660,7 @@ fi
 
 ## Troubleshooting
 
-### No Devices Detected
+## No Devices Detected
 
 **Symptoms:** "No audio devices found"
 
@@ -681,7 +681,7 @@ sudo alsa force-reload
 
 ---
 
-### Wrong Capabilities Detected
+## Wrong Capabilities Detected
 
 **Symptoms:** Detected capabilities don't match expectations
 
@@ -704,7 +704,7 @@ aplay test.wav
 
 ---
 
-### Configuration Validation Fails
+## Configuration Validation Fails
 
 **Symptoms:** `lyrebird-mic-check.sh -V` reports errors
 
@@ -724,7 +724,7 @@ sudo ./lyrebird-mic-check.sh -g --quality=normal
 
 ---
 
-### Permission Errors
+## Permission Errors
 
 **Symptoms:** "Permission denied" when generating config
 
@@ -765,7 +765,7 @@ sudo chmod 755 /etc/mediamtx
 
 ## Advanced Usage
 
-### Scripted Automation
+## Scripted Automation
 
 ```bash
 #!/bin/bash
@@ -785,7 +785,7 @@ else
 fi
 ```
 
-### JSON Processing
+## JSON Processing
 
 ```bash
 # Extract sample rates for all devices

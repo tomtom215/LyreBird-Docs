@@ -55,7 +55,7 @@ Each RTSP audio stream consumes system resources based on encoding settings:
    - Mono: Half the data of stereo
    - Stereo: Double processing and bandwidth
 
-### Base System Overhead
+## Base System Overhead
 
 Beyond per-stream costs, the system requires base resources:
 
@@ -67,7 +67,7 @@ Beyond per-stream costs, the system requires base resources:
 | System Scripts | <1% | 50 MB | 20-30 |
 | **Total Base** | **2-3%** | **150-200 MB** | **70-130** |
 
-### Total Resource Calculation
+## Total Resource Calculation
 
 **Formula:**
 
@@ -89,7 +89,7 @@ FDs: 100 + (10 × 12) = 220 file descriptors
 
 ## Platform-Specific Optimization
 
-### Raspberry Pi Limitations
+## Raspberry Pi Limitations
 
 **Platform:** Raspberry Pi 3/4
 
@@ -158,7 +158,7 @@ DEVICE_Mic2_CHANNELS=1
 !!! warning "USB Bus Limitations"
     Raspberry Pi shares USB bandwidth with Ethernet (on Pi 3 and 4). Heavy network traffic can impact USB audio device performance. Use separate network interface (WiFi) for streaming if possible.
 
-### Intel N100 Optimization
+## Intel N100 Optimization
 
 **Platform:** Intel N100 Mini PC
 
@@ -216,7 +216,7 @@ DEVICE_Room1_CHANNELS=1
 | All High | 4-6 | 25-35% | 500-700 MB |
 | Mixed | 8-10 | 25-40% | 600-800 MB |
 
-### High-Performance Workstation
+## High-Performance Workstation
 
 **Platform:** Desktop/Server with multi-core CPU
 
@@ -281,7 +281,7 @@ DEVICE_Monitor_*_CHANNELS=1
 
 ## Codec Selection and Tuning
 
-### Codec Comparison
+## Codec Comparison
 
 **Performance Characteristics:**
 
@@ -292,7 +292,7 @@ DEVICE_Monitor_*_CHANNELS=1
 | **MP3** | Good | Good | Medium | Universal | Legacy compatibility |
 | **PCM** | Excellent | Perfect | Very High | Universal | Local recording, no latency |
 
-### Opus Optimization
+## Opus Optimization
 
 **Best For:** Voice, podcasts, general audio streaming
 
@@ -334,7 +334,7 @@ DEVICE_NAME_CHANNELS=2
 | Music (normal) | 48 kHz | 96-128 kbps | Good |
 | Music (high) | 48 kHz | 128-192 kbps | Excellent |
 
-### AAC Optimization
+## AAC Optimization
 
 **Best For:** Music, high-fidelity audio, universal compatibility
 
@@ -375,7 +375,7 @@ DEVICE_NAME_CHANNELS=2
 | Music (high) | 48 kHz | 192-256 kbps | Excellent |
 | Music (reference) | 48 kHz | 256-320 kbps | Near-lossless |
 
-### PCM (Uncompressed)
+## PCM (Uncompressed)
 
 **Best For:** Local recording, minimal latency, maximum quality
 
@@ -412,7 +412,7 @@ DEVICE_NAME_CHANNELS=2
 
 ## Multi-Stream Optimization
 
-### Stream Prioritization
+## Stream Prioritization
 
 Assign resources based on stream importance:
 
@@ -435,7 +435,7 @@ DEVICE_Monitor_SAMPLE_RATE=16000
 DEVICE_Monitor_BITRATE=64k
 ```
 
-### Staggered Startup
+## Staggered Startup
 
 Prevent resource spikes by staggering stream starts:
 
@@ -454,7 +454,7 @@ sudo ./mediamtx-stream-manager.sh start
 - Allows system to stabilize
 - Easier to identify problematic devices
 
-### Resource-Based Stream Limiting
+## Resource-Based Stream Limiting
 
 Monitor resources and limit streams based on capacity:
 
@@ -490,7 +490,7 @@ fi
 echo "OK: Resources available for new stream"
 ```
 
-### Buffer Size Tuning
+## Buffer Size Tuning
 
 Optimize thread queue sizes for stability:
 
@@ -518,7 +518,7 @@ DEVICE_NAME_THREAD_QUEUE=512
 
 ## Quality vs. Performance Tradeoffs
 
-### Quality Presets
+## Quality Presets
 
 LyreBirdAudio provides three quality presets:
 
@@ -564,7 +564,7 @@ sudo ./lyrebird-mic-check.sh -g --quality=high
 - Memory: 60-80 MB per stream
 - **Best for:** Music, high-fidelity recording, critical applications
 
-### Custom Tuning
+## Custom Tuning
 
 Create custom quality profiles for specific needs:
 
@@ -630,7 +630,7 @@ Resource Summary:
   Active Streams: 2
 ```
 
-### System Resource Monitoring
+## System Resource Monitoring
 
 Use system tools for detailed analysis:
 
@@ -654,7 +654,7 @@ mpstat -P ALL 1
 iftop -i eth0
 ```
 
-### Performance Metrics Collection
+## Performance Metrics Collection
 
 Collect metrics for analysis:
 
@@ -682,7 +682,7 @@ Timestamp,CPU%,MemoryMB,FileDescriptors
 
 ## Troubleshooting Performance Issues
 
-### High CPU Usage
+## High CPU Usage
 
 **Symptoms:**
 
@@ -718,7 +718,7 @@ Timestamp,CPU%,MemoryMB,FileDescriptors
    - Use stream rotation
    - Distribute across multiple servers
 
-### Memory Exhaustion
+## Memory Exhaustion
 
 **Symptoms:**
 
@@ -747,7 +747,7 @@ Timestamp,CPU%,MemoryMB,FileDescriptors
    watch -n 1 free -h
    ```
 
-### File Descriptor Exhaustion
+## File Descriptor Exhaustion
 
 **Symptoms:**
 
@@ -782,7 +782,7 @@ Timestamp,CPU%,MemoryMB,FileDescriptors
    ulimit -n  # Should show 4096
    ```
 
-### Network Bandwidth Issues
+## Network Bandwidth Issues
 
 **Symptoms:**
 
@@ -817,7 +817,7 @@ Timestamp,CPU%,MemoryMB,FileDescriptors
 
 ## Best Practices
 
-### Capacity Planning
+## Capacity Planning
 
 1. **Start Small, Scale Gradually**
    - Begin with 2-3 streams
@@ -834,7 +834,7 @@ Timestamp,CPU%,MemoryMB,FileDescriptors
    - Reserve 20% memory for system
    - Don't max out file descriptors
 
-### Quality Selection
+## Quality Selection
 
 1. **Match Quality to Use Case**
    - Voice: Low quality (16kHz, 64kbps)
@@ -851,7 +851,7 @@ Timestamp,CPU%,MemoryMB,FileDescriptors
    - Verify quality meets requirements
    - Monitor for artifacts or issues
 
-### Platform Selection
+## Platform Selection
 
 1. **Raspberry Pi**
    - Limit to 2 devices maximum
@@ -885,7 +885,7 @@ Timestamp,CPU%,MemoryMB,FileDescriptors
 <div class="grid" markdown>
 
 <div markdown>
-### Troubleshooting
+## Troubleshooting
 Common issues and solutions
 
 [Troubleshooting →](troubleshooting.md)

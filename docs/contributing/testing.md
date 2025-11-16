@@ -20,7 +20,7 @@ Thorough testing ensures LyreBirdAudio remains reliable and stable across divers
 
 ## Testing Environment
 
-### Recommended Test Hardware
+## Recommended Test Hardware
 
 **Minimum Test Configuration:**
 
@@ -41,7 +41,7 @@ Thorough testing ensures LyreBirdAudio remains reliable and stable across divers
 | Storage | 50GB+ free | Extended testing |
 | Test Duration | 72+ hours | Stability validation |
 
-### Test Environment Setup
+## Test Environment Setup
 
 **1. Create Test Directory**
 
@@ -91,7 +91,7 @@ ls -l /dev/lyrebird-*
 
 ## Pre-Submission Testing
 
-### Code Validation
+## Code Validation
 
 **1. Shellcheck Validation**
 
@@ -140,7 +140,7 @@ bash -c 'declare -A test; test["key"]="value"; echo ${test["key"]}' || {
 
 ## Functional Testing
 
-### Script Testing
+## Script Testing
 
 **Test MediaMTX Installation:**
 
@@ -255,7 +255,7 @@ fi
 
 ## Hardware Testing
 
-### USB Device Testing
+## USB Device Testing
 
 **Single Device Test:**
 
@@ -335,7 +335,7 @@ done
 [[ $FAILED -eq 0 ]] && echo "All devices passed" || exit 1
 ```
 
-### USB Persistence Testing
+## USB Persistence Testing
 
 **Device Reconnection Test:**
 
@@ -387,7 +387,7 @@ done
 
 ## Stream Validation
 
-### RTSP Stream Testing
+## RTSP Stream Testing
 
 **Stream Connectivity Test:**
 
@@ -453,7 +453,7 @@ fi
 rm -f quality-test.aac ffmpeg-output.log
 ```
 
-### Stream Stability Test
+## Stream Stability Test
 
 **Short-Term Stability (5 minutes):**
 
@@ -507,7 +507,7 @@ rm -f stability-test.aac stability.log
 
 ## Performance Testing
 
-### Resource Usage Monitoring
+## Resource Usage Monitoring
 
 **CPU and Memory Test:**
 
@@ -572,7 +572,7 @@ echo "Verify bandwidth is appropriate for configured bitrate"
 rm -f bandwidth-test.aac
 ```
 
-### Load Testing
+## Load Testing
 
 **High-Load Test (5+ devices):**
 
@@ -626,7 +626,7 @@ sudo ./mediamtx-stream-manager.sh stop
 
 ## Integration Testing
 
-### Full System Integration Test
+## Full System Integration Test
 
 **Complete Workflow Test:**
 
@@ -870,7 +870,7 @@ fi
 
 ## Test Documentation
 
-### Test Results Template
+## Test Results Template
 
 ```markdown
 # Test Results: [Feature/Bug Fix Name]
@@ -883,26 +883,26 @@ fi
 
 ## Tests Performed
 
-### Functional Tests
+## Functional Tests
 - [x] Shellcheck validation passed
 - [x] MediaMTX installation successful
 - [x] USB device mapping works
 - [x] Stream start/stop works
 - [x] Stream playback verified
 
-### Hardware Tests
+## Hardware Tests
 - [x] Single device test passed
 - [x] Multiple device test passed (5 devices)
 - [x] USB persistence verified
 - [x] Device reconnection handled correctly
 
-### Performance Tests
+## Performance Tests
 - [x] CPU usage acceptable (<30%)
 - [x] Memory stable (no leaks detected)
 - [x] Bandwidth appropriate for bitrate
 - [x] Load test passed (5 devices, 24 hours)
 
-### Integration Tests
+## Integration Tests
 - [x] Full system workflow completed
 - [x] Diagnostics successful
 - [x] No errors in logs
@@ -936,14 +936,14 @@ None
 <div class="grid" markdown>
 
 <div markdown>
-### Development Setup
+## Development Setup
 Setting up development environment
 
 [Development Setup →](development-setup.md)
 </div>
 
 <div markdown>
-### Contributing Overview
+## Contributing Overview
 Contributing guidelines and workflows
 
 [Contributing Overview →](index.md)
