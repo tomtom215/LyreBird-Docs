@@ -348,6 +348,19 @@ LyreBird logs should be rotated to prevent disk space exhaustion:
         systemctl reload mediamtx-audio 2>/dev/null || true
     endscript
 }
+
+/var/log/mediamtx.out {
+    daily
+    rotate 7
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 mediamtx mediamtx
+    postrotate
+        systemctl reload mediamtx 2>/dev/null || true
+    endscript
+}
 ```
 
 **Test logrotate:**

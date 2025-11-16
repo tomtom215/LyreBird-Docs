@@ -267,17 +267,23 @@ UDEV_RULES_FILE=/tmp/test-udev.rules sudo ./usb-audio-mapper.sh
 
 ## DRY_RUN
 
-**Description:** Preview actions without executing them. **Only supported by `install_mediamtx.sh`.**
+**Description:** Preview actions without executing them.
+
+!!! warning "Only Available in install_mediamtx.sh"
+    The `DRY_RUN` variable is **ONLY** supported by `install_mediamtx.sh`. It is **NOT** available in any other LyreBirdAudio scripts including `mediamtx-stream-manager.sh`, `usb-audio-mapper.sh`, or `lyrebird-mic-check.sh`.
 
 **Default:** `false`
 
-**Valid Values:** `true`, `false`, `1`, `0`
+**Valid Values:** `true`, `false`
 
 **Usage:**
 
 ```bash
-# Preview MediaMTX installation steps without actually installing
-DRY_RUN=true sudo ./install_mediamtx.sh
+# CORRECT: DRY_RUN with installer only
+DRY_RUN=true sudo ./install_mediamtx.sh install
+
+# INCORRECT: DRY_RUN does not work with stream manager
+# DRY_RUN=true sudo ./mediamtx-stream-manager.sh start  # This will NOT work!
 ```
 
 **Purpose:**
@@ -286,75 +292,41 @@ DRY_RUN=true sudo ./install_mediamtx.sh
 - Test installation script logic
 - Validate system compatibility
 
-!!! note "Limited Support"
-    The DRY_RUN variable is only implemented in `install_mediamtx.sh`. It is not supported by other LyreBirdAudio scripts.
+**Alternatives for Other Scripts:**
+
+- Use `--test` flag with `usb-audio-mapper.sh` for testing USB mapping
+- Use `-V` flag with `lyrebird-mic-check.sh` for validating configuration
 
 ---
 
 ## Debug and Logging
 
-## DIAGNOSTIC_DEBUG
+## DEBUG
 
-**Description:** Enable detailed diagnostic tool debugging.
+**Description:** Enable debug output in scripts.
 
 **Default:** `false`
 
-**Valid Values:** `true`, `false`, `1`, `0`
+**Valid Values:** `true`, `false`
 
 **Usage:**
 
 ```bash
-# Enable diagnostic debugging
-DIAGNOSTIC_DEBUG=1 sudo ./lyrebird-diagnostics.sh --verbose
+# Enable debug mode
+DEBUG=true sudo ./mediamtx-stream-manager.sh start
 ```
 
-**Purpose:**
+**Scripts Supporting DEBUG:**
 
-- Troubleshoot diagnostic tool itself
-- Understand check logic
-- Report diagnostic issues
-
-## VERBOSE
-
-**Description:** Enable verbose output in scripts.
-
-**Default:** `false`
-
-**Valid Values:** `true`, `false`, `1`, `0`
-
-**Usage:**
-
-```bash
-# Verbose output for all operations
-VERBOSE=1 sudo ./mediamtx-stream-manager.sh status
-```
+- `mediamtx-stream-manager.sh`
+- `usb-audio-mapper.sh`
+- `lyrebird-updater.sh`
 
 **Purpose:**
 
 - Detailed operation logging
 - Troubleshooting script issues
 - Understanding script behavior
-
-## QUIET
-
-**Description:** Suppress non-error output.
-
-**Default:** `false`
-
-**Valid Values:** `true`, `false`, `1`, `0`
-
-**Usage:**
-
-```bash
-# Only show errors
-QUIET=1 sudo ./mediamtx-stream-manager.sh start
-```
-
-**Purpose:**
-
-- Minimal output for automation
-- Cron jobs
-- Clean output for parsing
 
 ## NO_COLOR
 
@@ -371,84 +343,15 @@ QUIET=1 sudo ./mediamtx-stream-manager.sh start
 NO_COLOR=1 sudo ./lyrebird-diagnostics.sh
 ```
 
+**Scripts Supporting NO_COLOR:**
+
+- `lyrebird-diagnostics.sh`
+
 **Purpose:**
 
 - Log file clarity
 - Terminal compatibility
 - Automated parsing
-
----
-
-## Quality Preset Overrides
-
-## DEFAULT_QUALITY
-
-**Description:** Default quality preset for device configuration generation.
-
-**Default:** `normal`
-
-**Valid Values:** `low`, `normal`, `high`
-
-**Usage:**
-
-```bash
-# Generate with high quality defaults
-DEFAULT_QUALITY=high sudo ./lyrebird-mic-check.sh -g
-```
-
-**Quality Presets:**
-
-| Preset | Sample Rate | Codec | Bitrate |
-|--------|-------------|-------|---------|
-| low | 16 kHz | opus | 64 kbps |
-| normal | 48 kHz | opus | 128 kbps |
-| high | 48 kHz | aac | 192 kbps |
-
----
-
-## Stream Management
-
-## AUTO_RECOVERY_ENABLED
-
-**Description:** Enable automatic stream recovery.
-
-**Default:** `true`
-
-**Valid Values:** `true`, `false`, `1`, `0`
-
-**Usage:**
-
-```bash
-# Disable auto-recovery
-AUTO_RECOVERY_ENABLED=false sudo ./mediamtx-stream-manager.sh monitor
-```
-
-**Purpose:**
-
-- Disable self-healing in testing
-- Manual recovery control
-- Debugging stream issues
-
-## MAX_RETRY_ATTEMPTS
-
-**Description:** Maximum number of automatic restart attempts.
-
-**Default:** `5`
-
-**Valid Values:** `1` to `20`
-
-**Usage:**
-
-```bash
-# Allow 10 restart attempts
-MAX_RETRY_ATTEMPTS=10 sudo ./mediamtx-stream-manager.sh start
-```
-
-**Purpose:**
-
-- Configure recovery persistence
-- Adjust for environment stability
-- Balance between recovery and alerting
 
 ---
 
@@ -458,9 +361,7 @@ MAX_RETRY_ATTEMPTS=10 sudo ./mediamtx-stream-manager.sh start
 
 ```bash
 # Production environment settings
-export LOGLEVEL=INFO
-export AUTO_RECOVERY_ENABLED=true
-export MAX_RETRY_ATTEMPTS=5
+export DEBUG=false
 export MAX_RESTART_DELAY=300
 export STREAM_STARTUP_DELAY=10
 
@@ -471,9 +372,7 @@ sudo ./mediamtx-stream-manager.sh start
 
 ```bash
 # Development environment settings
-export LOGLEVEL=DEBUG
-export DRY_RUN=false
-export VERBOSE=1
+export DEBUG=true
 export AUDIO_CONFIG=/home/user/test-audio-devices.conf
 export LOG_DIR=/home/user/test-logs
 
@@ -527,8 +426,8 @@ MAX_CPU_WARNING=80
 MAX_MEMORY_WARNING=200
 MAX_FD_WARNING=500
 
-# Logging
-LOGLEVEL=INFO
+# Debug
+DEBUG=false
 LOG_DIR=/var/log/lyrebird
 ```
 
@@ -554,7 +453,7 @@ sudo nano /etc/environment
 # Add LyreBird variables
 STREAM_STARTUP_DELAY=15
 MAX_RESTART_DELAY=300
-LOGLEVEL=INFO
+DEBUG=false
 ```
 
 **Activate:**
@@ -574,8 +473,7 @@ Configure environment variables in systemd service files:
 [Service]
 Environment="STREAM_STARTUP_DELAY=15"
 Environment="MAX_RESTART_DELAY=300"
-Environment="LOG LEVEL=INFO"
-Environment="AUTO_RECOVERY_ENABLED=true"
+Environment="DEBUG=false"
 
 ExecStart=/opt/lyrebird/mediamtx-stream-manager.sh monitor
 ```
@@ -608,7 +506,7 @@ VERBOSE=1 sudo ./mediamtx-stream-manager.sh status
 
 ```bash
 # Enable debug output to see variable usage
-DIAGNOSTIC_DEBUG=1 VERBOSE=1 sudo ./lyrebird-diagnostics.sh
+DEBUG=true sudo ./mediamtx-stream-manager.sh start
 
 # Check variable precedence
 # Command line > Environment file > System default
@@ -651,11 +549,11 @@ STREAM_STARTUP_DELAY=15 USB_STABILIZATION_DELAY=10 \
 Always test environment variable changes:
 
 ```bash
-# Test with DRY_RUN first
-DRY_RUN=true STREAM_STARTUP_DELAY=20 \
+# Test configuration first
+DEBUG=true STREAM_STARTUP_DELAY=20 \
   sudo ./mediamtx-stream-manager.sh start
 
-# Then apply for real
+# Then apply for production
 STREAM_STARTUP_DELAY=20 sudo ./mediamtx-stream-manager.sh start
 ```
 
