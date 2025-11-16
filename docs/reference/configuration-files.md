@@ -497,14 +497,24 @@ After=network.target
 
 [Service]
 Type=simple
-User=root
+User=mediamtx
+Group=mediamtx
 ExecStart=/usr/local/bin/mediamtx /etc/mediamtx/mediamtx.yml
 Restart=always
 RestartSec=5
 StandardOutput=journal
 StandardError=journal
 
-# Resource limits (optional)
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/log /var/lib/mediamtx
+StateDirectory=mediamtx
+RuntimeDirectory=mediamtx
+
+# Resource limits
 LimitNOFILE=4096
 LimitNPROC=512
 
@@ -549,8 +559,9 @@ Requires=mediamtx.service
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/opt/lyrebird
-ExecStart=/opt/lyrebird/mediamtx-stream-manager.sh monitor
+Group=root
+WorkingDirectory=/opt/LyreBirdAudio
+ExecStart=/opt/LyreBirdAudio/mediamtx-stream-manager.sh monitor
 Restart=always
 RestartSec=10
 StandardOutput=journal
@@ -648,7 +659,7 @@ DEVICE_Blue_Yeti_CODEC=opus
 DEVICE_Blue_Yeti_SAMPLE_RATE=48000
 DEVICE_Blue_Yeti_BITRATE=128k
 DEVICE_Blue_Yeti_CHANNELS=1
-DEVICE_Blue_Yeti_THREAD_QUEUE=2048  # Increased for USB stability
+DEVICE_Blue_Yeti_THREAD_QUEUE=2048  # Decreased from default 8192 for lower latency
 ```
 
 ---

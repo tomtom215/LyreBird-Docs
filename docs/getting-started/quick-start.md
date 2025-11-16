@@ -184,7 +184,7 @@ Common issues and solutions
 ## Common Issues
 
 !!! warning "MediaMTX Port Already in Use"
-    If port 8554 is already in use, edit `/opt/mediamtx/mediamtx.yml` and change the `rtspAddress` port.
+    If port 8554 is already in use, edit `/etc/mediamtx/mediamtx.yml` and change the `rtspAddress` port.
 
 !!! warning "USB Device Not Detected"
     Run `arecord -l` to list all audio devices. If your microphone doesn't appear, check USB connection and driver support.

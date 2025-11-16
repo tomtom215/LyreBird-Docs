@@ -148,7 +148,6 @@ sudo ./mediamtx-stream-manager.sh monitor
 
 - `STREAM_STARTUP_DELAY` - Stream stabilization wait time
 - `MAX_RESTART_DELAY` - Maximum exponential backoff
-- `AUTO_RECOVERY_ENABLED` - Enable/disable auto-recovery
 
 ---
 

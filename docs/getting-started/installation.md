@@ -134,7 +134,7 @@ LyreBirdAudio Orchestrator v2.1.0
 ========================================
 
 Installation Directory: /opt/LyreBirdAudio
-MediaMTX Install Path: /opt/mediamtx
+MediaMTX Install Path: /usr/local/bin
 System Architecture: x86_64
 
 1. Install/Update MediaMTX
@@ -162,8 +162,8 @@ The installer will:
 
 1. Detect your system architecture
 2. Download the latest MediaMTX release
-3. Extract to `/opt/mediamtx`
-4. Create default configuration
+3. Install binary to `/usr/local/bin/mediamtx`
+4. Create default configuration in `/etc/mediamtx`
 5. Set appropriate permissions
 
 Output:
@@ -171,15 +171,15 @@ Output:
 Detecting system architecture...
 Architecture: x86_64
 
-Downloading MediaMTX v1.8.0...
+Downloading MediaMTX (latest version)...
 ##################################################  100%
 
 Extracting MediaMTX...
-Installing to /opt/mediamtx...
+Installing to /usr/local/bin...
 
 MediaMTX installed successfully!
-Binary: /opt/mediamtx/mediamtx
-Config: /opt/mediamtx/mediamtx.yml
+Binary: /usr/local/bin/mediamtx
+Config: /etc/mediamtx/mediamtx.yml
 ```
 
 !!! success "MediaMTX Installed"
@@ -258,7 +258,7 @@ Bitrate: 128 kbps
 Create this stream? (y/n): y
 
 [PASS] Stream configuration created
-  Config file: /opt/mediamtx/streams/lyrebird-mic-1.env
+  Config file: /etc/mediamtx/audio-devices.conf
   RTSP URL: rtsp://localhost:8554/lyrebird-mic-1
 ```
 
@@ -327,7 +327,7 @@ vlc rtsp://localhost:8554/lyrebird-mic-1
 
 ### Enable MediaMTX Web UI (Optional)
 
-Edit `/opt/mediamtx/mediamtx.yml`:
+Edit `/etc/mediamtx/mediamtx.yml`:
 
 ```yaml
 webrtcAddress: :8889
@@ -376,9 +376,9 @@ Add:
 
 After installation, verify:
 
-- [ ] MediaMTX binary exists at `/opt/mediamtx/mediamtx`
+- [ ] MediaMTX binary exists at `/usr/local/bin/mediamtx`
 - [ ] USB devices mapped with persistent names
-- [ ] Stream configuration files created
+- [ ] Stream configuration file created at `/etc/mediamtx/audio-devices.conf`
 - [ ] Systemd service running
 - [ ] Service enabled for auto-start
 - [ ] Streams accessible via RTSP
@@ -441,9 +441,12 @@ sudo rm /etc/systemd/system/mediamtx-audio.service
 sudo rm /etc/udev/rules.d/99-usb-soundcards.rules
 sudo udevadm control --reload-rules
 
-# Remove software
+# Remove MediaMTX binary and configuration
+sudo rm -f /usr/local/bin/mediamtx
+sudo rm -rf /etc/mediamtx
+
+# Remove LyreBirdAudio
 sudo rm -rf /opt/LyreBirdAudio
-sudo rm -rf /opt/mediamtx
 ```
 
 ---
