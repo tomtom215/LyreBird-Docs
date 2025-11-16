@@ -892,7 +892,7 @@ Common issues and solutions
 </div>
 
 <div markdown>
-### Diagnostics & Monitoring
+## Diagnostics & Monitoring
 System health monitoring
 
 [Diagnostics & Monitoring →](diagnostics-monitoring.md)

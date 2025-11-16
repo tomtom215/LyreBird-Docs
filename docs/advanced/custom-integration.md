@@ -878,7 +878,7 @@ automation:
 <div class="grid" markdown>
 
 <div markdown>
-### Diagnostics & Monitoring
+## Diagnostics & Monitoring
 System health checks and monitoring
 
 [Diagnostics & Monitoring →](diagnostics-monitoring.md)

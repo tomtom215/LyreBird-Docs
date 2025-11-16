@@ -1075,7 +1075,7 @@ When seeking help, collect:
 <div class="grid" markdown>
 
 <div markdown>
-### Diagnostics & Monitoring
+## Diagnostics & Monitoring
 Health check tools and monitoring
 
 [Diagnostics & Monitoring →](diagnostics-monitoring.md)
