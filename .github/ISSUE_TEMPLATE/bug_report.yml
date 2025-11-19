@@ -1,0 +1,85 @@
+name: 🐛 Bug Report
+description: Report a documentation error or issue
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a documentation issue! Please fill out the form below to help us fix it quickly.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Clear description of the documentation issue
+      placeholder: "The installation command on the Quick Start page fails with..."
+    validations:
+      required: true
+
+  - type: input
+    id: page
+    attributes:
+      label: Affected Page
+      description: Which page has the issue?
+      placeholder: "docs/getting-started/installation.md or https://lyrebird-docs.pages.dev/getting-started/installation/"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current Documentation
+      description: What does the documentation currently say?
+      placeholder: |
+        Current text:
+        "Run: pip install lyrebird"
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Documentation
+      description: What should the documentation say?
+      placeholder: |
+        Should say:
+        "Run: pip install lyrebirdaudio"
+      render: markdown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How serious is this issue?
+      options:
+        - Critical (completely blocks users)
+        - High (causes significant confusion)
+        - Medium (minor confusion or inconvenience)
+        - Low (cosmetic or minor improvement)
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other information that might help
+      placeholder: "I encountered this while trying to set up LyreBirdAudio on Ubuntu 22.04..."
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I searched existing issues to avoid duplicates
+          required: true
+        - label: I checked the live documentation site
+          required: true
+        - label: I can point to the specific file/page with the issue
+          required: true

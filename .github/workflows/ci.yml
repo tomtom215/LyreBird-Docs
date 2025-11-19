@@ -1,0 +1,203 @@
+name: CI - Documentation Build
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - 'requirements.txt'
+      - '.github/workflows/ci.yml'
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - 'requirements.txt'
+      - '.github/workflows/ci.yml'
+
+jobs:
+  build-test:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build documentation (strict mode)
+        run: |
+          mkdocs build --strict --verbose
+
+      - name: Check for broken links
+        run: |
+          echo "Checking for broken internal links..."
+          # Simple check - mkdocs build --strict already validates internal links
+          echo "✓ Internal link validation passed (mkdocs --strict)"
+
+      - name: Verify site output
+        run: |
+          echo "Verifying build output..."
+          ls -lah site/
+          echo "✓ Site directory created successfully"
+
+          # Count generated HTML files
+          HTML_COUNT=$(find site -name "*.html" | wc -l)
+          echo "Generated $HTML_COUNT HTML files"
+
+          if [ "$HTML_COUNT" -lt 30 ]; then
+            echo "ERROR: Expected at least 30 HTML files, got $HTML_COUNT"
+            exit 1
+          fi
+          echo "✓ HTML file count validated"
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation-site
+          path: site/
+          retention-days: 7
+
+      - name: Build summary
+        run: |
+          echo "## Build Summary 📚" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Documentation build completed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Build Statistics" >> $GITHUB_STEP_SUMMARY
+          echo "- Python version: 3.11" >> $GITHUB_STEP_SUMMARY
+          echo "- MkDocs version: $(mkdocs --version)" >> $GITHUB_STEP_SUMMARY
+          echo "- HTML files generated: $(find site -name '*.html' | wc -l)" >> $GITHUB_STEP_SUMMARY
+          echo "- Total site size: $(du -sh site | cut -f1)" >> $GITHUB_STEP_SUMMARY
+
+  markdown-lint:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run markdownlint
+        uses: articulate/actions-markdownlint@v1
+        with:
+          config: .markdownlint.json
+          files: 'docs/**/*.md'
+          ignore: 'node_modules'
+        continue-on-error: true
+
+      - name: Markdown lint summary
+        if: always()
+        run: |
+          echo "## Markdown Lint Summary 📝" >> $GITHUB_STEP_SUMMARY
+          echo "Markdown linting completed (warnings allowed)" >> $GITHUB_STEP_SUMMARY
+
+  spell-check:
+    name: Spell Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install codespell
+        run: |
+          pip install codespell
+
+      - name: Run spell check
+        run: |
+          codespell docs/ README.md CONTRIBUTING.md --skip="*.svg,*.png,*.jpg" || true
+        continue-on-error: true
+
+      - name: Spell check summary
+        if: always()
+        run: |
+          echo "## Spell Check Summary 🔤" >> $GITHUB_STEP_SUMMARY
+          echo "Spell checking completed (warnings allowed)" >> $GITHUB_STEP_SUMMARY
+
+  accessibility-check:
+    name: Accessibility Check
+    runs-on: ubuntu-latest
+    needs: build-test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build documentation
+        run: |
+          mkdocs build
+
+      - name: Install pa11y-ci
+        run: |
+          npm install -g pa11y-ci
+
+      - name: Serve documentation
+        run: |
+          python -m http.server 8080 --directory site &
+          sleep 5
+
+      - name: Run accessibility tests
+        run: |
+          # Basic accessibility check on key pages
+          pa11y http://localhost:8080/index.html || true
+        continue-on-error: true
+
+      - name: Accessibility summary
+        if: always()
+        run: |
+          echo "## Accessibility Check Summary ♿" >> $GITHUB_STEP_SUMMARY
+          echo "Accessibility testing completed (warnings allowed)" >> $GITHUB_STEP_SUMMARY
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install pip-audit
+        run: |
+          python -m pip install --upgrade pip
+          pip install pip-audit
+
+      - name: Run security audit
+        run: |
+          pip-audit -r requirements.txt --desc
+        continue-on-error: true
+
+      - name: Security scan summary
+        if: always()
+        run: |
+          echo "## Security Scan Summary 🔒" >> $GITHUB_STEP_SUMMARY
+          echo "Dependency security scan completed" >> $GITHUB_STEP_SUMMARY

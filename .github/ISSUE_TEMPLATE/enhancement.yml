@@ -1,0 +1,97 @@
+name: ✨ Enhancement Request
+description: Suggest an improvement to the documentation
+title: "[ENHANCEMENT] "
+labels: ["enhancement", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a documentation improvement!
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Enhancement Description
+      description: What improvement would you like to see?
+      placeholder: "Add a troubleshooting section for common network configuration issues..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Enhancement Type
+      description: What kind of improvement is this?
+      options:
+        - New documentation page
+        - Expand existing page
+        - Add examples
+        - Improve clarity
+        - Add diagrams/visuals
+        - Reorganize content
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why is this needed?
+      description: Explain the value this would provide
+      placeholder: "Many users struggle with configuring firewalls for RTSP streams. A dedicated troubleshooting section would help them resolve issues faster..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed Content
+      description: If you have specific content in mind, share it here
+      placeholder: |
+        Suggested section:
+
+        ## Network Configuration Issues
+
+        ### Firewall Configuration
+        Allow ports 8554 (RTSP) and 8000-8100 (RTP)...
+      render: markdown
+
+  - type: input
+    id: location
+    attributes:
+      label: Suggested Location
+      description: Where should this content go?
+      placeholder: "docs/advanced/troubleshooting.md - new section after 'Device Detection Issues'"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this enhancement?
+      options:
+        - High (frequently needed by users)
+        - Medium (would help some users)
+        - Low (nice to have)
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Are there other ways to address this need?
+      placeholder: "This could alternatively be added to the FAQ or a dedicated network configuration guide..."
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I searched existing issues for similar requests
+          required: true
+        - label: This enhancement would benefit multiple users
+          required: true
+        - label: I reviewed the existing documentation structure
+          required: true

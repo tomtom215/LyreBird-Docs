@@ -1,0 +1,108 @@
+name: Security Audit
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'requirements.txt'
+
+jobs:
+  dependency-audit:
+    name: Dependency Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install pip-audit
+        run: |
+          python -m pip install --upgrade pip
+          pip install pip-audit
+
+      - name: Run security audit
+        id: audit
+        run: |
+          echo "Running pip-audit on requirements.txt..."
+          pip-audit -r requirements.txt --desc --format json > audit-results.json || true
+          pip-audit -r requirements.txt --desc
+        continue-on-error: true
+
+      - name: Upload audit results
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-audit-results
+          path: audit-results.json
+          retention-days: 90
+
+      - name: Check for critical vulnerabilities
+        run: |
+          if [ -f audit-results.json ]; then
+            CRITICAL_COUNT=$(jq '[.dependencies[] | select(.vulns[].severity == "high" or .vulns[].severity == "critical")] | length' audit-results.json || echo "0")
+            echo "Critical/High vulnerabilities found: $CRITICAL_COUNT"
+
+            if [ "$CRITICAL_COUNT" != "0" ]; then
+              echo "⚠️ CRITICAL OR HIGH SEVERITY VULNERABILITIES DETECTED" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "Please review the audit results and update dependencies" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+      - name: Security audit summary
+        if: always()
+        run: |
+          echo "## Security Audit Summary 🔒" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Audit Details" >> $GITHUB_STEP_SUMMARY
+          echo "- Date: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
+          echo "- Tool: pip-audit" >> $GITHUB_STEP_SUMMARY
+          echo "- Target: requirements.txt" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Review the job logs and artifacts for detailed findings" >> $GITHUB_STEP_SUMMARY
+
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          warn-on-licenses: GPL-3.0, AGPL-3.0
+
+  snyk-scan:
+    name: Snyk Security Scan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/python-3.10@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --file=requirements.txt
+
+      - name: Snyk summary
+        if: always()
+        run: |
+          echo "## Snyk Security Scan 🐍" >> $GITHUB_STEP_SUMMARY
+          echo "Snyk security scan completed" >> $GITHUB_STEP_SUMMARY
+          echo "Review job logs for detailed findings" >> $GITHUB_STEP_SUMMARY
