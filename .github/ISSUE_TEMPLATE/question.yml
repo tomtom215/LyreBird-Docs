@@ -1,0 +1,55 @@
+name: ❓ Question
+description: Ask a question about the documentation
+title: "[QUESTION] "
+labels: ["question"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question about the LyreBirdAudio documentation?
+
+        **Note**: For questions about using LyreBirdAudio (not the documentation itself), please use [GitHub Discussions](https://github.com/tomtom215/LyreBirdAudio/discussions).
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: "I'm confused about the difference between the Stream Manager and the Orchestrator..."
+    validations:
+      required: true
+
+  - type: input
+    id: page
+    attributes:
+      label: Related Documentation Page
+      description: Which page were you reading when this question came up?
+      placeholder: "docs/components/orchestrator.md"
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What were you trying to accomplish?
+      placeholder: "I was trying to understand how to manually control individual streams without using the orchestrator..."
+
+  - type: textarea
+    id: attempted
+    attributes:
+      label: What Have You Tried?
+      description: What documentation have you already reviewed?
+      placeholder: "I read the Stream Manager page and the Orchestrator page but I'm still unclear on when to use each one..."
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I searched existing issues and discussions
+          required: true
+        - label: I reviewed the relevant documentation pages
+          required: true
+        - label: This is a documentation question (not a usage question)
+          required: true

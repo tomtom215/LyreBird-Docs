@@ -1,0 +1,63 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    environment:
+      name: production
+      url: https://lyrebird-docs.pages.dev
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build documentation
+        run: |
+          mkdocs build --strict --verbose
+
+      - name: Deploy to Cloudflare Pages
+        run: |
+          echo "Deployment to Cloudflare Pages is handled automatically via Cloudflare Pages integration"
+          echo "This workflow validates the build before Cloudflare Pages deploys"
+
+      - name: Deployment summary
+        run: |
+          echo "## Deployment Summary 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Documentation built successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Deployment Information" >> $GITHUB_STEP_SUMMARY
+          echo "- Environment: Production" >> $GITHUB_STEP_SUMMARY
+          echo "- Platform: Cloudflare Pages" >> $GITHUB_STEP_SUMMARY
+          echo "- URL: https://lyrebird-docs.pages.dev" >> $GITHUB_STEP_SUMMARY
+          echo "- Build time: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Build Statistics" >> $GITHUB_STEP_SUMMARY
+          echo "- Pages: $(find site -name '*.html' | wc -l)" >> $GITHUB_STEP_SUMMARY
+          echo "- Site size: $(du -sh site | cut -f1)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📝 Cloudflare Pages will automatically deploy this build" >> $GITHUB_STEP_SUMMARY

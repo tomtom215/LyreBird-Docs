@@ -1,5 +1,8 @@
 # Python
 venv/
+venv_test/
+env/
+ENV/
 __pycache__/
 *.py[cod]
 *$py.class
@@ -9,6 +12,7 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+pip-wheel-metadata/
 
 # MkDocs
 site/

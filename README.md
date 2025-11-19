@@ -1,5 +1,13 @@
 # LyreBirdAudio Documentation
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Documentation Status](https://img.shields.io/badge/docs-live-brightgreen.svg)](https://lyrebird-docs.pages.dev)
+[![MkDocs](https://img.shields.io/badge/MkDocs-1.6.1-blue.svg)](https://www.mkdocs.org/)
+[![Material for MkDocs](https://img.shields.io/badge/Material-9.7.0-purple.svg)](https://squidfunk.github.io/mkdocs-material/)
+[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
+[![Security Audit](https://img.shields.io/badge/security-audited-success.svg)](#security)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 Official documentation site for [LyreBirdAudio](https://github.com/tomtom215/LyreBirdAudio).
 
 **Live Site:** https://lyrebird-docs.pages.dev
